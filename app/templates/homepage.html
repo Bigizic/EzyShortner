@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf8">
+    <link rel="stylesheet" href="../static/styles/normal.css">
+    <title>EzyUrl</title>
+</head>
+<body>
+    <header>
+        <h1 class="name">EZYURL</h1>
+        <button><h1>About</h1></button>
+        <button><h1>Team</h1></button>
+    </header>
+    <section>
+        <div class="right_background">
+            <section class="content">
+                <h2><i>Simplify Your Links Elevate Your Web Experience </i></h2>
+            </section>
+            <div class="background_user_input">
+                <form method="POST" action="/">
+                    <label for="user_input">Your long URL here:</label>
+                    <br>
+                    <input name="user_input" id="user_input" type="url" placeholder="Enter long link here">
+                    <br>
+                    <label class="label_user_output" for="user_output">Ezy Url:</label>
+                    <br>
+                    <input type="url" readonly="true" id="user_output">
+                    <br>
+                    <input type="submit" value="Shorten" class="enter">
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+

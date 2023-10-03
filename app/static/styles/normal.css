@@ -1,0 +1,83 @@
+body {
+    background: #1B6C8E;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+header {
+display: flex;
+width: 30%;
+flex-direction: row;
+justify-content: space-around;
+flex-shrink: 0;
+margin-bottom: 2%;
+}
+header h1, h3 {
+color: #FFF;
+text-align: center;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: 10px; /* 31.25% */
+}
+header button {
+    background-color: #1B6C8E;
+    border: none;
+}
+header button:hover h1{
+    color: #000000;
+}
+header .name {
+    color: greenyellow;
+    font-size: 40px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* content start */
+.content {
+    text-align: left;
+    font-size: 13px;
+
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-shrink: 0;
+}
+.content h2 {
+    color: #FFF;
+}/* content end */
+
+.right_background {
+    border-radius: 20px;
+    background: #2A2929;
+    /*mix-blend-mode: multiply;*/
+
+    width: 80%;
+    height: 535px;
+    flex-shrink: 0;
+    margin-left: 10%;
+}
+.background_user_input {
+    margin-left: 10%;
+}
+.background_user_input label {
+    color: white;
+}
+
+.background_user_input input {
+    width: 35%;
+    height: 40px;
+    border-radius: 4px;
+}
+#user_input {
+    margin-bottom: 13%;
+    padding: 0% 1.5% 0 1.5%;
+}
+#user_output {
+    margin-bottom: 4%;
+    padding: 0% 1.5% 0 1.5%;
+}
+.enter {
+    background-color: green;
+    border-radius: 4px;
+    width: 20%;
+}
