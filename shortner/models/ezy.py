@@ -36,6 +36,13 @@ class Ezy():
         with open(self.__file_path, "w") as open_file:
             open_file.write(str(self.to_dict()) + "\n")
 
+    def reload(self):
+        """Reads information about the Ezy instance from a Json file
+        """
+        with open(self.__file_path, "r") as f:
+           #textbox.text = f.read(self.original_url)
+           #textbox.text = f.read(self.short_url)
+
 
 def create_ezy_instance(original_url):
     return Ezy(original_url)
