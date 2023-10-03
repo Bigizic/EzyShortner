@@ -1,4 +1,4 @@
-# EzyURl Shortner
+## EzyURl Shortner
 
 ## Introduction
 
@@ -72,3 +72,4 @@ What are the risks of using Ezy?
 
 ## Existing Solutions
 * [TinyUrls](https://tinyurl.com)
+* [Bitly](https://bitly.com)
