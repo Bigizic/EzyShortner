@@ -55,11 +55,9 @@ class Ezy():
     def counts(self):
         """Counts the numbers of the urls in the database"""
         count = 0
-        if exists(self.original_url):
+        while (exists(self.original_url)):
             count = count + 1
-            print(count)
-        else:
-            print(count)
+        print(count)
 
     def remove_url(self):
         """Remove the Url from the database"""
