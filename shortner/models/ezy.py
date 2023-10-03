@@ -40,9 +40,33 @@ class Ezy():
         """Reads information about the Ezy instance from a Json file
         """
         with open(self.__file_path, "r") as f:
-           #textbox.text = f.read(self.original_url)
-           #textbox.text = f.read(self.short_url)
+           #textbox.text = f.read(self.to_dict(original_url))
+           #textbox.text = f.read(self.to_dict(short_url))
 
+    def exists(self):
+        """Checks if the url is existed or not"""
+        with open(self.__file_path, "r") as f:
+            urls = f.read(self.to_dict(original_url))
+            if self.original_url not in urls:
+                return (-1)
+            else:
+                return (1)
+
+    def counts(self):
+        """Counts the numbers of the urls in the database"""
+        count = 0
+        if exists(self.original_url):
+            count = count + 1
+            print(count)
+        else:
+            print(count)
+
+    def remove_url(self):
+        """Remove the Url from the database"""
+        url_delete = self.original_url
+        with open(self.__file_path, "r") as f:
+            url = f.read(self.to_dict(url_delete))
+            self.to_dict().remove(url)
 
 def create_ezy_instance(original_url):
     return Ezy(original_url)
