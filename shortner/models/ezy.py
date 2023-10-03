@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """A class that sets the parameters needed and add other funtionality
-basically thr entry point
+basically the entry point
 """
 
 
@@ -21,7 +21,7 @@ class Ezy():
         self.short_url = url_shortner(original_url)
 
     def to_dict(self):
-        """Creates a dectionary representation of the instance
+        """Creates a dictionary representation of the instance
         """
         return {
             "id": self.id,
@@ -31,6 +31,8 @@ class Ezy():
         }
 
     def save(self):
+        """Writes information about the `Ezy` instance to a JSON file
+        """
         with open(self.__file_path, "w") as open_file:
             open_file.write(str(self.to_dict()) + "\n")
 
