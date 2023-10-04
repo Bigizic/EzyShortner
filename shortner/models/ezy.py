@@ -7,18 +7,30 @@ basically the entry point
 import datetime
 import uuid
 from shortner.url_shortner import url_shortner
+import sqlalchemy
+from sqlalchemy import Column, String, DateTime
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
 
 
-class Ezy():
+class Ezy(Base):
     """default storage: MySql db"""
-    __file_path = "ezy.json"
 
-    def __init__(self, original_url):
-        """Sets the default parameters"""
+    __tablename__ = "records"
+
+    id = Column(String(100), primary_key=True)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    original_url = Column(String(2000), nullable=False)
+    short_url = Column(String(30), nullable=False)
+
+    def __init__(self, original_url, storage_type):
+        """Sets the default parameters for database"""
         self.id = str(uuid.uuid4())
         self.created_at = datetime.datetime.utcnow()
         self.original_url = original_url
         self.short_url = url_shortner(original_url)
+        self.storage_type = storage_type
 
     def to_dict(self):
         """Creates a dictionary representation of the instance
@@ -30,41 +42,15 @@ class Ezy():
             "short_url": self.short_url
         }
 
-    def save(self):
-        """Writes information about the `Ezy` instance to a JSON file
+    def save(self, session):
+        """Writes information about the `Ezy` instance to the database
         """
-        with open(self.__file_path, "w") as open_file:
-            open_file.write(str(self.to_dict()) + "\n")
-
-    def reload(self):
-        """Reads information about the Ezy instance from a Json file
-        """
-        with open(self.__file_path, "r") as f:
-           #textbox.text = f.read(self.to_dict(original_url))
-           #textbox.text = f.read(self.to_dict(short_url))
-
-    def exists(self):
-        """Checks if the url is existed or not"""
-        with open(self.__file_path, "r") as f:
-            urls = f.read(self.to_dict(original_url))
-            if self.original_url not in urls:
-                return (-1)
-            else:
-                return (1)
-
-    def counts(self):
-        """Counts the numbers of the urls in the database"""
-        count = 0
-        while (exists(self.original_url)):
-            count = count + 1
-        print(count)
+        self.storage_type.new(session)
+        self.storage_type.save()
 
     def remove_url(self):
-        """Remove the Url from the database"""
-        url_delete = self.original_url
-        with open(self.__file_path, "r") as f:
-            url = f.read(self.to_dict(url_delete))
-            self.to_dict().remove(url)
+        """Remove the instanced Url from the database"""
+        self.storage_type.delete(self)
 
-def create_ezy_instance(original_url):
-    return Ezy(original_url)
+def create_ezy_instance(original_url, storage_type):
+    return Ezy(original_url, storage_type)
