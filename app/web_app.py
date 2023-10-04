@@ -4,6 +4,7 @@
 
 from flask import Flask, request, render_template
 from shortner.models.ezy import create_ezy_instance
+from shortner.models.engine.db_storage import DBStorage
 
 app = Flask(__name__)
 
