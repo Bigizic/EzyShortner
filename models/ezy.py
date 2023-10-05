@@ -8,6 +8,7 @@ import datetime
 import uuid
 import models
 from shortner.url_shortner import url_shortner
+from shortner.url_shortner import generate_random_url
 import sqlalchemy
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
@@ -21,14 +22,14 @@ class Ezy(Base):
     __tablename__ = "records"
 
     id = Column(String(100), primary_key=True)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.datetime.now)
     original_url = Column(String(2000), nullable=False)
     short_url = Column(String(30), nullable=False)
 
     def __init__(self, original_url):
         """Sets the default parameters for database"""
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.utcnow()
+        self.created_at = datetime.datetime.now()
         self.original_url = original_url
         self.short_url = url_shortner(original_url)
 
@@ -51,3 +52,15 @@ class Ezy(Base):
     def remove_url(self):
         """Remove the instanced Url from the database"""
         models.storage_type.delete(self)
+
+    def exists(self):
+        """Makes a call to the database existing() to check if the
+        short_url exists in the database
+        """
+        if models.storage_type.existing(self.short_url) is True:
+            self.short_url = generate_random_url()
+
+    def url(self):
+        """returns the shortned url plus the subdomain
+        """
+        return "https://Ezyurl.tech/" + self.short_url

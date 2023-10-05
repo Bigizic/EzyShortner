@@ -72,3 +72,15 @@ class DBStorage:
         result = 0
         result += self.__session.query(Ezy).count()
         return result
+
+    def existing(self, my_short_url):
+        """This function reloads data from the database and checks
+        if the {short_url} column has any records of the shortened
+        url
+        Returns:
+            True if it exists otherwise false
+        """
+        if my_short_url:
+            exists = self.__session.query(Ezy).filter_by(
+                    short_url=my_short_url).first()
+        return True if exists is not None else False
