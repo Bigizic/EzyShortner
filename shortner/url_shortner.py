@@ -5,6 +5,8 @@ for the long url
 
 
 import hashlib
+import random
+import string
 
 
 def base62_encode(hash_int):
@@ -34,6 +36,18 @@ def url_shortner(original):
     return result
     """if database has result:
         result = short_code[-7:]"""
+
+
+def generate_random_url(length=0):
+    """Serves as helper to url_shortner. If the shortened url
+    exists in the database this function would be called to
+    generate a new url
+    """
+    if length > 1:
+        characters = string.ascii_letters + string.digits
+        return ''.join(random.choice(characters) for _ in range(length))
+    else:
+        return generate_random_url(6)
 
 
 if __name__ == '__main__':
