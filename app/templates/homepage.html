@@ -20,11 +20,13 @@
                 <form method="POST" action="/">
                     <label for="user_input">Your long URL here:</label>
                     <br>
-                    <input name="user_input" id="user_input" type="url" placeholder="Enter long link here">
+                    <input name="user_input" id="user_input" type="url" placeholder="Enter long link here" required="true">
                     <br>
                     <label class="label_user_output" for="user_output">Ezy Url:</label>
                     <br>
-                    <input type="url" readonly="true" id="user_output">
+		    {% if url %}
+		    <input type="url" readonly="true" id="user_output" value="{{url}}">
+		    {% endif %}
                     <br>
                     <input type="submit" value="Shorten" class="enter">
                 </form>
