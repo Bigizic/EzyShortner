@@ -16,8 +16,9 @@ def get_input():
         ezy_instance = Ezy(user_input)
         ezy_instance.exists()  # check for existence before saving
         ezy_instance.save()
+        return render_template('homepage.html', url=ezy_instance.url())
 
-    return render_template('homepage.html', url=ezy_instance.url())
+    return render_template('homepage.html')
 
 
 if __name__ == "__main__":
