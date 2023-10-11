@@ -37,7 +37,7 @@ into this:
     * ``Why``: Michael's creative approach to frontend development adds aesthetic value to our project. His skills in documentation ensure that our project is well-documented for users and developers alike, and his debugging skills contribute to a seamless user interface.
 
 
-* Oluwaferanmi Ayodele [Twitter](https://twitter.com/Lonewolfux)--[Instagram]()
+* Oluwaferanmi Ayodele [Twitter](https://twitter.com/Lonewolfux)--[Instagram](https://www.instagram.com/big_melatonin/)
     * ``Role``: User interface/User experience(UI/UX) designer
     * ``why``: Fernami's creative approach to elegant webdesign makes him invaluable to our project. His skills are webdesign with figma and xd
 
