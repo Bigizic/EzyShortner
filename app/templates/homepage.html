@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf8">
-    <link rel="stylesheet" href="../static/styles/normal.css">
+    <link type="text/css" rel="stylesheet" href="../static/styles/homepage.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js?"></script>
+    <script type="text/javascript" src="../static/styles/homepage.js"></script>
+    <link rel="icon" href="../static/images/ezy_icon.jpg">
     <title>EzyUrl</title>
-</head>
-<body>
-    <header>
-        <h1 class="name">EZYURL</h1>
-        <button><h1>About</h1></button>
-        <button><h1>Team</h1></button>
-    </header>
-    <section>
-        <div class="right_background">
-            <section class="content">
-                <h2><i>Simplify Your Links Elevate Your Web Experience </i></h2>
-            </section>
-            <div class="background_user_input">
-                <form method="POST" action="/">
-                    <label for="user_input">Your long URL here:</label>
-                    <br>
-                    <input name="user_input" id="user_input" type="url" placeholder="Enter long link here" required="true">
-                    <br>
-                    <label class="label_user_output" for="user_output">Ezy Url:</label>
-                    <br>
-		    {% if url %}
-		    <input type="url" readonly="true" id="user_output" value="{{url}}">
-		    {% endif %}
-                    <br>
-                    <input type="submit" value="Shorten" class="enter">
-                </form>
+    <body>
+        <header>
+            <h1>EZYURL</h1>
+            <div class="information">
+                <a class="home" href="">Home</a>
+                <a class="about" href=""> About us</a>
             </div>
-        </div>
-    </section>
-</body>
+        </header>
+        <section class="user_interface">
+            <h1>
+                Streamline Your Links With <b style="color: #006400;">EZYURL</b> Shortner
+            </h1>
+            <h4>
+                Transform Long Links into Compact, Shareable, and Memorable <br>URLS with Our Cutting-Edge URL Shortening Service
+            </h4>
+            <form method="POST" action="/">
+                <div class="background">
+                <label for="user_input">Long url:</label>
+                <br>
+                <input name="user_input" id="user_input" placeholder="Enter long link here" type="url" required="true">
+                <br>
+                <label class="label_user_output" for="user_output">Ezy Url:</label>
+                <!--{% if url %}-->
+                <br>
+                <input type="url" readonly="true" id="user_output" value="{{url}}">
+                <!--{% endif %}-->
+                <br>
+                <input type="submit" value="Shorten" class="enter">
+                <button class="share">copy</button>
+                </div>
+                </form>
+        </section>
+    </body>
 </html>
-
