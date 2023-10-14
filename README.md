@@ -1,6 +1,6 @@
 ## EzyURl Shortner
 
-![Weblook](images/IMG_0713.png)
+![Weblook](app/static/images/ezy_icon.jpg)
 
 ## Introduction
 

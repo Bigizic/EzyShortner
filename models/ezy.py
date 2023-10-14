@@ -26,22 +26,44 @@ class Ezy(Base):
     original_url = Column(String(2000), nullable=False)
     short_url = Column(String(30), nullable=False)
 
-    def __init__(self, original_url):
+    def __init__(self, *args, **kwargs):
         """Sets the default parameters for database"""
+        if kwargs:
+            for k, v in kwargs.items():
+                if k == "original_url":
+                    setattr(self, k, v)
+
         self.id = str(uuid.uuid4())
         self.created_at = datetime.datetime.now()
-        self.original_url = original_url
-        self.short_url = url_shortner(original_url)
+
+        if not kwargs:
+            self.original_url = "NOPE NO URL"
+
+        self.short_url = url_shortner(self.original_url)
 
     def to_dict(self):
         """Creates a dictionary representation of the instance
         """
-        return {
+        my_dict = self.__dict__.copy()
+        my_dict['created_at'] = my_dict['created_at'].strftime(
+                "%Y-%m-%dT%H:%M:%S.%f")
+
+        del my_dict['_sa_instance_state']
+        return my_dict
+
+        """return {
             "id": self.id,
             "created_at": self.created_at.isoformat(),
             "original_url": self.original_url,
             "short_url": self.short_url
-        }
+        }"""
+
+    def __str__(self):
+        """Handels string representation of the class
+        basically the print()
+        """
+        return "[{}] ({}) {}".format(self.__class__.__name__,
+                                     self.id, self.__dict__)
 
     def save(self):
         """Writes information about the `Ezy` instance to the database

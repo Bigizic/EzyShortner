@@ -1,0 +1,124 @@
+body {
+background: #131418;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+header {
+display: inline-flex;
+align-items: center;
+gap: 60px;
+}
+header h1 {
+color: #006400;
+font-style: italic;
+line-height: normal;
+white-space: nowrap;
+margin-right: 30rem;
+margin-left: 2rem;
+}
+/*header .ezy_header {
+background-image: url(ezy_icon.jpg);
+background-repeat: no-repeat;
+background-position: left;
+background-size: 100rem;
+}*/
+header .information {
+display: inline-flex;
+gap: 6rem;
+}
+.information a {
+text-decoration: none;
+}
+section h1 {
+    color: #fff;
+    text-align: center;
+    margin-top: 2rem;
+}
+section h4 {
+    color: #ADAEAF;
+    text-align: center;
+}
+section form {
+    border-radius: 20px;
+    background: #131418;
+    /*mix-blend-mode: multiply;*/
+
+    width: 80%;
+    flex-shrink: 0;
+    margin-left: 10%;
+}
+.background {
+    margin-left: 20%;
+}
+#user_input, #user_output{
+    width: 70%;
+    height: 2.5rem;
+    border-radius: 4px;
+    background-color: #44494D;
+    border: none;
+    color: white;
+}
+#user_input {
+    margin-bottom: 4%;
+    padding: 0% 1.5% 0 1.5%;
+}
+#user_output {
+    margin-bottom: 4%;
+    padding: 0% 1.5% 0 1.5%;
+}
+section form label {
+    color: #fff;
+    font-size: smaller;
+}
+.enter {
+    background-color: #006400;
+    border-radius: 8px;
+    width: 73%;
+    color: #fff;
+    height: 2rem;
+    /*margin-left: 11.5%;*/
+    border: none;
+    font-size: 100%;
+    margin-bottom: 4%;
+}
+.enter:hover {
+    background-color: #004700;
+}
+
+.home {
+    color: #006400;
+}
+.home:hover {
+    color: #ADAEAF;
+}
+.about {
+    color: #ADAEAF;
+}
+.about:hover {
+    color: #006400;
+}
+
+.share {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3%;
+    visibility: hidden;
+}
+.copy_ {
+    background-color: #006400;
+    border-radius: 4px;
+    color: #fff;
+    height: 30px;
+}
+.copy_:hover {
+    background-color: #004700;
+}
+.qr_code {
+    background-color: #006400;
+    border-radius: 4px;
+    color: #fff;
+    height: 30px;
+}
+.qr_code:hover {
+    background-color: #004700;
+}
