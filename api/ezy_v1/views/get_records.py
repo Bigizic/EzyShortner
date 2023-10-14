@@ -20,6 +20,7 @@ def get_status():
 def get_records_from_long_link():
     """This function return all records/objects of
     the long link
+    0.0.0.0:5001/api/ezy_v1/long?url={long_link}
     """
     long_link = request.args.get('url')
     all_records = storage_type.all(long_link)
