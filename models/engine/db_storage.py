@@ -33,14 +33,32 @@ class DBStorage:
         Session = scoped_session(session_factory)
         self.__session = Session
 
-    def all(self):
+    def all(self, long_link=None, short_link=None):
         """Query all records of the current database session
-        Returns a dictionary of all records"""
+        Returns a dictionary of all records of a link"""
+        objs = []
         result = {}
-        objs = self.__session.query(Ezy).all()
-        for items in objs:
-            key = items.__class__.__name__ + '.' + item.id
-            result[key] = items
+        if long_link:
+            objs += self.__session.query(Ezy).filter_by(
+                        original_url=long_link).all()
+
+        if short_link:
+            objs = self.__session.query(Ezy).filter_by(
+                        short_url=short_link).first()
+
+            attr = {k: v for k, v in objs.__dict__.items()
+                    if not k.startswith('_sa_instance_state')}
+
+            result[f'[{type(objs).__name__}].({objs.id})'] = {**attr}
+            return result
+
+        for obj in objs:
+            cl_name = type(obj).__name__
+            id = obj.id
+            attr = {k: v for k, v in obj.__dict__.items()
+                    if not k.startswith('_sa_instance_state')}
+
+            result[f'[{cl_name}].({id})'] = {**attr}
         return result
 
     def save(self):
@@ -51,21 +69,17 @@ class DBStorage:
         """Adds new object to the current database"""
         self.__session.add(session)
 
-    def delete(self):
+    def delete(self, ins=None):
         """Deletes the current session record if it's not None"""
-        self.__session.delete()
+        if ins is not None:
+            self.__session.delete(ins)
+            self.__session.commit()
+        else:
+            pass
 
     def close(self):
         """Close the current session"""
         self.__session.remove()
-
-    def get(self, id):
-        """Given an id of the instance it'll return the object based on it's id
-        otherwise return None"""
-        result = None
-        if id:
-            result = self.__session.query(Ezy).filter_by(id=id).first()
-        return result
 
     def count(self):
         """Returns number of records in the database"""
