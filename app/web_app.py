@@ -6,6 +6,7 @@ from flask import Flask, request, render_template
 from models.ezy import Ezy
 from models.engine.db_storage import DBStorage
 
+
 app = Flask(__name__)
 
 
@@ -13,7 +14,7 @@ app = Flask(__name__)
 def get_input():
     if request.method == "POST":
         user_input = request.form.get("user_input")
-        ezy_instance = Ezy(user_input)
+        ezy_instance = Ezy(original_url=user_input)
         ezy_instance.exists()  # check for existence before saving
         ezy_instance.save()
         return render_template('homepage.html', url=ezy_instance.url())
