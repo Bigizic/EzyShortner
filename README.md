@@ -1,6 +1,6 @@
 ## EzyURl Shortner
 
-![Weblook](app/static/images/ezy_icon.jpg)
+![Icon](app/static/images/ezy_icon.jpg)
 
 ## Introduction
 
@@ -17,7 +17,6 @@ web addresses into concise, easy-to-share links. With just a few clicks, you can
 into this: 
 
         https://ezyurl.tech/dfgdskt
-
 
 
 ## The Team
@@ -40,14 +39,20 @@ into this:
 * Oluwaferanmi Ayodele [Twitter](https://twitter.com/Lonewolfux)--[Instagram](https://www.instagram.com/big_melatonin/)
     * ``Role``: User interface/User experience(UI/UX) designer
     * ``why``: Fernami's creative approach to elegant webdesign makes him invaluable to our project. His skills are webdesign with figma and xd
+ 
 
 ## Technologies
-* Python -
+* Python
 * Javascript
 * Html
 * Css
-* Mysql
+* Mysql, MySql Alchemy
 * Flask
+* Jquery
+
+
+
+![weblook](app/static/images/IMG_0713.png)
 
 ## Technology Choices
 * Database Management: We chose MySQL for its robustness and reliability over alternatives like PostgreSQL. While both are excellent choices, MySQL aligns better with our project's scalability needs.
