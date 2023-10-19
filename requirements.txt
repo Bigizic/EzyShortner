@@ -1,0 +1,15 @@
+# These commands should be executed outside of the Python virtual environment
+# Use them to install necessary system libraries for MySQL or MariaDB support
+
+# Install libmysqlclient-dev
+# You can use this for MySQL support
+# sudo apt-get install libmysqlclient-dev
+
+# Install libmariadbclient-dev
+# You can use this for MariaDB support
+# sudo apt-get install libmariadbclient-dev
+
+Flask==2.1.0
+SQLAlchemy==1.4.23
+mysqlclient==2.1.0
+Flask-Cors==3.1.1
