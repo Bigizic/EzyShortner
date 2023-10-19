@@ -1,0 +1,32 @@
+{
+  "name": "ezy_urlshortner",
+  "version": "1.0.0",
+  "description": "Shortens url links",
+  "main": "homepage.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "EZYUSER={mysql_user} EZYPWD={password} python3 -m app.web_app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bigizic/Ezy_urlShortner.git"
+  },
+  "keywords": [
+    "[",
+    "\"mysql\"",
+    "\"flask\"",
+    "\"mysqlalchemy\"",
+    "\"python3\"]"
+  ],
+  "author": "Isaac",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bigizic/Ezy_urlShortner/issues"
+  },
+  "homepage": "https://github.com/Bigizic/Ezy_urlShortner#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
