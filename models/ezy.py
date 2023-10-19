@@ -7,6 +7,8 @@ basically the entry point
 import datetime
 import uuid
 import models
+import requests
+from requests.exceptions import ConnectionError, TooManyRedirects
 from shortner.url_shortner import url_shortner
 from shortner.url_shortner import generate_random_url
 import sqlalchemy
@@ -85,4 +87,21 @@ class Ezy(Base):
     def url(self):
         """returns the shortned url plus the subdomain
         """
-        return "https://Ezyurl.tech/" + self.short_url
+        try:
+            result = requests.get(self.original_url)
+        except requests.exceptions.MissingSchema:
+            self.original_url = "http://" + self.original_url
+            try:
+                result = requests.get(self.original_url)
+            except (ConnectionError, TooManyRedirects):
+                return None
+        except requests.exceptions.RequestException as e:
+            if isinstance(e, Timeout):
+                try:
+                    result = requests.get(self.original_url)
+                except Exception:
+                    return None
+            else:
+                return None
+        if result.status_code // 100 == 2:
+            return "https://Ezyurl.tech/" + self.short_url
