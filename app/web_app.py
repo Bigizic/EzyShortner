@@ -17,7 +17,11 @@ def get_input():
         ezy_instance = Ezy(original_url=user_input)
         ezy_instance.exists()  # check for existence before saving
         ezy_instance.save()
-        return render_template('homepage.html', url=ezy_instance.url())
+        word = "Long link enterd is not a valid address"
+        short_url = ezy_instance.url() if ezy_instance.url() else word
+        status_code = 200 if short_url != word else 404
+        return render_template('homepage.html', url=short_url,
+                               status=status_code)
 
     return render_template('homepage.html')
 
