@@ -1,0 +1,363 @@
+
+/*LARGE TABLETS/LAPTOPS */
+@media (min-width: 992px) and (max-width: 1199px) {
+	header {
+		display: inline-flex;
+                align-items: center;
+                gap: 60px;
+	}
+
+	header h1 {
+		color: #006400;
+		font-style: italic;
+                line-height: normal;
+                white-space: nowrap;
+                margin-right: 30rem;
+                margin-left: 2rem;
+	}
+	header .information {
+                display: inline-flex;
+                gap: 6rem;
+        }
+	section h1 {
+                color: #fff;
+                text-align: center;
+                margin-top: 2rem;
+        }
+	.user_interface {
+		min-width: 992px;
+		max-width: 1199px;
+	}
+	.background {
+		margin-left: 20%;
+	}
+	#user_input, #user_output {
+                width: 70%;
+                height: 2.5rem;
+                border-radius: 4px;
+                background-color: #44494D;
+                border: none;
+                color: white;
+                margin-bottom: 4%;
+                padding: 0% 1.5% 0% 1.5%;
+        }
+	.enter {
+                background-color: #006400;
+                border-radius: 8px;
+                width: 73%;
+                color: #fff;
+                height: 2rem;
+                border: none;
+                font-size: 100%;
+                margin-bottom: 4%;
+        }
+
+}
+
+/* EXTRA LARGE SCREENS */
+@media (min-width: 1920px) {
+	header {
+                display: inline-flex;
+                align-items: center;
+                gap: 60px;
+        }
+
+        header h1 {
+                color: #006400;
+                font-style: italic;
+                line-height: normal;
+                white-space: nowrap;
+                margin-right: 30rem;
+                margin-left: 2rem;
+        }
+        header .information {
+                display: inline-flex;
+                gap: 6rem;
+        }
+        section h1 {
+                color: #fff;
+                text-align: center;
+                margin-top: 2rem;
+        }
+        .user_interface {
+                min-width: 1200px;
+                max-width: 1919px;
+        }
+        .background {
+                margin-left: 20%;
+        }
+	#user_input, #user_output {
+                width: 70%;
+                height: 2.5rem;
+                border-radius: 4px;
+                background-color: #44494D;
+                border: none;
+                color: white;
+                margin-bottom: 4%;
+                padding: 0% 1.5% 0% 1.5%;
+        }
+        .enter {
+                background-color: #006400;
+                border-radius: 8px;
+                width: 73%;
+                color: #fff;
+                height: 2rem;
+                border: none;
+                font-size: 100%;
+                margin-bottom: 4%;
+        }
+}
+
+
+/* DESKTOPS */
+@media (min-width: 1200px) and (max-width: 1919px) {
+	header {
+		display: inline-flex;
+		align-items: center;
+		gap: 60px;
+	}
+
+	header h1 {
+		color: green;
+		/*color: #006400;*/
+		font-style: italic;
+		line-height: normal;
+		white-space: nowrap;
+		margin-right: 30rem;
+		margin-left: 2rem;
+	}
+	header .information {
+		display: inline-flex;
+		gap: 6rem;
+	}
+	section h1 {
+		color: #fff;
+		text-align: center;
+		margin-top: 2rem;
+	}
+	.user_interface {
+		min-width: 1200px;
+		max-width: 1919px;
+	}
+	.background {
+		margin-left: 20%;
+	}
+ 	#user_input, #user_output {
+		width: 70%;
+		height: 2.5rem;
+		border-radius: 4px;
+		background-color: #44494D;
+		border: none;
+		color: white;
+		margin-bottom: 4%;
+		padding: 0% 1.5% 0% 1.5%;
+	}
+	.enter {
+		background-color: #006400;
+		border-radius: 8px;
+		width: 73%;
+		color: #fff;
+		height: 2rem;
+		border: none;
+		font-size: 100%;
+		margin-bottom: 4%;
+	}
+}
+
+
+/* MOBILE */
+@media (max-width: 480px) {
+	header {
+		display: inline-flex;
+	}
+	header h1 {
+                color: #006400;
+                font-style: italic;
+                line-height: normal;
+                white-space: nowrap;
+                margin-right: 5rem;
+                margin-left: 2rem;
+		font-size: 22px;
+	}
+	header .information {
+		display: inline-flex;
+                gap: 3rem;
+		margin-top: 5%;
+	}
+	.information a {
+		font-size: smaller;
+	}
+	section h1 {
+		text-align: center;
+                margin-top: 2rem;
+		font-size: medium;
+	}
+	section h4 {
+		color: #ADAEAF;
+		text-align: center;
+		font-size: 10px;
+	}
+
+	.user_interface {
+		max-width: 480px;
+	}
+	.background {
+		margin-left: 0%;
+	}
+	section form label {
+		color: #fff;
+		font-size: 12px;
+	}
+	#user_input, #user_output {
+		width: 100%;
+		height: 2.5rem;
+		border-radius: 4px;
+		background-color: #44494D;
+		border: none;
+		color: white;
+		padding: 0% 2% 0% 2%;
+		margin-bottom: 4%;
+	}
+	.enter {
+		background-color: #006400;
+		border-radius: 8px;
+		width: 104%;
+		color: #fff;
+		height: 2rem;
+		border: none;
+		font-size: 100%;
+		margin-bottom: 5%;
+	}
+}
+
+/* SMALL TABLETS */
+
+@media (min-width: 768px) and (max-width: 991px) {
+	header {
+                display: inline-flex;
+		align-items: center;
+		gap: 60px;
+        }
+        header h1 {
+                color: #006400;
+                font-style: italic;
+                line-height: normal;
+                white-space: nowrap;
+                margin-right: 15rem;
+                margin-left: 2rem;
+                font-size: 30px;
+        }
+        header .information {
+                display: inline-flex;
+                gap: 3rem;
+                margin-top: 0%;
+        }
+        section h1 {
+                text-align: center;
+                margin-top: 2rem;
+        }
+        section h4 {
+                color: #ADAEAF;
+                text-align: center;
+                font-size: 15px;
+        }
+
+        .user_interface {
+		min-width: 768px;
+                max-width: 911px;
+        }
+        .background {
+                margin-left: 13%;
+        }
+	section form label {
+                color: #fff;
+                font-size: 13px;
+        }
+        #user_input, #user_output {
+                width: 80%;
+                height: 2.5rem;
+                border-radius: 4px;
+                background-color: #44494D;
+                border: none;
+                color: white;
+                padding: 0% 2% 0% 2%;
+                margin-bottom: 4%;
+        }
+        .enter {
+                background-color: #006400;
+                border-radius: 8px;
+                width: 84%;
+                color: #fff;
+                height: 2rem;
+                border: none;
+                font-size: 100%;
+                margin-bottom: 5%;
+        }
+}
+
+
+/* EXTRA SMALL DEVICES */
+@media (min-width: 481px) and (max-width: 767px) {
+	header {
+                display: inline-flex;
+                align-items: center;
+                gap: 60px;
+        }
+	header h1 {
+                color: #006400;
+                font-style: italic;
+                line-height: normal;
+                white-space: nowrap;
+                margin-right: 5rem;
+                margin-left: 2rem;
+                font-size: 30px;
+        }
+	header .information {
+                display: inline-flex;
+                gap: 3rem;
+                margin-top: 0%;
+        }
+	.information a {
+		font-size: small;
+	}
+	section h1 {
+                text-align: center;
+                margin-top: 2rem;
+		font-size: medium;
+        }
+        section h4 {
+                color: #ADAEAF;
+                text-align: center;
+                font-size: 10px;
+        }
+	.user_interface {
+                min-width: 481px;
+                max-width: 767px;
+        }
+        .background {
+                margin-left: 13%;
+        }
+        section form label {
+                color: #fff;
+        }
+        #user_input, #user_output {
+                width: 80%;
+                height: 2.5rem;
+                border-radius: 4px;
+                background-color: #44494D;
+                border: none;
+                color: white;
+                padding: 0% 2% 0% 2%;
+                margin-bottom: 4%;
+        }
+        .enter {
+                background-color: #006400;
+                border-radius: 8px;
+                width: 84%;
+                color: #fff;
+                height: 2rem;
+                border: none;
+                font-size: 100%;
+                margin-bottom: 5%;
+        }
+}
