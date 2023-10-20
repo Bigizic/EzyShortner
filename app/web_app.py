@@ -5,6 +5,7 @@
 from flask import Flask, request, render_template
 from models.ezy import Ezy
 from models.engine.db_storage import DBStorage
+from shortner.qr_img_gen import qr_gen
 
 
 app = Flask(__name__)
@@ -20,8 +21,11 @@ def get_input():
         word = "Long link enterd is not a valid address"
         short_url = ezy_instance.url() if ezy_instance.url() else word
         status_code = 200 if short_url != word else 404
+
+        qr_file_path = qr_gen(short_url) if short_url != word else ''
+
         return render_template('homepage.html', url=short_url,
-                               status=status_code)
+                               status=status_code, qr_image=qr_file_path)
 
     return render_template('homepage.html')
 
