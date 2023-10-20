@@ -9,6 +9,7 @@ import uuid
 import models
 import requests
 from requests.exceptions import ConnectionError, TooManyRedirects
+from requests.exceptions import MissingSchema, RequestException, Timeout
 from shortner.url_shortner import url_shortner
 from shortner.url_shortner import generate_random_url
 import sqlalchemy
@@ -89,13 +90,13 @@ class Ezy(Base):
         """
         try:
             result = requests.get(self.original_url)
-        except requests.exceptions.MissingSchema:
+        except MissingSchema:
             self.original_url = "http://" + self.original_url
             try:
                 result = requests.get(self.original_url)
             except (ConnectionError, TooManyRedirects):
                 return None
-        except requests.exceptions.RequestException as e:
+        except RequestException as e:
             if isinstance(e, Timeout):
                 try:
                     result = requests.get(self.original_url)
