@@ -37,7 +37,7 @@ class DBStorage:
         """Query all records of the current database session
         Returns a dictionary of all records of a link"""
         objs = []
-        result = {}
+        result = []
         if long_link:
             objs += self.__session.query(Ezy).filter_by(
                         original_url=long_link).all()
@@ -49,7 +49,10 @@ class DBStorage:
             attr = {k: v for k, v in objs.__dict__.items()
                     if not k.startswith('_sa_instance_state')}
 
-            result[f'[{type(objs).__name__}].({objs.id})'] = {**attr}
+            result.append({
+                'title': f'[{type(objs).__name__}].({objs.id})',
+                **attr
+            })
             return result
 
         for obj in objs:
@@ -58,7 +61,10 @@ class DBStorage:
             attr = {k: v for k, v in obj.__dict__.items()
                     if not k.startswith('_sa_instance_state')}
 
-            result[f'[{cl_name}].({id})'] = {**attr}
+            result.append({
+                'title': f'[{cl_name}].({id})',
+                **attr
+            })
         return result
 
     def save(self):
@@ -81,10 +87,18 @@ class DBStorage:
         """Close the current session"""
         self.__session.remove()
 
-    def count(self):
+    def count(self, long_link=None, short_link=None):
         """Returns number of records in the database"""
         result = 0
-        result += self.__session.query(Ezy).count()
+        if long_link:
+            result += self.__session.query(Ezy).filter_by(
+                    original_url=long_link).count()
+        elif short_link:
+            result += self.__session.query(Ezy).filter_by(
+                    short_url=short_link).count()
+        else:
+            result += self.__session.query(Ezy).count()
+
         return result
 
     def existing(self, my_short_url):
