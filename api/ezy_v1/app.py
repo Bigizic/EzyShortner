@@ -12,9 +12,10 @@ from werkzeug.exceptions import NotFound
 
 
 app = Flask(__name__)
-app.url_map.strict_slashes = False
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True  # for better readability
 app.register_blueprint(app_views)
-CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
+app.url_map.strict_slashes = False
+cors = CORS(app, resources={r"/api/ezy_v1/*": {"origins": "*"}})
 
 
 @app.teardown_appcontext
@@ -31,6 +32,13 @@ def not_found(error):
         404 description: a resource was not found
     """
     return make_response(jsonify({"error": "Not found"}), 404)
+
+app.config['SWAGGER'] = {
+    'title': 'Ezy Url Restful API',
+    'uiversion': 3
+}
+
+Swagger(app)
 
 
 if __name__ == '__main__':
