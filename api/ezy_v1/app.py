@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-""" Flask """
+""" EZYURL API configuration using Flask and flasgger """
 
 
 from api.ezy_v1.views import app_views
 from flask_cors import CORS
-from flasgger import Swagger
+from flasgger import Swagger, LazyString, LazyJSONEncoder
 from flasgger.utils import swag_from
 from flask import Flask, render_template, make_response, jsonify
 from models import storage_type
@@ -13,9 +13,12 @@ from werkzeug.exceptions import NotFound
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True  # for better readability
+app.json_encoder = LazyJSONEncoder
 app.register_blueprint(app_views)
 app.url_map.strict_slashes = False
-cors = CORS(app, resources={r"/api/ezy_v1/*": {"origins": "*"}})
+CORS(app, resources={r"/api/ezy_v1/*": {"origins": "*"}})
+
+template = dict(swaggerUiPrefix=LazyString(lambda : request.environ.get('HTTP_X_SCRIPT_NAME', '')))
 
 
 @app.teardown_appcontext
@@ -38,7 +41,7 @@ app.config['SWAGGER'] = {
     'uiversion': 3
 }
 
-Swagger(app)
+Swagger(app, template=template)
 
 
 if __name__ == '__main__':
