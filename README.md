@@ -49,6 +49,10 @@ into this:
 * Mysql, MySql Alchemy
 * Flask
 * Jquery
+* Gunicorn
+* Rest API
+* Swagger
+* Nginx
 
 
 
