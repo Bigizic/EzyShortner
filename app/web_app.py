@@ -29,6 +29,10 @@ def get_input():
 
     return render_template('homepage.html')
 
+@app.route("/aboutuspage.html")
+def about():
+    return render_template('aboutuspage.html')
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
