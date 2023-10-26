@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
     <meta charset="utf-8">
-<<<<<<< HEAD
     <link type="text/css" rel="stylesheet" href="../static/styles/homepage_responsive.css">
-=======
->>>>>>> main
     <link type="text/css" rel="stylesheet" href="../static/styles/homepage.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js?"></script>
     <script type="text/javascript" src="../static/scripts/homepage.js"></script>
@@ -15,11 +12,8 @@
             <h1>EZYURL</h1>
             <div class="information">
                 <a class="home" href="">Home</a>
-<<<<<<< HEAD
                 <a class="about" href="aboutuspage.html"> About us</a>
-=======
                 <a class="about" href=""> About us</a>
->>>>>>> main
             </div>
         </header>
         <section class="user_interface">
@@ -29,19 +23,16 @@
             <h4>
                 Transform Long Links into Compact, Shareable, and Memorable <br>URLS with Our Cutting-Edge URL Shortening Service
             </h4>
-<<<<<<< HEAD
             <form method="POST" action="/" id="url_form">
                 <div class="background">
                 <label for="user_input">Long url:</label>
                 <br>
                 <input name="user_input" id="user_input" placeholder="Enter long link here" type="text" required="true">
-=======
             <form method="POST" action="/">
                 <div class="background">
                 <label for="user_input">Long url:</label>
                 <br>
                 <input name="user_input" id="user_input" placeholder="Enter long link here" type="url" required="true">
->>>>>>> main
                 <br>
                 <label class="label_user_output" for="user_output">Ezy Url:</label>
                 <br>
@@ -50,23 +41,17 @@
                 <input type="submit" value="Shorten" class="enter">
                 </div>
                 </form>
-<<<<<<< HEAD
 		{% if status == 200 %}
-=======
->>>>>>> main
 		<div class="share">
 	            <button class="copy_">copy</button>
 	            <button class="qr_code">QR</button>
 	        </div>
-<<<<<<< HEAD
 		{% endif %}
         </section>
 	<div id="qr_container">
 		<img id="qrCodeImage" src="../static/images/qr_images/{{qr_image}}">
 		<button id="cancelButton">Cancel</button>
 	</div>
-=======
         </section>
->>>>>>> main
     </body>
 </html>
