@@ -8,6 +8,7 @@ from models.engine.db_storage import DBStorage
 from shortner.qr_img_gen import qr_gen
 
 
+
 app = Flask(__name__)
 
 

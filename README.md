@@ -1,6 +1,10 @@
 ## EzyURl Shortner
 
+<<<<<<< HEAD
 ![Icon](app/static/images/ezy_icon.jpg)
+=======
+![Weblook](app/static/images/ezy_icon.jpg)
+>>>>>>> main
 
 ## Introduction
 
@@ -39,7 +43,10 @@ into this:
 * Oluwaferanmi Ayodele [Twitter](https://twitter.com/Lonewolfux)--[Instagram](https://www.instagram.com/big_melatonin/)
     * ``Role``: User interface/User experience(UI/UX) designer
     * ``why``: Fernami's creative approach to elegant webdesign makes him invaluable to our project. His skills are webdesign with figma and xd
+<<<<<<< HEAD
  
+=======
+>>>>>>> main
 
 ## Technologies
 * Python

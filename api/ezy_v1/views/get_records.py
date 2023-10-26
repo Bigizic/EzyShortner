@@ -17,7 +17,10 @@ def get_status():
 
 
 @app_views.route('/long', methods=['GET'])
+<<<<<<< HEAD
 @swag_from('/api/ezy_v1/views/documentation/get_long_link.yml')
+=======
+>>>>>>> main
 def get_records_from_long_link():
     """This function return all records/objects of
     the long link
@@ -25,6 +28,7 @@ def get_records_from_long_link():
     """
     long_link = request.args.get('url')
     all_records = storage_type.all(long_link)
+<<<<<<< HEAD
     count = storage_type.count(long_link)
     if not all_records:
         abort(404)
@@ -40,10 +44,20 @@ def get_records_from_long_link():
 
 @app_views.route('/short/<short_link>', methods=['GET'])
 @swag_from('/api/ezy_v1/views/documentation/get_short_link.yml')
+=======
+    if not all_records:
+        abort(404)
+
+    return jsonify(all_records)
+
+
+@app_views.route('/short/<short_link>', methods=['GET'])
+>>>>>>> main
 def get_record_based_on_short_url(short_link):
     """returns a record of the short link
     """
     record = storage_type.all(None, short_link)
+<<<<<<< HEAD
     count = storage_type.count(None, short_link)
     if not record:
         abort(404)
@@ -55,3 +69,9 @@ def get_record_based_on_short_url(short_link):
     }
 
     return jsonify(result)
+=======
+    if not record:
+        abort(404)
+
+    return jsonify(record)
+>>>>>>> main

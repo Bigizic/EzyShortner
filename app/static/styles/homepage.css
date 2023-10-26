@@ -2,36 +2,61 @@ body {
 background: #131418;
 font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+<<<<<<< HEAD
 /*header {
 display: inline-flex;
 align-items: center;
 gap: 60px;
 }*/
 /*header h1 {
+=======
+header {
+display: inline-flex;
+align-items: center;
+gap: 60px;
+}
+header h1 {
+>>>>>>> main
 color: #006400;
 font-style: italic;
 line-height: normal;
 white-space: nowrap;
 margin-right: 30rem;
 margin-left: 2rem;
+<<<<<<< HEAD
 }*/
+=======
+}
+>>>>>>> main
 /*header .ezy_header {
 background-image: url(ezy_icon.jpg);
 background-repeat: no-repeat;
 background-position: left;
 background-size: 100rem;
 }*/
+<<<<<<< HEAD
 /*header .information {
 display: inline-flex;
 gap: 6rem;
 }*/
+=======
+header .information {
+display: inline-flex;
+gap: 6rem;
+}
+>>>>>>> main
 .information a {
 text-decoration: none;
 }
 section h1 {
     color: #fff;
+<<<<<<< HEAD
     /*text-align: center;
     margin-top: 2rem;*/
+=======
+    text-align: center;
+    margin-top: 2rem;
+>>>>>>> main
 }
 section h4 {
     color: #ADAEAF;
@@ -46,35 +71,65 @@ section form {
     flex-shrink: 0;
     margin-left: 10%;
 }
+<<<<<<< HEAD
 /*.background {
     margin-left: 20%;
 }*/
 /*#user_input, #user_output{
+=======
+.background {
+    margin-left: 20%;
+}
+#user_input, #user_output{
+>>>>>>> main
     width: 70%;
     height: 2.5rem;
     border-radius: 4px;
     background-color: #44494D;
     border: none;
     color: white;
+<<<<<<< HEAD
 }*/
 #user_input #user_output {
     margin-bottom: 4%;
+=======
+}
+#user_input {
+    margin-bottom: 4%;
+    padding: 0% 1.5% 0 1.5%;
+}
+#user_output {
+    margin-bottom: 4%;
+    padding: 0% 1.5% 0 1.5%;
+>>>>>>> main
 }
 section form label {
     color: #fff;
     font-size: smaller;
 }
+<<<<<<< HEAD
 /*.enter {
+=======
+.enter {
+>>>>>>> main
     background-color: #006400;
     border-radius: 8px;
     width: 73%;
     color: #fff;
     height: 2rem;
+<<<<<<< HEAD
     margin-left: 11.5%;
     border: none;
     font-size: 100%;
     margin-bottom: 4%;
 }*/
+=======
+    /*margin-left: 11.5%;*/
+    border: none;
+    font-size: 100%;
+    margin-bottom: 4%;
+}
+>>>>>>> main
 .enter:hover {
     background-color: #004700;
 }
@@ -97,7 +152,11 @@ section form label {
     align-items: center;
     justify-content: center;
     gap: 3%;
+<<<<<<< HEAD
     /*visibility: hidden;*/
+=======
+    visibility: hidden;
+>>>>>>> main
 }
 .copy_ {
     background-color: #006400;
@@ -117,6 +176,7 @@ section form label {
 .qr_code:hover {
     background-color: #004700;
 }
+<<<<<<< HEAD
 
 #qr_container {
 	background-color: #004700;
@@ -137,3 +197,5 @@ section form label {
 	color: white;
 	transform: translateX(200%);
 }
+=======
+>>>>>>> main
