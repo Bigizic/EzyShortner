@@ -8,6 +8,7 @@ Directory:
 
 
 import os
+from PIL import Image, ImageDraw
 import qrcode
 
 
