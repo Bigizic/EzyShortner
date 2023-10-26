@@ -9,6 +9,11 @@
 # You can use this for MariaDB support
 # sudo apt-get install libmariadbclient-dev
 
+# Install flask-swagger utils and ensure setuptools are available
+# pip install -U setuptools
+# sudo apt-get install -y python3-lxml
+# sudo pip3 install flasgger
+
 Flask==2.1.0
 SQLAlchemy==1.4.23
 mysqlclient==2.1.0
