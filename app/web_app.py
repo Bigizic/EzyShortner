@@ -8,7 +8,6 @@ from models.engine.db_storage import DBStorage
 from shortner.qr_img_gen import qr_gen
 
 
-
 app = Flask(__name__)
 
 
@@ -29,10 +28,6 @@ def get_input():
                                status=status_code, qr_image=qr_file_path)
 
     return render_template('homepage.html')
-
-@app.route("/aboutuspage.html")
-def about():
-    return render_template('aboutuspage.html')
 
 
 if __name__ == "__main__":
