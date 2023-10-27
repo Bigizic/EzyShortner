@@ -55,7 +55,3 @@ def get_record_based_on_short_url(short_link):
     }
 
     return jsonify(result)
-    if not record:
-        abort(404)
-
-    return jsonify(record)
