@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html>
     <meta charset="utf-8">
-    <link type="text/css" rel="stylesheet" href="../static/styles/homepage_responsive.css">
-    <link type="text/css" rel="stylesheet" href="../static/styles/homepage.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js?"></script>
-    <script type="text/javascript" src="../static/scripts/homepage.js"></script>
-    <link rel="icon" href="../static/images/ezy_icon.jpg">
+    <link type="text/css" rel="stylesheet" href="../static/styles/homepage_responsive.css?{{ cache_id }}">
+    <link type="text/css" rel="stylesheet" href="../static/styles/homepage.css?{{ cache_id }}">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js?{{ cache_id }}"></script>
+    <script type="text/javascript" src="../static/scripts/homepage.js?{{ cache_id }}"></script>
+    <link rel="icon" href="../static/images/ezy_icon.jpg?{{ cache_id }}">
     <title>EzyUrl</title>
     <body>
         <header>
             <h1>EZYURL</h1>
             <div class="information">
                 <a class="home" href="">Home</a>
-                <a class="about" href=""> About us</a>
+		<a class="about" href="./aboutuspage.html?{{ cache_id }}"> About us</a>
             </div>
+        <button class="menu-button">&#9776;</button>
+        <div class="cover-up">
+            <div class="cover-up-content">
+                <span class="close-button">&times;</span>
+                <div class="menu-information">
+                    <ul>
+                        <li><a class="home" href="">Home</a></li>
+			<li><a class="about" href="./aboutuspage.html?{{ cache_id }}"> About us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         </header>
         <section class="user_interface">
             <h1>
@@ -24,15 +36,17 @@
             </h4>
             <form method="POST" action="/" id="url_form">
                 <div class="background">
-                <label for="user_input">Long url:</label>
+		<label class="label_user_input" for="user_input">{{word}}</label>
                 <br>
-                <input name="user_input" id="user_input" placeholder="Enter long link here" type="text" required="true">
+                <input autofocus="true" name="user_input" id="user_input" placeholder="Enter long link here" type="text" required="true">
                 <br>
-                <label class="label_user_output" for="user_output">Ezy Url:</label>
+		<label class="label_user_output" for="user_output">{{alias_status}}</label>
                 <br>
-                <input type="url" readonly="true" id="user_output" value="{{url}}">
+                <input name="user_output" maxlength="50" type="text" readonly="true" id="user_output" value="{{url}}">
                 <br>
                 <input type="submit" value="Shorten" class="enter">
+                <br>
+                <input type="button" class="alias" value="ALIAS">
                 </div>
                 </form>
 		{% if status == 200 %}
@@ -48,3 +62,4 @@
 	</div>
     </body>
 </html>
+
