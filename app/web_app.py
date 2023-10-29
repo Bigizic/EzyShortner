@@ -19,24 +19,22 @@ def get_input():
         user_input = request.form.get("user_input")
         user_output = request.form.get("user_output")
 
-        """ezy_instance = Ezy(original_url=user_input, short_url=user_output) if
-                user_output else Ezy(original_url=user_input))"""
         ezy_instance = Ezy()
-        ezy_instance.original_url=user_input                            
+        ezy_instance.original_url = user_input
         if user_output:
-            ezy_instance.short_url=user_output
+            ezy_instance.short_url = user_output
 
         alias = (ezy_instance.exists(user_output) if user_output else
-                ezy_instance.exists())
-
+                 ezy_instance.exists())
         # app.logger.warning(alias)
 
         # ezy_instance.exists()  # check for existence before saving
         ezy_instance.save()
-
         wor = "Long link enterd is not a valid address"
 
-        short_url = ezy_instance.url() if ezy_instance.url() and not alias else ''
+        short_url = (ezy_instance.url() if ezy_instance.url()
+                     and not alias else '')
+
         word = wor if not short_url and not alias else ''
         status_code = 200 if len(short_url) > 1 and not alias else 404
 
@@ -44,7 +42,6 @@ def get_input():
                     short_url) > 1 and not alias else ''
         if not alias:
             alias = ''
-
 
         return render_template('homepage.html', url=short_url,
                                status=status_code, qr_image=qr_file_path,
