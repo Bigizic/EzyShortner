@@ -118,3 +118,10 @@ class DBStorage:
             exists = self.__session.query(Ezy).filter_by(
                     short_url=my_short_url).first()
             return True if exists is not None else False
+
+    def redirect(self, url):
+        """returns original_url from database of a short_url
+        """
+        res = self.__session.query(Ezy.original_url).filter(
+                                   Ezy.short_url == url).first()
+        return res.original_url if res else None
