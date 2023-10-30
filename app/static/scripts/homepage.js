@@ -2,8 +2,14 @@ const $ = window.$;
 
 $(document).ready(() => {
   $('#user_input').keypress(function (e) {
-    if (e.which === 13) {
+    if (e.which === 13 && $('#user_input').val().length > 3) {
       $('#url_form').submit();
+    }
+    if (e.which === 13) {
+      if ($('#user_input').val().length < 2) {
+        $('#user_input').focus();
+        $('#user_input').blur();
+      }
     }
   });
 
