@@ -101,14 +101,27 @@ class DBStorage:
 
         return result
 
-    def existing(self, my_short_url):
+    def existing(self, my_short_url, alias=None, long_link=None):
         """This function reloads data from the database and checks
         if the {short_url} column has any records of the shortened
         url
         Returns:
             True if it exists otherwise false
         """
+        if alias:
+            word = "Alias has been used please try another"
+            e = self.__session.query(Ezy).filter_by(
+                short_url=alias).first()
+            return word if e is not None else False
+
         if my_short_url:
             exists = self.__session.query(Ezy).filter_by(
                     short_url=my_short_url).first()
-        return True if exists is not None else False
+            return True if exists is not None else False
+
+    def redirect(self, url):
+        """returns original_url from database of a short_url
+        """
+        res = self.__session.query(Ezy.original_url).filter(
+                                   Ezy.short_url == url).first()
+        return res.original_url if res else None
