@@ -49,6 +49,39 @@ def get_input():
 
     return render_template('homepage.html', cache_id=uuid.uuid4())
 
+@app.route('/about')
+def about():
+    return render_template('aboutuspage.html', cache_id=uuid.uuid4())
+
+
+"""Perfroms redirection
+HOW IT WORKS:
+A user accesses a short URL like ezyurl.com/shortlink in their web browser
+Nginx Receives the Request
+Nginx Routes the Request to Python Script
+Nginx is configured to route all incoming requests to a specific location
+Nginx sends the request to this Python script for processing.
+The URL path, /shortlink is passed as part of the request to the Python script
+The script looks up the original URL associated with shortlink from MYSQL database
+If it finds a matching original URL, it proceeds to create a redirection response.
+it generates an HTTP redirection response using a 302 status code.
+Nginx receives the HTTP redirection response from the Python script.
+Nginx processes the redirection response and performs the redirection based on the
+Location header. It tells the user's web browser to navigate to the original URL.
+"""
+
+
+@app.route('/move/<shortlink>')
+def redirect(shortlink):
+    """Perfroms redirection
+    """
+    short = shortlink.split('/')[3]
+    result = DBStorage()
+    dict_result = result.all(None, short)
+    app.logger(dict_result)
+    return
+
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
