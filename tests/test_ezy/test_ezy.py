@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""Unittests for Ezy class and methods
-"""
+"""Unittests for Ezy class and methods"""
 
 import unittest
 import pep8
@@ -10,6 +9,8 @@ from models import storage_type
 
 
 class TestEzyCodeStyle(unittest.TestCase):
+    """Checks if ezy.py passes pycodestyle and
+    if test_ezy.py passes pycodestyle"""
 
     def test_ezy_pass_pep8(self):
         """Tests for pycodestyle"""
@@ -25,7 +26,7 @@ class TestEzyCodeStyle(unittest.TestCase):
 
 
 class TestEzyToDict(unittest.TestCase):
-    """Tests for to dict method"""
+    """Tests to_dict() method"""
 
     def test_ezy_to_dict_method(self):
         """Test ezy class to dict method"""
@@ -66,11 +67,12 @@ class TestEzyToDict(unittest.TestCase):
 
 
 class TestEzySaveMethod(unittest.TestCase):
+    """Checks save() method... like the name implies it saves
+    an object to the database"""
 
     def test_save(self):
         """Test if the save() method automatically save an
-        ezy object when it's called upon
-        """
+        ezy object when it's called upon"""
         ins = Ezy()
         ins.original_url = "dgdfgerteyeryreb.com"
         ins.save()
@@ -78,8 +80,7 @@ class TestEzySaveMethod(unittest.TestCase):
 
     def test_save_retrieve_attributes(self):
         """Test if specific attributes can be retrieved from the
-        database after saving them
-        """
+        database after saving them"""
         ins = Ezy()
         ins.original_url = "erwerwerwrw.com"
         ins.save()
@@ -93,19 +94,18 @@ class TestEzySaveMethod(unittest.TestCase):
 
 
 class TestEzyRemove_Url(unittest.TestCase):
+    """Checks remove_url() method"""
 
     def test_remove_url(self):
         """Test if the remove_url would not delete an
-        object that's not saved in the database
-        """
+        object that's not saved in the database"""
         ins = Ezy()
         ins.original_url = "yusdafasfas.com"
         self.assertEqual(ins.remove_url(), None)
 
     def test_save_then_remove_url(self):
         """Test if the remove_url deletes an object that's
-        saved in the database
-        """
+        saved in the database"""
         ins = Ezy()
         ins.original_url = "wefwsfsdfdscsc.com"
         ins.save()
@@ -119,10 +119,80 @@ class TestEzyRemove_Url(unittest.TestCase):
 
 
 class TestExistsMethod(unittest.TestCase):
+    """Checks exists() method"""
 
     def test_exists_returns_none(self):
-        """Test to see if a short_url doesn't exist
-        """
+        """Test to see if exists method returns False when a
+        short_url that doesn't exist is passed to the exists method"""
         ins = Ezy()
+        ins.original_url = "youth.com"
         res = ins.exists("https://ezyurl.tech/mycook.com/dfgdfg")
         self.assertEqual(res, False)
+
+    def test_exists_not_return_none(self):
+        """Test to see if exists method doesn't return None when
+        a short_url that exists is passed to the exists method"""
+        ins = Ezy()
+        ins.original_url = "youth.com"
+        ins.short_url = "tyeuias"
+        ins.save()
+
+        ins_two = Ezy()
+        ins_two.original_url = "man.com"
+        ins_two.short_url = ins.short_url
+        res = ins_two.exists(ins_two.short_url)
+
+        self.assertEqual(res, "Alias has been used please try another")
+
+    def test_exists_generate_random_url(self):
+        """Test if exists method generates a random url if a
+        short_url that exists in the database is being called to it"""
+        ins = Ezy()
+        ins.original_url = "youth-google.com"
+        ins.short_url = "NoneMaster"
+        ins.save()
+
+        two = Ezy()
+        two.original_url = "bootle.com"
+        two.short_url = ins.short_url  # set short_url to already created one
+        two.exists()  # should generate random short url
+        two.save()  # save then check database for match
+
+        ins_one = storage_type.all(ins.original_url)
+        ins_two = storage_type.all(two.original_url)
+
+        for (_, i) in zip(ins_one, ins_two):
+            u = _.get("short_url")
+            y = i.get("short_url")
+
+        self.assertNotEqual(u, y)
+
+
+class TestUrlMethod(unittest.TestCase):
+    """This method returns a new short url that's been concatenated with
+    https://www.ezyurl.tech/ if the original url is valid"""
+
+    def test_url_valid_url(self):
+        """Test a valid url without specifying it's subdomain
+        to the url method"""
+        ins = Ezy()
+        ins.original_url = "github.com"
+        ins.save()
+        short_url = ins.url()
+        self.assertNotEqual(short_url, None)
+
+    def test_url_valid_url(self):
+        """Test a valid url including it's subdomain"""
+        ins = Ezy()
+        ins.original_url = "https://www.gitlab.com"
+        ins.save()
+        short_url = ins.url()
+        self.assertNotEqual(short_url, None)
+
+    def test_url_not_valid_url(self):
+        """Test an invalid url"""
+        ins = Ezy()
+        ins.original_url = "https://wwww.sdfsdfsdfssfsfsiludfs.com"
+        ins.save()
+        short_url = ins.url()
+        self.assertEqual(short_url, None)
