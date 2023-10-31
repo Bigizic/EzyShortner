@@ -77,11 +77,14 @@ class DBStorage:
 
     def delete(self, ins=None):
         """Deletes the current session record if it's not None"""
-        if ins is not None:
-            self.__session.delete(ins)
-            self.__session.commit()
-        else:
-            pass
+        try:
+            if ins is not None:
+                self.__session.delete(ins)
+                self.__session.commit()
+            else:
+                return None
+        except sqlalchemy.exc.InvalidRequestError:
+            return None
 
     def close(self):
         """Close the current session"""
@@ -101,7 +104,7 @@ class DBStorage:
 
         return result
 
-    def existing(self, my_short_url, alias=None, long_link=None):
+    def existing(self, my_short_url, alias=None):
         """This function reloads data from the database and checks
         if the {short_url} column has any records of the shortened
         url

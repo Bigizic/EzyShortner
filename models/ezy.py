@@ -90,7 +90,7 @@ class Ezy(Base):
         short_url exists in the database
         """
         if alias:
-            return models.storage_type.existing(None, alias, self.original_url)
+            return models.storage_type.existing(None, alias)
 
         if not alias and models.storage_type.existing(self.short_url) is True:
             self.short_url = generate_random_url()
