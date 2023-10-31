@@ -150,3 +150,19 @@ class TestDBStorageMethods(unittest.TestCase):
             self.assertTrue(_.get("id"))
             self.assertTrue(_.get("created_at"))
             self.assertTrue(_.get("short_url"))
+
+    def test_all_short_link(self):
+        """Test all() method short_link"""
+        instan = Ezy()
+        instan.original_url = "Eight-mywebsite.com"
+        storage_type._DBStorage__session.add(instan)
+        storage_type._DBStorage__session.commit()
+        res = storage_type.all(instan.short_url)
+
+        self.assertEqual(type(res), list)
+        for _ in res:
+            self.assertEqual(type(_), dict)
+            self.assertTrue(_.get("title"))
+            self.assertTrue(_.get("id"))
+            self.assertTrue(_.get("created_at"))
+            self.assertTrue(_.get("short_url"))
