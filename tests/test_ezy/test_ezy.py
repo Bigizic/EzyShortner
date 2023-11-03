@@ -196,3 +196,7 @@ class TestUrlMethod(unittest.TestCase):
         ins.save()
         short_url = ins.url()
         self.assertEqual(short_url, None)
+
+
+if __name__ == '__main__':
+    unittest.main()
