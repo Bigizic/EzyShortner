@@ -1,4 +1,6 @@
 const $ = window.$;
+const BASEURL = "localhost";
+// const BASEURL = "ezyurl.io/";
 
 $(document).ready(() => {
   $('#user_input').keypress(function (e) {
@@ -55,7 +57,7 @@ $(document).ready(() => {
     $('.label_user_output').html('www.ezyurl.tech/');
     $('#user_output').on('input', function () {
       var userInput = $(this).val();
-      $('.label_user_output').text('www.ezyurl.tech/' + userInput);
+      $('.label_user_output').text(`${BASEURL}/` + userInput);
     });
   });
   /* end alias button */
