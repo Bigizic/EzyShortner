@@ -17,7 +17,8 @@ from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
-BASEURL = "https://Ezyurl.tech/"
+# BASEURL = "https://Ezyurl.tech/"
+BASEURL = "localhost/"
 
 
 class Ezy(Base):
@@ -60,13 +61,6 @@ class Ezy(Base):
 
         del my_dict['_sa_instance_state']
         return my_dict
-
-        """return {
-            "id": self.id,
-            "created_at": self.created_at.isoformat(),
-            "original_url": self.original_url,
-            "short_url": self.short_url
-        }"""
 
     def __str__(self):
         """Handels string representation of the class
