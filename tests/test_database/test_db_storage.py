@@ -135,6 +135,38 @@ class TestDBStorageMethods(unittest.TestCase):
         self.assertEqual(storage_type.redirect(inst.short_url),
                          inst.original_url)
 
+    def test_all(self):
+        """Tests all() method"""
+        insta = Ezy()
+        insta.original_url = "seven-mywebsite.com"
+        storage_type._DBStorage__session.add(insta)
+        storage_type._DBStorage__session.commit()
+        res = storage_type.all(insta.original_url)
 
+        self.assertEqual(type(res), list)
+        for _ in res:
+            self.assertEqual(type(_), dict)
+            self.assertTrue(_.get("title"))
+            self.assertTrue(_.get("id"))
+            self.assertTrue(_.get("created_at"))
+            self.assertTrue(_.get("short_url"))
+
+    def test_all_short_link(self):
+        """Test all() method short_link"""
+        instan = Ezy()
+        instan.original_url = "Eight-mywebsite.com"
+        storage_type._DBStorage__session.add(instan)
+        storage_type._DBStorage__session.commit()
+        res = storage_type.all(instan.short_url)
+
+        self.assertEqual(type(res), list)
+        for _ in res:
+            self.assertEqual(type(_), dict)
+            self.assertTrue(_.get("title"))
+            self.assertTrue(_.get("id"))
+            self.assertTrue(_.get("created_at"))
+            self.assertTrue(_.get("short_url"))
+
+            
 if __name__ == '__main__':
     unittests.main()
