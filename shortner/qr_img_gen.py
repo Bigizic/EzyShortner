@@ -26,7 +26,11 @@ def qr_gen(short_url=None):
         img = qr.make_image(fill_color="black", back_color="white")
         img_dir = 'app/static/images/qr_images'
         os.makedirs(img_dir, exist_ok=True)
-        file_path = short_url.split('/')[3]
+
+        if short_url.startswith("localhost"):
+            file_path = short_url.split('/')[1]
+        else:
+            file_path = short_url.split('/')[3]
         file_name = os.path.join(img_dir, f'{file_path}.png')
         img.save(file_name)
         return f'{file_path}.png'
