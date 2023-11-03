@@ -134,3 +134,7 @@ class TestDBStorageMethods(unittest.TestCase):
 
         self.assertEqual(storage_type.redirect(inst.short_url),
                          inst.original_url)
+
+
+if __name__ == '__main__':
+    unittests.main()
