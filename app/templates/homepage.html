@@ -12,7 +12,7 @@
             <h1>EZYURL</h1>
             <div class="information">
                 <a class="home" href="">Home</a>
-		<a class="about" href="./aboutuspage.html?{{ cache_id }}"> About us</a>
+		<a class="about" href="{{ url_for('about') }}?{{ cache_id }}"> About us</a>
             </div>
         <button class="menu-button">&#9776;</button>
         <div class="cover-up">
@@ -21,7 +21,7 @@
                 <div class="menu-information">
                     <ul>
                         <li><a class="home" href="">Home</a></li>
-			<li><a class="about" href="./aboutuspage.html?{{ cache_id }}"> About us</a></li>
+			<li><a class="about" href="{{ url_for('about') }}?{{ cache_id }}"> About us</a></li>
                     </ul>
                 </div>
             </div>
