@@ -92,21 +92,4 @@ class Ezy(Base):
     def url(self):
         """returns the shortned url plus the subdomain
         """
-        try:
-            result = requests.get(self.original_url)
-        except MissingSchema:
-            self.original_url = "http://" + self.original_url
-            try:
-                result = requests.get(self.original_url)
-            except (ConnectionError, TooManyRedirects):
-                return None
-        except RequestException as e:
-            if isinstance(e, Timeout):
-                try:
-                    result = requests.get(self.original_url)
-                except Exception:
-                    return None
-            else:
-                return None
-        if result.status_code // 100 == 2:
-            return BASEURL + self.short_url
+        return BASEURL + self.short_url
