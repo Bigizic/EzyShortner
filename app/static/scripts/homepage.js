@@ -1,5 +1,5 @@
 const $ = window.$;
-const BASEURL = "localhost";
+const BASEURL = 'localhost';
 // const BASEURL = "ezyurl.io/";
 
 $(document).ready(() => {
@@ -12,6 +12,13 @@ $(document).ready(() => {
         $('#user_input').focus();
         $('#user_input').blur();
       }
+    }
+  });
+
+  $('#user_input').on('input', function () {
+    if ($('#user_output').val()) {
+      console.log('HELLO');
+      $('#user_output').val('');
     }
   });
 
@@ -33,9 +40,8 @@ $(document).ready(() => {
 
   $('.menu-button').click(function () {
     $('.cover-up').css('width', '100%');
-    
   });
-  
+
   $('.close-button').click(function () {
     $('.cover-up').css('width', '0');
   });
@@ -48,18 +54,17 @@ $(document).ready(() => {
     const currentWidth = parseInt($('#user_output').css('width'));
     const lPadd = parseInt($('#user_output').css('padding-left'));
     const rPadd = parseInt($('#user_output').css('padding-right'));
-    const newWidth =  currentWidth - (lPadd + rPadd);
+    const newWidth = currentWidth - (lPadd + rPadd);
     $('#user_output').css('width', newWidth);
     $('#user_output').attr('autofocus', 'autofocus');
     $('#user_output').removeAttr('readonly');
     $('#user_output').attr('placeholder', 'Enter an alias e.g JohnDoe');
     $('.label_user_output').css('color', 'aliceblue');
-    $('.label_user_output').html('www.ezyurl.tech/');
+    $('.label_user_output').html(BASEURL + '/');
     $('#user_output').on('input', function () {
-      var userInput = $(this).val();
+      const userInput = $(this).val();
       $('.label_user_output').text(`${BASEURL}/` + userInput);
     });
   });
   /* end alias button */
-})
-
+});
