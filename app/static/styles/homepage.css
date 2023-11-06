@@ -98,7 +98,19 @@ section form label {
 	height: 30px;
 	background-color: #006400;
 	color: white;
-	transform: translateX(200%);
+	transform: translateX(0%);
+}
+
+#downloadButton {
+	width: fit-content;
+        border-radius: 4px;
+        height: 30px;
+        background-color: #006400;
+        color: white;
+}
+#downloadButton a {
+	text-decoration: none;
+	color: white;
 }
 
 .alias {
@@ -111,4 +123,9 @@ section form label {
 }
 .alias:hover {
     background-color: #131418;
+}
+div .something {
+    display: flex;
+    justify-content: center;
+    gap: 50%;
 }
