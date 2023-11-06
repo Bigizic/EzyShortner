@@ -15,6 +15,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def get_input():
+
     if request.method == "POST":
         user_input = request.form.get("user_input")
         user_output = request.form.get("user_output")
@@ -24,7 +25,8 @@ def get_input():
 
         ezy_instance = Ezy()
         ezy_instance.original_url = user_input
-        if user_output:
+
+        if len(user_output) > 2:
             ezy_instance.short_url = user_output
 
             alias = func_alias(ezy_instance, user_output)
@@ -51,6 +53,7 @@ def get_input():
             ezy_instance.save()
             if ezy_instance.url():
                 short_url = ezy_instance.url()
+                app.logger.warning(short_url)
                 qr_file_path = qr_gen(short_url)
                 return homepage(short_url, 200, qr_file_path, '', '')
             else:
@@ -131,7 +134,6 @@ def redirect(shortlink):
         if not url.startswith("https://") and not url.startswith("http://"):
             url = 'http://' + url
 
-        app.logger.warning(url)
         response = make_response('')
         response.headers['Location'] = url
         response.status_code = 302
