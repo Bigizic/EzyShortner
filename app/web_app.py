@@ -101,8 +101,8 @@ def func_alias(ezy_instance, user_output):
 
 @app.route('/about')
 def about():
-    """renders about us page"""
-    return render_template('aboutuspage.html', cache_id=uuid.uuid4())
+    """Renders static page"""
+    return render_template('staticpage.html', cache_id=uuid.uuid4())
 
 
 """Perfroms redirection
