@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
-    <meta charset="utf-8">
+<html lang="en">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link type="text/css" rel="stylesheet" href="../static/styles/homepage_responsive.css?{{ cache_id }}">
     <link type="text/css" rel="stylesheet" href="../static/styles/homepage.css?{{ cache_id }}">
@@ -13,7 +13,7 @@
             <h1>EZYURL</h1>
             <div class="information">
                 <a class="home" href="">Home</a>
-		<a class="about" href="{{ url_for('about') }}?{{ cache_id }}"> About us</a>
+		<a class="about" href="{{ url_for('about') }}?{{ cache_id }}"> About</a>
             </div>
         <button class="menu-button">&#9776;</button>
         <div class="cover-up">
@@ -22,7 +22,7 @@
                 <div class="menu-information">
                     <ul>
                         <li><a class="home" href="">Home</a></li>
-			<li><a class="about" href="{{ url_for('about') }}?{{ cache_id }}"> About us</a></li>
+			<li><a class="about" href="{{ url_for('about') }}?{{ cache_id }}"> About</a></li>
                     </ul>
                 </div>
             </div>
@@ -30,7 +30,7 @@
         </header>
         <section class="user_interface">
             <h1>
-                Streamline Your Links With <b style="color: #006400;">EZYURL</b> Shortner
+                Streamline Your Links With <b class="e">EZYURL</b> Shortner
             </h1>
             <h4>
                 Transform Long Links into Compact, Shareable, and Memorable <br>URLS with Our Cutting-Edge URL Shortening Service
@@ -66,10 +66,11 @@
 		</div>
 	</div>
     <footer>
-        <a href="{{ url_for('about') }}?{{ cache_id }}"> About Us </a>
-        <a href=""> Api </a>
-        <a href="">licence </a>
-        <a href=""> &copy; 2023 Isaac Ajibola </a>
+        <a href="{{ url_for('about') }}?{{ cache_id }}"> About</a>
+	<a href="" target="_blank"> Api </a>
+        <a href="https://github.com/Bigizic/Ezy_urlShortner/blob/main/LICENSE" target="_blank">licence </a>
+        <a href="https://www.github.com/Bigizic/Ezy_UrlShortner" target="_blank">Github</a>
+	<a href="mailto:Olalekanisaac75@gmail.com"> &copy; 2023 I.O.A</a>
     </footer>
     </body>
 </html>
