@@ -2,7 +2,7 @@ body {
     background: #131418;
     font-family: apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,Liberation Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
     height: 100vh;
-    width: 99%;
+    width: fit-content;
 }
 
 header {
@@ -15,6 +15,7 @@ header h1 {
     margin-left: 5vw;
     cursor: pointer;
     transition: transform 0.5s ease;
+    font-size: 30px;
 }
 header h1:hover {
     color: #006400;
@@ -24,8 +25,8 @@ header button {
     background-color: #006400;
     margin-right: 10vw;
     border: none;
-    width: max-content;
-    height: fit-content;
+    width: fit-content;
+    /*height: fit-content;*/
     padding: 8px;
     border-radius: 10px;
     cursor: pointer;
@@ -57,14 +58,14 @@ header a button:hover {
 }
 
 .intro h1 {
-    font-size: xx-large;
+    font-size: 40px;
 }
 .intro button {
     background-color: #006400;
     border: none;
     width: max-content;
     height: fit-content;
-    padding: 8px;
+    padding: 10px;
     border-radius: 10px;
     cursor: pointer;
     /*transition: background-color 0.5s ease;*/
@@ -85,10 +86,9 @@ header a button:hover {
 
 .how_to_use {
     color: #fff;
-    font-size: xxx-large;
+    font-size: 40px;
     text-align: center;
     background-color: inherit;
-    width: 99%;
     height: fit-content;
     transition: transform 0.5s ease;
 }
@@ -102,10 +102,9 @@ header a button:hover {
 
 .user_stories_text {
     color: #fff;
-    font-size: xxx-large;
+    font-size: 40px;
     text-align: center;
     background-color: inherit;
-    width: 99%;
     height: fit-content;
     transition: transform 0.5s ease;
 }

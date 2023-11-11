@@ -1,0 +1,79 @@
+/*LARGE TABLETS/LAPTOPS */
+@media (min-width: 992px) and (max-width: 1199px) {
+    body header h1 {
+        color: #fff;
+        margin-left: 5vw;
+        cursor: pointer;
+        transition: transform 0.5s ease;
+        
+    }
+}
+
+/* EXTRA LARGE SCREENS */
+@media (min-width: 1920px) {
+}
+
+/* DESKTOPS */
+@media (min-width: 1200px) and (max-width: 1919px) {
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+
+    .intro h1 {
+        font-size: 25px !important;
+    }
+    .intro h4 {
+        font-size: 10px !important;
+    }
+    .user_stories {
+        display: block !important;
+        margin: 7% !important;
+    }
+    .how_to_use, .user_stories_text {
+        font-size: 30px !important;
+    }
+    .inspiration h2 {
+        font-size: 30px !important;
+    }
+    .team {
+        display: block !important;
+        margin: 5% !important;
+    }
+}
+
+/* SMALL TABLETS */
+@media (min-width: 768px) and (max-width: 991px) {
+    body header h1 {
+        color: #fff;
+        margin-left: 5vw;
+        cursor: pointer;
+        transition: transform 0.5s ease;
+    
+    }
+}
+
+/* EXTRA SMALL DEVICES */
+@media (min-width: 481px) and (max-width: 767px) { 
+
+    .intro h1 {
+        font-size: 25px !important;
+    }
+    .intro h4 {
+        font-size: 15px !important;
+    }
+    .user_stories {
+        display: block !important;
+        margin: 7% !important;
+    }
+    .how_to_use, .user_stories_text {
+        font-size: 30px !important;
+    }
+    .inspiration h2 {
+        font-size: 30px !important;
+    }
+    .team {
+        display: block !important;
+        margin: 5% !important;
+    }
+}
