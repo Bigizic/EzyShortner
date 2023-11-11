@@ -46,6 +46,10 @@ $(document).ready(() => {
     $('.cover-up').css('width', '0');
   });
 
+  $('#user_output').on('input', function() {
+    $(this).val($(this).val().replace(/[^a-zA-Z0-9-_+=&]/g, ''));
+  });
+
   /* This sets the alias button */
   $('.alias').one('click', function () {
     if ($('#user_output').val()) {
