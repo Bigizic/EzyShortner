@@ -53,7 +53,6 @@ def get_input():
             ezy_instance.save()
             if ezy_instance.url():
                 short_url = ezy_instance.url()
-                app.logger.warning(short_url)
                 qr_file_path = qr_gen(short_url)
                 return homepage(short_url, 200, qr_file_path, '', '')
             else:
