@@ -26,7 +26,7 @@ def get_input():
         ezy_instance = Ezy()
         ezy_instance.original_url = user_input
 
-        if len(user_output) > 2:
+        if user_output and len(user_output) > 2:
             ezy_instance.short_url = user_output
 
             alias = func_alias(ezy_instance, user_output)
