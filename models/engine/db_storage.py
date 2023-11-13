@@ -111,16 +111,23 @@ class DBStorage:
         Returns:
             True if it exists otherwise false
         """
-        if alias:
-            word = "Alias has been used please try another"
-            e = self.__session.query(Ezy).filter_by(
-                short_url=alias).first()
-            return word if e is not None else False
+        try:
+            if alias:
+                word = "Alias has been used please try another"
+                e = self.__session.query(Ezy).filter_by(
+                    short_url=alias).first()
+                return word if e is not None else False
 
-        if my_short_url:
-            exists = self.__session.query(Ezy).filter_by(
-                    short_url=my_short_url).first()
-            return True if exists is not None else False
+            if my_short_url:
+                exists = self.__session.query(Ezy).filter_by(
+                         short_url=my_short_url).first()
+                return True if exists is not None else False
+        except Exception:
+            self.__session.rollback()
+            return False
+
+        finally:
+            self.__session.close()
 
     def redirect(self, url):
         """returns original_url from database of a short_url
