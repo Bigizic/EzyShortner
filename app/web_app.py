@@ -47,14 +47,14 @@ def get_input():
             if alias == "alias doesn't exist original url valid":
                 short_url = ezy_instance.url()
                 qr_file_path = qr_gen(short_url)
-                return homepage(short_url, 200, qr_file_path, '', '')
+                return homepage('https://' + short_url, 200, qr_file_path, '', '')
         else:
             ezy_instance.exists()  # check for existence before saving
             ezy_instance.save()
             if ezy_instance.url():
                 short_url = ezy_instance.url()
                 qr_file_path = qr_gen(short_url)
-                return homepage(short_url, 200, qr_file_path, '', '')
+                return homepage('https://' + short_url, 200, qr_file_path, '', '')
             else:
                 return homepage('', 404, '', '', wor)
 
