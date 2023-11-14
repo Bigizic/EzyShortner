@@ -142,7 +142,7 @@ header a button:hover {
     padding-top: 2%;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.center, .right {
+.left, .center, .right {
     padding: 2%;
 }
 .left:hover, .center:hover, .right:hover {
@@ -152,8 +152,7 @@ header a button:hover {
 
 #profilepic, #profilepic2, #profilepic3 {
     border-radius: 50%;
-    width: 20vw;
-    height: fit-content;
+    width: 25vw;
 }
 
 .socials {
