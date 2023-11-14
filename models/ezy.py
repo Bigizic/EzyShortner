@@ -17,8 +17,7 @@ from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
-# BASEURL = "https://Ezyurl.tech/"
-BASEURL = "localhost/"
+BASEURL = "ezyurl.xyz/"
 
 
 class Ezy(Base):
@@ -29,7 +28,7 @@ class Ezy(Base):
     id = Column(String(100), primary_key=True)
     created_at = Column(DateTime, default=datetime.datetime.now)
     original_url = Column(String(2000), nullable=False)
-    short_url = Column(String(30), nullable=False)
+    short_url = Column(String(70), nullable=False)
 
     def __init__(self, *args, **kwargs):
         """Sets the default parameters for database"""
