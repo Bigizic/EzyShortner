@@ -1,6 +1,5 @@
 const $ = window.$;
-const BASEURL = 'localhost';
-// const BASEURL = "ezyurl.io/";
+const BASEURL = 'ezyurl.xyz';
 
 $(document).ready(() => {
   $('#user_input').keypress(function (e) {
@@ -17,7 +16,6 @@ $(document).ready(() => {
 
   $('#user_input').on('input', function () {
     if ($('#user_output').val()) {
-      console.log('HELLO');
       $('#user_output').val('');
     }
   });
