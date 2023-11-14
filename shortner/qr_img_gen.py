@@ -27,7 +27,7 @@ def qr_gen(short_url=None):
         img_dir = 'app/static/images/qr_images'
         os.makedirs(img_dir, exist_ok=True)
 
-        if short_url.startswith("localhost"):
+        if short_url.startswith("ezyurl.xyz"):
             file_path = short_url.split('/')[1]
         else:
             file_path = short_url.split('/')[3]
