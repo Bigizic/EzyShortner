@@ -58,7 +58,7 @@ into this:
 
 
 
-![weblook](app/static/images/IMG_0713.png)
+![weblook](v1/app/static/images/IMG_0713.png)
 
 ## Technology Choices
 * Database Management: We chose MySQL for its robustness and reliability over alternatives like PostgreSQL. While both are excellent choices, MySQL aligns better with our project's scalability needs.
