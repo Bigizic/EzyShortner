@@ -1,0 +1,180 @@
+body {
+    background: #131418;
+    font-family: apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,Liberation Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    height: 100vh;
+    width: fit-content;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header h1 {
+    color: #fff;
+    margin-left: 5vw;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+    font-size: 30px;
+}
+header h1:hover {
+    color: #006400;
+    transform: scale(1.2);
+}
+header button {
+    background-color: #006400;
+    margin-right: 10vw;
+    border: none;
+    width: fit-content;
+    /*height: fit-content;*/
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.8s ease;
+}
+header button:hover {
+    background-color: #fff;
+}
+header a button {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 550;
+}
+header a button:hover {
+    color: #131418;
+}
+
+.intro {
+    color: #fff;
+    text-align: center;
+}
+.e {
+    color: #006400;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+.e:hover {
+    color: #fff;
+}
+
+.intro h1 {
+    font-size: 40px;
+}
+.intro button {
+    background-color: #006400;
+    border: none;
+    width: max-content;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    /*transition: background-color 0.5s ease;*/
+    transition: transform 0.5s ease;
+}
+.intro button:hover {
+    background-color: #fff;
+    transform: scale(1.2);
+}
+.intro a button {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 550;
+}
+.intro a button:hover {
+    color: #131418;
+}
+
+.how_to_use {
+    color: #fff;
+    font-size: 40px;
+    text-align: center;
+    background-color: inherit;
+    height: fit-content;
+    transition: transform 0.5s ease;
+}
+.how_to_use:hover {
+    transform: scale(1.2);
+}
+
+.img_desktop {
+    margin: 5%;
+}
+
+.user_stories_text {
+    color: #fff;
+    font-size: 40px;
+    text-align: center;
+    background-color: inherit;
+    height: fit-content;
+    transition: transform 0.5s ease;
+}
+.user_stories_text:hover {
+    transform: scale(1.2);
+}
+
+.user_stories {
+    display: flex;
+    margin: 5%;
+    gap: 5vw;
+}
+
+.inspiration {
+    background-color: #fff;
+    margin-top: 15%;
+    height: fit-content;
+    text-align: center;
+    padding: 2% 0% 2% 0%;
+}
+
+.inspiration h2 {
+    font-size: xx-large;
+}
+
+.team {
+    display: flex;
+    margin: 2%;
+    gap: 2%;
+    justify-content: center;
+}
+
+.left, .center, .right {
+    border: 1px solid #131418;
+    padding-top: 2%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.left, .center, .right {
+    padding: 2%;
+}
+.left:hover, .center:hover, .right:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#profilepic, #profilepic2, #profilepic3 {
+    border-radius: 50%;
+    width: 25vw;
+}
+
+.socials {
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+}
+
+footer {
+    background-color: inherit;
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    text-transform: capitalize;
+    padding: 2vh 0vh 2vh 0vh;
+    justify-content: space-evenly;
+}
+footer a {
+    text-decoration: none;
+    color: #fff;
+    font-size: small;
+}
+footer a:hover {
+    color: #006400;
+}

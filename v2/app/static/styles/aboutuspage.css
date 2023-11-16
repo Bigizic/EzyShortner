@@ -1,0 +1,43 @@
+body{
+	background-color: black;
+}
+
+h1{
+	text-align: center;
+	color: green;
+}
+
+.center{
+	text-align: center;
+	color: white;
+}
+
+h2{
+	text-align: center;
+	color: green;
+}
+
+.info_left{
+	text-align: left;
+	color: grey;
+	font-size: 18px;
+	padding-left: 170px;
+}
+
+.info_center{
+	text-align: center;
+	color: grey;
+	font-size: 18px;
+	padding-left: 300px;
+}
+
+.info_right{
+	text-align: right;
+	color: grey;
+	font-size: 18px;
+	padding-left: 300px;
+}
+
+.same_line{
+	display: flex;
+}

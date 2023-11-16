@@ -1,0 +1,52 @@
+Retrieves an instance of a shortened url
+---
+parameters:
+        - name: short_link
+          in: path
+          type: string
+          required: true
+          description: The unique ID of the record you want to retrieve.
+tags:
+        - Short Link
+responses:
+        200:
+                description: Request executed successfully
+                schema:
+                        type: object
+                        properties:
+                                exists:
+                                        type: string
+                                        description: Indicates if the record exists.
+                                        example: ok
+                                number_of_record:
+                                        type: integer
+                                        description: The number of records retrieved (should be 1 for a valid ID).
+                                        example: 1
+                                data:
+                                        type: array
+                                        description: An array containing the retrieved record(s).
+                                        items:
+                                                type: object
+                                                properties:
+                                                        created_at:
+                                                                type: string
+                                                                format: date-time
+                                                                description: Creation date and time
+                                                                example: "Thu, 19 Oct 2023 22:48:28 GMT"
+                                                        id:
+                                                                type: string
+                                                                description: Unique ID of the record.
+                                                                example: "0849d274-a0f8-4994-a42a-7a7dc64a1f44"
+                                                        original_url:
+                                                                type: string
+                                                                description: The original URL associated with the record.
+                                                                example: "https://www.example.com/blog-how-to-use-ezy_url?url=longurl"
+                                                        short_url:
+                                                                type: string
+                                                                description: The short URL associated with the record.
+                                                                example: "ezyurl.tech/bJdFGT"
+                                                        title:
+                                                                type: string
+                                                                description: Title of the record
+                                                                example: "[Ezy].(0849d274-a0f8-4994-a42a-7a7dc64a1f44)"
+

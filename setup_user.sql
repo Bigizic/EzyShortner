@@ -1,6 +1,6 @@
 -- setup user and password for database
 CREATE DATABASE IF NOT EXISTS Ezy_url;
-CREATE USER IF NOT EXISTS 'ezy_user'@'localhost' IDENTIFIED BY '0000';
-GRANT ALL PRIVILEGES ON `Ezy_url`.* TO 'ezy_user'@'localhost';
-GRANT SELECT ON `performance_schema`.* TO 'ezy_user'@'localhost';
+CREATE USER IF NOT EXISTS 'isaac'@'localhost' IDENTIFIED BY '1738';
+GRANT ALL PRIVILEGES ON `Ezy_url`.* TO 'isaac'@'localhost';
+GRANT SELECT ON `performance_schema`.* TO 'isaac'@'localhost';
 FLUSH PRIVILEGES;

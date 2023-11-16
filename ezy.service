@@ -1,6 +1,7 @@
 [Unit]
 Description=ezy.service - Ezy web app server startup file
-After=network.target
+After=network.target mysql.service
+Requires=mysql.service
 
 [Service]
 User=ubuntu
