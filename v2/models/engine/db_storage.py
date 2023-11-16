@@ -22,7 +22,8 @@ class DBStorage:
         HST = "0.0.0.0"
         DB = "Ezy_url"
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format(USER, PWD, HST, DB))
+                                      format(USER, PWD, HST, DB),
+                                      pool_pre_ping=True)
         self.reload()
 
     def reload(self):
