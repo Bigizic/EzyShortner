@@ -68,21 +68,21 @@ class EzyModel(Base):
     def save(self):
         """Writes information about the `Ezy` instance to the database
         """
-        models.v2.storage_type.new(self)
-        models.v2.storage_type.save()
+        models.storage_type.new(self)
+        models.storage_type.save()
 
     def remove_url(self):
         """Remove the instanced Url from the database"""
-        models.v2.storage_type.delete(self)
+        models.storage_type.delete(self)
 
     def exists(self, alias=None):
         """Makes a call to the database existing() to check if the
         short_url exists in the database
         """
         if alias:
-            return models.v2.storage_type.existing(None, alias)
+            return models.storage_type.existing(None, alias)
 
-        if not alias and models.v2.storage_type.existing(self.short_url) is True:
+        if not alias and models.storage_type.existing(self.short_url) is True:
             self.short_url = generate_random_url()
 
     def url(self):

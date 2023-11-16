@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from models.v2.engine.db_storage import DBStorage
+from models.engine.db_storage import DBStorage
 # Creates an instance of the database model and connects to
 # database module using the storage_type variable
 
