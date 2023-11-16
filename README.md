@@ -1,6 +1,6 @@
 ## EzyURl Shortner
 
-![Icon](app/static/images/ezy_icon.jpg)
+![Icon](v1/app/static/images/ezy_icon.jpg)
 
 ## Introduction
 
