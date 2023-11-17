@@ -148,7 +148,6 @@ class DBStorage:
                                       Ezy.user_id == user_id).all()
         return result if result else None
 
-
     def fetch_user(self, id, email=None):
         """Fetches a user from the database by email or id
         """
