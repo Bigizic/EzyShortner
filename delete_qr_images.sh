@@ -1,6 +1,7 @@
 #!/bin/bash
 # bash script that deletes the qr images after they exceed their time
 # of stay on the server
+# use with cron tab enter crontab -e to add, enter crontab -l to list tasks
 
 image_directory="~/Ezy_UrlShortner/v1/app/static/images/qr_images/"
 
