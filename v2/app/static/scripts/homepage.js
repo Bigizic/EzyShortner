@@ -37,7 +37,7 @@ $(document).ready(() => {
   });
 
   $('.menu-button').click(function () {
-    $('.cover-up').css('width', '100%');
+    $('.cover-up').css('width', '80%');
   });
 
   $('.close-button').click(function () {

@@ -5,6 +5,9 @@
     <title>Transform Long Links into Compact, Shareable, and Memorable URLS</title>
     <link type="text/css" rel="stylesheet" href="../static/styles/homepage_responsive.css?{{ cache_id }}">
     <link type="text/css" rel="stylesheet" href="../static/styles/homepage.css?{{ cache_id }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link type="text/css" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js?{{ cache_id }}"></script>
     <script type="text/javascript" src="../static/scripts/homepage.js?{{ cache_id }}"></script>
     <link rel="icon" href="../static/images/ezy_icon.jpg?{{ cache_id }}">
@@ -22,7 +25,7 @@
                 <div class="menu-information">
                     <ul>
                         <li><a class="home" href="">Home</a></li>
-			<li><a class="about" href="{{ url_for('about') }}?{{ cache_id }}"> About</a></li>
+			            <li><a class="about" href="{{ url_for('about') }}?{{ cache_id }}"> About</a></li>
                     </ul>
                 </div>
             </div>
@@ -46,13 +49,12 @@
                 <input name="user_output" maxlength="50" type="text" readonly="true" id="user_output" value="{{url}}">
                 <br>
                 <input type="submit" value="Shorten" class="enter">
-                <br>
-                <input type="button" class="alias" value="ALIAS">
                 </div>
                 </form>
 		{% if status == 200 %}
 		<div class="share">
-	            <button class="copy_">copy</button>
+	            <button class="copy_">COPY</button>
+                <input type="button" class="alias" value="ALIAS">
 	            <button class="qr_code">QR</button>
 	        </div>
 		{% endif %}

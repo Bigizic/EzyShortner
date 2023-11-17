@@ -16,6 +16,7 @@ header h1 {
     color: #fff;
     cursor: pointer;
     transition: transform 0.5s ease;
+    font-family: 'Black Ops One';
 }
 header h1:hover {
     color: #006400;
@@ -48,14 +49,15 @@ section form {
     margin-left: 10%;
 }
 
-#user_input #user_output {
-    margin-bottom: 4%;
+#user_input, #user_output {
+    border-radius: 10px !important;
 }
 section form label {
     color: #fff;
     font-size: smaller;
     font-style: italic;
 }
+
 .enter:hover {
     background-color: #004700;
 }
@@ -79,24 +81,6 @@ section form label {
     justify-content: center;
     gap: 3%;
     /*visibility: hidden;*/
-}
-.copy_ {
-    background-color: #006400;
-    border-radius: 4px;
-    color: #fff;
-    height: 30px;
-}
-.copy_:hover {
-    background-color: #004700;
-}
-.qr_code {
-    background-color: #006400;
-    border-radius: 4px;
-    color: #fff;
-    height: 30px;
-}
-.qr_code:hover {
-    background-color: #004700;
 }
 
 #qr_container {
@@ -131,7 +115,7 @@ section form label {
 	color: white;
 }
 
-.alias {
+.alias, .copy_, .qr_code {
     background-color: #006400;
     color: aliceblue;
     border-radius: 4px;
@@ -140,8 +124,9 @@ section form label {
     height: fit-content;
     padding: 4px;
     transition: transform 0.5s ease;
+    font-weight: 550;
 }
-.alias:hover {
+.alias:hover, .copy_:hover, .qr_code:hover {
     background-color: #131418;
     transform: scale(1.2);
 }
@@ -172,3 +157,4 @@ footer a:hover {
 .user_interface {
 	flex: 0.95;
 }
+

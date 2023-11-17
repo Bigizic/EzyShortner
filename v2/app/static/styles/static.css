@@ -16,6 +16,7 @@ header h1 {
     cursor: pointer;
     transition: transform 0.5s ease;
     font-size: 30px;
+    font-family: 'Black Ops One';
 }
 header h1:hover {
     color: #006400;
