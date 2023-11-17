@@ -155,7 +155,7 @@ footer {
     text-transform: capitalize;
     padding: 2vh 0vh 2vh 0vh;
     justify-content: center;
-    gap: 5%;
+    gap: 2.5%;
 }
 footer a {
     text-decoration: none;
@@ -200,7 +200,7 @@ footer a:hover {
 
 .mobile_user {
     display: grid;
-    margin-top: 50vh;
+    margin-top: 30vh;
     margin-right: 40px;
     gap: 20px;
 }
