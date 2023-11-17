@@ -13,6 +13,8 @@
 # pip install -U setuptools
 # sudo apt-get install -y python3-lxml
 # sudo pip3 install flasgger
+# install gunicorn
+# sudo apt install gunicorn 
 
 Flask
 Flask-Cors
