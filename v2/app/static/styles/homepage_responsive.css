@@ -4,19 +4,19 @@
 	header {
 		display: inline-flex;
                 align-items: center;
-                gap: 10vw;
+                justify-content: space-between
 	}
 
 	header h1 {
 		color: aliceblue;
                 line-height: normal;
                 white-space: nowrap;
-                margin-right: 30rem;
                 margin-left: 2rem;
 	}
 	header .information {
                 display: inline-flex;
                 gap: 6rem;
+                margin-right: 10vw;
         }
 	section h1 {
                 color: #fff;
@@ -73,19 +73,19 @@
 	header {
                 display: inline-flex;
                 align-items: center;
-                gap: 10vw;
+                justify-content: space-between;
         }
 
         header h1 {
                 color: aliceblue;
                 line-height: normal;
                 white-space: nowrap;
-                margin-right: 30rem;
                 margin-left: 2rem;
         }
         header .information {
                 display: inline-flex;
                 gap: 6rem;
+                margin-right: 10vw;
         }
         section h1 {
                 color: #fff;
@@ -155,7 +155,7 @@
 	header .information {
 		display: inline-flex;
 		gap: 6rem;
-                margin-right: 20vw;
+                margin-right: 10vw;
 	}
 	section h1 {
 		color: #fff;
@@ -215,7 +215,6 @@
 
 }
 
-
 /* MOBILE */
 @media (max-width: 480px) {
 	header {
@@ -242,6 +241,7 @@
                 height: fit-content;
                 border-radius: 4px;
                 font-size: 20px;
+                font-weight: 900;
         }
         header .menu-button:hover {
                 background-color: aliceblue;
@@ -269,7 +269,7 @@
                 background-color: inherit;
                 width: fit-content;
                 height: fit-content;
-                font-size: 20px;
+                font-size: 40px;
                 font-weight: bolder;
                 position: absolute;
                 right: 6vw;
@@ -376,6 +376,7 @@
                 height: fit-content;
                 border-radius: 4px;
                 font-size: 20px;
+                font-weight: 900;
         }
         header .menu-button:hover {
                 background-color: aliceblue;
@@ -403,7 +404,7 @@
                 background-color: inherit;
                 width: fit-content;
                 height: fit-content;
-                font-size: 20px;
+                font-size: 40px;
                 font-weight: bolder;
                 position: absolute;
                 right: 6vw;
@@ -484,7 +485,6 @@
         footer {
                 gap: 2vw;
         }
-        
 }
 
 
@@ -514,6 +514,7 @@
                 height: fit-content;
                 border-radius: 4px;
                 font-size: 20px;
+                font-weight: 900;
         }
         header .menu-button:hover {
                 background-color: aliceblue;
@@ -541,7 +542,7 @@
                 background-color: inherit;
                 width: fit-content;
                 height: fit-content;
-                font-size: 20px;
+                font-size: 40px;
                 font-weight: bolder;
                 position: absolute;
                 right: 6vw;
@@ -596,7 +597,7 @@
 		font-size: small;
         }
         .enter {
-                background-color: #006400;
+                background-color: #131418;
                 border-radius: 8px;
                 width: 84%;
                 color: #fff;
@@ -619,5 +620,4 @@
         footer {
                 gap: 2vw;
         }
-
 }
