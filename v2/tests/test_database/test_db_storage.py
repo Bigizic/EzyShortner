@@ -167,6 +167,6 @@ class TestDBStorageMethods(unittest.TestCase):
             self.assertTrue(_.get("created_at"))
             self.assertTrue(_.get("short_url"))
 
-            
+
 if __name__ == '__main__':
     unittests.main()
