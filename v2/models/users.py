@@ -23,11 +23,12 @@ class User(EzyModel, Base):
         """initializes user"""
         super().__init__(*args, **kwargs)
 
-    def set_password(self, password):
-        """Set the user's password securely."""
-        salt = bcrypt.gensalt()
-        self.password_hash = bcrypt.hashpw(password.encode(), salt).decode()
-
-    def check_password(self, password):
-        """Check if the provided password is correct."""
-        return bcrypt.checkpw(password.encode(), self.password_hash.encode())
+    def __setattr__(self, attribute, value):
+        """Set the user's password securely before it's saved in
+        the database"""
+        if attribute == "password":
+            salt = bcrypt.gensalt()
+            hashed_password = bcrypt.hashpw(value.encode(), salt).decode()
+            super().__setattr__(attribute, hashed_password)
+        else:
+            super().__setattr__(attribute, value)
