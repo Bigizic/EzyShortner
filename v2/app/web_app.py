@@ -15,9 +15,11 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def get_input():
-
     if request.method == "POST":
         user_input = request.form.get("user_input")
+        if user_input.startswith(('https://ezyurl.xyz', 'ezyurl.xyz')):
+            return homepage('', 404, '', '', 'cannot use domain')
+
         user_output = request.form.get("user_output")
 
         wor = "Long link enterd is not a valid address"
@@ -54,18 +56,27 @@ def get_input():
             if ezy_instance.url():
                 short_url = ezy_instance.url()
                 qr_file_path = qr_gen(short_url)
-                return homepage('https://' + short_url, 200, qr_file_path, '', '')
+                resp = make_response(homepage('https://' + short_url, 200,
+                                     qr_file_path, '', ''))
+                resp.set_cookie('user_input_cookie', short_url)
+                return resp
             else:
                 return homepage('', 404, '', '', wor)
 
     return render_template('homepage.html', cache_id=uuid.uuid4())
 
-
+@app.route('/history', methods=['GET', 'POST'])
 def homepage(short_url, status_code, qr_file_path, alias, word):
     """Renders homepage"""
+    name = request.cookies.get('user_input_cookie')
+    app.logger.warning(name)
+    all_params = locals()
+    if any(param_value is None for param_value in all_params.values()):
+        return render_template('homepage.html', cache_id=uuid.uuid4())
+
     return render_template('homepage.html', url=short_url,
                            status=status_code, qr_image=qr_file_path,
-                           alias_status=alias, word=word)
+                           alias_status=alias, word=word, history=name)
 
 
 def func_alias(ezy_instance, user_output):
