@@ -22,7 +22,7 @@ class DBStorage:
         USER = environ.get("EZYUSER")
         PWD = environ.get("EZYPWD")
         HST = "0.0.0.0"
-        DB = "Ezy_url_2"
+        DB = "Ezy_url"
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
                                       format(USER, PWD, HST, DB),
                                       pool_pre_ping=True)
