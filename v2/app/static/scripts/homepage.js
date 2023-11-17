@@ -2,6 +2,14 @@ const $ = window.$;
 const BASEURL = 'ezyurl.xyz';
 
 $(document).ready(() => {
+  /* start loading view */
+  $('.loader').show();
+  setTimeout(function() {
+    $('.loader-container').fadeOut();
+    $('body').css('visibility', 'visible');
+  }, 1000);
+  /* end loading view */
+
   $('#user_input').keypress(function (e) {
     if (e.which === 13 && $('#user_input').val().length > 3) {
       $('#url_form').submit();
@@ -62,6 +70,7 @@ $(document).ready(() => {
     $('#user_output').removeAttr('readonly');
     $('#user_output').attr('placeholder', 'Enter an alias e.g JohnDoe');
     $('.label_user_output').css('color', 'aliceblue');
+    $('.label_user_output').css('font-size', 'medium');
     $('.label_user_output').html(BASEURL + '/');
     $('#user_output').on('input', function () {
       const userInput = $(this).val();
@@ -70,3 +79,4 @@ $(document).ready(() => {
   });
   /* end alias button */
 });
+
