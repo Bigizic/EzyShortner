@@ -20,9 +20,26 @@
             <div class="information">
 		        <a class="about" href="{{ url_for('about') }}?{{ cache_id }}"> About</a>
                 <a class="blog" href="">Blog</a>
-                <a class="home" href="">Home</a>
                 <a class="login" href="">Login</a>
                 <a class="sign_up" href="">Sign up</a>
+		<a class="history" action="/history">View History</a>
+                <div class="history_list">
+                    <div class="history_items" action="/history">
+                        <span class="h-close-button">&times;</span>
+                        <ul>
+                            <li><h4> Original url </h4>
+                                <ul>
+				<li> short url: {{history}} </li>
+                                </ul>
+                            </li>
+                            <li><h4> Original url </h4>
+                                <ul>
+                                    <li> short url</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         <button class="menu-button">&#9776;</button>
         <div class="cover-up">
@@ -87,3 +104,4 @@
     </footer>
     </body>
 </html>
+
