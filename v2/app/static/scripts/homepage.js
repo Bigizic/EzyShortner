@@ -54,7 +54,7 @@ $(document).ready(() => {
 
   /* history animation */
   $('.history').click(function () {
-    $('.history_list').css('width', '23%');
+    $('.history_list').css('width', '24%');
   });
   $('.h-close-button').click(function () {
     $('.history_list').css('width', '0%');
@@ -124,7 +124,7 @@ $(document).ready(() => {
             for (let item of result.data) {
               const article = `
                 <li>
-                <h3>${item.original_url}<button class="history_copy">Copy</button></h3>
+                <h3>${item.original_url} <button class="history_copy">Copy</button></h3>
                 <ul>
                   <li class="short-url-history">
                     Short URL: https://ezyurl.xyz/${item.short_url} <button class="history_copy">Copy</button><br>
@@ -156,20 +156,19 @@ $(document).ready(() => {
   /* end history section */
 
   /*history onclick operations */
-  $('.history_copy').click(function () {
-    console.log("COPIED");
+  $(document).on('click', '.history_copy', function() {
     const parent = $(this).parent();
-    console.log("OMNE");
     if (parent.is('h3')) {
-      consoler.log("ONEA");
-      const textToCopy = parent.text().trim();
+      const textToCopy = parent.text().trim().split(' ')[0];
       copyTextToClipboard(textToCopy);
-      console.log("YES");
     } else if ( parent.is('.short-url-history') ) {
-        const textToCopy = parent.text().trim().split(' ')[1];
+        const textToCopy = parent.text().trim().split(' ')[2];
         copyTextToClipboard(textToCopy);
-        console.log("YES");
     }
+    $(this).text('Copied!');
+    setTimeout(() => {
+      $(this).text('Copy');
+    }, 1000);
   });
   function copyTextToClipboard(text) {
     const tempTextarea = document.createElement('textarea');
