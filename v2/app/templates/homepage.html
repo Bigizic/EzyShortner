@@ -25,7 +25,7 @@
 		<a class="history">View History</a>
                 <div class="history_list">
                     <div class="history_items">
-                        <span class="h-close-button">&times;</span>
+                        <span class="h-close-button">&times;</span><br><br>
 			<div class="view_history">
 			<ul class="long-url-history">
 			</ul>
@@ -71,13 +71,14 @@
                 <input type="submit" value="Shorten" class="enter">
                 </div>
                 </form>
-		{% if status == 200 %}
 		<div class="share">
+		    <input type="button" class="alias" value="ALIAS">
+		    {% if status == 200 %}
 	            <button class="copy_">COPY</button>
-                <input type="button" class="alias" value="ALIAS">
 	            <button class="qr_code">QR</button>
+	            {% endif %}
 	        </div>
-		{% endif %}
+
         </section>
 	<div id="qr_container">
 		<img id="qrCodeImage" src="../static/images/qr_images/{{qr_image}}">
