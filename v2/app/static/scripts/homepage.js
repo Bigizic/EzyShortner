@@ -182,4 +182,15 @@ $(document).ready(() => {
     document.body.removeChild(tempTextarea);
   };
   /* end history onclick operations */
+
+
+  /* start mobile history view */
+  $('.menu-information .history').click(function () {
+    $('.menu-information .history_list').css('width', '100%');
+  });
+  $('.menu-information .h-close-button').click(function () {
+    $('.menu-information .history_list').css('width', '0%');
+  });
+  /* end mobile history view */
 });
+
