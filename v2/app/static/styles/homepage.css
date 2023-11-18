@@ -1,7 +1,5 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+html, body {
+   height: 100%;
 }
 
 body {
@@ -13,7 +11,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#131418",endCo
     font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; 
 }
 
 .information a {
