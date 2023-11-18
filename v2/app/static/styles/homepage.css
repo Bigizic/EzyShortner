@@ -213,3 +213,104 @@ footer a:hover {
     border-radius: 50px;
     font-size: large;
 }
+
+.history {
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Black Ops One';
+    font-size: 14px;
+}
+.history:hover {
+    color: #006400;
+}
+
+ .history_list {
+    width: 0%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #131313;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+.history_items {
+    color: #fff;
+    margin: 20px 20px 20px 10px;    
+}
+
+.h-close-button {
+    cursor: pointer;
+    color: white;
+    background-color: inherit;
+    width: fit-content;
+    height: fit-content;
+    font-size: 30px;
+    font-weight: bolder;
+    position: fixed;
+    border-radius: 4px;
+    text-align: center;
+}
+.h-close-button:hover {
+    background-color: #006400;
+    color: #131313;
+}
+
+.long-url-history {
+	list-style-type: none;
+	font-size: small;
+}
+.short-url-history {
+	list-style-type: none;
+	font-size: small;
+}
+
+.history_copy {
+    cursor: pointer;
+    font-size: 8px;
+    width: fit-content;
+    background-color: #006400;
+    transition: transform 0.2s ease;
+    font-family: 'Black Ops One';
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+}
+
+.history_copy:hover {
+    background-color: #131418;
+    transform: scale(1.1);
+}
+
+.cover-up {
+    width: 0%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #131313;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+.cover-up-content {
+    padding: 20px;
+    color: white;
+}
+
+.history_nothing_list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.view_history {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    /*max-height: 300px;*/
+}
+
+.view_history::-webkit-scrollbar {
+    width: 0px;
+}
