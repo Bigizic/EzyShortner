@@ -1,18 +1,31 @@
+/* CSS Reset */
+* {
+
+    padding: 0;
+    
+}
+
 body {
-    /*background: #131418;*/
-    background: rgb(19,20,24);
-    background: linear-gradient(180deg, rgba(19,20,24,1) 48%, rgba(0,100,0,1) 77%);
-    font-family: apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,Liberation Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    background: rgb(19, 20, 24);
+    background: linear-gradient(
+        180deg,
+        rgba(19, 20, 24, 1) 48%,
+        rgba(0, 100, 0, 1) 77%
+    );
+    font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    margin: 0;
 }
+
 .information a {
 text-decoration: none;
 }
 .label_user_input, .label_user_output {
     color: red;
+}
+header {
+    margin-top: 20px;
 }
 header h1 {
     color: #fff;
@@ -320,5 +333,5 @@ footer a:hover {
 }
 
 .menu-information li {
-    border-bottom: none !important;
+    border-bottom: 1px solid #fff !important;
 }
