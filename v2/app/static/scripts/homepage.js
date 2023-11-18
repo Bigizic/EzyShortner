@@ -1,7 +1,9 @@
 const $ = window.$;
 const BASEURL = 'ezyurl.xyz';
+const testEnv = 'api/ezy_v1/short?url=';
 
 $(document).ready(() => {
+
   /* start loading view */
   $('.loader').show();
   setTimeout(function() {
@@ -9,6 +11,7 @@ $(document).ready(() => {
     $('body').css('visibility', 'visible');
   }, 1000);
   /* end loading view */
+
 
   $('#user_input').keypress(function (e) {
     if (e.which === 13 && $('#user_input').val().length > 3) {
@@ -28,22 +31,37 @@ $(document).ready(() => {
     }
   });
 
+  /* copy button */
   $('.copy_').click(function () {
     const urlField = $('#user_output').select();
     document.execCommand('copy');
     urlField.blur();
   });
+  /* end copy button */
 
+  /* qr image animation */
   $('.qr_code').click(function () {
     $('#qr_container').slideDown();
   });
   $('#cancelButton').click(function () {
     $('#qr_container').slideUp();
   });
+  /* end qr image animation */
+
   $('header h1').click(function () {
     window.location.replace(window.location.href);
   });
 
+  /* history animation */
+  $('.history').click(function () {
+    $('.history_list').css('width', '23%');
+  });
+  $('.h-close-button').click(function () {
+    $('.history_list').css('width', '0%');
+  });
+  /* end history animation */
+
+  /* mobile menu button */
   $('.menu-button').click(function () {
     $('.cover-up').css('width', '80%');
   });
@@ -51,6 +69,7 @@ $(document).ready(() => {
   $('.close-button').click(function () {
     $('.cover-up').css('width', '0');
   });
+  /* end mobile menu button */
 
   $('#user_output').on('input', function() {
     $(this).val($(this).val().replace(/[^a-zA-Z0-9-_+=&]/g, ''));
@@ -78,5 +97,88 @@ $(document).ready(() => {
     });
   });
   /* end alias button */
-});
 
+  /* histroy section */
+  let userHistory = JSON.parse(localStorage.getItem('userHistory')) || [];
+
+  function updateHistory(userInput) {
+    userHistory.push(userInput);
+    
+    localStorage.setItem('userHistory', JSON.stringify(userHistory));
+  };
+
+  $('.history').click(function() {
+    let storedUserHistory = JSON.parse(localStorage.getItem('userHistory'));
+    const historyList = $('.long-url-history');
+    //$('.short-url-history').empty();
+    historyList.empty();
+    
+    if (storedUserHistory) {
+      storedUserHistory.forEach(function(userInput) {
+        //$('.short-url-history').append('<li>' + userInput + '</li>');
+        $.ajax({
+          url: `${testEnv}` + userInput,
+          type: 'GET',
+          success: function(result) {
+            const historyList = $('.long-url-history');
+            for (let item of result.data) {
+              const article = `
+                <li>
+                <h3>${item.original_url}<button class="history_copy">Copy</button></h3>
+                <ul>
+                  <li class="short-url-history">
+                    Short URL: https://ezyurl.xyz/${item.short_url} <button class="history_copy">Copy</button><br>
+                    Created At: ${item.created_at}<br>
+                  </li>
+                </ul>
+                </li>`;
+              historyList.append(article);           
+            }
+          },
+          error: function(err) { console.log(err); }
+	});
+      });
+    } else {
+        const article = `
+	  <li class="history_nothing_list">
+          <h3 class="history_nothing">Nothing to see here
+          </h3>
+          </li>`;
+        $('.long-url-history').append(article);
+    };
+  });
+
+  let userInput = $('#user_output').val();
+  if (userInput) {
+    updateHistory(userInput);
+  }
+
+  /* end history section */
+
+  /*history onclick operations */
+  $('.history_copy').click(function () {
+    console.log("COPIED");
+    const parent = $(this).parent();
+    console.log("OMNE");
+    if (parent.is('h3')) {
+      consoler.log("ONEA");
+      const textToCopy = parent.text().trim();
+      copyTextToClipboard(textToCopy);
+      console.log("YES");
+    } else if ( parent.is('.short-url-history') ) {
+        const textToCopy = parent.text().trim().split(' ')[1];
+        copyTextToClipboard(textToCopy);
+        console.log("YES");
+    }
+  });
+  function copyTextToClipboard(text) {
+    const tempTextarea = document.createElement('textarea');
+    tempTextarea.value = text;
+
+    document.body.appendChild(tempTextarea);
+    tempTextarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempTextarea);
+  };
+  /* end history onclick operations */
+});
