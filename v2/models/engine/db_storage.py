@@ -4,7 +4,9 @@
 
 import models
 from os import environ
-from models.ezy import Ezy, Base
+from models.Ezy_model import EzyModel, Base
+from models.ezy import Ezy
+from models.users import User
 import sqlalchemy
 from sqlalchemy import func
 from sqlalchemy import create_engine
@@ -22,7 +24,8 @@ class DBStorage:
         HST = "0.0.0.0"
         DB = "Ezy_url"
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format(USER, PWD, HST, DB))
+                                      format(USER, PWD, HST, DB),
+                                      pool_pre_ping=True)
         self.reload()
 
     def reload(self):
@@ -135,3 +138,23 @@ class DBStorage:
         res = self.__session.query(Ezy.original_url).filter(
                                    Ezy.short_url == url).first()
         return res.original_url if res else None
+
+    def fetch_user_and_ezy(self, user_id):
+        """checks in the database a user id and the
+        user_id column of the records table if there's a match
+        returns everything it can find on that user created objects
+        """
+        result = self.__session.query(Ezy).filter(
+                                      Ezy.user_id == user_id).all()
+        return result if result else None
+
+    def fetch_user(self, id, email=None):
+        """Fetches a user from the database by email or id
+        """
+        if id:
+            result = self.__session.query(User).filter(User.id == id).first()
+            return result if result else None
+        if email:
+            result = self.__session.query(User).filter(
+                                          User.email == email).first()
+            return result if result else None

@@ -13,6 +13,8 @@
 # pip install -U setuptools
 # sudo apt-get install -y python3-lxml
 # sudo pip3 install flasgger
+# install gunicorn
+# sudo apt install gunicorn 
 
 Flask
 Flask-Cors
@@ -20,3 +22,4 @@ flasgger
 SQLAlchemy==1.4.23
 mysqlclient==2.1.0
 qrcode==6.1
+bcrypt

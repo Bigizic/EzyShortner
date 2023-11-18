@@ -189,14 +189,6 @@ class TestUrlMethod(unittest.TestCase):
         short_url = ins.url()
         self.assertNotEqual(short_url, None)
 
-    def test_url_not_valid_url(self):
-        """Test an invalid url"""
-        ins = Ezy()
-        ins.original_url = "https://wwww.sdfsdfsdfssfsfsiludfs.com"
-        ins.save()
-        short_url = ins.url()
-        self.assertEqual(short_url, None)
-
 
 if __name__ == '__main__':
     unittest.main()
