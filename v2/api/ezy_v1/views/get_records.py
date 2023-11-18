@@ -38,11 +38,12 @@ def get_records_from_long_link():
     return jsonify(result)
 
 
-@app_views.route('/short/<short_link>', methods=['GET'])
+@app_views.route('/short', methods=['GET'])
 @swag_from('/api/ezy_v1/views/documentation/get_short_link.yml')
-def get_record_based_on_short_url(short_link):
+def get_record_based_on_short_url():
     """returns a record of the short link
     """
+    short_link = request.args.get('url').split('/')[3]
     record = storage_type.all(None, short_link)
     count = storage_type.count(None, short_link)
     if not record:
