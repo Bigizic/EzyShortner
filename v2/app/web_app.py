@@ -19,6 +19,11 @@ def get_input():
 
     if request.method == "POST":
         user_input = request.form.get("user_input")
+
+        if user_input.startswith(('https://ezyurl.xyz/', 'ezyurl.xyz/',
+                                  'http://ezyurl.xyz/', 'https://www.ezyurl.xyz/',
+                                  'http://www.ezyurl.xyz/')):
+            return homepage('', '', 404, '', 'Cannot use Domain')
         user_output = request.form.get("user_output")
 
         wor = "Long link enterd is not a valid address"
