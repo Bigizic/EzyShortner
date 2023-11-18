@@ -6,7 +6,7 @@ body {
 background: rgb(19,20,24);
 background: linear-gradient(180deg, rgba(19,20,24,1) 42%, rgba(0,100,0,1) 76%);
     font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-    display: grid;
+    display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
