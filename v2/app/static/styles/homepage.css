@@ -1,7 +1,7 @@
 body {
     /*background: #131418;*/
     background: rgb(19,20,24);
-    background: linear-gradient(180deg, rgba(19,20,24,1) 33.3%, rgba(0,100,0,1) 66.6%, rgba(19,20,24,1) 99.9%);
+    background: linear-gradient(180deg, rgba(19,20,24,1) 48%, rgba(0,100,0,1) 77%);
     font-family: apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,Liberation Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
     display: flex;
     flex-direction: column;
@@ -73,7 +73,7 @@ section form label {
 .enter:hover {
     background-color: #131418 !important;
 }
-.menu-information .home, .menu-information .about, .menu-information .blog, .menu-information .login, .menu-information .sign_up {
+.menu-information .home, .menu-information .about, .menu-information .blog, .menu-information .history, .menu-information .login, .menu-information .sign_up  {
     font-size: 4vw !important;
 }
 
@@ -163,7 +163,7 @@ footer a {
     font-size: small;
 }
 footer a:hover {
-    color: #006400;
+    color: #131313;
 }
 .user_interface {
 	flex: 0.90;
@@ -214,6 +214,10 @@ footer a:hover {
     font-size: large;
 }
 
+.mobile_user button:hover {
+    background-color: #004700;
+}
+
 .history {
     color: #fff;
     cursor: pointer;
@@ -253,8 +257,7 @@ footer a:hover {
     text-align: center;
 }
 .h-close-button:hover {
-    background-color: #006400;
-    color: #131313;
+    color: #006400;
 }
 
 .long-url-history {
@@ -264,7 +267,9 @@ footer a:hover {
 .short-url-history {
 	list-style-type: none;
 	font-size: small;
+	border-bottom: none !important;
 }
+
 
 .history_copy {
     cursor: pointer;
@@ -312,4 +317,8 @@ footer a:hover {
 
 .view_history::-webkit-scrollbar {
     width: 0px;
+}
+
+.menu-information li {
+    border-bottom: none !important;
 }
