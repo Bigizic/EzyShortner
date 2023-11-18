@@ -3,11 +3,8 @@ html, body {
 }
 
 body {
-    background: rgb(19,20,24);
-background: -moz-linear-gradient(180deg, rgba(19,20,24,1) 42%, rgba(0,100,0,1) 76%);
-background: -webkit-linear-gradient(180deg, rgba(19,20,24,1) 42%, rgba(0,100,0,1) 76%);
+background: rgb(19,20,24);
 background: linear-gradient(180deg, rgba(19,20,24,1) 42%, rgba(0,100,0,1) 76%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#131418",endColorstr="#006400",GradientType=1);
     font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
     display: flex;
     flex-direction: column;
