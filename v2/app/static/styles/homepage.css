@@ -231,7 +231,8 @@ footer a:hover {
     top: 0;
     right: 0;
     background-color: #131313;
-    overflow-x: hidden;
+    overflow-x: scroll;
+    overflow-y: scroll;
     transition: 0.5s;
 }
 .history_items {
@@ -289,7 +290,6 @@ footer a:hover {
     top: 0;
     right: 0;
     background-color: #131313;
-    overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
 }
@@ -306,9 +306,8 @@ footer a:hover {
 }
 
 .view_history {
-    overflow-y: scroll;
     scrollbar-width: none;
-    /*max-height: 300px;*/
+    
 }
 
 .view_history::-webkit-scrollbar {
