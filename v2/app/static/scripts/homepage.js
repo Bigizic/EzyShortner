@@ -71,9 +71,11 @@ $(document).ready(() => {
   });
   /* end mobile menu button */
 
+  /* output or alias prefered characters */
   $('#user_output').on('input', function() {
     $(this).val($(this).val().replace(/[^a-zA-Z0-9-_+=&]/g, ''));
   });
+  /* end prefered characters */
 
   /* This sets the alias button */
   $('.alias').one('click', function () {
