@@ -2,7 +2,7 @@
 /*LARGE TABLETS/LAPTOPS */
 @media (min-width: 992px) and (max-width: 1199px) {
 	header {
-		display: inline-flex;
+		display: flex;
                 align-items: center;
                 justify-content: space-between
 	}
@@ -71,7 +71,7 @@
 /* EXTRA LARGE SCREENS */
 @media (min-width: 1920px) {
 	header {
-                display: inline-flex;
+                display: flex;
                 align-items: center;
                 justify-content: space-between;
         }
