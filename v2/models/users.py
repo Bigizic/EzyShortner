@@ -5,7 +5,7 @@
 import bcrypt
 from models.Ezy_model import EzyModel, Base
 import sqlalchemy
-from sqlalchemy import Column, String
+from sqlalchemy import Column, String, Boolean
 from sqlalchemy.orm import relationship
 import uuid
 
@@ -18,6 +18,7 @@ class User(EzyModel, Base):
     first_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=True)
     ezy_urls = relationship("Ezy", backref="user")
+    verified = Column(Boolean, default=False)
 
     def __init__(self, *args, **kwargs):
         """initializes user"""

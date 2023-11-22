@@ -48,15 +48,17 @@ class DBStorage:
         if short_link:
             objs = self.__session.query(Ezy).filter_by(
                         short_url=short_link).first()
+            if objs:
+                attr = {k: v for k, v in objs.__dict__.items()
+                        if not k.startswith('_sa_instance_state')}
 
-            attr = {k: v for k, v in objs.__dict__.items()
-                    if not k.startswith('_sa_instance_state')}
-
-            result.append({
-                'title': f'[{type(objs).__name__}].({objs.id})',
-                **attr
-            })
-            return result
+                result.append({
+                    'title': f'[{type(objs).__name__}].({objs.id})',
+                    **attr
+                })
+                return result
+            else:
+                return None
 
         for obj in objs:
             cl_name = type(obj).__name__
@@ -107,7 +109,7 @@ class DBStorage:
 
         return result
 
-    def existing(self, my_short_url, alias=None):
+    def existing(self, my_short_url, alias=None, user_email=None):
         """This function reloads data from the database and checks
         if the {short_url} column has any records of the shortened
         url
@@ -117,13 +119,17 @@ class DBStorage:
         try:
             if alias:
                 word = "Alias has been used please try another"
-                e = self.__session.query(Ezy).filter_by(
+                exists = self.__session.query(Ezy).filter_by(
                     short_url=alias).first()
-                return word if e is not None else False
+                return word if exists is not None else False
 
             if my_short_url:
                 exists = self.__session.query(Ezy).filter_by(
                          short_url=my_short_url).first()
+                return True if exists is not None else False
+            if user_email:
+                exists = self.__session.query(User).filter_by(
+                         email=user_email).first()
                 return True if exists is not None else False
         except Exception:
             self.__session.rollback()
