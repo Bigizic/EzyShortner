@@ -9,7 +9,7 @@ $(document).ready(() => {
   setTimeout(function() {
     $('.loader-container').fadeOut();
     $('body').css('visibility', 'visible');
-  }, 1000);
+  }, 3000);
   /* end loading view */
 
 
