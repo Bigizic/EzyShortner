@@ -235,6 +235,7 @@
         }
         header .menu-button {
                 background-color: inherit;
+                cursor: pointer;
                 color: #006400;
                 margin-right: 2rem;
                 width: fit-content;
@@ -370,6 +371,7 @@
         header .menu-button {
                 background-color: inherit;
                 color: #006400;
+                cursor: pointer;
                 margin-right: 2rem;
                 width: fit-content;
                 height: fit-content;
@@ -507,6 +509,7 @@
 	 header .menu-button {
                 background-color: inherit;
                 color: #006400;
+                cursor: pointer;
                 margin-right: 2rem;
                 width: fit-content;
                 height: fit-content;
