@@ -4,6 +4,7 @@
 
 from flask import Flask, request, render_template, make_response, session
 from models.ezy import Ezy
+from models.users import User
 from models.engine.db_storage import DBStorage
 from shortner.qr_img_gen import qr_gen
 import uuid
@@ -11,7 +12,7 @@ import logging
 
 
 app = Flask(__name__)
-app.secret_key = "Isaac"
+# app.secret_key = "Isaac"
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -21,7 +22,8 @@ def get_input():
         user_input = request.form.get("user_input")
 
         if user_input.startswith(('https://ezyurl.xyz/', 'ezyurl.xyz/',
-                                  'http://ezyurl.xyz/', 'https://www.ezyurl.xyz/',
+                                  'http://ezyurl.xyz/',
+                                  'https://www.ezyurl.xyz/',
                                   'http://www.ezyurl.xyz/')):
             return homepage('', '', 404, '', 'Cannot use Domain')
         user_output = request.form.get("user_output")
@@ -53,14 +55,16 @@ def get_input():
             if alias == "alias doesn't exist original url valid":
                 short_url = ezy_instance.url()
                 qr_file_path = qr_gen(short_url)
-                return homepage('https://' + short_url, 200, qr_file_path, '', '')
+                return homepage('https://' + short_url, 200,
+                                qr_file_path, '', '')
         else:
             ezy_instance.exists()  # check for existence before saving
             ezy_instance.save()
             if ezy_instance.url():
                 short_url = ezy_instance.url()
                 qr_file_path = qr_gen(short_url)
-                return homepage('https://' + short_url, 200, qr_file_path, '', '')
+                return homepage('https://' + short_url, 200,
+                                qr_file_path, '', '')
             else:
                 return homepage('', 404, '', '', wor)
     return render_template('homepage.html', cache_id=uuid.uuid4())
@@ -105,8 +109,34 @@ def func_alias(ezy_instance, user_output):
 
 @app.route('/about')
 def about():
-    """Renders static page"""
-    return render_template('staticpage.html', cache_id=uuid.uuid4())
+    """Renders static/about page"""
+    return render_template('about.html', cache_id=uuid.uuid4())
+
+
+@app.route('/signup', methods=["GET", "POST"])
+def sign_up():
+    """Renders sign up page"""
+    if request.method == 'POST':
+        email = request.form.get("email")
+        # protect against attacks
+        if len(email) > 128 or not email.find('@') or email is None:
+            return render_template('signup.html', info=f"{email} is invalid!")
+        password = request.form.get("pass")
+        first_name = request.form.get("first_name")
+        last_name = request.form.get("last_name")
+
+        new_user = User()
+        new_user.email = email
+        new_user.password = password
+        new_user.first_name = first_name
+        new_user.last_name = last_name
+        if new_user.exists(None, email) is True:
+            return render_template('signup.html', info=f"email has been used!")
+        new_user.save()
+        return render_template('signup.html',
+                               info="Success!! Check your inbox")
+
+    return render_template('signup.html')
 
 
 """Perfroms redirection
