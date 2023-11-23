@@ -49,10 +49,10 @@
             </div>
             <div class="g-signin2" data-onsuccess="onSignIn"></div>
             <p>Already have an account? <a style="color: #888888;" href="#">Sign in here</a></p>
-            <a style="color: #888888;" href="{{ url_for('get_input') }}"> Not sure? </a>
+            <a style="color: #888888;" href="{{ url_for('web_app.get_input') }}"> Not sure? </a>
         </section>
         <footer>
-            <a href="{{ url_for('about') }}?{{ cache_id }}"> About</a> &bull;
+            <a href="{{ url_for('web_app.about') }}?{{ cache_id }}"> About</a> &bull;
 	    <a href="" target="_blank"> Api </a> &bull;
             <a href="https://www.github.com/Bigizic/Ezy_UrlShortner" target="_blank">Github</a> &bull;
             <a>&copy; 2023</a>
