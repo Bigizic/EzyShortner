@@ -13,7 +13,7 @@ import logging
 
 app = Flask(__name__)
 # app.secret_key = "Isaac"
-Logged_in = False;
+Logged_in = False
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -134,7 +134,7 @@ def sign_up():
         if new_user.exists(None, email) is True:
             return render_template('signup.html', info=f"email has been used!")
         new_user.save()
-        logged_in = True;
+        logged_in = True
         return render_template('signup.html',
                                info="Success!! Check your inbox")
 
