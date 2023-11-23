@@ -120,7 +120,7 @@ def sign_up():
         email = request.form.get("email")
         # protect against attacks
         if len(email) > 128 or not email.find('@') or email is None:
-            return render_template('signup.html', info=f"{email} is invalid!")
+            return render_template('signup.html', info="email is invalid!")
         password = request.form.get("pass")
         first_name = request.form.get("first_name")
         last_name = request.form.get("last_name")
