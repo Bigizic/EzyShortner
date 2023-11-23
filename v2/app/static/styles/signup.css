@@ -182,6 +182,11 @@ footer {
     justify-content: center;
     gap: 2.5vw;
 }
+footer a {
+    text-decoration: none;
+    color: #fff;
+    font-size: small;
+}
 
 footer a:hover {
     color: #131313;
