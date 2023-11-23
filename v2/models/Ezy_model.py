@@ -75,12 +75,14 @@ class EzyModel(Base):
         """Remove the instanced Url from the database"""
         models.storage_type.delete(self)
 
-    def exists(self, alias=None, user_email=None):
+    def exists(self, alias=None, user_email=None, user_id=None):
         """Makes a call to the database existing() to check if the
         short_url exists in the database
         """
         if user_email:
             return models.storage_type.existing(None, None, user_email)
+        if user_id:
+            return models.storage_type.existing(None, None, None, user_id)
         if alias:
             return models.storage_type.existing(None, alias)
 

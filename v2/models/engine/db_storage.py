@@ -109,7 +109,8 @@ class DBStorage:
 
         return result
 
-    def existing(self, my_short_url, alias=None, user_email=None):
+    def existing(self, my_short_url, alias=None, user_email=None,
+                 user_id=None):
         """This function reloads data from the database and checks
         if the {short_url} column has any records of the shortened
         url
@@ -130,6 +131,10 @@ class DBStorage:
             if user_email:
                 exists = self.__session.query(User).filter_by(
                          email=user_email).first()
+                return True if exists is not None else False
+            if user_id:
+                exists = self.__session.query(User).filter_by(
+                         id=user_id).first()
                 return True if exists is not None else False
         except Exception:
             self.__session.rollback()
