@@ -15,7 +15,7 @@
 	}
 	header .information {
                 display: inline-flex;
-                gap: 6rem;
+                gap: 6vw;
                 margin-right: 10vw;
         }
 	section h1 {
@@ -84,7 +84,7 @@
         }
         header .information {
                 display: inline-flex;
-                gap: 6rem;
+                gap: 6vw;
                 margin-right: 10vw;
         }
         section h1 {
@@ -154,7 +154,7 @@
 	}
 	header .information {
 		display: inline-flex;
-		gap: 6rem;
+		gap: 6vw;
                 margin-right: 10vw;
 	}
 	section h1 {

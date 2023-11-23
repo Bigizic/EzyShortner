@@ -161,7 +161,7 @@ footer {
     text-transform: capitalize;
     padding: 2vh 0vh 2vh 0vh;
     justify-content: center;
-    gap: 2.5%;
+    gap: 2.5vw;
 }
 footer a {
     text-decoration: none;
