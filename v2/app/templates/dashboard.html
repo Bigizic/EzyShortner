@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ezy Dashboard</title>
-    <link rel="stylesheet" href="../static/styles/dashboard.css">
+    <link rel="stylesheet" href="/static/styles/dashboard.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link type="text/css" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js?{{ cache_id }}"></script>
-    <link rel="icon" href="../static/images/ezy_icon.jpg?{{ cache_id }}">
+    <link rel="icon" href="/static/images/ezy_icon.jpg?{{ cache_id }}">
 </head>
 <body>
     <div class="container">
@@ -39,7 +39,7 @@
                 <p class="user-information">OL</p>
                 <p class="user-name">John Doe</p>
                 </div>
-                <a class="logout">Logout</a>
+                <a href="{{ url_for('web_app.logout') }}" class="logout">Logout</a>
             </div>
         </section>
         <section class="right-sidebar">
@@ -76,7 +76,7 @@
     
             </section>
         <div id="qr_container">
-            <img id="qrCodeImage" src="../static/images/qr_images/{{qr_image}}">
+            <img id="qrCodeImage" src="/static/images/qr_images/{{qr_image}}">
             <div class="something">
                 <button id="downloadButton"><a href="../static/images/qr_images/{{qr_image}}" download="Ezyqr.png">Download &nbsp;<i class="bi bi-cloud-download-fill"></i></a>
                 </button>
