@@ -1,11 +1,8 @@
 #!/usr/bin/pytohn3
 """Web app using flask"""
 
-
-#from app.user_app_routes import dashboard
-#from app.user_app import dashboard
 from flask import Flask, request, render_template, make_response, session
-from flask import  Blueprint, redirect, url_for, current_app
+from flask import Blueprint, redirect, url_for, current_app
 from models.ezy import Ezy
 from models.users import User
 from models.engine.db_storage import DBStorage
@@ -15,21 +12,14 @@ import uuid
 import logging
 
 
-"""app = Flask(__name__)
-app.secret_key = environ.get("FLASK_KEY")
-Logged_in = False"""
-
-
-"""# Initialize logged_in status in session
-@app.before_request
-def before_request():
-    session.setdefault('logged_in', False)"""
-
-
 web_app_blueprint = Blueprint('web_app', __name__)
+
 
 @web_app_blueprint.route("/", methods=["GET", "POST"])
 def get_input():
+    if "logged_in" in session and session['logged_in']:
+        return redirect(url_for('web_app.dashboard',
+                        user_id=session['user_id']))
 
     if request.method == "POST":
         user_input = request.form.get("user_input")
@@ -48,11 +38,13 @@ def get_input():
         ezy_instance.original_url = user_input
 
         if user_output:
-            bad_alias = ["api", "api/", "api//", "api-docs", "api/docs/" "api_docs"
-                    "signup", "signup/docs", "sign_up", "sign-up", "signin",
-                    "signin/docs", "sign_in", "sign-in", "aboutus", "about", 
-                    "about_us", "about-us", "dashboard", "dash_board", "dash-board"
-                    "dashboard/" "dashboard//", "dashboard_"]
+            bad_alias = ["api", "api/", "api//", "api-docs", "api/docs/",
+                         "api_docs", "signup", "signup/docs", "sign_up",
+                         "sign-up", "signin", "signin/docs", "sign_in",
+                         "sign-in", "aboutus", "about", "about_us",
+                         "about-us", "dashboard", "dash_board",
+                         "dash-board", "dashboard/", "dashboard//",
+                         "dashboard_"]
 
             if user_output in bad_alias or len(user_output) > 70:
                 return homepage('', '', 404, '', 'Oops... Not Allowd')
@@ -161,21 +153,43 @@ def sign_up():
         session['user_id'] = new_user.id
 
         return redirect(url_for("web_app.dashboard", user_id=new_user.id))
+    info_message = session.pop('info_message', None)
+    return render_template('signup.html', info=info_message)
 
-    return render_template('signup.html')
 
-
-@web_app_blueprint.route('/dashboard/<user_id>', methods=["GET", "POST"])
+@web_app_blueprint.route('/dashboard/<user_id>', methods=["GET", "POST"],
+                         strict_slashes=False)
 def dashboard(user_id):
-    if ('logged_in' in session and session['logged_in'] and session['user_id'] == user_id):
+    if ('logged_in' in session and session['logged_in'] and
+            session['user_id'] == user_id):
         user = User().exists(None, None, user_id)
         if user:
-            return render_template('dashboard.html')
+            return render_template('dashboard.html', cache_id=uuid.uuid4())
         else:
             # direct a user if they've been blocked to sign in
-            return render_template('signup.html', info="Account doesn't exist")
+            session['info_message'] = "Account doesn't exist"
+            return redirect(url_for('web_app.sign_up'))
     else:
-        return render_template('signup.html', info="Sign in to continue")
+        session['info_message'] = "Sign in to continue"
+        return redirect(url_for('web_app.sign_up'))
+
+
+@web_app_blueprint.route('/dashboard', methods=["GET", "POST"])
+def dashboard_helper():
+    """Incase a user enters a route like server_name/dashboard"""
+    if ('logged_in' in session and session['logged_in']):
+        return redirect(url_for('web_app.dashboard',
+                        user_id=session['user_id']))
+    else:
+        session['info_message'] = "Sign in to continue"
+        return redirect(url_for('web_app.sign_up'))
+
+
+@web_app_blueprint.route('/logout', methods=["GET"])
+def logout():
+    """clear the session data"""
+    session.clear()
+    return redirect(url_for('web_app.get_input'))
 
 
 """Perfroms redirection
