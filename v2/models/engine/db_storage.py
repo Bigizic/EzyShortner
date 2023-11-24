@@ -122,20 +122,21 @@ class DBStorage:
                 word = "Alias has been used please try another"
                 exists = self.__session.query(Ezy).filter_by(
                     short_url=alias).first()
-                return word if exists is not None else False
+                return word if exists else False
 
             if my_short_url:
                 exists = self.__session.query(Ezy).filter_by(
                          short_url=my_short_url).first()
-                return True if exists is not None else False
+                return True if exists else False
             if user_email:
                 exists = self.__session.query(User).filter_by(
                          email=user_email).first()
-                return True if exists is not None else False
+                return [exists.id, exists.password] if exists else None
             if user_id:
                 exists = self.__session.query(User).filter_by(
                          id=user_id).first()
-                return True if exists is not None else False
+                return True if exists else False
+
         except Exception:
             self.__session.rollback()
             return False
