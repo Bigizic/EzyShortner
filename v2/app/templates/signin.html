@@ -4,19 +4,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="google-signin-client_id" content="518132922807-jtvohrg6r96o0t29k8de2ps3tr3u9vgv.apps.googleusercontent.com">
     <title>Transform Long Links into Compact, Shareable, and Memorable URLS</title>
-    <link type="text/css" rel="stylesheet" href="/static/styles/signup.css?{{ cache_id }}">
+    <link type="text/css" rel="stylesheet" href="/static/styles/signin.css?{{ cache_id }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link type="text/css" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js?{{ cache_id }}"></script>
-    <script type="text/javascript" src="/static/scripts/signup.js?{{ cache_id }}"></script>
+    <script type="text/javascript" src="/static/scripts/signin.js?{{ cache_id }}"></script>
     <link rel="icon" href="/static/images/ezy_icon.jpg?{{ cache_id }}">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <body>
 	<div class="loader-container">
-	    <div class="loader">
-	    </div>
+	    <div class="loader"></div>
 	</div>
         <section>
             {% if info %}
@@ -25,7 +24,7 @@
             <h1> EZYURL </h1>
             <h2 id="typing-animation"></h2>
             <div class="user_interface">
-                <form method="POST" action="/signup" id="signup_form">
+                <form method="POST" action="/signin" id="signin_form">
                     <div class="first_form">
                     <label for="email_or_username">Email</label>
                     <input required="true" name="email" id="email_or_username" type="email" type="text">
@@ -35,20 +34,12 @@
                     <span class="toggle-password"><i class=""></i></span>
                     <label style="color: red; font-size: smaller;" class="password-warning" for="pass"></label>
                     </div>
-                    <button class="next_button">Next<i class="bi bi-arrow-right-square-fill"></i></button>
-                    </div>
-                    <div style="display: none;" class="second_form">
-                       <label for="first_name"> First Name</label>
-                       <input required="true" name="first_name" id="first_name" type="text">
-                       <label for="last_name"> Last Name</label>
-                       <input required="true" name="last_name" id="last_name" type="text"><br>
-                       <input type="submit" value="Sign Up" class="enter_">
-                       <button class="back_button">Back</button>
+                    <input type="submit" value="Sign In" class="enter_">
                     </div>
                 </form>
             </div>
             <div class="g-signin2" data-onsuccess="onSignIn"></div>
-            <p>Already have an account? <a style="color: #888888;" href="{{ url_for('web_app.sign_in') }}">Sign in here</a></p>
+            <p>Create an account <a style="color: #888888;" href="{{ url_for('web_app.sign_up') }}">Sign up</a></p>
             <a style="color: #888888;" href="{{ url_for('web_app.get_input') }}"> Not sure? </a>
         </section>
         <footer>

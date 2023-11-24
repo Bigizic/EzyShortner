@@ -22,7 +22,7 @@
             <div class="information">
 		        <a class="about" href="{{ url_for('web_app.about') }}"> About</a>
                 <a class="blog" href="">Blog</a>
-                <a class="login" href="">Login</a>
+                <a class="login" href="{{ url_for('web_app.sign_in') }}">Login</a>
 		<a class="sign_up" href="{{ url_for('web_app.sign_up') }}">Sign up</a>
 		        <a class="history">History</a>
                 <div class="history_list">
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <div class="mobile_user">
-                            <a class="login" href=""><button>Login</button></a>
+                            <a class="login" href="{{ url_for('web_app.sign_in') }}"><button>Login</button></a>
                             <a class="sign_up" href="{{ url_for('web_app.sign_up') }}"><button>Sign up</button></a>
                         </div>
                     </ul>
