@@ -184,21 +184,24 @@ def sign_in():
                                    cache_id=uuid.uuid4())
 
         # check for existence of user via email return id and password
-        user_id, user_pass = DBStorage().existing(None, None, email)
-        # compares html password and database password
-        passs = bcrypt.checkpw(password.encode(), user_pass.encode())
-        if passs:
-            session['logged_in'] = True
-            session['email'] = email
-            session['user_id'] = user_id
-            return redirect(url_for("web_app.dashboard", user_id=user_id))
-
-        elif user_id and not passs:
-            return render_template('signin.html', info="Oops wrong password",
-                                   cache_id=uuid.uuid4())
-        else:
+        user_data = DBStorage().existing(None, None, email)
+        if not user_data:
             return render_template('signin.html', info="Oops.. No user Found",
                                    cache_id=uuid.uuid4())
+
+        user_id, user_pass = user_data if user_data else None
+
+        if user_id and user_pass:
+            # compares html password and database password
+            passs = bcrypt.checkpw(password.encode(), user_pass.encode())
+            if passs:
+                session['logged_in'] = True
+                session['email'] = email
+                session['user_id'] = user_id
+                return redirect(url_for("web_app.dashboard", user_id=user_id))
+            else:
+                return render_template('signin.html', info="Oops wrong password",
+                                       cache_id=uuid.uuid4())
 
     info_message = session.pop('info_message', None)
     return render_template('signin.html', cache_id=uuid.uuid4())
