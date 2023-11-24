@@ -200,7 +200,8 @@ def sign_in():
                 session['user_id'] = user_id
                 return redirect(url_for("web_app.dashboard", user_id=user_id))
             else:
-                return render_template('signin.html', info="Oops wrong password",
+                return render_template('signin.html',
+                                       info="Oops wrong password",
                                        cache_id=uuid.uuid4())
 
     info_message = session.pop('info_message', None)
