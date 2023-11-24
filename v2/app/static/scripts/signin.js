@@ -37,41 +37,7 @@ $(document).ready(() => {
       }, 5000);
     }
   /* end */
-  
-  /* next button functions */
-  $('.next_button').click(function () {
-    const emailInput = $('#email_or_username');
-    const passInput = $('#pass');
-    if(emailInput.val() && passInput.val().length >= 8) {
-      $('.first_form').hide().css('transform', 'scale(1)');
-      $('.second_form').show().css('transform', 'scale(1.1)');
-      setTimeout(function () {
-        typeText(0, "Almost there...", 100);
-      }, 1500);
-    } else {
-      if (!emailInput.val()) {
-        emailInput.css('border', '1px solid red');
-      }
-      if (!passInput.val()) {
-        passInput.css('border', '1px solid red');
-      }
-      if (passInput.val().length < 8) {
-        $('.password-warning').html("password length must be 8");
-      }
-    }
-  });
-  /* next button end */
-  
-  /* back button functions */
-  $('.back_button').click(function () {
-    $('.second_form').hide().css('transform', 'scale(1)');
-    $('.first_form').show().css('transform', 'scale(1.1)');
-    setTimeout(function () {
-      typeText(0, "Create an account in seconds!", 100);
-    }, 1500);
-  });
-  /* back button end */
-  
+
   /* password toogle */
   const passwordInput = $('#pass');
   const eyeIcon = $('.toggle-password i');
@@ -102,5 +68,5 @@ $(document).ready(() => {
     });
   /* end */
     
-  typeText(0, "Create an account in seconds!", 100);
+  typeText(0, "Hi there, Welcome back...", 100);
 });
