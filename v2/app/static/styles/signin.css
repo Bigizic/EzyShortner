@@ -62,16 +62,12 @@ section h1 {
     transition: transform 0.5s ease;
 }
 
-.second_form {
-    transition: transform 0.5s ease;
-}
-
 label {
     display: block;
     font-size: smaller;
 }
 
-#email_or_username, #pass, #first_name, #last_name {
+#email_or_username, #pass {
     width: 90%;
     height: 2rem;
     border-radius: 10px;
@@ -83,13 +79,13 @@ label {
     font-size: medium;
 }
 
-#email_or_username:focus, #pass:focus, #first_name:focus, #last_name:focus {
+#email_or_username:focus, #pass:focus {
     border: 1px solid black !important;
     outline: none;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2)
 }
 
-.enter_, .next_button {
+.enter_ {
     background-color: #006400 !important;
     width: 80%;
     height: 2rem;
@@ -101,17 +97,8 @@ label {
     box-sizing: content-box;
     cursor: pointer;
 }
-.back_button {
-    background-color: #006400 !important;
-    width: max-content;
-    border: none;
-    color: white;
-    font-size: medium;
-    margin-bottom: 10%;
-    border-radius: 10px;
-}
 
-.enter_:hover, .next_button:hover, .back_button:hover {
+.enter_:hover {
     background-color: #131418 !important;
 }
 
@@ -159,17 +146,6 @@ label {
   cursor: pointer;
 }
 
-.next_button {
-    position: relative !important;
-}
-
-.next_button i {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-52%);
-    cursor: pointer;
-}
 
 footer {
     width: 100%;
