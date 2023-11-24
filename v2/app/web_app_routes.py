@@ -139,8 +139,9 @@ def sign_up():
             return render_template('signup.html', info="email is invalid!",
                                    cache_id=uuid.uuid4())
         password = request.form.get("pass")
-        if len(password) > 128:
-            return render_template('signup.html', info="Password too long",
+        if len(password) > 128 or password is None:
+            ps = "Oops.. check the password"
+            return render_template('signin.html', info=ps,                           
                                    cache_id=uuid.uuid4())
 
         first_name = request.form.get("first_name")
@@ -179,8 +180,9 @@ def sign_in():
             return render_template('signin.html', info="email is invalid!",
                                    cache_id=uuid.uuid4())
         password = request.form.get("pass")
-        if len(password) > 128:
-            return render_template('signin.html', info="Password too long",
+        if len(password) > 128 or password is None:
+            ps = "Oops.. check the password"
+            return render_template('signin.html', info=ps,
                                    cache_id=uuid.uuid4())
 
         # check for existence of user via email return id and password
