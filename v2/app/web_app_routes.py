@@ -1,6 +1,7 @@
 #!/usr/bin/pytohn3
 """Web app using flask"""
 
+import bcrypt
 from flask import Flask, request, render_template, make_response, session
 from flask import Blueprint, redirect, url_for, current_app
 from models.ezy import Ezy
@@ -88,7 +89,8 @@ def homepage(short_url, status_code, qr_file_path, alias, word):
     """Renders homepage"""
     return render_template('homepage.html', url=short_url,
                            status=status_code, qr_image=qr_file_path,
-                           alias_status=alias, word=word)
+                           alias_status=alias, word=word,
+                           cache_id=uuid.uuid4())
 
 
 def func_alias(ezy_instance, user_output):
@@ -134,8 +136,13 @@ def sign_up():
         email = request.form.get("email")
         # protect against attacks
         if len(email) > 128 or not email.find('@') or email is None:
-            return render_template('signup.html', info="email is invalid!")
+            return render_template('signup.html', info="email is invalid!",
+                                   cache_id=uuid.uuid4())
         password = request.form.get("pass")
+        if len(password) > 128:
+            return render_template('signup.html', info="Password too long",
+                                   cache_id=uuid.uuid4())
+
         first_name = request.form.get("first_name")
         last_name = request.form.get("last_name")
 
@@ -144,17 +151,57 @@ def sign_up():
         new_user.password = password
         new_user.first_name = first_name
         new_user.last_name = last_name
-        if new_user.exists(None, email) is True:
-            return render_template('signup.html', info=f"email already exits!")
+        if new_user.exists(None, email):
+            return render_template('signup.html', info="email already exits!",
+                                   cache_id=uuid.uuid4())
         new_user.save()
-        logged_in = True
         session['user_email'] = email
         session['logged_in'] = True
         session['user_id'] = new_user.id
-
         return redirect(url_for("web_app.dashboard", user_id=new_user.id))
+
     info_message = session.pop('info_message', None)
-    return render_template('signup.html', info=info_message)
+    return render_template('signup.html', info=info_message,
+                           cache_id=uuid.uuid4())
+
+
+@web_app_blueprint.route('/signin', methods=["GET", "POST"])
+def sign_in():
+    """Renders sign in page"""
+    if "logged_in" in session and session['logged_in']:
+        return redirect(url_for('web_app.dashboard',
+                        user_id=session['user_id']))
+
+    if request.method == 'POST':
+        email = request.form.get("email")
+        # protect against attacks
+        if len(email) > 128 or not email.find('@') or email is None:
+            return render_template('signin.html', info="email is invalid!",
+                                   cache_id=uuid.uuid4())
+        password = request.form.get("pass")
+        if len(password) > 128:
+            return render_template('signin.html', info="Password too long",
+                                   cache_id=uuid.uuid4())
+
+        # check for existence of user via email return id and password
+        user_id, user_pass = DBStorage().existing(None, None, email)
+        # compares html password and database password
+        passs = bcrypt.checkpw(password.encode(), user_pass.encode())
+        if passs:
+            session['logged_in'] = True
+            session['email'] = email
+            session['user_id'] = user_id
+            return redirect(url_for("web_app.dashboard", user_id=user_id))
+
+        elif user_id and not passs:
+            return render_template('signin.html', info="Oops wrong password",
+                                   cache_id=uuid.uuid4())
+        else:
+            return render_template('signin.html', info="Oops.. No user Found",
+                                   cache_id=uuid.uuid4())
+
+    info_message = session.pop('info_message', None)
+    return render_template('signin.html', cache_id=uuid.uuid4())
 
 
 @web_app_blueprint.route('/dashboard/<user_id>', methods=["GET", "POST"],
@@ -168,10 +215,10 @@ def dashboard(user_id):
         else:
             # direct a user if they've been blocked to sign in
             session['info_message'] = "Account doesn't exist"
-            return redirect(url_for('web_app.sign_up'))
+            return redirect(url_for('web_app.sign_in'))
     else:
         session['info_message'] = "Sign in to continue"
-        return redirect(url_for('web_app.sign_up'))
+        return redirect(url_for('web_app.sign_in'))
 
 
 @web_app_blueprint.route('/dashboard', methods=["GET", "POST"])
@@ -182,7 +229,7 @@ def dashboard_helper():
                         user_id=session['user_id']))
     else:
         session['info_message'] = "Sign in to continue"
-        return redirect(url_for('web_app.sign_up'))
+        return redirect(url_for('web_app.sign_in'))
 
 
 @web_app_blueprint.route('/logout', methods=["GET"])
