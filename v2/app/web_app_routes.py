@@ -54,7 +54,7 @@ def get_input():
                     "about_us", "about-us", "dashboard", "dash_board", "dash-board"
                     "dashboard/" "dashboard//", "dashboard_"]
 
-            if user_output in bad_alias:
+            if user_output in bad_alias or len(user_output) > 70:
                 return homepage('', '', 404, '', 'Oops... Not Allowd')
 
             ezy_instance.short_url = user_output
