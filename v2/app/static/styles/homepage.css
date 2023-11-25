@@ -266,6 +266,7 @@ footer a:hover {
     overflow-x: scroll;
     overflow-y: scroll;
     transition: 0.5s;
+    z-index: 1;
 }
 .history_items {
     color: #fff;
