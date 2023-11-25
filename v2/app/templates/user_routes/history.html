@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ezy Dashboard</title>
-    <link rel="stylesheet" href="/static/styles/dashboard.css">
+    <link rel="stylesheet" href="/static/styles/user_routes/history.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link type="text/css" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js?{{ cache_id }}"></script>
-    <script type="text/javascript" src="/static/scripts/dashboard.js?{{ cache_id }}"></script>
+    <script type="text/javascript" src="/static/scripts/user_routes/history.js?{{ cache_id }}"></script>
     <link rel="icon" href="/static/images/ezy_icon.jpg?{{ cache_id }}">
 </head>
 <body>
@@ -38,41 +38,10 @@
         </section>
         <section class="right-sidebar">
             <div class="main-content">
-                <h1>EZYURL</h1>
+                <h1>HISTORY</h1>
             </div>
             <section class="user_interface">
-                <form method="POST" id="url_form">
-                    <div class="background">
-                    <label class="label_user_input" for="user_input">{{word}}</label>
-                    <input autofocus="true" name="user_input" id="user_input" placeholder="Enter long link here" type="text" required="true">
-            <label class="label_user_output" for="user_output">{{alias_status}}</label>
-                    <input name="user_output" maxlength="50" type="text" readonly="true" id="user_output" value="{{url}}">
-                    <input type="submit" value="Shorten" class="enter">
-                    </div>
-                </form>
-            <div class="share">
-                <input type="button" class="alias" value="ALIAS">
-                {% if status == 200 %}
-                    <button class="copy_">COPY</button>
-                    <button class="qr_code">QR</button>
-                    {% endif %}
-                </div>
-    
             </section>
-        <div id="qr_container">
-            <img id="qrCodeImage" src="/static/images/qr_images/{{qr_image}}">
-            <div class="something">
-                <button id="downloadButton"><a href="../static/images/qr_images/{{qr_image}}" download="Ezyqr.png">Download &nbsp;<i class="bi bi-cloud-download-fill"></i></a>
-                </button>
-                <button id="cancelButton">Cancel</button>
-            </div>
-        </div>
-        <footer>
-            <a target="_blank" href="{{ url_for('web_app.about') }}"> About</a> &bull;
-            <a href="https://github.com/Bigizic/Ezy_urlShortner/blob/main/LICENSE" target="_blank">licence </a> &bull;
-            <a href="https://www.github.com/Bigizic/Ezy_UrlShortner" target="_blank">Github</a> &bull;
-        <a> &copy; 2023</a>
-        </footer>
         </section>
     </div>
 </body>
