@@ -18,7 +18,7 @@ web addresses into concise, easy-to-share links. With just a few clicks, you can
 
 into this: 
 
-        https://ezyurl.tech/dfgdskt
+        https://ezyurl.xyz/dfgdskt
 
 
 ## The Team
