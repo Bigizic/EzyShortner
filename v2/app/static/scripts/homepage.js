@@ -120,6 +120,15 @@ $(document).ready(() => {
     }
   });
   /* end alias button */
+  
+  
+/* FUNCTION TO GET CURRENT TIMEZONE OF A USER AND USE IT TO UPDATE CREATED FIELD IN HISTORY SECTION*/
+  function convertUTCToLocal(utcDateTime) {
+    let userTimezone = moment.tz.guess();
+    return moment.utc(utcDateTime).tz(userTimezone).format('dddd MMMM YYYY HH:mm:ss');
+};
+/* END */
+
 
   /* histroy section */
   let userHistory = JSON.parse(localStorage.getItem('userHistory')) || [];
@@ -145,13 +154,14 @@ $(document).ready(() => {
           success: function(result) {
             const historyList = $('.long-url-history');
             for (let item of result.data) {
+              const user_time = convertUTCToLocal(item.created_at);
               const article = `
                 <li>
                 <h3>${item.original_url} <button class="history_copy">Copy</button></h3>
                 <ul>
                   <li class="short-url-history">
-                    Short URL: https://ezyurl.xyz/${item.short_url} <button class="history_copy">Copy</button><br>
-                    Created At: ${item.created_at}<br>
+                    <strong>Short URL:</strong> https://ezyurl.xyz/${item.short_url} <button class="history_copy">Copy</button><br>
+                    <strong>Created At:</strong> ${user_time}<br>
                   </li>
                 </ul>
                 </li>`;
@@ -175,8 +185,10 @@ $(document).ready(() => {
   if (userInput) {
     updateHistory(userInput);
   }
-
   /* end history section */
+
+
+
 
   /*history onclick operations */
   $(document).on('click', '.history_copy', function() {
@@ -214,4 +226,3 @@ $(document).ready(() => {
   });
   /* end mobile history view */
 });
-
