@@ -170,3 +170,54 @@ footer a {
 footer a:hover {
     color: #131313;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* SMALL TABLETS */
+@media (min-width: 768px) and (max-width: 991px) {
+	html {
+		height: 100%;
+	}
+	body {
+		margin: 0px;
+		background: rgb(19,20,24);
+	}
+}
+
+
+/* MOBILE */
+@media (max-width: 480px) {
+	html {
+		height: 100%;
+	}
+	body {
+		margin: 0px;
+		background: rgb(19,20,24) !important;
+	}
+}
+
+
+/* EXTRA SMALL DEVICES */
+@media (min-width: 481px) and (max-width: 767px) {
+	html {
+		height: 100%
+	}
+	body {
+		margin: 0px;
+		background: rgb(19,20,24);
+	}
+}
