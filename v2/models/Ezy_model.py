@@ -26,7 +26,6 @@ class EzyModel(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow)
 
-
     def __init__(self, *args, **kwargs):
         """Sets the default parameters for database"""
         short = False
