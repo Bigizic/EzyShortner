@@ -302,6 +302,7 @@
         	display: block !important;
         	font-size: xxx-large;
         	transition: transform 0.5s ease;
+        	cursor: pointer;
         }
         .mobile_h1:hover {
         	color: #006400;
@@ -321,13 +322,13 @@
         	margin-left: 10%
         }
         #user_input, #user_output {
-                width: 100%;
+                width: 90%;
                 height: 3rem;
                 border-radius: 20px !important;
                 background-color: #45494C;
                 border: none;
                 color: white;
-                padding: 0% 2% 0% 2%;
+                padding: 0% 2% 0% 4%;
                 margin-bottom: 4%;
 		font-size: medium;
         }
@@ -335,7 +336,7 @@
         .enter {
                 background-color: #006400;
                 border-radius: 20px !important;
-                width: 104%;
+                width: 86%;
                 color: #fff;
                 height: 2.5rem;
                 border: none;
@@ -455,6 +456,7 @@
         	display: block !important;
         	font-size: xxx-large;
         	transition: transform 0.5s ease;
+        	cursor: pointer;
         }
         .mobile_h1:hover {
         	color: #006400;
@@ -478,13 +480,13 @@
         	margin-left: 10% !important;
         }
         #user_input, #user_output {
-                width: 100%;
+                width: 90%;
                 height: 3rem;
                 border-radius: 20px !important;
                 background-color: #45494C;
                 border: none;
                 color: white;
-                padding: 0% 2% 0% 2%;
+                padding: 0% 2% 0% 4%;
                 margin-bottom: 4%;
 		font-size: medium;
         }
@@ -492,7 +494,7 @@
         .enter {
                 background-color: #006400;
                 border-radius: 20px !important;
-                width: 104%;
+                width: 86%;
                 color: #fff;
                 height: 2.5rem;
                 border: none;
@@ -611,6 +613,7 @@
         	display: block !important;
         	font-size: xxx-large;
         	transition: transform 0.5s ease;
+        	cursor: pointer;
         }
         .mobile_h1:hover {
         	color: #006400;
@@ -633,20 +636,20 @@
         	margin-left: 10% !important;
         }
         #user_input, #user_output {
-                width: 100%;
+                width: 90%;
                 height: 3rem;
                 border-radius: 20px !important;
                 background-color: #45494C;
                 border: none;
                 color: white;
-                padding: 0% 2% 0% 2%;
+                padding: 0% 2% 0% 4%;
                 margin-bottom: 4%;
 		font-size: medium;
         }
         .enter {
                 background-color: #131418;
                 border-radius: 20px !important;
-                width: 104%;
+                width: 86%;
                 color: #fff;
                 height: 2.5rem;
                 border: none;
