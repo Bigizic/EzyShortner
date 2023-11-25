@@ -218,6 +218,9 @@
 	html {
 		height: 100%;
 	}
+	body {
+		margin: 0px;
+	}
 	header {
                 display: flex;
                 align-items: center;
@@ -368,6 +371,9 @@
 @media (min-width: 768px) and (max-width: 991px) {
 	html {
 		height: 100%;
+	}
+	body {
+		margin: 0px;
 	}
 	header {
                 display: flex;
@@ -528,6 +534,9 @@
 @media (min-width: 481px) and (max-width: 767px) {
 	html {
 		height: 100%
+	}
+	body {
+		margin: 0px;
 	}
 	header {
                 display: flex;
