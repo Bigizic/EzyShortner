@@ -166,6 +166,7 @@ section form label {
     transition: transform 0.5s ease;
     font-weight: 550;
     cursor: pointer;
+    font-size: inherit;
 }
 .alias:hover, .copy_:hover, .qr_code:hover {
     background-color: #131418;
