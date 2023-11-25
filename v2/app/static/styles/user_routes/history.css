@@ -118,7 +118,7 @@ body {
     transform: scale(1.1);
 }
 
-.left-items-li:active {
+.left-items-lix:active {
     background: black;
     transform: scale(1.1);
 }
@@ -361,7 +361,9 @@ footer a:hover {
     background-image: url("/static/images/icons/api_code_slash.svg") !important; 
 }
 
-.left-items-li a, .left-items-lix a {
+
+
+.left-items-lix a, .left-items-li a {
     text-decoration: none;
     color: inherit;
 }
