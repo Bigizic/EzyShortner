@@ -2,7 +2,7 @@
 """ Base model for all models """
 
 
-import datetime
+from datetime import datetime
 import uuid
 import models
 import requests
@@ -23,8 +23,8 @@ class EzyModel(Base):
     __abstract__ = True
 
     id = Column(String(100), primary_key=True)
-    created_at = Column(DateTime, default=datetime.datetime.now)
-    updated_at = Column(DateTime, default=datetime.datetime.now)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow)
 
 
     def __init__(self, *args, **kwargs):
@@ -39,7 +39,7 @@ class EzyModel(Base):
                     setattr(self, k, v)
 
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
+        self.created_at = datetime.utcnow()
 
         if not kwargs:
             self.original_url = "NOPE NO URL"
