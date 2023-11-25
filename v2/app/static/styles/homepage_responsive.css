@@ -217,9 +217,11 @@
 @media (max-width: 480px) {
 	html {
 		height: 100%;
+		background: rgb(19,20,24);
 	}
 	body {
 		margin: 0px;
+		background: rgb(19,20,24) !important;
 	}
 	header {
                 display: flex;
@@ -374,6 +376,7 @@
 	}
 	body {
 		margin: 0px;
+		background: rgb(19,20,24);
 	}
 	header {
                 display: flex;
@@ -537,6 +540,7 @@
 	}
 	body {
 		margin: 0px;
+		background: rgb(19,20,24);
 	}
 	header {
                 display: flex;
