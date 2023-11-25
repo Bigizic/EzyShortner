@@ -29,7 +29,7 @@ def get_input():
                                   'http://ezyurl.xyz/',
                                   'https://www.ezyurl.xyz/',
                                   'http://www.ezyurl.xyz/')):
-            return homepage('', '', 404, '', 'Cannot use Domain')
+            return homepage('', '', 404, '', 'Cannot shorten Ezy Domain')
         user_output = request.form.get("user_output")
 
         wor = "Long link enterd is not a valid address"
@@ -141,7 +141,7 @@ def sign_up():
         password = request.form.get("pass")
         if len(password) > 128 or password is None:
             ps = "Oops.. check the password"
-            return render_template('signin.html', info=ps,                           
+            return render_template('signin.html', info=ps,
                                    cache_id=uuid.uuid4())
 
         first_name = request.form.get("first_name")
@@ -213,11 +213,79 @@ def sign_in():
 @web_app_blueprint.route('/dashboard/<user_id>', methods=["GET", "POST"],
                          strict_slashes=False)
 def dashboard(user_id):
+    if request.method == "POST":
+        current_app.logger.warning(user_id)
+        user_input = request.form.get("user_input")
+
+        if user_input.startswith(('https://ezyurl.xyz/', 'ezyurl.xyz/',
+                                  'http://ezyurl.xyz/',
+                                  'https://www.ezyurl.xyz/',
+                                  'http://www.ezyurl.xyz/')):
+            return dashpage('', '', 404, '', 'Cannot shorten Ezy Domains')
+        user_output = request.form.get("user_output")
+
+        wor = "Long link enterd is not a valid address"
+        alias_error = "Alias has been used please try another"
+
+        ezy_instance = Ezy()
+        ezy_instance.original_url = user_input
+        ezy_instance.user_id = user_id
+
+        if user_output:
+            bad_alias = ["api", "api/", "api//", "api-docs", "api/docs/",
+                         "api_docs", "signup", "signup/docs", "sign_up",
+                         "sign-up", "signin", "signin/docs", "sign_in",
+                         "sign-in", "aboutus", "about", "about_us",
+                         "about-us", "dashboard", "dash_board",
+                         "dash-board", "dashboard/", "dashboard//",
+                         "dashboard_"]
+
+            if user_output in bad_alias or len(user_output) > 70:
+                return dashpage('', '', 404, '', 'Oops... Not Allowd')
+
+            ezy_instance.short_url = user_output
+
+            alias = func_alias(ezy_instance, user_output)
+            if alias == "alias exist original url valid":
+                """This would check if the alias exists before saving
+                and if the original url entered by user is valid"""
+                # ezy_instance.remove_url()  # deletes the created instance
+                ezy_instance.save()
+                return dashpage('', 404, '', alias_error, '')
+
+            ezy_instance.save()
+            if alias == "alias exist original url invalid":
+                ezy_instance.remove_url()  # deletes the created instance
+                return dashpage('', 404, '', '', wor)
+            if alias == "alias doesn't exist original url invalid":
+                ezy_instance.remove_url()  # deletes the created instance
+                return dashpage('', 404, '', '', wor)
+            if alias == "alias doesn't exist original url valid":
+                short_url = ezy_instance.url()
+                qr_file_path = qr_gen(short_url)
+                return dashpage('https://' + short_url, 200,
+                                qr_file_path, '', '')
+        else:
+            ezy_instance.exists()  # check for existence before saving
+            ezy_instance.save()
+            if ezy_instance.url():
+                short_url = ezy_instance.url()
+                qr_file_path = qr_gen(short_url)
+                return dashpage('https://' + short_url, 200,
+                                qr_file_path, '', '')
+            else:
+                return dashpage('', 404, '', '', wor)
+
     if ('logged_in' in session and session['logged_in'] and
             session['user_id'] == user_id):
         user = User().exists(None, None, user_id)
         if user:
-            return render_template('dashboard.html', cache_id=uuid.uuid4())
+            info = DBStorage().fetch_user(user_id)
+            names = info.first_name + ' ' + info.last_name
+            email = info.email[:2].upper()
+            return render_template('dashboard.html', cache_id=uuid.uuid4(),
+                                   names=names, email=email,
+                                   user_id=session['user_id'])
         else:
             # direct a user if they've been blocked to sign in
             session['info_message'] = "Account doesn't exist"
@@ -225,6 +293,14 @@ def dashboard(user_id):
     else:
         session['info_message'] = "Sign in to continue"
         return redirect(url_for('web_app.sign_in'))
+
+
+def dashpage(short_url, status_code, qr_file_path, alias, word):
+    """Renders homepage"""
+    return render_template('dashboard.html', url=short_url,
+                           status=status_code, qr_image=qr_file_path,
+                           alias_status=alias, word=word,
+                           cache_id=uuid.uuid4(), user_id=session['user_id'])
 
 
 @web_app_blueprint.route('/dashboard', methods=["GET", "POST"])
@@ -245,27 +321,32 @@ def logout():
     return redirect(url_for('web_app.get_input'))
 
 
-"""Perfroms redirection
-HOW IT WORKS:
-A user accesses a short URL like ezyurl.com/shortlink in their web browser
-Nginx Receives the Request
-Nginx Routes the Request to Python Script
-Nginx is configured to route all incoming requests to a specific location
-Nginx sends the request to this Python script for processing.
-The URL path, /shortlink is passed as part of the request to the Python script
-The script looks up the original URL associated with shortlink from database
-If it finds a matching original URL, it creates a redirection response.
-it generates an HTTP redirection response using a 302 status code.
-Nginx receives the HTTP redirection response from the Python script.
-Nginx processes the redirection response and performs the redirection
-based on the Location header. It tells the user's web browser to navigate
-to the original URL.
-"""
+@web_app_blueprint.route('/history/<user_id>', methods=["GET"])
+def history(user_id):
+    """Renders history for a user"""
+    if ('logged_in' in session and session['logged_in'] and
+            session['user_id'] == user_id):
+        user = User().exists(None, None, user_id)
+        if user:
+            info = DBStorage().fetch_user(user_id)
+            names = info.first_name + ' ' + info.last_name
+            email = info.email[:2].upper()
+            return render_template('user_routes/history.html',
+                                   cache_id=uuid.uuid4(),
+                                   email=email, names=names,
+                                   user_id=user_id)
+        else:
+            # direct a user if they've been blocked to sign in
+            session['info_message'] = "Account doesn't exist"
+            return redirect(url_for('web_app.sign_in'))
+    else:
+        session['info_message'] = "Sign in to continue"
+        return redirect(url_for('web_app.sign_in'))
 
 
 @web_app_blueprint.route('/<shortlink>')
 def redirect_function(shortlink):
-    """Perfroms redirection"""
+    """Perfroms redirection refain to redirection.txt"""
     result = DBStorage()
     url = result.redirect(shortlink)
 
