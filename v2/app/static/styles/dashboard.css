@@ -66,6 +66,8 @@ body {
     padding: 8px;
     border-radius: 15px;
     cursor: pointer;
+    color: #fff;
+    text-decoration: none;
 }
 .logout:hover {
     background-color: #004700;
