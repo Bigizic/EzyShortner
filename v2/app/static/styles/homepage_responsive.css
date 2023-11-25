@@ -215,6 +215,9 @@
 
 /* MOBILE */
 @media (max-width: 480px) {
+	html {
+		height: 100%;
+	}
 	header {
                 display: flex;
                 align-items: center;
@@ -317,7 +320,7 @@
                 width: 100%;
                 height: 3rem;
                 border-radius: 20px !important;
-                background-color: #44494D;
+                background-color: #45494C;
                 border: none;
                 color: white;
                 padding: 0% 2% 0% 2%;
@@ -350,12 +353,17 @@
         }
         footer {
                 gap: 2vw;
+                position: absolute;
+                bottom: 0px;
         }
 }
 
 /* SMALL TABLETS */
 
 @media (min-width: 768px) and (max-width: 991px) {
+	html {
+		height: 100%;
+	}
 	header {
                 display: flex;
                 align-items: center;
@@ -465,7 +473,7 @@
                 width: 100%;
                 height: 3rem;
                 border-radius: 20px !important;
-                background-color: #44494D;
+                background-color: #45494C;
                 border: none;
                 color: white;
                 padding: 0% 2% 0% 2%;
@@ -500,12 +508,17 @@
         }
         footer {
                 gap: 2vw;
+                position: absolute;
+                bottom: 0px;
         }
 }
 
 
 /* EXTRA SMALL DEVICES */
 @media (min-width: 481px) and (max-width: 767px) {
+	html {
+		height: 100%
+	}
 	header {
                 display: flex;
                 align-items: center;
@@ -611,7 +624,7 @@
                 width: 100%;
                 height: 3rem;
                 border-radius: 20px !important;
-                background-color: #44494D;
+                background-color: #45494C;
                 border: none;
                 color: white;
                 padding: 0% 2% 0% 2%;
@@ -644,5 +657,7 @@
         }
         footer {
                 gap: 2vw;
+                position: absolute;
+                bottom: 0px;
         }
 }
