@@ -226,7 +226,7 @@
                 line-height: normal;
                 white-space: nowrap;
                 margin-left: 2rem;
-                font-size: 8vw !important;
+                 font-size: 8vw !important;
         }
 	header .information {
                 display: none;
@@ -234,9 +234,11 @@
         header .menu-button {
                 background-color: inherit;
                 color: #006400;
-                cursor: pointer;
-                margin-right: 10%;
-                font-size: xxx-large;
+                margin-right: 2rem;
+                width: fit-content;
+                height: fit-content;
+                border-radius: 4px;
+                font-size: 30px;
                 font-weight: 900;
         }
         header .menu-button:hover {
@@ -273,7 +275,8 @@
                 text-align: center;
         }
         .close-button:hover {
-                color: #006400;
+                background-color: #006400;
+                color: #131313;
         }
 	.menu-information a {
 		font-size: 5vw;
@@ -288,15 +291,13 @@
         }
         section h1 {
                 text-align: center;
-                /*margin-top: 10vw;
-                font-size: 4vw;*/
+                margin-top: 10vw;
                 font-size: x-large !important;
         }
-        section h1 strong {
+        section h4 {
                 color: #ADAEAF;
                 text-align: center;
-                font-size: 10px;
-                display: none !important;
+                font-size: calc(10px);
         }
 
         .user_interface {
@@ -308,11 +309,11 @@
                 font-size: 10px;
         }
         section form {
-                margin-left: 10% !important;
+        	margin-left: 10%
         }
         #user_input, #user_output {
                 width: 80%;
-                height: 2.5rem;
+                height: 2rem;
                 border-radius: 4px;
                 background-color: #44494D;
                 border: none;
@@ -371,9 +372,11 @@
         header .menu-button {
                 background-color: inherit;
                 color: #006400;
-                cursor: pointer;
-                margin-right: 10%;
-                font-size: xxx-large;
+                margin-right: 2rem;
+                width: fit-content;
+                height: fit-content;
+                border-radius: 4px;
+                font-size: 30px;
                 font-weight: 900;
         }
         header .menu-button:hover {
@@ -410,7 +413,8 @@
                 text-align: center;
         }
         .close-button:hover {
-                color: #006400;
+                background-color: #006400;
+                color: #131313;
         }
 	.menu-information a {
 		font-size: 5vw;
@@ -425,15 +429,12 @@
         }
         section h1 {
                 text-align: center;
-                /*font-size: 4vw;*/
                 font-size: x-large !important;
         }
-
-        section h1 strong {
+        section h4 {
                 color: #ADAEAF;
                 text-align: center;
-                font-size: 10px;
-                display: none !important;
+                font-size: calc(16px);
         }
 
         .user_interface {
@@ -441,16 +442,19 @@
                 max-width: 911px;
                 display: block !important;
         }
+        /*.background {
+                margin-left: 0%;
+        }*/
 	section form label {
                 color: #fff;
                 font-size: 13px;
         }
         section form {
-                margin-left: 10% !important;
+        	margin-left: 10% !important;
         }
         #user_input, #user_output {
                 width: 80%;
-                height: 2.5rem;
+                height: 3.5rem;
                 border-radius: 4px;
                 background-color: #44494D;
                 border: none;
@@ -501,7 +505,7 @@
                 line-height: normal;
                 white-space: nowrap;
                 margin-left: 2rem;
-                font-size: 8vw !important;
+                font-size: 6vw !important;
         }
 	header .information {
                 display: none;
@@ -509,9 +513,11 @@
 	 header .menu-button {
                 background-color: inherit;
                 color: #006400;
-                cursor: pointer;
-                margin-right: 10%;
-                font-size: xxx-large;
+                margin-right: 2rem;
+                width: fit-content;
+                height: fit-content;
+                border-radius: 4px;
+                font-size: 30px;
                 font-weight: 900;
         }
         header .menu-button:hover {
@@ -548,7 +554,8 @@
                 text-align: center;
         }
         .close-button:hover {
-                color: #006400;
+                background-color: #006400;
+                color: #131313;
         }
 	.menu-information a {
 		font-size: 5vw;
@@ -563,29 +570,31 @@
         }
 	section h1 {
                 text-align: center;
-                /*margin-top: 2rem;*/
+                margin-top: 2rem;
 		font-size: x-large !important;
         }
-        section h1 strong {
+        section h4 {
                 color: #ADAEAF;
                 text-align: center;
                 font-size: 10px;
-                display: none !important;
         }
 	.user_interface {
                 min-width: 481px;
                 max-width: 767px;
                 display: block !important;
         }
-        section form {
-	        margin-left: 10% !important;
-	}
+        /*.background {
+                margin-left: 13%;
+        }*/
         section form label {
                 color: #fff;
         }
+        section form {
+        	margin-left: 10% !important;
+        }
         #user_input, #user_output {
                 width: 80%;
-                height: 2.5rem !important;
+                height: 2.5rem;
                 border-radius: 4px;
                 background-color: #44494D;
                 border: none;
@@ -619,4 +628,3 @@
                 gap: 2vw;
         }
 }
-
