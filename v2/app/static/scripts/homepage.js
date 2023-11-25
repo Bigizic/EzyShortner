@@ -51,6 +51,9 @@ $(document).ready(() => {
   $('header h1').click(function () {
     window.location.replace(window.location.href);
   });
+  $('.mobile_h1').click(function () {
+    window.location.replace(window.location.href);
+  });
 
   /* history animation */
   $('.history').click(function () {
