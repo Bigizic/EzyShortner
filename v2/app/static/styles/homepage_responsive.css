@@ -315,7 +315,7 @@
         }
         #user_input, #user_output {
                 width: 100%;
-                height: 2.5rem;
+                height: 3rem;
                 border-radius: 20px !important;
                 background-color: #44494D;
                 border: none;
@@ -330,7 +330,7 @@
                 border-radius: 20px !important;
                 width: 104%;
                 color: #fff;
-                height: 2rem;
+                height: 2.5rem;
                 border: none;
                 font-size: 100%;
                 margin-bottom: 5%;
@@ -343,6 +343,10 @@
                 border: none;
                 margin-bottom: 1vh;
 		padding: 4px;
+        }
+        
+        .img_desktop {
+        	display: none !important;
         }
         footer {
                 gap: 2vw;
@@ -459,7 +463,7 @@
         }
         #user_input, #user_output {
                 width: 100%;
-                height: 2.5rem;
+                height: 3rem;
                 border-radius: 20px !important;
                 background-color: #44494D;
                 border: none;
@@ -474,7 +478,7 @@
                 border-radius: 20px !important;
                 width: 104%;
                 color: #fff;
-                height: 2rem;
+                height: 2.5rem;
                 border: none;
                 font-size: 100%;
                 margin-bottom: 5%;
@@ -490,6 +494,9 @@
                 border: none;
                 margin-bottom: 1vh;
 		padding: 4px;
+        }
+        .img_desktop {
+        	display: none !important;
         }
         footer {
                 gap: 2vw;
@@ -602,7 +609,7 @@
         }
         #user_input, #user_output {
                 width: 100%;
-                height: 2.5rem;
+                height: 3rem;
                 border-radius: 20px !important;
                 background-color: #44494D;
                 border: none;
@@ -616,7 +623,7 @@
                 border-radius: 20px !important;
                 width: 104%;
                 color: #fff;
-                height: 2rem;
+                height: 2.5rem;
                 border: none;
                 font-size: 100%;
                 margin-bottom: 5%;
@@ -631,6 +638,9 @@
         }
         .menu-information li {
                 border-bottom: solid;
+        }
+        .img_desktop {
+        	display: none !important;
         }
         footer {
                 gap: 2vw;
