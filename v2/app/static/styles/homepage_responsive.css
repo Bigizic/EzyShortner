@@ -226,25 +226,21 @@
                 line-height: normal;
                 white-space: nowrap;
                 margin-left: 2rem;
-                font-size: 40px;
+                font-size: 8vw !important;
         }
 	header .information {
                 display: none;
         }
         header .menu-button {
                 background-color: inherit;
-                cursor: pointer;
                 color: #006400;
-                margin-right: 2rem;
-                width: fit-content;
-                height: fit-content;
-                border-radius: 4px;
-                font-size: 40px;
+                cursor: pointer;
+                margin-right: 10%;
+                font-size: xxx-large;
                 font-weight: 900;
         }
         header .menu-button:hover {
-                background-color: aliceblue;
-                color: #333;
+                color: #fff;
                 transition: 0.5s;
         }
         .cover-up {
@@ -364,7 +360,7 @@
                 line-height: normal;
                 white-space: nowrap;
                 margin-left: 2rem;
-                font-size: 5vw;
+                font-size: 5vw !important;
         }
 	header .information {
                 display: none;
@@ -376,16 +372,12 @@
                 background-color: inherit;
                 color: #006400;
                 cursor: pointer;
-                margin-right: 2rem;
-                width: fit-content;
-                height: fit-content;
-                border-radius: 4px;
-                font-size: 40px;
+                margin-right: 10%;
+                font-size: xxx-large;
                 font-weight: 900;
         }
         header .menu-button:hover {
-                background-color: aliceblue;
-                color: #333;
+                color: #fff;
                 transition: 0.5s;
         }
         .cover-up {
@@ -509,7 +501,7 @@
                 line-height: normal;
                 white-space: nowrap;
                 margin-left: 2rem;
-                font-size: 5vw;
+                font-size: 8vw !important;
         }
 	header .information {
                 display: none;
@@ -518,10 +510,8 @@
                 background-color: inherit;
                 color: #006400;
                 cursor: pointer;
-                margin-right: 2rem;
-                width: fit-content;
-                height: fit-content;
-                font-size: 40px;
+                margin-right: 10%;
+                font-size: xxx-large;
                 font-weight: 900;
         }
         header .menu-button:hover {
