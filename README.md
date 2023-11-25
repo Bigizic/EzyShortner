@@ -53,8 +53,8 @@ into this:
 * Jquery
 * Gunicorn
 * Rest API
-* Swagger
 * Nginx
+* Chart.js
 
 
 
