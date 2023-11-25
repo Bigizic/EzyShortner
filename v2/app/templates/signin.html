@@ -34,12 +34,13 @@
                     <span class="toggle-password"><i class=""></i></span>
                     <label style="color: red; font-size: smaller;" class="password-warning" for="pass"></label>
                     </div>
-                    <input type="submit" value="Sign In" class="enter_">
+                    <input type="submit" value="Sign In" class="enter_"><br>
+                    <a style="color: #888888;"> Reset Password </a><br><br>
                     </div>
                 </form>
             </div>
             <div class="g-signin2" data-onsuccess="onSignIn"></div>
-            <p>Create an account <a style="color: #888888;" href="{{ url_for('web_app.sign_up') }}">Here</a></p>
+            <p>Don't have an account? <a style="color: #888888;" href="{{ url_for('web_app.sign_up') }}">Sign up</a></p>
             <a style="color: #888888;" href="{{ url_for('web_app.get_input') }}"> Not sure? </a>
         </section>
         <footer>
