@@ -301,6 +301,11 @@
         .mobile_h1 {
         	display: block !important;
         	font-size: xxx-large;
+        	transition: transform 0.5s ease;
+        }
+        .mobile_h1:hover {
+        	color: #006400;
+        	transform: scale(1.2);
         }
 
 	.user_interface {
@@ -449,6 +454,11 @@
         .mobile_h1 {
         	display: block !important;
         	font-size: xxx-large;
+        	transition: transform 0.5s ease;
+        }
+        .mobile_h1:hover {
+        	color: #006400;
+        	transform: scale(1.2);
         }
 
 	.user_interface {
@@ -600,6 +610,11 @@
         .mobile_h1 {
         	display: block !important;
         	font-size: xxx-large;
+        	transition: transform 0.5s ease;
+        }
+        .mobile_h1:hover {
+        	color: #006400;
+        	transform: scale(1.2);
         }
 
 	.user_interface {
