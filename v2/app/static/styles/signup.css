@@ -159,7 +159,7 @@ label {
 .toggle-password {
   position: absolute;
   top: 50%;
-  right: 5px;
+  right: 8px;
   transform: translateY(-30%);
   cursor: pointer;
 }
