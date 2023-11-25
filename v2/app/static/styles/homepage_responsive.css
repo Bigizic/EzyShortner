@@ -21,18 +21,16 @@
 	section h1 {
                 color: #fff;
                 text-align: center;
-                margin-top: 2rem;
+                /*margin-top: 2rem;*/
         }
 	.user_interface {
 		min-width: 992px;
 		max-width: 1199px;
 	}
-	/*.background {
-		margin-left: 20%;
-	}*/
+
 	#user_input, #user_output {
                 width: 70%;
-                height: 2.5rem;
+                height: 50px;
                 border-radius: 4px;
                 background-color: #44494D;
                 border: none;
@@ -90,7 +88,7 @@
         section h1 {
                 color: #fff;
                 text-align: center;
-                margin-top: 2rem;
+                /*margin-top: 2rem;*/
         }
         .user_interface {
                 min-width: 1200px;
@@ -101,7 +99,7 @@
         }*/
 	#user_input, #user_output {
                 width: 70%;
-                height: 2.5rem;
+                height: 50px;
                 border-radius: 4px;
                 background-color: #44494D;
                 border: none;
@@ -160,7 +158,7 @@
 	section h1 {
 		color: #fff;
 		text-align: center;
-		margin-top: 2rem;
+		/*margin-top: 2rem;*/
 	}
 	.user_interface {
 		min-width: 1200px;
@@ -171,7 +169,7 @@
 	}*/
  	#user_input, #user_output {
 		width: 70%;
-		height: 2.5rem;
+		height: 50px;
 		border-radius: 4px;
 		background-color: #44494D;
 		border: none;
@@ -228,7 +226,7 @@
                 line-height: normal;
                 white-space: nowrap;
                 margin-left: 2rem;
-                font-size: 5vw;
+                font-size: 40px;
         }
 	header .information {
                 display: none;
@@ -241,7 +239,7 @@
                 width: fit-content;
                 height: fit-content;
                 border-radius: 4px;
-                font-size: 20px;
+                font-size: 40px;
                 font-weight: 900;
         }
         header .menu-button:hover {
@@ -294,25 +292,31 @@
         }
         section h1 {
                 text-align: center;
-                margin-top: 10vw;
-                font-size: 4vw;
+                /*margin-top: 10vw;
+                font-size: 4vw;*/
+                font-size: x-large !important;
         }
-        section h4 {
+        section h1 strong {
                 color: #ADAEAF;
                 text-align: center;
-                font-size: calc(10px);
+                font-size: 10px;
+                display: none !important;
         }
 
         .user_interface {
                 max-width: 480px;
+                display: block !important;
         }
 	section form label {
                 color: #fff;
                 font-size: 10px;
         }
+        section form {
+                margin-left: 10% !important;
+        }
         #user_input, #user_output {
                 width: 80%;
-                height: 2rem;
+                height: 2.5rem;
                 border-radius: 4px;
                 background-color: #44494D;
                 border: none;
@@ -376,7 +380,7 @@
                 width: fit-content;
                 height: fit-content;
                 border-radius: 4px;
-                font-size: 20px;
+                font-size: 40px;
                 font-weight: 900;
         }
         header .menu-button:hover {
@@ -429,28 +433,32 @@
         }
         section h1 {
                 text-align: center;
-                font-size: 4vw;
+                /*font-size: 4vw;*/
+                font-size: x-large !important;
         }
-        section h4 {
+
+        section h1 strong {
                 color: #ADAEAF;
                 text-align: center;
-                font-size: calc(16px);
+                font-size: 10px;
+                display: none !important;
         }
 
         .user_interface {
 		min-width: 768px;
                 max-width: 911px;
+                display: block !important;
         }
-        /*.background {
-                margin-left: 0%;
-        }*/
 	section form label {
                 color: #fff;
                 font-size: 13px;
         }
+        section form {
+                margin-left: 10% !important;
+        }
         #user_input, #user_output {
                 width: 80%;
-                height: 3.5rem;
+                height: 2.5rem;
                 border-radius: 4px;
                 background-color: #44494D;
                 border: none;
@@ -513,13 +521,11 @@
                 margin-right: 2rem;
                 width: fit-content;
                 height: fit-content;
-                border-radius: 4px;
-                font-size: 20px;
+                font-size: 40px;
                 font-weight: 900;
         }
         header .menu-button:hover {
-                background-color: aliceblue;
-                color: #333;
+                color: #fff;
                 transition: 0.5s;
         }
         .cover-up {
@@ -567,27 +573,29 @@
         }
 	section h1 {
                 text-align: center;
-                margin-top: 2rem;
-		font-size: medium;
+                /*margin-top: 2rem;*/
+		font-size: x-large !important;
         }
-        section h4 {
+        section h1 strong {
                 color: #ADAEAF;
                 text-align: center;
                 font-size: 10px;
+                display: none !important;
         }
 	.user_interface {
                 min-width: 481px;
                 max-width: 767px;
+                display: block !important;
         }
-        /*.background {
-                margin-left: 13%;
-        }*/
+        section form {
+	        margin-left: 10% !important;
+	}
         section form label {
                 color: #fff;
         }
         #user_input, #user_output {
                 width: 80%;
-                height: 2.5rem;
+                height: 2.5rem !important;
                 border-radius: 4px;
                 background-color: #44494D;
                 border: none;
