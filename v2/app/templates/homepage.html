@@ -66,32 +66,25 @@
         </header>
         <section class="user_interface">
             <h1>
-                Streamline Your Links With <b class="e">EZYURL</b> Shortener
+                Streamline Your Links Rethink Link Sharing<br>
+                <strong>Transform Lengthy Links into Shareable Gems EZYURL Shortener Offers QR Generation, Detailed Analytics, Customizable Aliases, and Editable Short Links!</strong>
             </h1>
-            <h4>
-                Transform Long Links into Compact, Shareable, and Memorable <br>URLS with Our Cutting-Edge URL Shortening Service
-            </h4>
             <form method="POST" action="/" id="url_form">
                 <div class="background">
 		<label class="label_user_input" for="user_input">{{word}}</label>
-                <br>
                 <input autofocus="true" name="user_input" id="user_input" placeholder="Enter long link here" type="text" required="true">
-                <br>
 		<label class="label_user_output" for="user_output">{{alias_status}}</label>
-                <br>
                 <input name="user_output" maxlength="50" type="text" readonly="true" id="user_output" value="{{url}}">
-                <br>
                 <input type="submit" value="Shorten" class="enter">
                 </div>
-                </form>
-		<div class="share">
+                <div class="share">
 		    <input type="button" class="alias" value="ALIAS">
 		    {% if status == 200 %}
-	            <button class="copy_">COPY</button>
-	            <button class="qr_code">QR</button>
+	            <input type="button" class="copy_" value="COPY">
+	            <input type="button" class="qr_code" value="QR">
 	            {% endif %}
 	        </div>
-
+                </form>
         </section>
 	<div id="qr_container">
 		<img id="qrCodeImage" src="../static/images/qr_images/{{qr_image}}">
@@ -101,6 +94,7 @@
 			<button id="cancelButton">Cancel</button>
 		</div>
 	</div>
+	<div class="img_desktop" style="position: relative; padding-bottom: calc(56.285868392664504% + 44px); height: 0;"><iframe src=https://app.supademo.com/embed/ayKnLcb3cZitPz7pF0NbN frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
     <footer>
         <a href="{{ url_for('web_app.about') }}"> About</a> &bull;
 	<a href="" target="_blank"> Api </a> &bull;
