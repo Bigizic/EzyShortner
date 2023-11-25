@@ -55,7 +55,7 @@ $(document).ready(() => {
     window.location.replace(window.location.href);
   });
 
-  /* history animation */
+  /* history animation for desktops && larger screens*/
   $('.history').click(function () {
     $('.history_list').css('width', '24%');
   });
