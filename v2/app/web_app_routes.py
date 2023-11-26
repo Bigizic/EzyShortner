@@ -297,7 +297,7 @@ def dashboard(user_id):
 
 
 def dashpage(short_url, status_code, qr_file_path, alias, word):
-    """Renders homepage"""
+    """Renders dashpage"""
     return render_template('dashboard.html', url=short_url,
                            status=status_code, qr_image=qr_file_path,
                            alias_status=alias, word=word,
