@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezy Dashboard</title>
+    <link rel="stylesheet" href="/static/styles/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link type="text/css" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js?{{ cache_id }}"></script>
+    <script type="text/javascript" src="/static/scripts/dashboard.js?{{ cache_id }}"></script>
+    <link rel="icon" href="/static/images/ezy_icon.jpg?{{ cache_id }}">
+</head>
+<body>
+    <div class="loader-container">
+            <div class="loader"></div>
+    </div>
+    <div class="container">
+        <section class="left-sidebar">
+            <div class="short-links-info">
+                <ul class="left-items">
+                    <li class="left-items-li"><a href="{{ url_for('web_app.dashboard', user_id=user_id) }}"><i class="dashboard_icon"></i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
+                    <li class="left-items-lii"><i class="howtouse_icon"></i>&nbsp;&nbsp;&nbsp;How to use</li>
+                    <li class="left-items-liii"><i class="editlinks_icon"></i>&nbsp;&nbsp;&nbsp;Edit your links</li>
+                    <li class="left-items-lix"><a href="{{ url_for('web_app.history', user_id=user_id) }}"><i class="history_icon"></i>&nbsp;&nbsp;&nbsp;Histroy<span><sup style="color: #888;">Ezy links analytics </sup></span></a></li>
+                    <li class="left-items-lx"><i class="profile_icon"></i>&nbsp;&nbsp;&nbsp;Profile Information</li>
+                    <li class="left-items-lxi"><i class="api_icon"></i>&nbsp;&nbsp;&nbsp;Api</li>
+                </ul>
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                <p class="user-information">{{ email }}</p>
+                <p class="user-name">{{ names }}<sup>Last login:</sup></p>
+                </div>
+                <a href="{{ url_for('web_app.logout') }}" class="logout">Logout</a>
+            </div>
+        </section>
+        <section class="right-sidebar">
+            <div class="main-content">
+                <h1>EZYURL</h1>
+            </div>
+            <section class="user_interface">
+                <form method="POST" id="url_form">
+                    <div class="background">
+                    <label class="label_user_input" for="user_input">{{word}}</label>
+                    <input autofocus="true" name="user_input" id="user_input" placeholder="Enter long link here" type="text" required="true">
+            <label class="label_user_output" for="user_output">{{alias_status}}</label>
+                    <input name="user_output" maxlength="50" type="text" readonly="true" id="user_output" value="{{url}}">
+                    <input type="submit" value="Shorten" class="enter">
+                    </div>
+                </form>
+            <div class="share">
+                <input type="button" class="alias" value="ALIAS">
+                {% if status == 200 %}
+                    <button class="copy_">COPY</button>
+                    <button class="qr_code">QR</button>
+                    {% endif %}
+                </div>
+    
+            </section>
+        <div id="qr_container">
+            <img id="qrCodeImage" src="/static/images/qr_images/{{qr_image}}">
+            <div class="something">
+                <button id="downloadButton"><a href="../static/images/qr_images/{{qr_image}}" download="Ezyqr.png">Download &nbsp;<i class="bi bi-cloud-download-fill"></i></a>
+                </button>
+                <button id="cancelButton">Cancel</button>
+            </div>
+        </div>
+        <footer>
+            <a target="_blank" href="{{ url_for('web_app.about') }}"> About</a> &bull;
+            <a href="https://github.com/Bigizic/Ezy_urlShortner/blob/main/LICENSE" target="_blank">licence </a> &bull;
+            <a href="https://www.github.com/Bigizic/Ezy_UrlShortner" target="_blank">Github</a> &bull;
+        <a> &copy; 2023</a>
+        </footer>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,374 @@
+body {
+    background: rgb(19,20,24);
+    background: linear-gradient(180deg, rgba(19,20,24,1) 42%, rgba(0,100,0,1) 76%);
+    font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    /*margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;*/
+}
+
+.menu-button {
+    border: none !important;
+}
+
+.information a {
+text-decoration: none;
+}
+.label_user_input, .label_user_output {
+    color: red;
+}
+header h1 {
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+    font-family: 'Black Ops One';
+    font-size: 45px;
+}
+header h1:hover {
+    color: #006400;
+    transform: scale(1.2);
+}
+
+.e {
+    color: #006400;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+.e:hover {
+    color: #fff;
+}
+.user_interface {
+	flex: 0.90;
+	display: flex;
+	align-items: stretch;
+}
+
+section h1 {
+    color: #fff;
+    font-size: xxx-large;
+    font-family: 'Black Ops One' !important;
+    flex: 0 0 50%;
+    margin-top: 5%;
+}
+
+section h1 strong {
+    color: #8888;
+    font-size: 16px;
+    display: block;
+}
+.mobile_h1 {
+    display: none;
+}
+
+section h4 {
+    color: #ADAEAF;
+    text-align: center;
+}
+section form {
+    border-radius: 20px;
+    background: inherit;
+    text-align: center;
+
+    width: 80%;
+    flex-shrink: 1;
+    /*margin-left: 10%;*/
+    margin-top: 5%;
+    flex: 0 0 50%;
+}
+
+#user_input:focus, #user_output:focus {
+    border: 1px solid black !important;
+    outline: none;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2)
+}
+
+#user_input, #user_output {
+    border-radius: 10px;
+}
+section form label {
+    color: #fff;
+    font-size: smaller;
+    font-style: italic;
+    display: block;
+}
+
+.enter {
+    background-color: #006400 !important;
+    font-family: 'Black Ops One';
+}
+
+.enter:hover {
+    background-color: #131418 !important;
+}
+.menu-information .home, .menu-information .about, .menu-information .blog, .menu-information .history, .menu-information .login, .menu-information .sign_up  {
+    font-size: 4vw !important;
+}
+
+.home, .about, .blog, .login, .sign_up {
+    color: #fff;
+    font-size: 16px !important;
+    font-family: 'Black Ops One';
+}
+.home:hover, .about:hover, .blog:hover, .login:hover, .sign_up:hover {
+    color: #006400;
+}
+
+.share {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3%;
+    /*visibility: hidden;*/
+}
+
+#qr_container {
+	background-color: #004700;
+	position: absolute;
+	top: 25%;
+	height: max-content;
+	display: none;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 20px;
+	border-radius: 4px;
+}
+#cancelButton {
+	width: 20%;
+	border-radius: 4px;
+	height: 30px;
+	background-color: #006400;
+	color: white;
+	transform: translateX(0%);
+	cursor: pointer;
+}
+
+#downloadButton {
+	width: fit-content;
+        border-radius: 4px;
+        height: 30px;
+        background-color: #006400;
+        color: white;
+        cursor: pointer;
+}
+#downloadButton a {
+	text-decoration: none;
+	color: white;
+}
+
+.alias, .copy_, .qr_code {
+    background-color: #006400;
+    color: #fff;
+    border-radius: 4px;
+    border: none;
+    margin-bottom: 1vh;
+    height: fit-content;
+    padding: 4px;
+    transition: transform 0.5s ease;
+    font-weight: 550;
+    cursor: pointer;
+    font-size: inherit;
+}
+.alias:hover, .copy_:hover, .qr_code:hover {
+    background-color: #131418;
+    transform: scale(1.2);
+}
+div .something {
+    display: flex;
+    justify-content: center;
+    gap: 50%;
+}
+
+.img_desktop {
+    margin: 5%;
+}
+
+footer {
+    background-color: inherit;
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    text-transform: capitalize;
+    padding: 2vh 0vh 2vh 0vh;
+    justify-content: center;
+    gap: 2.5vw;
+}
+footer a {
+    text-decoration: none;
+    color: #fff;
+    font-size: small;
+}
+footer a:hover {
+    color: #131313;
+}
+
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(19,20,24);
+    background: linear-gradient(180deg, rgba(19,20,24,1) 20%, rgba(0,100,0,1) 50%, rgba(19,20,24,1) 80%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid black;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    display: none; /* Initially hidden */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.mobile_user {
+    display: grid;
+    margin-top: 40vh;
+    margin-right: 40px;
+    gap: 20px;
+}
+.mobile_user button {
+    color: #fff;
+    background-color: #006400;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 50px;
+    font-size: large;
+}
+
+.mobile_user button:hover {
+    background-color: #004700;
+}
+
+.history {
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Black Ops One';
+    font-size: 16px;
+}
+.history:hover {
+    color: #006400;
+}
+
+ .history_list {
+    width: 0%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #131313;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    transition: 0.5s;
+    z-index: 1;
+}
+.history_items {
+    color: #fff;
+    margin: 20px 20px 100px 10px;
+}
+
+.h-close-button {
+    cursor: pointer;
+    color: white;
+    background-color: inherit;
+    width: fit-content;
+    height: fit-content;
+    font-size: 30px;
+    font-weight: bolder;
+    position: fixed;
+    border-radius: 4px;
+    text-align: center;
+}
+.h-close-button:hover {
+    color: #006400;
+}
+
+.long-url-history {
+	list-style-type: none;
+	font-size: small;
+}
+.short-url-history {
+	list-style-type: none;
+	font-size: small;
+	border-bottom: none !important;
+}
+
+
+.history_copy {
+    cursor: pointer;
+    font-size: 8px;
+    width: fit-content;
+    background-color: #006400;
+    transition: transform 0.2s ease;
+    font-family: 'Black Ops One';
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+}
+
+.history_copy:hover {
+    background-color: #131418;
+    transform: scale(1.1);
+}
+
+.cover-up {
+    width: 0%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #131313;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+.cover-up-content {
+    padding: 20px;
+    color: white;
+}
+
+.history_nothing_list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.view_history {
+    scrollbar-width: none;
+    
+}
+
+.view_history::-webkit-scrollbar {
+    width: 0px;
+}
+
+.menu-information li {
+    border-bottom: 1px solid #fff !important;
+}
+
+.cover-up {
+    z-index: 1 !important;
+}
+
+#downloadButton {
+    position: relative !important;
+}
+
+#downloadButton i {
+    /*position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-52%);*/
+    cursor: pointer
+}
