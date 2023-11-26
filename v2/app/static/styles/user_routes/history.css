@@ -157,14 +157,18 @@ body {
     min-height: 100vh;
 }
 
-.main-content {
+.main-content h1 {
     color: #fff;
     cursor: pointer;
     font-family: 'Black Ops One';
-    font-size: xx-large;
+    font-size: xxx-large;
 }
-.main-content:hover {
+.main-content h1:hover {
     color: #006400;
+}
+.main-content h3 {
+    font-size: x-large;
+    font-family: initial;
 }
 
 .e {
@@ -367,3 +371,51 @@ footer a:hover {
     text-decoration: none;
     color: inherit;
 }
+
+/* TABLE VIEW */
+
+#search_ {
+    width: 50%;
+    height: 40px;
+    border-radius: 20px;
+    padding: 0% 2% 0% 2%;
+    background-color: #8888;
+    border: none;
+    box-shadow: 0 8px 16px black;
+    font-size: medium;
+    box-shadow: 0 2px 8px inset;
+    color: #fff;
+}
+
+#search_:focus {
+    outline: none;
+}
+
+.short_link, .long_link {
+    width: 100px;
+    height: 25px;
+    border-radius: 10px;
+    color: #fff;
+    background-color: #006400;
+    border: none;
+    box-shadow: 0 2px 4px black;
+    margin: 2%;
+    cursor: pointer;
+}
+
+#table {
+    display: flex;
+    justify-content: center;
+    border: none;
+    background: #888;
+    padding: 0px;
+    margin: 0px;
+    width: 80%;
+    transform: translateX(10%);
+}
+
+.history_table {
+    border: 1px solid black;
+}
+
+/*END TABLE VIEW */
