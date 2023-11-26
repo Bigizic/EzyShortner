@@ -92,3 +92,8 @@ class EzyModel(Base):
         """returns the shortned url plus the subdomain
         """
         return BASEURL + self.short_url
+
+    def get_long(self, shortlink):
+        """Returns the long link associated with a short link"""
+        return models.storage_type.redirect(shortlink)
+
