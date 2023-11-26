@@ -149,6 +149,8 @@ class DBStorage:
         """
         res = self.__session.query(Ezy.original_url).filter(
                                    Ezy.short_url == url).first()
+        res.clicks += 1  # stores in the database number of clicks
+        self.__session.commit()
         return res.original_url if res else None
 
     def fetch_user_and_ezy(self, user_id):
