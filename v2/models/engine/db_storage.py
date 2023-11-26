@@ -147,7 +147,7 @@ class DBStorage:
     def redirect(self, url):
         """returns original_url from database of a short_url
         """
-        res = self.__session.query(Ezy.original_url).filter(
+        res = self.__session.query(Ezy).filter(
                                    Ezy.short_url == url).first()
         res.clicks += 1  # stores in the database number of clicks
         self.__session.commit()
