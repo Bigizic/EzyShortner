@@ -207,7 +207,8 @@ def sign_in():
                                        cache_id=uuid.uuid4())
 
     info_message = session.pop('info_message', None)
-    return render_template('signin.html', cache_id=uuid.uuid4())
+    return render_template('signin.html', cache_id=uuid.uuid4(), 
+                           info=info_message)
 
 
 @web_app_blueprint.route('/dashboard/<user_id>', methods=["GET", "POST"],
@@ -347,8 +348,7 @@ def history(user_id):
 @web_app_blueprint.route('/<shortlink>')
 def redirect_function(shortlink):
     """Perfroms redirection refain to redirection.txt"""
-    result = DBStorage()
-    url = result.redirect(shortlink)
+    url = Ezy().get_long(shortlink)
 
     if url is not None:
         if not url.startswith("https://") and not url.startswith("http://"):
