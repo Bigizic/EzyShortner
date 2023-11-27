@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ezy History</title>
-    <link rel="stylesheet" href="/static/styles/user_routes/history.css">
+    <link rel="stylesheet" href="/static/styles/user_routes/history.css?{{ cache_id }}">
+    <link rel="stylesheet" href="/static/styles/user_routes/history_responsive.css?{{ cache_id }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link type="text/css" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
@@ -16,6 +17,13 @@
     <div class="loader-container">
             <div class="loader"></div>
     </div>
+    <button class="menu-button">&#9776;</button>
+            <div class="cover-up">
+            <div class="cover-up-content">
+                <span class="close-button">&times;</span>
+                <div class="menu-information"> </div>
+              </div>
+            </div>
     <div class="container">
         <section class="left-sidebar">
             <div class="short-links-info">
@@ -39,7 +47,7 @@
         <section class="right-sidebar">
             <div class="main-content">
                 <h1>HISTORY</h1>
-                <h3>Get a report on your generated shortened links</h3>
+                <h3>Track and Review Your Links</h3>
             </div>
 			<section class="user_interface">
 				<div class="viewers_graph">
@@ -71,11 +79,11 @@
 						{% if history_items %}
 						{% for items in history_items %}
 						<li class="table-row">
-						<div class="col col-1" data-label="No.">{{ loop.index }}</div>
-						<div class="col col-2" data-label="Date">{{ items.created_at }}</div>
-						<div class="col col-3" data-label="Long link"><a href="{{ items.original_url }}">{{ items.original_url }}</a></div>
-						<div class="col col-4" data-label="Ezy url"><a href="https://ezyurl.xyz/{{ items.short_url }}">https://ezyurl.xyz/{{ items.short_url }}</a></div>
-						<div class="col col-5" data-label="No of clicks">{{ 0 if items.clicks is none else items.clicks }}</div>
+						<div class="col col-1">{{ loop.index }}</div>
+						<div class="col col-2">{{ items.created_at }}</div>
+						<div class="col col-3"><a href="{{ items.original_url }}">{{ items.original_url }}</a></div>
+						<div class="col col-4"><a href="https://ezyurl.xyz/{{ items.short_url }}">https://ezyurl.xyz/{{ items.short_url }}</a></div>
+						<div class="col col-5">{{ 0 if items.clicks is none else items.clicks }}</div>
 						</li>
 						{% endfor %}
 						{% endif %}
