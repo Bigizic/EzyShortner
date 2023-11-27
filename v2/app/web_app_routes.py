@@ -170,8 +170,14 @@ def sign_up():
 def sign_in():
     """Renders sign in page"""
     if "logged_in" in session and session['logged_in']:
-        return redirect(url_for('web_app.dashboard',
-                        user_id=session['user_id']))
+        user = User().exists(None, None, session['user_id'])
+        if user:
+            return redirect(url_for('web_app.dashboard',
+                            user_id=session['user_id']))
+        else:
+            info_message = session.pop('info_message', None)
+            return render_template('signin.html', cache_id=uuid.uuid4(),
+                                   info=info_message)
 
     if request.method == 'POST':
         email = request.form.get("email")
