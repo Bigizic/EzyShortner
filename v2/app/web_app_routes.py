@@ -332,14 +332,27 @@ def history(user_id):
             info = DBStorage().fetch_user(user_id)
             names = info.first_name + ' ' + info.last_name
             email = info.email[:2].upper()
+            history = DBStorage().fetch_user_and_ezy(user_id)
             return render_template('user_routes/history.html',
                                    cache_id=uuid.uuid4(),
                                    email=email, names=names,
-                                   user_id=user_id)
+                                   user_id=user_id,
+                                   history_items=history)
         else:
             # direct a user if they've been blocked to sign in
             session['info_message'] = "Account doesn't exist"
             return redirect(url_for('web_app.sign_in'))
+    else:
+        session['info_message'] = "Sign in to continue"
+        return redirect(url_for('web_app.sign_in'))
+
+
+@web_app_blueprint.route('/history', methods=["GET", "POST"])
+def history_helper():
+    """Incase a user enters a route like server_name/history"""
+    if ('logged_in' in session and session['logged_in']):
+        return redirect(url_for('web_app.history',
+                        user_id=session['user_id']))
     else:
         session['info_message'] = "Sign in to continue"
         return redirect(url_for('web_app.sign_in'))
