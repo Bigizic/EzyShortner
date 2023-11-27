@@ -215,7 +215,6 @@ def sign_in():
                          strict_slashes=False)
 def dashboard(user_id):
     if request.method == "POST":
-        current_app.logger.warning(user_id)
         user_input = request.form.get("user_input")
 
         if user_input.startswith(('https://ezyurl.xyz/', 'ezyurl.xyz/',
@@ -300,10 +299,17 @@ def dashboard(user_id):
 
 def dashpage(short_url, status_code, qr_file_path, alias, word):
     """Renders dashpage"""
+    user = User().exists(None, None, session.get('user_id'))
+    if user:
+        info = DBStorage().fetch_user(session.get('user_id'))
+        names = info.first_name + ' ' + info.last_name
+        email = info.email[:2].upper()
+
     return render_template('dashboard.html', url=short_url,
                            status=status_code, qr_image=qr_file_path,
                            alias_status=alias, word=word,
-                           cache_id=uuid.uuid4(), user_id=session['user_id'])
+                           cache_id=uuid.uuid4(), user_id=session['user_id'],
+                           names=names, email=email)
 
 
 @web_app_blueprint.route('/dashboard', methods=["GET", "POST"])
@@ -315,13 +321,6 @@ def dashboard_helper():
     else:
         session['info_message'] = "Sign in to continue"
         return redirect(url_for('web_app.sign_in'))
-
-
-@web_app_blueprint.route('/logout', methods=["GET"])
-def logout():
-    """clear the session data"""
-    session.clear()
-    return redirect(url_for('web_app.get_input'))
 
 
 @web_app_blueprint.route('/history/<user_id>', methods=["GET"])
@@ -358,6 +357,13 @@ def history_helper():
     else:
         session['info_message'] = "Sign in to continue"
         return redirect(url_for('web_app.sign_in'))
+
+
+@web_app_blueprint.route('/logout', methods=["GET"])
+def logout():
+    """clear the session data"""
+    session.clear()
+    return redirect(url_for('web_app.get_input'))
 
 
 @web_app_blueprint.route('/<shortlink>')
