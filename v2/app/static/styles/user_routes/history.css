@@ -380,83 +380,78 @@ footer a:hover {
   overflow-y: scroll;
 }
 
-.responsive-table {
-  li {
+.responsive-table li {
     border-radius: 3px;
     padding: 25px 30px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
-  }
-  .table-header {
+}
+.table-header {
     background-color: #006400;
     text-transform: uppercase;
     letter-spacing: 0.03em;
     border-radius: 20px;
     font-weight: 900;
-  }
-  .table-row {
+}
+.table-row {
     background-color: #2b2b2b;
     box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
     transition: 0.5s ease;
     border-radius: 20px;
-  }
-  .table-row a {
+}
+.table-row a {
     color: lightgreen;
-  }
+}
   
-  .table-row:hover {
+.table-row:hover {
     background-color: #fff;
     color: black;
     transform: scale(1.02);
-  }
-  .table-row:hover a:hover {
+}
+.table-row:hover a:hover {
     color: green;
-  }
+}
 
-  .col-1 {
+.col-1 {
     flex-basis: 10%;
-  }
-  .col-2 {
+}
+.col-2 {
     flex-basis: 25%;
-  }
-  .col-3 {
+}
+.col-3 {
     flex-basis: 40%;
-  }
-  .col-4 {
+}
+.col-4 {
     flex-basis: 30%;
-  }
-  .col-5 {
+}
+.col-5 {
     flex-basis: 10%;
-  }
-  
-  @media all and (max-width: 767px) {
-    .table-header {
-      display: none;
-    }
-    .table-row{
-      
-    }
-    li {
-      display: block;
-    }
-    .col {
-      
-      flex-basis: 100%;
-      
-    }
-    .col {
-      display: flex;
-      padding: 10px 0;
-      &:before {
-        color: #6C7A89;
-        padding-right: 10px;
-        content: attr(data-label);
-        flex-basis: 50%;
-        text-align: right;
-      }
-    }
-  }
+}
+
+
+/* MOBILES */  
+@media all and (max-width: 767px) {
+	.table-header {
+		display: none;
+	}
+	.table-row li{
+		display: block;
+	}
+	.table-row .col {
+		flex-basis: 100%;
+	}
+	.col {
+		display: flex;
+		padding: 10px 0;
+		&:before {
+			color: #6C7A89;
+			padding-right: 10px;
+			content: attr(data-label);
+			flex-basis: 50%;
+			text-align: right;
+		}
+	}
 }
 
 /*END TABLE VIEW */
@@ -549,6 +544,8 @@ button {
 }
 
 button.shadow {
+  /*box-shadow: 0 10px 30px black;*/
+}
   /*box-shadow: 0 10px 30px black;*/
 }
 
