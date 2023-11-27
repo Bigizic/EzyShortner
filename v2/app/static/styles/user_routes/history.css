@@ -377,7 +377,6 @@ footer a:hover {
   margin: 5% 5% 0% 5%;
   transform: translateX(0%);
   background: #8888;
-  overflow-y: scroll;
 }
 
 .responsive-table li {
