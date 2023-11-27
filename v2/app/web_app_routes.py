@@ -170,14 +170,8 @@ def sign_up():
 def sign_in():
     """Renders sign in page"""
     if "logged_in" in session and session['logged_in']:
-        user = User().exists(None, None, session['user_id'])
-        if user:
             return redirect(url_for('web_app.dashboard',
                             user_id=session['user_id']))
-        else:
-            info_message = session.pop('info_message', None)
-            return render_template('signin.html', cache_id=uuid.uuid4(),
-                                   info=info_message)
 
     if request.method == 'POST':
         email = request.form.get("email")
@@ -295,9 +289,11 @@ def dashboard(user_id):
                                    user_id=session['user_id'])
         else:
             # direct a user if they've been blocked to sign in
+            session['logged_in'] = False
             session['info_message'] = "Account doesn't exist"
             return redirect(url_for('web_app.sign_in'))
     else:
+        session['logged_in'] = False
         session['info_message'] = "Sign in to continue"
         return redirect(url_for('web_app.sign_in'))
 
