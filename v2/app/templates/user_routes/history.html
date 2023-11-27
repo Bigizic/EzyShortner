@@ -46,39 +46,38 @@
 					<p>Viewers graph </p>
 				</div>
 				<div class="search_container">
-					<input type="search" id="search_" placeholder="Get a report based on long link">
-					<span class="search_icon"></span>
-					<div class="date_">
-						<span class="date_icon"></span>
+				    <div id="app-cover">
+					<div id="app">
+						<form method="get" action="">
+							<div id="f-element">
+								<div id="inp-cover"><input id="search_input" type="text" name="query" placeholder="" required="true" autocomplete="off"></div>
+							</div>
+							<button type="submit" class="shadow"><i class="search_icon"></i></button>
+						</form>
 					</div>
-					<div class="short_and_long">
-						<input type="button" value="Long Link" class="long_link">
-						<input type="button" value="Short Link" class="short_link">
-					</div>
+					<input type="button" value="Short" id="short_">
+					<input type="button" value="Long" id="long_">
+				</div>
 				</div>
 				<div id="table">
-				<table class="history_table" border="1">
-					<thead>
-						<tr>
-							<th>NO.</th>
-							<th>Id</th>
-							<th>Created at</th>
-							<th>Original Link <sup>Long link</sup></th>
-							<th>Short link<sup>Ezy link</sup></th>
-							<th>Clicks</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="data_fill">
-							<td>1</td>
-							<td>sdfsdfdsfdsfdsfds</td>
-							<td>Today</td>
-							<td>Google.com</td>
-							<td>https://ezyurl.xyz/fgdfgdfd</td>
-							<td>6</td>
-						</tr>
-					</tbody>
-				</table>
+					<ul class="responsive-table">
+						<li class="table-header">
+						  <div class="col col-1">No.</div>
+						  <div class="col col-2">Date</div>
+						  <div class="col col-3">Long link</div>
+						  <div class="col col-4">Short Link</div>
+						  <div class="col col-5">Clicks</div>
+						</li>
+						{% for items in history_items %}
+						<li class="table-row">
+						<div class="col col-1" data-label="No.">{{ loop.index }}</div>
+						<div class="col col-2" data-label="Date">{{ items.created_at }}</div>
+						<div class="col col-3" data-label="Long link"><a href="{{ items.original_url }}">{{ items.original_url }}</a></div>
+						<div class="col col-4" data-label="Ezy url"><a href="https://ezyurl.xyz/{{ items.short_url }}">https://ezyurl.xyz/{{ items.short_url }}</a></div>
+						<div class="col col-5" data-label="No of clicks">{{ 0 if items.clicks is none else items.clicks }}</div>
+						</li>
+						{% endfor %}
+						</ul>
 				</div>
 			</section>
 		</section>
