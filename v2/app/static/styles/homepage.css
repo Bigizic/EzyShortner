@@ -372,3 +372,14 @@ footer a:hover {
     transform: translateY(-52%);*/
     cursor: pointer
 }
+
+.download_icon {
+    background: url("/static/images/icons/cloud-download-fill.svg");
+    background-repeat: none;
+    width: 16px;
+    height: 16px;
+    background-size: 100%;
+    display: inline flow-root list-item;
+    filter: invert(1);
+    font-size: 0px;
+}

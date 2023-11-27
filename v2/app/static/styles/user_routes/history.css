@@ -6,6 +6,29 @@ body {
     color: #fff;
 }
 
+/*OTHER DEVICES */
+
+.menu-button {
+    border: none !important;
+}
+
+.cover-up {
+    width: 0%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #131313;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+.cover-up-content {
+    padding: 20px;
+    color: white;
+}
+
+/* END OTHER */
+
 .loader-container {
     position: fixed;
     top: 0;
@@ -371,8 +394,12 @@ footer a:hover {
 }
 
 /* TABLE VIEW */
+
+.responsive-table {
+  padding: 0px;
+}
 #table {
-  padding: 10px 50px 10px 10px;
+  padding: 10px 30px 10px 30px;
   border-radius: 20px;
   margin: 5% 5% 0% 5%;
   transform: translateX(0%);
@@ -440,7 +467,7 @@ footer a:hover {
 		display: block;
 	}
 	.table-row .col {
-		flex-basis: 100%;
+		flex-basis: 0%;
 	}
 	.col {
 		display: flex;
@@ -453,6 +480,14 @@ footer a:hover {
 			text-align: right;
 		}
 	}
+	.col-3 {
+            overflow-wrap: break-word;
+            overflow-x: scroll;
+            flex-basis: 20% !important;
+        }
+        .col-5 {
+            flex-basis: 20%;
+        }
 }
 
 /*END TABLE VIEW */
@@ -603,9 +638,9 @@ button i.fas {
       border-radius: 20px;
       font-size: inherit;
       display: initial;
-      width: 7%;
+      width: fit-content;
       font-family: revert;
-      padding: 2px;
+      padding: 5px 10px;
       cursor: pointer;
       border: 2px solid #fff;
       line-height: inherit;
