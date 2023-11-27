@@ -381,7 +381,7 @@ footer a:hover {
 
 .responsive-table li {
     border-radius: 3px;
-    padding: 25px 30px;
+    padding: 10px 25px 10px 25px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
@@ -390,14 +390,14 @@ footer a:hover {
     background-color: #006400;
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    border-radius: 20px;
+    border-radius: 20px !important;
     font-weight: 900;
 }
 .table-row {
     background-color: #2b2b2b;
     box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
     transition: 0.5s ease;
-    border-radius: 20px;
+    border-radius: 20px !important;
 }
 .table-row a {
     color: lightgreen;
@@ -420,6 +420,8 @@ footer a:hover {
 }
 .col-3 {
     flex-basis: 40%;
+    width: 0px;
+    overflow-wrap: break-word;
 }
 .col-4 {
     flex-basis: 30%;
