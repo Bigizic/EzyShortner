@@ -11,7 +11,6 @@ $(document).ready(() => {
     $('body').css('visibility', 'visible');
   }, 1000);
   /* end loading view */
-
   $('.left-items-lix').addClass('hover-effect');
 
   $('#user_input').keypress(function (e) {
@@ -147,4 +146,17 @@ $(document).ready(() => {
   });
 
   /* END SEARCH */
+  
+  /* mobile menu button */
+  $('.menu-button').click(function () {
+    $('.cover-up').css('width', '80%');
+  });
+
+  $('.close-button').click(function () {
+    $('.cover-up').css('width', '0');
+  });
+  /* end mobile menu button */
+  
+  /* BEGIN HISTORY ITEMS */
+  /* END HISTORY ITEMS */
 });
