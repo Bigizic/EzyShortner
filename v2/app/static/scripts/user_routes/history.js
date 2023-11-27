@@ -95,5 +95,56 @@ $(document).ready(() => {
     }
   });
   /* end alias button */
+
   
+  /* SEARCH */
+  
+  var app = $("#app"),
+    short = $("#short_"),
+    long = $("#long_"),
+    input = $("#inp-cover input"),
+    button = $("button");
+
+  function toggleApp() {
+    app.toggleClass("opened");
+
+    if (button.hasClass("shadow")) button.toggleClass("shadow");
+    else
+      setTimeout(function () {
+        button.toggleClass("shadow");
+      }, 300);
+
+    if (app.hasClass("opened")) {
+      setTimeout(function () {
+        input.toggleClass("move-up");
+      }, 200);
+      setTimeout(function () {
+        input.focus();
+      }, 500);
+    } else
+      setTimeout(function () {
+        input.toggleClass("move-up").val("");
+      }, 200);
+
+    if (!long.hasClass("sl")) {
+      setTimeout(function () {
+        long.addClass("sl");
+      }, 800);
+    } else
+      setTimeout(function () {
+        long.removeClass("sl");
+      }, 300);
+  }
+
+  long.click(function() {
+    toggleApp();
+    $('#search_input').attr('placeholder', 'Enter a long link e.g Example.com/this-is-an-example');
+  });
+
+  short.click(function() {
+    toggleApp();
+    $('#search_input').attr('placeholder', 'Enter a short link e.g https://ezyurl.xyz/a-link');
+  });
+
+  /* END SEARCH */
 });
