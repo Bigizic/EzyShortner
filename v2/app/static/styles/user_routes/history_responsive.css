@@ -17,6 +17,7 @@
 }
 
 
+
 /* EXTRA LARGE SCREENS */
 @media (min-width: 1920px) {
     .menu-button {
@@ -33,6 +34,7 @@
     }
 
 }
+
 
 
 /* DESKTOPS */
@@ -53,14 +55,137 @@
 }
 
 
+
 /* MOBILE */
 @media (max-width: 480px) {
+    html {
+		height: 100%
+    }
+    body {
+		margin: 0px;
+		background: rgb(19,20,24) !important;
+    }
+    .menu-button {
+        background-color: inherit;
+        color: #006400;
+        width: fit-content;
+        height: fit-content;
+        border-radius: 4px;
+        font-size: 40px;
+        font-weight: 900;
+        position: relative;
+        transition: none;
+    }
+    .left-sidebar {
+        display: none
+    }
+    
+    .cover-up {
+                width: 0%;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                right: 0;
+                background-color: #131313;
+                overflow-x: hidden;
+                transition: 0.5s;
+                padding-top: 60px;
+    }
+    .cover-up-content {
+                padding: 20px;
+                color: white;
+    }
+    .close-button {
+                cursor: pointer;
+                color: white;
+                background-color: inherit;
+                width: fit-content;
+                height: fit-content;
+                font-size: 40px;
+                font-weight: bolder;
+                position: absolute;
+                right: 6vw;
+                top: 4vw;
+                border-radius: 4px;
+                text-align: center;
+    }
+    .close-button:hover {
+                color: #131313;
+    }
+    .right-sidebar {
+        margin-left: 0% !important;
+    }
+    .search_container {
+        margin-top: 15%;
+    }
 }
+
 
 
 /* SMALL TABLETS */
 @media (min-width: 768px) and (max-width: 991px) {
+    html {
+		height: 100%
+    }
+    body {
+		margin: 0px;
+		background: rgb(19,20,24) !important;
+    }
+    .menu-button {
+        background-color: inherit;
+        color: #006400;
+        width: fit-content;
+        height: fit-content;
+        border-radius: 4px;
+        font-size: 40px;
+        font-weight: 900;
+        position: relative;
+        transition: none;
+    }
+    .left-sidebar {
+        display: none
+    }
+    
+    .cover-up {
+                width: 0%;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                right: 0;
+                background-color: #131313;
+                overflow-x: hidden;
+                transition: 0.5s;
+                padding-top: 60px;
+    }
+    .cover-up-content {
+                padding: 20px;
+                color: white;
+    }
+    .close-button {
+                cursor: pointer;
+                color: white;
+                background-color: inherit;
+                width: fit-content;
+                height: fit-content;
+                font-size: 40px;
+                font-weight: bolder;
+                position: absolute;
+                right: 6vw;
+                top: 4vw;
+                border-radius: 4px;
+                text-align: center;
+    }
+    .close-button:hover {
+                color: #131313;
+    }
+    .right-sidebar {
+        margin-left: 0% !important;
+    }
+    .search_container {
+        margin-top: 15%;
+    }
 }
+
 
 
 /* EXTRA SMALL DEVICES */
