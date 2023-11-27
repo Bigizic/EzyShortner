@@ -31,7 +31,7 @@
             <div class="user-info">
                 <div class="user-details">
                 <p class="user-information">{{ email }}</p>
-                <p class="user-name">{{ names }}<sup>Last login:</sup></p>
+                <p class="user-name">{{ names }}</p>
                 </div>
                 <a href="{{ url_for('web_app.logout') }}" class="logout">Logout</a>
             </div>
@@ -68,6 +68,7 @@
 						  <div class="col col-4">Short Link</div>
 						  <div class="col col-5">Clicks</div>
 						</li>
+						{% if history_items %}
 						{% for items in history_items %}
 						<li class="table-row">
 						<div class="col col-1" data-label="No.">{{ loop.index }}</div>
@@ -77,6 +78,7 @@
 						<div class="col col-5" data-label="No of clicks">{{ 0 if items.clicks is none else items.clicks }}</div>
 						</li>
 						{% endfor %}
+						{% endif %}
 						</ul>
 				</div>
 			</section>
