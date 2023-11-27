@@ -161,8 +161,19 @@ class DBStorage:
         user_id column of the records table if there's a match
         returns everything it can find on that user created objects
         """
-        result = self.__session.query(Ezy).filter(
+        objs = []
+        result = []
+        objs += self.__session.query(Ezy).filter(
                                       Ezy.user_id == user_id).all()
+        for obj in objs:
+            cl_name = type(obj).__name__
+            id = obj.id
+            attr = {k: v for k, v in obj.__dict__.items()
+                    if not k.startswith('_sa_instance_state')}
+            
+            result.append({
+                **attr
+            })
         return result if result else None
 
     def fetch_user(self, id, email=None):
