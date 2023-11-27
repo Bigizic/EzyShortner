@@ -26,7 +26,7 @@ class Ezy(EzyModel, Base):
     original_url = Column(String(2000), nullable=False)
     short_url = Column(String(70), nullable=False)
     user_id = Column(String(100), ForeignKey('users.id'))
-    clicks = Column(BigInteger, nullable=True)
+    clicks = Column(BigInteger, nullable=True default=0)
 
     def __init__(self, *args, **kwargs):
         """Constructor"""
