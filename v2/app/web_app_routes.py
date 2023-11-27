@@ -335,12 +335,11 @@ def history(user_id):
             names = info.first_name + ' ' + info.last_name
             email = info.email[:2].upper()
             history = DBStorage().fetch_user_and_ezy(user_id)
-            word = "Oops.. Nothinng here"
             return render_template('user_routes/history.html',
                                    cache_id=uuid.uuid4(),
                                    email=email, names=names,
                                    user_id=user_id,
-                                   history_items=history if history else word)
+                                   history_items=history)
         else:
             # direct a user if they've been blocked to sign in
             session['info_message'] = "Account doesn't exist"
