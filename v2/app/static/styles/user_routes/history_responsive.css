@@ -129,6 +129,12 @@
         border-radius: 10px;
         transition: transform 0.5s ease;
     }
+    .logout {
+        margin-top: 50px !important;
+    }
+    .user-info {
+        margin-top: 50pX !important;
+    }
     
 }
 
@@ -207,6 +213,12 @@
         border-radius: 10px;
         transition: transform 0.5s ease;
     }
+    .logout {
+        margin-top: 50px !important;
+    }
+    .user-info {
+        margin-top: 50pX !important;
+    }
 }
 
 
@@ -283,5 +295,11 @@
         width: 100% !important;
         border-radius: 10px;
         transition: transform 0.5s ease;
+    }
+    .logout {
+        margin-top: 50px !important;
+    }
+    .user-info {
+        margin-top: 50pX !important;
     }
 }
