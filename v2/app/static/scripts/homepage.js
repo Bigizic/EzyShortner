@@ -125,7 +125,7 @@ $(document).ready(() => {
 /* FUNCTION TO GET CURRENT TIMEZONE OF A USER AND USE IT TO UPDATE CREATED FIELD IN HISTORY SECTION*/
   function convertUTCToLocal(utcDateTime) {
     let userTimezone = moment.tz.guess();
-    return moment.utc(utcDateTime).tz(userTimezone).format('dddd MMMM YYYY HH:mm:ss');
+    return moment.utc(utcDateTime).tz(userTimezone).format('dddd Do MMMM YYYY HH:mm:ss');
 };
 /* END */
 
