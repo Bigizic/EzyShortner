@@ -105,6 +105,7 @@
 						<div class="col col-3"><a href="{{ items.original_url }}" target="_blank" >{{ items.original_url }}</a></div>
 						<div class="col col-4"><a href="https://ezyurl.xyz/{{ items.short_url }}" target="_blank">ezyurl.xyz/{{ items.short_url }}</a></div>
 						<div class="col col-5">{{ 0 if items.clicks is none else items.clicks }}</div>
+						<div class="bin"><button type="button" class="delete-btn" data-ezy-url-id="{{ items.id }}"><i class="bi bi-trash-fill"></i></button></div>
 						</li>
 						{% endfor %}
 						{% endif %}
