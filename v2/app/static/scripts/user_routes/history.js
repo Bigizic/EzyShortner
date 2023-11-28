@@ -92,7 +92,19 @@ $(document).ready(() => {
 
 
   addClassForMobile();
-
-
   $(window).resize(addClassForMobile);
+  
+  
+  /* FUNCTION TO GET CURRENT TIMEZONE OF A USER AND USE IT TO UPDATE CREATED FIELD IN HISTORY SECTION*/
+  function convertUTCToLocal(utcDateTime) {
+    let userTimezone = moment.tz.guess();
+    return moment.utc(utcDateTime).tz(userTimezone).format('dddd MMMM YYYY HH:mm:ss');
+};
+/* END */
+
+  $('.table-row .col-2').each(function() {
+    let utcTime = $(this).text();
+    let localTime = convertUTCToLocal(utcTime);
+    $(this).text(localTime);
+  });
 });
