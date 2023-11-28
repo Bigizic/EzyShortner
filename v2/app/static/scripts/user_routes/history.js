@@ -107,4 +107,25 @@ $(document).ready(() => {
     let localTime = convertUTCToLocal(utcTime);
     $(this).text(localTime);
   });
+  
+  
+  /*DELETE BUTTON FUNCTIONS */
+  
+  $('.delete-btn').on('click', function(e) {
+    e.preventDefault();
+    let ezyUrlId = $(this).data('ezy-url-id');
+    if (confirm('Are you sure you want to delete this record?')) {
+      $.ajax({
+        url: `/history/delete/${ezyUrlId}`,
+        method: 'POST',
+        success: function(response) {
+          window.location.replace(window.location.href);
+        },
+        error: function(xhr, status, error) {
+          console.error(error);
+        }
+      });
+    }
+  });
+  /*END DELETE BUTTON */
 });
