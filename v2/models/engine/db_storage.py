@@ -80,11 +80,14 @@ class DBStorage:
         """Adds new object to the current database"""
         self.__session.add(session)
 
-    def delete(self, ins=None):
+    def delete(self, ins=None, ezy_id=None):
         """Deletes the current session record if it's not None"""
         try:
             if ins is not None:
                 self.__session.delete(ins)
+                self.__session.commit()
+            elif ezy_id is not None:
+                self.__session.query(Ezy).filter_by(id=ezy_id).delete()
                 self.__session.commit()
             else:
                 return None
