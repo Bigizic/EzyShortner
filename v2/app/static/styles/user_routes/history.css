@@ -613,6 +613,33 @@ button i.fas {
       border: 2px solid #fff;
       line-height: inherit;
       margin: 22px 0px 22px 0px;
-} 
+}
+
+.bin {
+    font-size: larger;
+    cursor: pointer !important;
+}
+
+.bin a {
+    text-decoration: none;
+    color: #fff;
+}
+.delete-btn {
+    background-color: inherit !important;
+    border: none !important;
+    margin-top: 0 !important;
+    padding: 0% !important;
+    display: initial !important;
+    width: 0% !important;
+    position: inherit !important;
+    height: 0px !important;
+    color: #fff !important;
+    font-size: inherit !important;
+}
+
+.table-row:hover .delete-btn:hover {
+    color: green !important;
+}
+
 
 /* END SEARCH */

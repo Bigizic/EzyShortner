@@ -138,6 +138,9 @@
     #table {
         font-size: 10px;
     }
+    .bin {
+        margin-top: 10px;
+    }
     
 }
 
@@ -310,5 +313,8 @@
     }
     #table {
         font-size: 10px;
+    }
+    .bin {
+        margin-top: 10px;
     }
 }
