@@ -21,7 +21,25 @@
             <div class="cover-up">
             <div class="cover-up-content">
                 <span class="close-button">&times;</span>
-                <div class="menu-information"> </div>
+                <div class="menu-information">
+            <div class="short-links-info">
+                <ul class="left-items">
+                    <li class="left-items-li"><a href="{{ url_for('web_app.dashboard', user_id=user_id) }}"><i class="dashboard_icon"></i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
+                    <li class="left-items-lii"><i class="howtouse_icon"></i>&nbsp;&nbsp;&nbsp;How to use</li>
+                    <li class="left-items-liii"><i class="editlinks_icon"></i>&nbsp;&nbsp;&nbsp;Edit your links</li>
+                    <li class="left-items-lix"><a href="{{ url_for('web_app.history', user_id=user_id) }}"><i class="history_icon"></i>&nbsp;&nbsp;&nbsp;Histroy<span><sup style="color: #888;">Ezy links analytics </sup></span></a></li>
+                    <li class="left-items-lx"><i class="profile_icon"></i>&nbsp;&nbsp;&nbsp;Profile Information</li>
+                    <li class="left-items-lxi"><i class="api_icon"></i>&nbsp;&nbsp;&nbsp;Api</li>
+                </ul>
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                <p class="user-information">{{ email }}</p>
+                <p class="user-name">{{ names }}</p>
+                </div>
+                <a href="{{ url_for('web_app.logout') }}" class="logout">Logout</a>
+            </div>
+                </div>
               </div>
             </div>
     <div class="container">
