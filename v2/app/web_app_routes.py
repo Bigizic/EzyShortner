@@ -359,6 +359,25 @@ def history_helper():
         return redirect(url_for('web_app.sign_in'))
 
 
+@web_app_blueprint.route('/history/delete/<ezy_url_id>',
+                         methods=["POST"])
+def delete_history(ezy_url_id):
+    """Deletes an instance of a url"""
+    if ('logged_in' in session and session['logged_in'] and
+            session['user_id']):
+        user = User().exists(None, None, session['user_id'])
+        if user:
+            DBStorage().delete(None, ezy_url_id)
+            return redirect(url_for('web_app.history',
+                            user_id=session['user_id']))
+        else:
+            session['info_message'] = "Sign in to continue"
+            return redirect(url_for('web_app.sign_in'))
+    else:
+        session['info_message'] = "Sign in to continue"
+        return redirect(url_for('web_app.sign_in'))
+
+
 @web_app_blueprint.route('/logout', methods=["GET"])
 def logout():
     """clear the session data"""
