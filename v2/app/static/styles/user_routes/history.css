@@ -365,34 +365,6 @@ footer a:hover {
 
 
 
-/*ICONS*/
-.dashboard_icon, .howtouse_icon, .editlinks_icon, .history_icon, .profile_icon, .api_icon  {
-	background-image: url("/static/images/icons/dashboard_house_fill.svg");
-	background-repeat: no-repeat;
-	background-size: 100%;
-	width: 16px;
-	height: 16px;
-	display: inline flow-root list-item;
-	filter: invert(1);
-}
-.howtouse_icon {
-    background-image: url("/static/images/icons/person-workspace.svg") !important; 
-}
-.editlinks_icon {
-    background-image: url("/static/images/icons/link-45deg.svg") !important; 
-}
-.history_icon {
-    background-image: url("/static/images/icons/hourglass-bottom.svg") !important; 
-}
-.profile_icon{
-    background-image: url("/static/images/icons/person-fill.svg") !important; 
-}
-.api_icon {
-    background-image: url("/static/images/icons/api_code_slash.svg") !important; 
-}
-
-
-
 .left-items-lix a, .left-items-li a {
     text-decoration: none;
     color: inherit;
@@ -622,15 +594,6 @@ button i.fas {
   z-index: -1;
 }
 
-.search_icon {
-	background-image: url("/static/images/icons/search_icon.svg");
-	background-repeat: no-repeat;
-	background-size: 100%;
-	width: 30px;
-        height: 30px;
-	display: inline flow-root list-item;
-	filter: invert(1);
-}
 
 .shadow:hover {
   background: black;
