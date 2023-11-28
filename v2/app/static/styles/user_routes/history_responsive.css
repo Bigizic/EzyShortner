@@ -135,6 +135,9 @@
     .user-info {
         margin-top: 50pX !important;
     }
+    #table {
+        font-size: 10px;
+    }
     
 }
 
@@ -219,6 +222,9 @@
     .user-info {
         margin-top: 50pX !important;
     }
+    #table {
+        font-size: 10px;
+    }
 }
 
 
@@ -301,5 +307,8 @@
     }
     .user-info {
         margin-top: 50pX !important;
+    }
+    #table {
+        font-size: 10px;
     }
 }
