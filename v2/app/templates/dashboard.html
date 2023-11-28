@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link type="text/css" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js?{{ cache_id }}"></script>
     <script type="text/javascript" src="/static/scripts/dashboard.js?{{ cache_id }}"></script>
     <link rel="icon" href="/static/images/ezy_icon.jpg?{{ cache_id }}">
@@ -20,12 +21,12 @@
         <section class="left-sidebar">
             <div class="short-links-info">
                 <ul class="left-items">
-                    <li class="left-items-li"><a href="{{ url_for('web_app.dashboard', user_id=user_id) }}"><i class="dashboard_icon"></i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
-                    <li class="left-items-lii"><i class="howtouse_icon"></i>&nbsp;&nbsp;&nbsp;How to use</li>
-                    <li class="left-items-liii"><i class="editlinks_icon"></i>&nbsp;&nbsp;&nbsp;Edit your links</li>
-                    <li class="left-items-lix"><a href="{{ url_for('web_app.history', user_id=user_id) }}"><i class="history_icon"></i>&nbsp;&nbsp;&nbsp;Histroy<span><sup style="color: #888;">Ezy links analytics </sup></span></a></li>
-                    <li class="left-items-lx"><i class="profile_icon"></i>&nbsp;&nbsp;&nbsp;Profile Information</li>
-                    <li class="left-items-lxi"><i class="api_icon"></i>&nbsp;&nbsp;&nbsp;Api</li>
+                    <li class="left-items-li"><a href="{{ url_for('web_app.dashboard', user_id=user_id) }}"><i style="font-size: larger;" class="bi bi-house-fill"></i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
+                    <li class="left-items-lii"><i style="font-size: larger;" class="bi bi-person-workspace"></i>&nbsp;&nbsp;&nbsp;How to use</li>
+                    <li class="left-items-liii"><i style="font-size: larger;" class="bi bi-link-45deg"></i>&nbsp;&nbsp;&nbsp;Edit your links</li>
+                    <li class="left-items-lix"><a href="{{ url_for('web_app.history', user_id=user_id) }}"><i style="font-size: larger;" class="bi bi-hourglass-bottom"></i>&nbsp;&nbsp;&nbsp;Histroy<span><sup style="color: #888;">Ezy links analytics </sup></span></a></li>
+                    <li class="left-items-lx"><i style="font-size: larger;" class="bi bi-person-fill"></i>&nbsp;&nbsp;&nbsp;Profile Information</li>
+                    <li class="left-items-lxi"><i style="font-size: larger;" class="bi bi-code-slash"></i>&nbsp;&nbsp;&nbsp;Api</li>
                 </ul>
             </div>
             <div class="user-info">
