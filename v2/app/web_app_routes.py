@@ -24,6 +24,9 @@ def get_input():
 
     if request.method == "POST":
         user_input = request.form.get("user_input")
+        if len(user_input) >= 32000:
+            return homepage('', '', 404,
+                            'Link must not be greater than 32000', '')
 
         if user_input.startswith(('https://ezyurl.xyz/', 'ezyurl.xyz/',
                                   'http://ezyurl.xyz/',
@@ -216,6 +219,9 @@ def sign_in():
 def dashboard(user_id):
     if request.method == "POST":
         user_input = request.form.get("user_input")
+        if len(user_input) >= 32000:
+            return dashpage('', '', 404,
+                            'Link must not be greater than 32000', '')
 
         if user_input.startswith(('https://ezyurl.xyz/', 'ezyurl.xyz/',
                                   'http://ezyurl.xyz/',
@@ -323,28 +329,69 @@ def dashboard_helper():
         return redirect(url_for('web_app.sign_in'))
 
 
-@web_app_blueprint.route('/history/<user_id>', methods=["GET"])
+@web_app_blueprint.route('/history/<user_id>', methods=["GET", "POST"])
 def history(user_id):
     """Renders history for a user"""
+    if request.method == "POST":
+        query = request.form.get("query")
+        return historypage(user_id, query)
+
     if ('logged_in' in session and session['logged_in'] and
             session['user_id'] == user_id):
-        user = User().exists(None, None, user_id)
-        if user:
-            info = DBStorage().fetch_user(user_id)
-            names = info.first_name + ' ' + info.last_name
-            email = info.email[:2].upper()
-            history = DBStorage().fetch_user_and_ezy(user_id)
-            return render_template('user_routes/history.html',
-                                   cache_id=uuid.uuid4(),
-                                   email=email, names=names,
-                                   user_id=user_id,
-                                   history_items=history)
-        else:
-            # direct a user if they've been blocked to sign in
-            session['info_message'] = "Account doesn't exist"
-            return redirect(url_for('web_app.sign_in'))
+
+        return historypage(user_id)
     else:
         session['info_message'] = "Sign in to continue"
+        return redirect(url_for('web_app.sign_in'))
+
+
+def historypage(user_id, query=None):
+    """Renders the history page returns crucial info"""
+    if query:
+        long_result = DBStorage().search(user_id, query)
+        current_app.logger.warning(query)
+        short_result = DBStorage().search(user_id, None,
+                                          query.split('/')[2])
+        current_app.logger.warning(short_result)
+
+        result = long_result if long_result else short_result
+        search_result = []
+
+        current_app.logger.warning(result)
+        user = User().exists(None, None, user_id)
+        info = DBStorage().fetch_user(user_id)
+        names = info.first_name + ' ' + info.last_name
+        email = info.email[:2].upper()
+
+        for obj in result:
+            cl_name = type(obj).__name__
+            id = obj.id
+            attr = {k: v for k, v in obj.__dict__.items()
+                    if not k.startswith('_sa_instance_state')}
+            
+            search_result.append({
+                **attr
+            })
+        return render_template('user_routes/history.html',
+                               cache_id=uuid.uuid4(),
+                               email=email, names=names,
+                               user_id=user_id,
+                               history_items=search_result)
+
+    user = User().exists(None, None, user_id)
+    if user:
+        info = DBStorage().fetch_user(user_id)
+        names = info.first_name + ' ' + info.last_name
+        email = info.email[:2].upper()
+        history = DBStorage().fetch_user_and_ezy(user_id)
+        return render_template('user_routes/history.html',
+                               cache_id=uuid.uuid4(),
+                               email=email, names=names,
+                               user_id=user_id,
+                               history_items=history)
+    else:
+        # direct a user if they've been blocked to sign in
+        session['info_message'] = "Account doesn't exist"
         return redirect(url_for('web_app.sign_in'))
 
 
