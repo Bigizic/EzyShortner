@@ -408,8 +408,6 @@ footer a:hover {
 }
   
 .table-row:hover {
-    background-color: #fff;
-    color: black;
     transform: scale(1.02);
 }
 .table-row:hover a:hover {
@@ -437,14 +435,20 @@ footer a:hover {
 
 /* MOBILES */  
 @media all and (max-width: 767px) {
+	#table {
+		font-size: 11px !important;
+	}
 	.table-header {
-		display: none;
+		display: none !important;
 	}
-	.table-row li{
-		display: block;
+	.table-row {
+		box-shadow: 0px 0px 9px 0px #8888;
 	}
-	.table-row .col {
-		flex-basis: 0%;
+	li {
+	        display: block !important;
+	}
+	.col {
+		flex-basis: 100%;
 	}
 	.col {
 		display: flex;
@@ -461,6 +465,8 @@ footer a:hover {
             overflow-wrap: break-word;
             overflow-x: scroll;
             flex-basis: 20% !important;
+            width: 100% !important;
+            display: block !important;
         }
         .col-5 {
             flex-basis: 20%;
