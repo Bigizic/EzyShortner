@@ -189,3 +189,26 @@ class DBStorage:
             result = self.__session.query(User).filter(
                                           User.email == email).first()
             return result if result else None
+
+    def search(self, user_id=None, longl=None, short=None):
+        """Query the database with the user's id to find a
+        record of short link or long link associated with a user
+        """
+        user = self.__session.query(User).filter(
+                                    User.id == user_id).first()
+
+        if user:
+            long_link = self.__session.query(Ezy).filter(
+                                             Ezy.user_id == user_id,
+                                             Ezy.original_url == longl).all()
+
+            short_link = self.__session.query(Ezy).filter(
+                                              Ezy.user_id == user_id,
+                                              Ezy.short_url == short).all()
+
+            if long_link:
+                return long_link
+            if short_link:
+                return short_link
+
+        return False
