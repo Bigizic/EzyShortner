@@ -18,17 +18,6 @@ $(document).ready(() => {
   }
   /* end */
 
-  /* being removing animation text */
-  function clearText(index, text, delay) {
-    if (index <= text.length) {
-      $('#typing-animation').text(text.substring(0, text.length - index));
-      setTimeout(function() {
-        clearText(index + 1, text, delay);
-      }, delay);
-    }
-  }
-  /* end */
-
   /* status code success or email has been used */
   const statusElement = $('#status_code');
     if (statusElement.length) {
@@ -40,23 +29,23 @@ $(document).ready(() => {
   
   /* next button functions */
   $('.next_button').click(function () {
-    const emailInput = $('#email_or_username');
-    const passInput = $('#pass');
-    if(emailInput.val() && passInput.val().length >= 8) {
-      $('.first_form').hide().css('transform', 'scale(1)');
-      $('.second_form').show().css('transform', 'scale(1.1)');
-      setTimeout(function () {
+    if ($('#typing-animation').text() === "Create an account in seconds!") {
+      const emailInput = $('#email_or_username');
+      const passInput = $('#pass');
+      if (emailInput.val() && passInput.val().length >= 8) {
+        $('.first_form').hide().css('transform', 'scale(1)');
+        $('.second_form').show().css('transform', 'scale(1.1)');
         typeText(0, "Almost there...", 100);
-      }, 1500);
-    } else {
-      if (!emailInput.val()) {
-        emailInput.css('border', '1px solid red');
-      }
-      if (!passInput.val()) {
-        passInput.css('border', '1px solid red');
-      }
-      if (passInput.val().length < 8) {
-        $('.password-warning').html("password length must be 8");
+      } else {
+        if (!emailInput.val()) {
+          emailInput.css('border', '1px solid red');
+        }
+        if (!passInput.val()) {
+          passInput.css('border', '1px solid red');
+        }
+        if (passInput.val().length < 8) {
+          $('.password-warning').html("password length must be 8");
+        }
       }
     }
   });
@@ -64,11 +53,11 @@ $(document).ready(() => {
   
   /* back button functions */
   $('.back_button').click(function () {
-    $('.second_form').hide().css('transform', 'scale(1)');
-    $('.first_form').show().css('transform', 'scale(1.1)');
-    setTimeout(function () {
+    if ($('#typing-animation').text() === "Almost there...") {
+      $('.second_form').hide().css('transform', 'scale(1)');
+      $('.first_form').show().css('transform', 'scale(1.1)');
       typeText(0, "Create an account in seconds!", 100);
-    }, 1500);
+    }
   });
   /* back button end */
   
@@ -102,5 +91,5 @@ $(document).ready(() => {
     });
   /* end */
     
-  typeText(0, "Create an account in seconds!", 100);
+  typeText(0, 'Create an account in seconds!', 100);
 });
