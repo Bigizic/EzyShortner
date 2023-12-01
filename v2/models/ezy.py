@@ -23,7 +23,7 @@ class Ezy(EzyModel, Base):
     """default storage: MySql db"""
 
     __tablename__ = "records"
-    original_url = Column(String(2000), nullable=False)
+    original_url = Column(String(32000), nullable=False)
     short_url = Column(String(70), nullable=False)
     user_id = Column(String(100), ForeignKey('users.id'))
     clicks = Column(BigInteger, nullable=True, default=0)
