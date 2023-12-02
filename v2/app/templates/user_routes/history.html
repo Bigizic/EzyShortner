@@ -84,8 +84,10 @@
 							<button type="submit" class="shadow"><i style="font-size: xx-large;" class="bi bi-search"></i></button>
 						</form>
 					</div>
-					<input type="button" value="Short" id="short_">
-					<input type="button" value="Long" id="long_">
+					<input type="button" value="Search" id="short_"><br>
+					{% if info %}
+            				<p id="status_code">{{info}}</p>
+            				{% endif %}
 				</div>
 				</div>
 				<div id="table">
