@@ -59,7 +59,7 @@ $(document).ready(() => {
 
   short.click(function() {
     toggleApp();
-    $('#search_input').attr('placeholder', 'Enter a short link e.g https://ezyurl.xyz/a-link');
+    $('#search_input').attr('placeholder', 'Search by long or short link');
   });
 
   /* END SEARCH */
@@ -128,4 +128,19 @@ $(document).ready(() => {
     }
   });
   /*END DELETE BUTTON */
+  
+  /* output or alias prefered characters */
+  $('#search_input').on('input', function() {
+    $(this).val($(this).val().replace(/[' ']/g, ''));
+  });
+  /* end prefered characters */
+
+  /* status code NOT FOUND */
+  const statusElement = $('#status_code');
+    if (statusElement.length) {
+      setTimeout(function () {
+        statusElement.fadeOut();
+      }, 3000);
+    }
+  /* end */
 });
