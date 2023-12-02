@@ -364,8 +364,11 @@ def historypage(user_id, query=None):
         names = info.first_name + ' ' + info.last_name
         email = info.email[:2].upper()
         his = DBStorage().fetch_user_and_ezy(user_id)
-        history = sorted(his, key=lambda x: x['created_at'],
-                         reverse=True)
+        if his:
+            history = sorted(his, key=lambda x: x['created_at'],
+                             reverse=True)
+        else:
+            history = ''
         return render_template('user_routes/history.html',
                                cache_id=uuid.uuid4(),
                                email=email, names=names,
