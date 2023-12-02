@@ -10,6 +10,10 @@ body {
     color: #fff;
 }
 
+.menu-button {
+    border: 2px solid #fff !important;
+}
+
 .loader-container {
     position: fixed;
     top: 0;
@@ -54,6 +58,8 @@ body {
     border-radius: 10px;
     display: grid;
     height: 88vh;
+    position: fixed;
+    width: 18%;
 }
 
 .user-info {
@@ -124,8 +130,9 @@ body {
 }
 
 .hover-effect {
-    background: black;
-    transform: scale(1.1);
+        background: white !important;
+        transform: scale(1.1);
+        color: #006400 !important;
 }
 
 .short-links {
@@ -155,13 +162,14 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    margin-left: 20%;
 }
 
 .main-content {
     color: #fff;
     cursor: pointer;
     font-family: 'Black Ops One';
-    font-size: xx-large;
+    font-size: 2.5rem;
 }
 .main-content:hover {
     color: #006400;

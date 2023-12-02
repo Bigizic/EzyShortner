@@ -9,7 +9,7 @@ body {
 }
 
 .menu-button {
-    border: none !important;
+    border: 2px solid #fff !important;
 }
 
 .information a {

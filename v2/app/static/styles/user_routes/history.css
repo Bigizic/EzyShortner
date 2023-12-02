@@ -9,7 +9,7 @@ body {
 /*OTHER DEVICES */
 
 .menu-button {
-    border: none !important;
+    border: 2px solid #fff !important;
 }
 
 .cover-up {
@@ -447,7 +447,7 @@ footer a:hover {
 /* MOBILES */  
 @media all and (max-width: 767px) {
 	#table {
-		font-size: 11px !important;
+		font-size: 14px !important;
 	}
 	.table-header {
 		display: none !important;
