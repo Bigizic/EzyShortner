@@ -12,9 +12,9 @@ $(document).ready(() => {
   }, 1000);
   /* end loading view */
   $('.left-items-lix').addClass('hover-effect');
-  
+
   /* SEARCH */
-  
+
   var app = $("#app"),
     short = $("#short_"),
     long = $("#long_"),
@@ -73,11 +73,7 @@ $(document).ready(() => {
     $('.cover-up').css('width', '0');
   });
   /* end mobile menu button */
-  
-  /* BEGIN HISTORY ITEMS */
-  /* END HISTORY ITEMS */
-  
-  
+
   
   /* Function to add a class for mobile*/
   function addClassForMobile() {
@@ -143,4 +139,8 @@ $(document).ready(() => {
       }, 3000);
     }
   /* end */
+  
+  $('.main-content h1').click(function () {
+    window.location.replace(window.location.href);
+  });
 });

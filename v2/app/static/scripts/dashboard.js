@@ -13,6 +13,27 @@ $(document).ready(() => {
   /* end loading view */
   
   $('.left-items-li').addClass('hover-effect');
+  
+  /* Function to add a class for mobile*/
+  function addClassForMobile() {
+    const leftItemLix = $('.left-items-li');
+    if ($(window).width() <= 991) {
+      leftItemLix.addClass('mobile-class');
+    } else {
+      leftItemLix.removeClass('mobile-class');
+    }
+  }
+  /* end class for mobile*/
+
+  /* mobile menu button */
+  $('.menu-button').click(function () {
+    $('.cover-up').css('width', '80%');
+  });
+
+  $('.close-button').click(function () {
+    $('.cover-up').css('width', '0');
+  });
+  /* end mobile menu button */
 
   $('#user_input').keypress(function (e) {
     if (e.which === 13 && $('#user_input').val().length > 3) {
@@ -95,5 +116,9 @@ $(document).ready(() => {
     }
   });
   /* end alias button */
+
+  $('.main-content h1').click(function () {
+    window.location.replace(window.location.href);
+  });
   
 });
