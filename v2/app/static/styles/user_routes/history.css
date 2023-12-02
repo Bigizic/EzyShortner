@@ -340,6 +340,17 @@ section form label {
     transform: scale(1.2);
 }
 
+#status_code {
+    background-color: #fff;
+    color: black;
+    height: 2rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 5px;
+    display: inline;
+    align-items: center;
+}
 
 footer {
     background-color: inherit;
