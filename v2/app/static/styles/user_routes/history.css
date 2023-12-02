@@ -473,8 +473,6 @@ footer a:hover {
 		}
 	}
 	.col-3 {
-            overflow-wrap: break-word;
-            overflow-x: scroll;
             flex-basis: 20% !important;
             width: 100% !important;
             display: block !important;
