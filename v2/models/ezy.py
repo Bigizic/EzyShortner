@@ -17,6 +17,9 @@ import sqlalchemy
 from sqlalchemy import Column, String, DateTime, ForeignKey, BigInteger
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
+import re
+
+BASEURL = "ezyurl.xyz/"
 
 
 class Ezy(EzyModel, Base):
@@ -31,3 +34,15 @@ class Ezy(EzyModel, Base):
     def __init__(self, *args, **kwargs):
         """Constructor"""
         super().__init__(*args, **kwargs)
+
+    def url(self):
+        """returns the shortned url plus the subdomain
+        """
+        link = self.original_url
+        if len(link) > 2:
+            pattern = r'^(https?://|www\.)'
+            sec = r'\.\w+'
+            if re.match(pattern, link) or re.search(sec, link):
+                return BASEURL + self.short_url
+            else:
+                return None

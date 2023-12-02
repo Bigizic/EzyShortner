@@ -196,19 +196,15 @@ class DBStorage:
         """
         user = self.__session.query(User).filter(
                                     User.id == user_id).first()
-
         if user:
             long_link = self.__session.query(Ezy).filter(
                                              Ezy.user_id == user_id,
                                              Ezy.original_url == longl).all()
-
             short_link = self.__session.query(Ezy).filter(
                                               Ezy.user_id == user_id,
                                               Ezy.short_url == short).all()
-
             if long_link:
                 return long_link
             if short_link:
                 return short_link
-
         return False

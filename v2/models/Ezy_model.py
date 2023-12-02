@@ -88,11 +88,6 @@ class EzyModel(Base):
         if not alias and models.storage_type.existing(self.short_url) is True:
             self.short_url = generate_random_url()
 
-    def url(self):
-        """returns the shortned url plus the subdomain
-        """
-        return BASEURL + self.short_url
-
     def get_long(self, shortlink):
         """Returns the long link associated with a short link"""
         return models.storage_type.redirect(shortlink)
