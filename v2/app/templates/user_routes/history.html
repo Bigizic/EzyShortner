@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezy History</title>
+    <link rel="stylesheet" href="/static/styles/user_routes/history.css?{{ cache_id }}">
+    <link rel="stylesheet" href="/static/styles/user_routes/history_responsive.css?{{ cache_id }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link type="text/css" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js?{{ cache_id }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
+    <script type="text/javascript" src="/static/scripts/user_routes/history.js?{{ cache_id }}"></script>
+    <link rel="icon" href="/static/images/ezy_icon.jpg?{{ cache_id }}">
+</head>
+<body>
+    <div class="loader-container">
+            <div class="loader"></div>
+    </div>
+    <button class="menu-button">&#9776;</button>
+            <div class="cover-up">
+            <div class="cover-up-content">
+                <span class="close-button">&times;</span>
+                <div class="menu-information">
+            <div class="short-links-info">
+                <ul class="left-items">
+                    <li class="left-items-li"><a href="{{ url_for('web_app.dashboard', user_id=user_id) }}"><i style="font-size: larger;" class="bi bi-house-fill"></i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
+                    <li class="left-items-lii"><i style="font-size: larger;" class="bi bi-person-workspace"></i>&nbsp;&nbsp;&nbsp;How to use</li>
+                    <li class="left-items-liii"><i style="font-size: larger;" class="bi bi-link-45deg"></i>&nbsp;&nbsp;&nbsp;Edit your links</li>
+                    <li class="left-items-lix"><a href="{{ url_for('web_app.history', user_id=user_id) }}"><i style="font-size: larger;" class="bi bi-hourglass-bottom"></i>&nbsp;&nbsp;&nbsp;Histroy<span><sup style="color: #888;">Ezy links analytics </sup></span></a></li>
+                    <li class="left-items-lx"><i style="font-size: larger;" class="bi bi-person-fill"></i>&nbsp;&nbsp;&nbsp;Profile Information</li>
+                    <li class="left-items-lxi"><i style="font-size: larger;" class="bi bi-code-slash"></i>&nbsp;&nbsp;&nbsp;Api</li>
+                </ul>
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                <p class="user-information">{{ email }}</p>
+                <p class="user-name">{{ names }}</p>
+                </div>
+                <a href="{{ url_for('web_app.logout') }}" class="logout">Logout</a>
+            </div>
+                </div>
+              </div>
+            </div>
+    <div class="container">
+        <section class="left-sidebar">
+            <div class="short-links-info">
+                <ul class="left-items">
+                    <li class="left-items-li"><a href="{{ url_for('web_app.dashboard', user_id=user_id) }}"><i style="font-size: larger;" class="bi bi-house-fill"></i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
+                    <li class="left-items-lii"><i style="font-size: larger;" class="bi bi-person-workspace"></i>&nbsp;&nbsp;&nbsp;How to use</li>
+                    <li class="left-items-liii"><i style="font-size: larger;" class="bi bi-link-45deg"></i>&nbsp;&nbsp;&nbsp;Edit your links</li>
+                    <li class="left-items-lix"><a href="{{ url_for('web_app.history', user_id=user_id) }}"><i style="font-size: larger;" class="bi bi-hourglass-bottom"></i>&nbsp;&nbsp;&nbsp;Histroy<span><sup style="color: #888;">Ezy links analytics </sup></span></a></li>
+                    <li class="left-items-lx"><i style="font-size: larger;" class="bi bi-person-fill"></i>&nbsp;&nbsp;&nbsp;Profile Information</li>
+                    <li class="left-items-lxi"><i style="font-size: larger;" class="bi bi-code-slash"></i>&nbsp;&nbsp;&nbsp;Api</li>
+                </ul>
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                <p class="user-information">{{ email }}</p>
+                <p class="user-name">{{ names }}</p>
+                </div>
+                <a href="{{ url_for('web_app.logout') }}" class="logout">Logout</a>
+            </div>
+        </section>
+        <section class="right-sidebar">
+            <div class="main-content">
+                <h1>HISTORY</h1>
+                <h3>Track and Review Your Links</h3>
+            </div>
+			<section class="user_interface">
+				<div class="viewers_graph">
+					<p>Viewers graph </p>
+				</div>
+				<div class="search_container">
+				    <div id="app-cover">
+					<div id="app">
+						<form method="POST" id="search_form">
+							<div id="f-element">
+								<div id="inp-cover"><input id="search_input" type="text" name="query" placeholder="" required="true" autocomplete="off"></div>
+							</div>
+							<button type="submit" class="shadow"><i style="font-size: xx-large;" class="bi bi-search"></i></button>
+						</form>
+					</div>
+					<input type="button" value="Search" id="short_"><br>
+					{% if info %}
+            				<p id="status_code">{{info}}</p>
+            				{% endif %}
+				</div>
+				</div>
+				<div id="table">
+					<ul class="responsive-table">
+						<li class="table-header">
+						  <div class="col col-1">No.</div>
+						  <div class="col col-2">Date</div>
+						  <div class="col col-3">Long link</div>
+						  <div class="col col-4">Short Link</div>
+						  <div class="col col-5">Clicks</div>
+						</li>
+						{% if history_items %}
+						{% for items in history_items %}
+						<li class="table-row">
+						<div data-label="No." class="col col-1">{{ loop.index }}</div>
+						<div data-label="Date" class="col col-2">{{ items.created_at }}</div>
+						<div data-label="Long Link" class="col col-3"><a rel="noopener noreferrer" href="{{ items.original_url }}" target="_blank" >{{ items.original_url }}</a></div>
+						<div data-label="Short Link" class="col col-4"><a href="https://ezyurl.xyz/{{ items.short_url }}" target="_blank">ezyurl.xyz/{{ items.short_url }}</a></div>
+						<div data-label="Clicks" class="col col-5">{{ 0 if items.clicks is none else items.clicks }}</div>
+						<div data-label="Click to delete" class="bin"><button type="button" class="delete-btn" data-ezy-url-id="{{ items.id }}"><i class="bi bi-trash-fill"></i></button></div>
+						</li>
+						{% endfor %}
+						{% endif %}
+						</ul>
+				</div>
+			</section>
+		</section>
+	</div>
+</body>
+</html>
