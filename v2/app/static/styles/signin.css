@@ -125,7 +125,7 @@ label {
 
 
 #status_code {
-    background-color: white;
+    /*background-color: white;*/
     color: red;
     height: 2rem;
     overflow: hidden;
@@ -137,7 +137,7 @@ label {
     align-items: center;
     position: absolute;
     top: 0px;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     font-weight: 900;
 }
 

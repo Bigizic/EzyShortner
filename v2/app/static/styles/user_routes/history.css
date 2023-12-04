@@ -341,7 +341,7 @@ section form label {
 }
 
 #status_code {
-  background-color: white;
+  /*background-color: white;*/
   color: red;
   height: 2rem;
   overflow: hidden;
@@ -350,7 +350,7 @@ section form label {
   padding: 5px;
   display: inline;
   align-items: center;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
   font-weight: 900;
 }
 
