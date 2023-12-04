@@ -40,7 +40,7 @@ body, html {
 #typing-animation {
     font-size: medium;
     color: #fff;
-    font-family: 'Black Ops One';
+    font-family: initial;
 }
 
 section {
@@ -138,8 +138,8 @@ label {
 
 
 #status_code {
-    background-color: #fff;
-    color: black;
+    background-color: white;
+    color: red;
     height: 2rem;
     overflow: hidden;
     white-space: nowrap;
@@ -150,6 +150,8 @@ label {
     align-items: center;
     position: absolute;
     top: 0px;
+    border: 1px solid red;
+    font-weight: 900;
 }
 
 .password-container {
@@ -198,19 +200,8 @@ footer a:hover {
 
 
 
-
-
-
-
-
-
-
-
 /* SMALL TABLETS */
 @media (min-width: 768px) and (max-width: 991px) {
-	html {
-		height: 100%;
-	}
 	body {
 		margin: 0px;
 		background: rgb(19,20,24);
@@ -220,9 +211,6 @@ footer a:hover {
 
 /* MOBILE */
 @media (max-width: 480px) {
-	html {
-		height: 100%;
-	}
 	body {
 		margin: 0px;
 		background: rgb(19,20,24) !important;
@@ -232,9 +220,6 @@ footer a:hover {
 
 /* EXTRA SMALL DEVICES */
 @media (min-width: 481px) and (max-width: 767px) {
-	html {
-		height: 100%
-	}
 	body {
 		margin: 0px;
 		background: rgb(19,20,24);
