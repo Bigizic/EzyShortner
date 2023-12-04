@@ -77,8 +77,8 @@ def sign_up():
 def sign_in():
     """Renders sign in page"""
     if "logged_in" in session and session['logged_in']:
-            return redirect(url_for('web_app.dashboard',
-                            user_id=session['user_id']))
+        return redirect(url_for('web_app.dashboard',
+                        user_id=session['user_id']))
 
     if request.method == 'POST':
         email = request.form.get("email")
@@ -110,11 +110,11 @@ def sign_in():
                 return redirect(url_for("web_app.dashboard", user_id=user_id))
             else:
                 return render_template('signin.html',
-                                       info="Oops wrong password",
+                                       info="Oops wrong information",
                                        cache_id=uuid.uuid4())
 
     info_message = session.pop('info_message', None)
-    return render_template('signin.html', cache_id=uuid.uuid4(), 
+    return render_template('signin.html', cache_id=uuid.uuid4(),
                            info=info_message)
 
 
@@ -205,8 +205,10 @@ def delete_history(ezy_url_id):
         session['info_message'] = "Sign in to continue"
         return redirect(url_for('web_app.sign_in'))
 
+
 """FUNCTIONS
 """
+
 
 def application(user_input, user_output, user_id=None):
     if len(user_input) >= 32000:
@@ -230,11 +232,8 @@ def application(user_input, user_output, user_id=None):
     if user_output:
         bad_alias = ["api", "api-docs", "api_docs", "signup", "sign_up",
                      "sign-up", "signin", "sign_in", "sign-in", "aboutus",
-                     "about", "about_us","about-us", "dashboard",
-                     "dash_board", "dash-board", "dashboard_", "ezy", "ezy.",
-                     "ezy.com"]
-        pattern = r'[/\\]'
-        sec = r'\.\w+'
+                     "about", "about_us", "about-us", "dashboard", "ezy.com",
+                     "dash_board", "dash-board", "dashboard_", "ezy", "ezy."]
 
         if user_output in bad_alias or len(user_output) > 70:
             return '', '', 404, '', 'Oops... Not Allowd'
@@ -266,12 +265,14 @@ def application(user_input, user_output, user_id=None):
         else:
             return '', 404, '', '', wor
 
+
 def homepage(short_url, status_code, qr_file_path, alias, word):
     """Renders homepage"""
     return render_template('homepage.html', url=short_url,
                            status=status_code, qr_image=qr_file_path,
                            alias_status=alias, word=word,
                            cache_id=uuid.uuid4())
+
 
 def func_alias(ezy_instance, user_output):
     """Handles:
@@ -302,6 +303,7 @@ def func_alias(ezy_instance, user_output):
     if not alias and valid_url:
         return "alias doesn't exist original url valid"
 
+
 def dashpage(short_url, status_code, qr_file_path, alias, word):
     """Renders dashpage"""
     user = User().exists(None, None, session.get('user_id'))
@@ -316,14 +318,13 @@ def dashpage(short_url, status_code, qr_file_path, alias, word):
                            cache_id=uuid.uuid4(), user_id=session['user_id'],
                            names=names, email=email)
 
+
 def historypage(user_id, query=None):
     """Renders the history page returns crucial info"""
     if query:
         long_result = DBStorage().search(user_id, query)
 
-        if len(query) > 10:
-            query = query[-7:]
-            short_result = DBStorage().search(user_id, None, query)
+        short_result = DBStorage().search(user_id, None, query[-7:])
 
         result = long_result if long_result else short_result
 
@@ -339,7 +340,7 @@ def historypage(user_id, query=None):
                 id = obj.id
                 attr = {k: v for k, v in obj.__dict__.items()
                         if not k.startswith('_sa_instance_state')}
-            
+
                 sear.append({
                     **attr
                 })
@@ -378,6 +379,7 @@ def historypage(user_id, query=None):
         # direct a user if they've been blocked to sign in
         session['info_message'] = "Account doesn't exist"
         return redirect(url_for('web_app.sign_in'))
+
 
 @web_app_blueprint.route('/logout', methods=["GET"])
 def logout():
