@@ -181,6 +181,7 @@ div .something {
 
 .img_desktop {
     margin: 5%;
+    display: none;
 }
 
 footer {
@@ -191,7 +192,7 @@ footer {
     text-transform: capitalize;
     padding: 2vh 0vh 2vh 0vh;
     justify-content: center;
-    gap: 2.5vw;
+    gap: 2.5rem;
 }
 footer a {
     text-decoration: none;
@@ -382,4 +383,36 @@ footer a:hover {
     display: inline flow-root list-item;
     filter: invert(1);
     font-size: 0px;
+}
+
+.second_interface {
+    margin: 5%;
+}
+
+.second_interface h2 {
+    text-align: center;
+    color: #fff;
+    font-size: 1.9rem;
+}
+
+.products {
+    display: flex;
+    gap: 2rem;
+}
+.products h2 {
+    font-size: larger;
+}
+.products h4 {
+    font-size: smaller;
+}
+
+.first_product, .second_product, .third_product {
+    border: 1px solid black;
+    height: 30rem;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.first_product:hover, .second_product:hover, .third_product:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
