@@ -191,13 +191,19 @@ body {
 }
 
 .main-content h1 {
-    color: #fff;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0px 10px 0px 0px;
+    background: #888;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
     font-family: 'Black Ops One';
-    font-size: 2.5rem;
 }
 .main-content h1:hover {
-    color: #006400;
+    /*color: #006400;*/
 }
 .main-content h3 {
     font-size: x-large;
