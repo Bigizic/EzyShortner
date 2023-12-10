@@ -16,9 +16,10 @@ def infopage(user_id):
     if info:
         names = info.first_name + ' ' + info.last_name
         email = info.email[:2].upper()
+        full_email = info.email
         return render_template('user_routes/information.html',
                                cache_id=uuid.uuid4(), names=names, email=email,
-                               user_id=user_id)
+                               user_id=user_id, full_email=full_email)
     else:
         return render_template('signin.html', info="Oops.. No user Found",
                                cache_id=uuid.uuid4())
@@ -33,6 +34,7 @@ def information(user_id, user_info=None):
         info = DBStorage().fetch_user(user_id)
         names = info.first_name + ' ' + info.last_name
         email = info.email[:2].upper()
+        full_email = info.email
     else:
         return render_template('signin.html', info="Oops.. No user Found",
                                cache_id=uuid.uuid4())
@@ -67,8 +69,9 @@ def information(user_id, user_info=None):
                 render_template('user_routes/information.html',
                                 cache_id=uuid.uuid4(), email=email,
                                 names=names, user_id=user_id,
+                                full_email=full_email,
                                 info="Invalid details")
 
     return render_template('user_routes/information.html',
                            cache_id=uuid.uuid4(), email=email, names=names,
-                           user_id=user_id)
+                           user_id=user_id, full_email=full_email)
