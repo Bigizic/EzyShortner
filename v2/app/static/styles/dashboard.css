@@ -369,7 +369,7 @@ footer a:hover {
     background-image: url("/static/images/icons/api_code_slash.svg") !important; 
 }
 
-.left-items-li a, .left-items-lix a {
+.left-items-li a, .left-items-lix a, .left-items-lx a {
     text-decoration: none;
     color: inherit;
 }

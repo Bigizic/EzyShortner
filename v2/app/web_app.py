@@ -1,6 +1,7 @@
 #!/usr/bin/pytohn3
 """Web app using flask"""
 
+from datetime import timedelta
 from flask import Flask, request, render_template, make_response, session
 from models.ezy import Ezy
 from models.users import User
@@ -14,6 +15,7 @@ import logging
 
 # app = Flask(__name__, static_folder='static', static_url_path='/static')
 app = Flask(__name__)
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)  # set session to 7 days
 app.secret_key = environ.get("FLASK_KEY")
 app.url_map.strict_slashes = False
 

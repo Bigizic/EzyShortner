@@ -125,6 +125,7 @@
     .left-items {
         list-style-type: none;
         padding: revert;
+        padding-left: 10px;
     }
     .left-items-li, .left-items-lii, .left-items-liii, .left-items-lix, .left-items-lx, .left-items-lxi {
         padding: 10px 0px 10px 10px;
@@ -219,6 +220,7 @@
     .left-items {
         list-style-type: none;
         padding: revert;
+        padding-left: 10px;
     }
     .left-items-li, .left-items-lii, .left-items-liii, .left-items-lix, .left-items-lx, .left-items-lxi {
         padding: 10px 0px 10px 10px;
@@ -309,6 +311,7 @@
     .left-items {
         list-style-type: none;
         padding: revert;
+        padding-left: 10px;
     }
     .left-items-li, .left-items-lii, .left-items-liii, .left-items-lix, .left-items-lx, .left-items-lxi {
         padding: 10px 0px 10px 10px;
