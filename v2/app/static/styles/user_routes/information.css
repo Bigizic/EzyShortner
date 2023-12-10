@@ -202,9 +202,7 @@ body {
     height: 4rem;
     font-family: 'Black Ops One';
 }
-.main-content h1:hover {
-    /*color: #006400;*/
-}
+
 .main-content h3 {
     font-size: x-large;
     font-family: initial;
@@ -233,6 +231,42 @@ body {
 }
 
 
+.user_names {
+    /*background: #8888;*/
+    text-align: left;
+    /*padding-top: 1px;
+    padding-bottom: 1px;*/
+    margin: 3rem;
+}
+.user_names ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user_names li {
+    margin-bottom: 1rem;
+}
+
+.user_names li button {
+    background-color: #fff;
+    width: 100%;
+    text-align: left;
+    border-radius: 10px;
+    height: 3rem;
+    font-weight: 550;
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: medium;
+    border: none;
+    transition: transform 0.5s ease;
+}
+.user_names li button:hover {
+    background: #8888;
+    border: none;
+    transform: scale(1.04);
+}
+
+
 
 
 
@@ -254,7 +288,14 @@ body {
     .cover-up-content {
         display: none;
     }
-
+    .user_names {
+        margin-top: 3rem !important;
+    margin-left: 10rem !important;
+    margin-right: 10rem !important;
+    }
+    .main-content h1 {
+    margin: 50px 10px 0px 0px !important;
+    }
 
 }
 
@@ -274,7 +315,14 @@ body {
     .cover-up-content {
         display: none;
     }
-
+    .user_names {
+        margin-top: 3rem !important;
+    margin-left: 10rem !important;
+    margin-right: 10rem !important;
+    }
+    .main-content h1 {
+    margin: 50px 10px 0px 0px !important;
+    }
 }
 
 
@@ -293,7 +341,14 @@ body {
     .cover-up-content {
         display: none;
     }
-
+    .user_names {
+        margin-top: 3rem !important;
+    margin-left: 10rem !important;
+    margin-right: 10rem !important;
+    }
+    .main-content h1 {
+    margin: 50px 10px 0px 0px !important;
+    }
 }
 
 
