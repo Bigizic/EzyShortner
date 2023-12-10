@@ -67,18 +67,17 @@
         <section class="right-sidebar">
             <div class="main-content">
                 <h1>{{ email }}</h1>
-                <h3>Your Account</h3>
+                <h2>{{ names }}</h2>
+                <h5>{{ full_email }}</h5>
             </div>
             <section class="user_interface">
                 <div class="user_names">
-
-                </div>
-                <div class="user_password">
-
-                </div>
-                <div class="buttons">
-                    <button>Sign out</button>
-                    <button>Contact Support</button>
+                    <ul>
+                        <li><button>{{ names }}</button></li>
+                        <li><button>Password</button></li>
+                        <li><button>Sign out</button></li>
+                        <li><button><a style="color: initial; text-decoration: none; cursor: pointer;" href="mailto:Olalekanisaac75@gmail.com">Contact Support</a></button></li>
+                    </ul>
                 </div>
             </section>
         </section>
