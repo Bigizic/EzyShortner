@@ -15,6 +15,7 @@ from app.web_app_functions.dashpage import dashpage
 from app.web_app_functions.homepage import homepage
 from app.web_app_functions.historypage import historypage
 from app.web_app_functions.information import information
+from app.web_app_functions.editlink import editlink
 import re
 import uuid
 import logging
@@ -68,11 +69,15 @@ def sign_up():
         password = request.form.get("pass")
         if len(password) > 128 or password is None:
             ps = "Oops.. check the password"
-            return render_template('signin.html', info=ps,
+            return render_template('signup.html', info=ps,
                                    cache_id=uuid.uuid4())
 
         first_name = request.form.get("first_name")
         last_name = request.form.get("last_name")
+
+        if len(first_name) >= 127 or len(last_name) >= 127:
+            return render_template('signup.html', info="names too long",
+                                   cache_id=uuid.uuid4())
 
         new_user = User()
         new_user.email = email
@@ -122,8 +127,10 @@ def sign_in():
         user_id, user_pass = user_data if user_data else None
 
         if user_id and user_pass:
+            current_app.logger.warning(user_pass)
             # compares html password and database password
             passs = bcrypt.checkpw(password.encode(), user_pass.encode())
+            current_app.logger.warning(passs)
             if passs:
                 session['logged_in'] = True
                 session['email'] = email
@@ -226,15 +233,15 @@ def delete_history(ezy_url_id):
 
 
 @web_app_blueprint.route('/profile/<user_id>',
-                         methods=["GET", "POST", "PUT"])
+                         methods=["GET", "POST"])
 def user_profile(user_id):
     """ Render user's profile information """
-    if request.method == "PUT":
-        first_name = request.method.get("first_name")
-        last_name = request.method.get("last_name")
+    if request.method == "POST":
+        first_name = request.form.get("first_name")
+        last_name = request.form.get("last_name")
 
-        old_pass = request.method.get("old_password")
-        new_pass = request.method.get("new_password")
+        old_pass = request.form.get("old_password")
+        new_pass = request.form.get("new_password")
         user_credentials = {
                 'first_name': first_name,
                 'last_name': last_name,
@@ -245,6 +252,25 @@ def user_profile(user_id):
 
     if check_session():
         return information(user_id)
+    else:
+        session['info_message'] = "Sign in to continue"
+        return redirect(url_for('web_app.sign_in'))
+
+
+@web_app_blueprint.route('/edit-my-links/<user_id>', methods=["GET", "POST"])
+def edit_my_link(user_id):
+    """Edits a user's long link"""
+    if request.method == "POST":
+        long_link = request.form.get("long_link")
+        short = request.form.get("short_link")
+        query = request.form.get("query")
+        if query:
+            return editlink(user_id, None, query)
+        if long_link and short:
+            return editlink(user_id, [long_link, short], None)
+
+    if check_session():
+        return editlink(user_id)
     else:
         session['info_message'] = "Sign in to continue"
         return redirect(url_for('web_app.sign_in'))
