@@ -243,7 +243,7 @@ footer a:hover {
 
 
 
-.left-items-li a, .left-items-lix a, .left-items-lx a {
+.left-items-lii a, .left-items-li a, .left-items-lix a, .left-items-lx a, .left-items-liii a, .left-items-lxi a {
     text-decoration: none;
     color: inherit;
 }
@@ -525,3 +525,80 @@ button i.fas {
 
 
 /* END SEARCH */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* BEGIN EDIT FILE */
+
+.bi-pen-fill:hover {
+	color: #006400;
+}
+
+.editlink_form {
+	background-color: #004700;
+	position: fixed;
+	top: 25%;
+	height: 15rem;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 40px;
+	border-radius: 8px;
+	display: flex;
+	z-index: 2;
+}
+
+.submit_and_cancel {
+	margin-top: 1rem;
+	display: flex;
+	gap: 10rem;
+}
+
+#pass_save, #pass_cancel {
+	border-radius: 4px !important;
+	height: 30px !important;
+	background-color: #006400 !important;
+	color: white !important;
+	transform: translateX(0%) !important;
+	cursor: pointer !important;
+	border: 2px solid #fff !important;
+	text-align: center;
+	font-size: revert;
+	padding: revert;
+}
+
+#long_link, #short_link {
+  width: 90%;
+  border: none;
+  outline: none;
+  height: 2rem;
+  background: #8888;
+  border-radius: 4px;
+  color: #fff;
+  font-size: medium;
+  font-weight: 550;
+  padding: 0 20px 0 10px;
+  position: relative;
+  margin-top: 1rem;
+}
+
+
+#status_link {
+	font-size: large;
+}
+
+/* END EDIT FILE */

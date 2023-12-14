@@ -173,7 +173,7 @@ body {
 
 
 
-.left-items-li a, .left-items-lix a, .left-items-lx a {
+.left-items-lii a, .left-items-li a, .left-items-lix a, .left-items-lx a, .left-items-liii a, .left-items-lxi a {
     text-decoration: none;
     color: inherit;
 }
@@ -258,17 +258,102 @@ body {
     position: relative;
     font-size: medium;
     border: none;
-    transition: transform 0.5s ease;
 }
 .user_names li button:hover {
     background: #8888;
     border: none;
-    transform: scale(1.04);
 }
 
+.bi-pen-fill{
+        position: absolute;
+        right: 2rem;
+}
+.name_form, .password_form {
+	background-color: #004700;
+	position: absolute;
+	top: 25%;
+	height: 15rem;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 40px;
+	border-radius: 8px;
+	display: flex;
+	
+}
+.name_form label, .password_form label {
+	display: block;
+}
+#f_name {
+	margin-bottom: 3rem;
+}
+#f_name, #l_name, #o_pass, #n_pass, #nn_pass  {
+  width: 90%;
+  border: none;
+  outline: none;
+  height: 2rem;
+  background: #8888;
+  border-radius: 4px;
+  color: #fff;
+  font-size: medium;
+  font-weight: 550;
+  padding: 0 20px 0 10px;
+  position: relative;
+}
 
+.submit_and_cancel {
+	margin-top: 4rem;
+	display: flex;
+	gap: 10rem;
+}
+.submit_and_cancel_p {
+	margin-top: 2rem;
+	display: flex;
+	gap: 10rem;
+}
 
+#name_save, #name_cancel, #pass_save, #pass_cancel  {
+	width: fit-content;
+	border-radius: 4px;
+	height: 30px;
+	background-color: #006400;
+	color: white;
+	transform: translateX(0%);
+	cursor: pointer;
+}
 
+#o_pass, #n_pass {
+	margin-bottom: 1rem;
+}
+
+#status_code {
+    /*background-color: white;*/
+    color: red;
+    font-weight: 900;
+}
+
+#status_code_2 {
+    /*background-color: white;*/
+    color: #007400;
+    font-weight: 900;
+}
+.toggle-password {
+  position: absolute;
+  top: 25%;
+  right: 38px;
+  transform: translateY(-70%);
+  cursor: pointer;
+}
+.toggle-password-n {
+  position: absolute;
+  top: 46%;
+  right: 38px;
+  transform: translateY(-70%);
+  cursor: pointer;
+}
+#n_status {
+	display: none;
+	color: red;
+}
 
 
 
@@ -295,6 +380,9 @@ body {
     }
     .main-content h1 {
     margin: 50px 10px 0px 0px !important;
+    }
+    .name_form, .password_form {
+	transform: translateX(0%) !important;
     }
 
 }
@@ -323,6 +411,10 @@ body {
     .main-content h1 {
     margin: 50px 10px 0px 0px !important;
     }
+    .name_form, .password_form {
+	transform: translateX(0%) !important;
+    }
+
 }
 
 
@@ -348,6 +440,9 @@ body {
     }
     .main-content h1 {
     margin: 50px 10px 0px 0px !important;
+    }
+    .name_form, .password_form {
+	transform: translateX(0%) !important;
     }
 }
 
