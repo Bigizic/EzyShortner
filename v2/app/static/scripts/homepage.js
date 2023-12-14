@@ -96,7 +96,7 @@ $(document).ready(() => {
       $('#user_output').css('width', newWidth);
       $('#user_output').attr('autofocus', 'autofocus');
       $('#user_output').removeAttr('readonly');
-      $('#user_output').attr('placeholder', 'Enter an alias e.g JohnDoe');
+      $('#user_output').attr('placeholder', 'Enter an alias e.g ezyurl.xyz/awesome-tips');
       $('.label_user_output').css('color', 'aliceblue');
       $('.label_user_output').css('font-size', 'medium');
       $('.label_user_output').html(BASEURL + '/');
@@ -225,4 +225,15 @@ $(document).ready(() => {
     $('.menu-information .history_list').css('width', '0%');
   });
   /* end mobile history view */
+  
+  /* product hover + button */
+  $('.first_product, .second_product').hover(
+    function() {
+      $(this).find('a button').addClass('hover-effect');
+    },
+    function() {
+      $(this).find('a button').removeClass('hover-effect');
+    }
+  );
+  /* end product hover + button*/
 });

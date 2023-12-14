@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit your profile</title>
+    <link rel="stylesheet" href="/static/styles/user_routes/information.css?{{ cache_id }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link type="text/css" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js?{{ cache_id }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
+    <script type="text/javascript" src="/static/scripts/user_routes/information.js?{{ cache_id }}"></script>
+    <link rel="icon" href="/static/images/ezy_icon.jpg?{{ cache_id }}">
+</head>
+<body>
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+    <button class="menu-button">&#9776;</button>
+    <div class="cover-up">
+        <div class="cover-up-content">
+            <span class="close-button">&times;</span>
+            <div class="menu-information">
+                <div class="short-links-info">
+                    <ul class="left-items">
+                        <li class="left-items-li"><a href="{{ url_for('web_app.dashboard', user_id=user_id) }}"><i style="font-size: larger;" class="bi bi-house-fill"></i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
+                        <li class="left-items-lii"><i style="font-size: larger;" class="bi bi-person-workspace"></i>&nbsp;&nbsp;&nbsp;How to use</li>
+                        <li class="left-items-liii"><a href="{{ url_for('web_app.edit_my_link', user_id=user_id) }}"> <i style="font-size: larger;" class="bi bi-link-45deg"></i>&nbsp;&nbsp;&nbsp;Edit my links</a></li>
+                        <li class="left-items-lix"><a href="{{ url_for('web_app.history', user_id=user_id) }}"><i style="font-size: larger;" class="bi bi-hourglass-bottom"></i>&nbsp;&nbsp;&nbsp;Histroy<span><sup style="color: #888;">Ezy links analytics </sup></span></a></li>
+                        <li class="left-items-lx"><a href="{{ url_for('web_app.user_profile', user_id=user_id) }}"><i style="font-size: larger;" class="bi bi-person-fill"></i>&nbsp;&nbsp;&nbsp;Profile Information</a></li>
+                        <li class="left-items-lxi"><i style="font-size: larger;" class="bi bi-code-slash"></i>&nbsp;&nbsp;&nbsp;Api<span><sup style="color: #888;">  For developers</sup></span></li>
+                    </ul>
+                </div>
+                <div class="user-info">
+                    <div class="user-details">
+                        <p class="user-information">{{ email }}</p>
+                        <p class="user-name">{{ names }}</p>
+                    </div>
+                    <a href="{{ url_for('web_app.logout') }}" class="logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <section class="left-sidebar">
+            <div class="short-links-info">
+                <ul class="left-items">
+                    <li class="left-items-li"><a href="{{ url_for('web_app.dashboard', user_id=user_id) }}"><i style="font-size: larger;" class="bi bi-house-fill"></i>&nbsp;&nbsp;&nbsp;Dashboard</a></li>
+                    <li class="left-items-lii"><i style="font-size: larger;" class="bi bi-person-workspace"></i>&nbsp;&nbsp;&nbsp;How to use</li>
+                    <li class="left-items-liii"><a href="{{ url_for('web_app.edit_my_link', user_id=user_id) }}"> <i style="font-size: larger;" class="bi bi-link-45deg"></i>&nbsp;&nbsp;&nbsp;Edit my links</a></li>
+                    <li class="left-items-lix"><a href="{{ url_for('web_app.history', user_id=user_id) }}"><i style="font-size: larger;" class="bi bi-hourglass-bottom"></i>&nbsp;&nbsp;&nbsp;Histroy<span><sup style="color: #888;">Ezy links analytics </sup></span></a></li>
+                    <li class="left-items-lx"><a href="{{ url_for('web_app.user_profile', user_id=user_id) }}"><i style="font-size: larger;" class="bi bi-person-fill"></i>&nbsp;&nbsp;&nbsp;Profile Information</a></li>
+                    <li class="left-items-lxi"><i style="font-size: larger;" class="bi bi-code-slash"></i>&nbsp;&nbsp;&nbsp;Api<span><sup style="color: #888;">  For developers</sup></span></li>
+                </ul>
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <p class="user-information">{{ email }}</p>
+                    <p class="user-name">{{ names }}</p>
+                </div>
+                <a href="{{ url_for('web_app.logout') }}" class="logout">Logout</a>
+            </div>
+        </section>
+        <section class="right-sidebar">
+            {% if info %}
+            <p id="status_code">{{info}}</p>
+            {% endif %}
+            {% if sec_info %}
+            <p id="status_code_2">{{sec_info}}</p>
+            {% endif %}
+            <div class="main-content">
+                <h1>{{ email }}</h1>
+                <h2>{{ names }}</h2>
+                <h5>{{ full_email }}</h5>
+            </div>
+            <section class="user_interface">
+                <div class="user_names">
+                    <ul>
+                        <li><button><i class="bi bi-person-fill"></i>&nbsp;&nbsp;&nbsp; {{ names }}<i id="edit_name" style="font-style: normal; cursor: pointer;" class="bi bi-pen-fill">Edit</i></button></li>
+                        <li><button><i class="bi bi-key-fill"></i>&nbsp;&nbsp;&nbsp;Password<i id="edit_pass" style="font-style: normal; cursor: pointer;" class="bi bi-pen-fill">Edit</i></button></li>
+                        <li><button><i style="color: #006400;" class="bi bi-shield-lock-fill"></i>&nbsp;&nbsp;&nbsp;<a style="color: initial; text-decoration: none; cursor: pointer;" href="">Setup 2FA</button></li>
+                        <li><button><i class="bi bi-envelope-at-fill"></i>&nbsp;&nbsp;&nbsp;<a style="color: initial; text-decoration: none; cursor: pointer;" href="mailto:Olalekanisaac75@gmail.com">Contact Support</a></button></li>
+                    </ul>
+                </div>
+            </section>
+        </section>
+        <div style="display: none;" class="name_form">
+            <form method="POST">
+            <label for="f_name">First name</label>
+            <input type="text" name="first_name" id="f_name">
+            <label for="l_name">Last name</label>
+            <input type="text" name="last_name" id="l_name">
+            
+            <div class="submit_and_cancel">
+            <input id="name_save" type="submit" value="Save">
+            <input id="name_cancel" type="button" value="Cancel">
+            </div>
+            </form>
+        </div>
+        <div class="password_form" style="display: none;">
+            <form id="pass_form" method="POST">
+            <label for="o_pass">Current Password</label>
+            <input type="password" name="old_password" id="o_pass">
+            <span class="toggle-password"><i class=""></i></span>
+            <label for="n_pass">New Password</label>
+            <input type="password" name="new_password" id="n_pass">
+            <span class="toggle-password-n"><i class=""></i></span>
+            <label id="n_status" for="n_pass">Password don't match</label>
+            <label for="nn_pass">Confirm New Password</label>
+            <input type="password" id="nn_pass">
+            
+            <div class="submit_and_cancel_p">
+            <input id="pass_save" type="submit" value="Save">
+            <input id="pass_cancel"type="button" value="Cancel" action="cancel">
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

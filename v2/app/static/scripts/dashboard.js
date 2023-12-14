@@ -120,5 +120,6 @@ $(document).ready(() => {
   $('.main-content h1').click(function () {
     window.location.replace(window.location.href);
   });
-  
+  addClassForMobile();
+  $(window).resize(addClassForMobile);
 });

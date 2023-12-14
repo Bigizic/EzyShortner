@@ -215,9 +215,6 @@
 
 /* MOBILE */
 @media (max-width: 480px) {
-	html {
-		height: 100%;
-	}
 	body {
 		margin: 0px;
 		background: rgb(19,20,24) !important;
@@ -361,18 +358,13 @@
         	display: none !important;
         }
         footer {
-                gap: 2vw;
-                position: absolute;
-                bottom: 0px;
+                gap: 1rem !important;
         }
 }
 
 /* SMALL TABLETS */
 
 @media (min-width: 768px) and (max-width: 991px) {
-	html {
-		height: 100%;
-	}
 	body {
 		margin: 0px;
 		background: rgb(19,20,24) !important;
@@ -525,18 +517,13 @@
         	display: none !important;
         }
         footer {
-                gap: 2vw;
-                position: absolute;
-                bottom: 0px;
+                gap: 1.5rem !important;
         }
 }
 
 
 /* EXTRA SMALL DEVICES */
 @media (min-width: 481px) and (max-width: 767px) {
-	html {
-		height: 100%
-	}
 	body {
 		margin: 0px;
 		background: rgb(19,20,24) !important;
@@ -683,8 +670,6 @@
         	display: none !important;
         }
         footer {
-                gap: 2vw;
-                position: absolute;
-                bottom: 0px;
+                gap: 1.5rem !important;
         }
 }

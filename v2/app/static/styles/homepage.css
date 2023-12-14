@@ -181,6 +181,7 @@ div .something {
 
 .img_desktop {
     margin: 5%;
+    display: none;
 }
 
 footer {
@@ -191,7 +192,7 @@ footer {
     text-transform: capitalize;
     padding: 2vh 0vh 2vh 0vh;
     justify-content: center;
-    gap: 2.5vw;
+    gap: 2.5rem;
 }
 footer a {
     text-decoration: none;
@@ -382,4 +383,81 @@ footer a:hover {
     display: inline flow-root list-item;
     filter: invert(1);
     font-size: 0px;
+}
+
+.second_interface {
+    margin: 5%;
+}
+
+.second_interface h2 {
+    text-align: center;
+    color: #fff;
+    font-size: 1.9rem;
+}
+
+.products {
+    display: flex;
+    gap: 2rem;
+}
+.products h2 {
+    font-size: larger;
+}
+.products h3 {
+    color: #ADAEAF;
+    text-align: center;
+}
+.products ul {
+    color: #fff;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    flex-direction: column;
+}
+
+
+.first_product, .second_product, .third_product {
+    border: 1px solid black;
+    height: fit-content;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: -webkit-fill-available;
+    background: #8888;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.first_product:hover, .second_product:hover, .third_product:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.first_product_ezy_qr {
+    background-image: url('../images/ezyurl.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 5rem;
+    height: 5rem;
+    margin: 1rem 0 1rem 0;
+}
+
+.hover-effect{
+    transition: transform 0.7s ease;
+    transform: scale(1.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.products a button {
+    padding: 5px 20px;
+    width: -webkit-fill-available;
+    border-radius: 20px;
+    background: inherit;
+    border: 2px solid #fff;
+    cursor: pointer;
+    font-size: large;
+    font-weight: 550;
 }

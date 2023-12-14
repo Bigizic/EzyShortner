@@ -11,7 +11,12 @@ $(document).ready(() => {
     $('body').css('visibility', 'visible');
   }, 1000);
   /* end loading view */
-  $('.left-items-lix').addClass('hover-effect');
+  
+  if (window.currentFile === "fileA") {
+    $('.left-items-lix').addClass('hover-effect');
+  } else {
+    $('.left-items-liii').addClass('hover-effect');
+  }
 
   /* SEARCH */
 
@@ -77,11 +82,19 @@ $(document).ready(() => {
   
   /* Function to add a class for mobile*/
   function addClassForMobile() {
-    const leftItemLix = $('.left-items-lix');
-    if ($(window).width() <= 991) {
-      leftItemLix.addClass('mobile-class');
+    if (window.currentFile === "fileA") {
+      const leftItemLix = $('.left-items-lix');
+      if ($(window).width() <= 991) {
+        leftItemLix.addClass('mobile-class');
+      } else {
+        leftItemLix.removeClass('mobile-class');
+      }
     } else {
-      leftItemLix.removeClass('mobile-class');
+      if ($(window).width() <= 991) {
+        $('.left-items-liii').addClass('mobile-class');
+      } else {
+        $('.left-items-liii').removeClass('mobile-class');
+      }
     }
   }
   /* end class for mobile*/
@@ -143,4 +156,73 @@ $(document).ready(() => {
   $('.main-content h1').click(function () {
     window.location.replace(window.location.href);
   });
+  
+  /* GRAPH */
+  const records = [];
+
+  $('.table-row').each(function() {
+    const shortUrl = $(this).find('.col-4').text().trim();
+    const clicks = parseInt($(this).find('.col-5').text().trim(), 10);
+
+    const record = { url: shortUrl, clicks: clicks };
+    records.push(record);
+    records.sort((a, b) => b.clicks - a.clicks);
+  });
+  const clicksData = records.slice(0, 10).map(record => record.clicks);
+  const shortUrlData = records.slice(0, 10).map(record => record.url);
+
+  const ctx = $('#userChart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: shortUrlData,
+      datasets: [{
+        label: 'No of Clicks',
+        data: clicksData,
+        borderWidth: 1,
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: 'white'
+          }
+        },
+        x: {
+          ticks: {
+            color: 'white'
+          }
+        }
+      }
+    }
+  });
+  
+  /* END GRAPH */
+  
+  
+  /* EDIT YOUR LINKS FILE */
+  
+  /* long link edit form show() */
+  $('.bi-pen-fill').on('click', function (e) {
+    let shortLink = $(this).parent().find('.col-4').data('short-link');
+    $('#short_link').val('https://ezyurl.xyz/' + shortLink);
+    $('.editlink_form').slideDown();
+  });
+  $('#pass_cancel').click(function () {
+    $('.editlink_form').slideUp();
+  });
+  /* End long link edit form */
+  
+  /* status code color */
+  if ($('#status_code').html() === 'Successfully updated') {
+    $('#status_code').css('color', '#007400');
+  } else {
+    $('#status_code').css('color', 'red');
+  }
+  /* end status code color */
+  
+  
+  /* END EDIT YOUR LINKS FILE*/
 });

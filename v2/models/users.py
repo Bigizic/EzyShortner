@@ -8,12 +8,13 @@ import sqlalchemy
 from sqlalchemy import Column, String, Boolean
 from sqlalchemy.orm import relationship
 import uuid
+from flask import current_app
 
 
 class User(EzyModel, Base):
     """ Decleration of user """
     __tablename__ = 'users'
-    email = Column(String(128), nullable=False)
+    email = Column(String(128), nullable=False, unique=True)
     password = Column(String(128), nullable=False)
     first_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=True)
