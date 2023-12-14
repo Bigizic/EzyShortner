@@ -25,7 +25,7 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
 
 """def add_random(num):
-    return num + random.randint(1, 10)"""
+    return num + random.randint(1, 9000)"""
 
 # app.jinja_env.globals.update(add_random=add_random)
 
