@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-"""Function that render's user's history page
-@param (user_id): <str> from session['user_id'] also in uuid.uuid4() format
-@param (query): <str> search query, default=None
+"""function that handle's a user post request to edit
+a long link to a short link
+@param (link): <list> contains long link and short link
+@prarm (qury): <str> contains search query
 
-Return: history template
+Return: template
 """
 
 from flask import render_template, current_app
@@ -14,8 +15,41 @@ import re
 import uuid
 
 
-def historypage(user_id, query=None):
-    """Renders the history page returns crucial info"""
+def editpage(user_id, info=None, sec_info=None):
+    """ Implementation """
+    user = User().exists(None, None, user_id)
+    if user:
+        fe_user = DBStorage().fetch_user(user_id)
+        names = fe_user.first_name + ' ' + fe_user.last_name
+        email = fe_user.email[:2].upper()
+        his = DBStorage().fetch_user_and_ezy(user_id)
+        if his:
+            history = sorted(his, key=lambda x: x['created_at'], reverse=True)
+        else:
+            history = ''
+
+        return render_template('user_routes/edit.html',
+                               cache_id=uuid.uuid4(),
+                               email=email, names=names,
+                               user_id=user_id,
+                               history_items=history,
+                               info=info if info else sec_info)
+    else:
+        session['info_message'] = "Account doesn't exist"
+        return redirect(url_for('web_app.sign_in'))
+
+
+def editlink(user_id, links=None, query=None):
+    """ Implementation """
+    if links:
+        edit_record = DBStorage().update_user_longL_record(user_id,
+                                                           links[0],
+                                                           links[1])
+        if edit_record:
+            return editpage(user_id, "Successfully updated")
+        else:
+            return editpage(user_id, None, "Check your entries")
+
     if query:
         long_result = DBStorage().search(user_id, query)
 
@@ -44,17 +78,15 @@ def historypage(user_id, query=None):
             search_result = sorted(sear, key=lambda x: x['created_at'],
                                    reverse=True)
             # search result successful
-            return render_template('user_routes/history.html',
+            return render_template('user_routes/edit.html',
                                    cache_id=uuid.uuid4(),
                                    email=email, names=names,
                                    user_id=user_id,
                                    history_items=search_result)
         else:
-            return render_template('user_routes/history.html',
-                                   cache_id=uuid.uuid4(),
-                                   email=email, names=names,
-                                   user_id=user_id,
-                                   info="NO RESULTS")
+            return render_template('user_routes/edit.html', email=email,
+                                   cache_id=uuid.uuid4(), names=names,
+                                   user_id=user_id, info="NO RESULTS")
 
     user = User().exists(None, None, user_id)
     if user:
@@ -67,7 +99,7 @@ def historypage(user_id, query=None):
                              reverse=True)
         else:
             history = ''
-        return render_template('user_routes/history.html',
+        return render_template('user_routes/edit.html',
                                cache_id=uuid.uuid4(),
                                email=email, names=names,
                                user_id=user_id,
