@@ -127,10 +127,8 @@ def sign_in():
         user_id, user_pass = user_data if user_data else None
 
         if user_id and user_pass:
-            current_app.logger.warning(user_pass)
             # compares html password and database password
             passs = bcrypt.checkpw(password.encode(), user_pass.encode())
-            current_app.logger.warning(passs)
             if passs:
                 session['logged_in'] = True
                 session['email'] = email
