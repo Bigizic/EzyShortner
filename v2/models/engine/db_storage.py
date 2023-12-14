@@ -3,6 +3,7 @@
 
 
 import bcrypt
+from flask import current_app
 import models
 from os import environ
 from models.Ezy_model import EzyModel, Base
@@ -174,7 +175,7 @@ class DBStorage:
             id = obj.id
             attr = {k: v for k, v in obj.__dict__.items()
                     if not k.startswith('_sa_instance_state')}
-            
+
             result.append({
                 **attr
             })
@@ -210,30 +211,34 @@ class DBStorage:
                 return short_link
         return False
 
-    def update_user(self, user_id, first_name, last_name, new_password):
+    def update_user(self, user_id, first_name=None, last_name=None,
+                    new_password=None):
         """ Updates a user record """
-        user = self.__session.query(User).filter(
-                                    User.id == user_id).first()
-        if first_name:
+        user = self.__session.query(User).filter(User.id == user_id).first()
+
+        if first_name is not None:
             user.first_name = first_name
-            self.__session.commit()
-            return True
 
-        if last_name:
+        if last_name is not None:
             user.last_name = last_name
-            self.__session.commit()
-            return True
 
-        if first_name and last_name:
-            user.first_name = first_name
-            user.last_name = last_name
-            self.__session.commit()
-            return True
-
-        if new_password:
+        if new_password is not None:
             old_pass = user.password
-            salt = bcrypt.gensalt()
-            hashed_password = bcrypt.hashpw(old_pass.encode(), salt).decode()
-            user.password = hashed_password
+            user.password = new_password
+
+        self.__session.commit()
+        return True
+
+    def update_user_longL_record(self, user_id, longL, shortL):
+        """ Works for the edit your link route to update a user
+        record
+        """
+        result = self.search(user_id, None, shortL.split('/')[3])
+        if result:
+            for obj in result:
+                setattr(obj, 'original_url', longL)
+
             self.__session.commit()
             return True
+
+        return False
