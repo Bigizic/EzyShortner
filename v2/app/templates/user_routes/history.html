@@ -108,7 +108,7 @@
 						<div data-label="Date" class="col col-2">{{ items.created_at }}</div>
 						<div data-label="Long Link" class="col col-3"><a rel="noopener noreferrer" href="{{ items.original_url }}" target="_blank" >{{ items.original_url }}</a></div>
 						<div data-label="Short Link" class="col col-4"><a href="https://ezyurl.xyz/{{ items.short_url }}" target="_blank">ezyurl.xyz/{{ items.short_url }}</a></div>
-						<div data-label="Clicks" class="col col-5">{{ 0 if items.clicks is none else add_random(items.clicks) }}</div>
+						<div data-label="Clicks" class="col col-5">{{ 0 if items.clicks is none else items.clicks }}</div>
 						<div data-label="Click to delete" class="bin"><button type="button" class="delete-btn" data-ezy-url-id="{{ items.id }}"><i class="bi bi-trash-fill"></i></button></div>
 						</li>
 						{% endfor %}
