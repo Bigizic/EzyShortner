@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+# installs apt resources
+
+sudo apt-get install -y libmysqlclient-dev
+sudo apt-get install -y libmariadbclient-dev
+sudo apt-get install -y python3-lxml
+sudo apt install -y gunicorn
