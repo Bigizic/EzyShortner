@@ -9,21 +9,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link type="text/css" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-    <!-- Modernizer JS
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>-->
-    <!-- Normalize CSS	
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" /> -->
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js?{{ cache_id }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
     <script type="text/javascript" src="../static/scripts/homepage.js?{{ cache_id }}"></script>
     <script type="text/javascript" src="../static/scripts/signup.js"></script>
-    <!-- Bar Chart CSS -->
-    <link rel="stylesheet" href="../static/jquery-bar-chart-with-css/css/bar-chart.css">
 
-    <!-- Bar Chart JS -->
-    <script src="../static/jquery-bar-chart-with-css/js/plugins.js"></script>
-    <script src="../static/jquery-bar-chart-with-css/js/bar-chart.js"></script>
     <link rel="icon" href="../static/images/ezy_icon.jpg?{{ cache_id }}">
     <body>
         <header>
@@ -116,25 +108,30 @@
                 <div class="first_product_ezy_qr"></div>
                 <h3>Create QR codes instantly for effortless mobile sharing and accessibility</h3>
                 <ul>
-                    <li>Experience quick and hassle-free QR code generation for instant download and link sharing on the go.</li>
-                    <li>Enhance engagement and accessibility with swift QR code generation tailored to your needs.</li>
+                    <li><span class="bi bi-check-circle-fill"></span>Experience quick and hassle-free QR code generation for instant download and link sharing on the go.</li>
+                    <li><span class="bi bi-check-circle-fill"></span>Enhance engagement and accessibility with swift QR code generation tailored to your needs.</li>
                 </ul>
-                <a href=""><button>Get started for free</button></a>
+                <a href="{{ url_for('web_app.sign_up') }}"><button>Get started for free</button></a>
             </div>
             <div class="second_product">
                 <h2>Comprehensive Engagement Analytics</h2>
                 <div class="second_product_ezy_qr"></div>
-                <h3>Access detailed insights for informed decision-making on link performance.</h3>
+                <h3>Access detailed insights for informed decision-making on link performance</h3>
                 <ul>
-                    <li>EZYURL's analytics platform offers a comprehensive suite of tools that go beyond basic metrics.</li>
-                    <li>Track the number of clicks on each shortened link, gaining valuable data on user interaction and engagement levels.</li>
-                    <li>Gain insights through a chart comparison of shortened links, aiding in optimizing high-performing content.</li>
+                    <li><span class="bi bi-check-circle-fill"></span>Track the number of clicks on each shortened link, gaining valuable data on user interaction and engagement levels.</li>
+                    <li><span class="bi bi-check-circle-fill"></span>Gain insights through a chart comparison of shortened links, aiding in optimizing high-performing content.</li>
                 </ul>
-                <a href=""><button>Get started for free</button></a>
+                <a href="{{ url_for('web_app.sign_up') }}"><button>Get started for free</button></a>
             </div>
             <div class="third_product">
                 <h2>Adaptive Link Editing</h2>
-                <h3>Retain control by editing links post-creation to suit evolving needs seamlessly.</h3>
+                <div class="third_product_ezy_qr"></div>
+                <h3>Retain control by editing links post-creation to suit evolving needs seamlessly</h3>
+                <ul>
+                <li><span class="bi bi-check-circle-fill"></span>Make changes to your destination URLs to align with changing content strategies, redirecting traffic to updated resources or promotions.</li>
+                <li><span class="bi bi-check-circle-fill"></span>Adapt shortened links across multiple platforms or channels without the need for creating new ones, ensuring consistent messaging and brand integrity.</li>
+                </ul>
+                <a href="{{ url_for('web_app.sign_up') }}"><button>Get started for free</button></a>
             </div>
         </div>
     </section>
