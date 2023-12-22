@@ -219,6 +219,12 @@ body {
     font-size: small;
 }
 
+.viewers_graph {
+	/*width: -webkit-fill-available;
+	width: -moz-available;*/
+	width: 30rem;
+}
+
 footer {
     background-color: inherit;
     width: 100%;
@@ -347,6 +353,10 @@ footer a:hover {
         .col-5 {
             flex-basis: 20%;
         }
+        .viewers_graph {
+		width: -webkit-fill-available;
+		/*width: -moz-available;*/
+	}
 }
 
 /*END TABLE VIEW */
@@ -600,5 +610,7 @@ button i.fas {
 #status_link {
 	font-size: large;
 }
+
+
 
 /* END EDIT FILE */

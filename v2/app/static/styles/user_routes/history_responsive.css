@@ -150,8 +150,8 @@
                 font-size: 40px;
                 font-weight: bolder;
                 position: absolute;
-                right: 6vw;
-                top: 4vw;
+                right: 2rem;
+		top: 2rem;
                 border-radius: 4px;
                 text-align: center;
     }
@@ -245,8 +245,8 @@
                 font-size: 40px;
                 font-weight: bolder;
                 position: absolute;
-                right: 6vw;
-                top: 4vw;
+                right: 2rem;
+		top: 2rem;
                 border-radius: 4px;
                 text-align: center;
     }
@@ -336,8 +336,8 @@
                 font-size: 40px;
                 font-weight: bolder;
                 position: absolute;
-                right: 6vw;
-                top: 4vw;
+                right: 2rem;
+		top: 2rem;
                 border-radius: 4px;
                 text-align: center;
     }
