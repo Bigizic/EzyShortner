@@ -123,7 +123,7 @@ section form label {
     /*visibility: hidden;*/
 }
 
-#qr_container {
+#qr_container, #share_container {
 	background-color: #004700;
 	position: absolute;
 	top: 25%;
@@ -133,6 +133,11 @@ section form label {
 	transform: translateX(-50%);
 	padding: 20px;
 	border-radius: 4px;
+}
+#share_container {
+	top: 50% !important;
+	right: 10% !important;
+	width: max-content;
 }
 #cancelButton {
 	width: 20%;
@@ -157,7 +162,7 @@ section form label {
 	color: white;
 }
 
-.alias, .copy_, .qr_code {
+.alias, .copy_, .qr_code, .b_share {
     background-color: #006400;
     color: #fff;
     border-radius: 4px;
@@ -170,7 +175,7 @@ section form label {
     cursor: pointer;
     font-size: inherit;
 }
-.alias:hover, .copy_:hover, .qr_code:hover {
+.alias:hover, .copy_:hover, .qr_code:hover, .b_share:hover {
     background-color: #131418;
     transform: scale(1.2);
 }
@@ -426,8 +431,9 @@ footer a:hover {
 
 .bi-check-circle-fill {
     margin-right: 1rem;
-    color: black;
+    color: silver;
     font-size: 0.8rem;
+    margin-top: 0.3rem;
 }
 
 
@@ -508,4 +514,42 @@ footer a:hover {
     cursor: pointer;
     font-size: large;
     font-weight: 550;
+}
+
+#facebook, #instagram, #snapchat, #x, #whatsapp, #telegram {
+	background: url('/static/images/gifs/facebook.gif');
+	background-repeat: repeat;
+	background-size: auto;
+	background-repeat: no-repeat;
+	width: 2rem;
+	height: 2rem;
+	background-size: 100%;
+	border: none;
+	border-radius: 10px;
+	margin-right: 0.5rem;
+}
+
+#instagram {
+	background: url('/static/images/gifs/instagram.gif')!important;
+	background-size: 100% !important;
+}
+
+#snapchat {
+	background: url('/static/images/gifs/snapchat.gif')!important;
+	background-size: 100% !important;
+}
+
+#x {
+	background: url('/static/images/gifs/x.png')!important;
+	background-size: 100% !important;
+}
+
+#whatsapp {
+	background: url('/static/images/gifs/whatsapp.gif')!important;
+	background-size: 100% !important;
+}
+
+#telegram {
+	background: url('/static/images/gifs/telegram.gif')!important;
+	background-size: 100% !important;
 }
