@@ -372,6 +372,15 @@
 	.bi-check-circle-fill {
 		color: #fff !important;
 	}
+	.second_interface h2 {
+		font-size: revert !important;
+	}
+	.second_interface {
+		margin: 20% 5% !important;
+	}
+	section h4 {
+		font-size: small !important;
+	}
         footer {
                 gap: 1rem !important;
         }
@@ -546,6 +555,15 @@
 	.bi-check-circle-fill {
 		color: #fff !important;
 	}
+	.second_interface h2 {
+		font-size: revert !important;
+	}
+	.second_interface {
+		margin: 20% 5% !important;
+	}
+	section h4 {
+		font-size: small !important;
+	}
         footer {
                 gap: 1.5rem !important;
         }
@@ -713,6 +731,15 @@
 	}
 	.bi-check-circle-fill {
 		color: #fff !important;
+	}
+	.second_interface h2 {
+		font-size: revert !important;
+	}
+	.second_interface {
+		margin: 20% 5% !important;
+	}
+	section h4 {
+		font-size: small !important;
 	}
         footer {
                 gap: 1.5rem !important;
