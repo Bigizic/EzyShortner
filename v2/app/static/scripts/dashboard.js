@@ -66,13 +66,16 @@ $(document).ready(() => {
     $('#qr_container').slideDown();
     $('header').css('opacity', '0.2');
     $('.user_interface').css('opacity', '0.2');
-    $('.second_interface').css('opacity', '0.2');
+    $('.main-content').css('opacity', '0.2');
+    $('.left-sidebar').css('opacity', '0.2');
     $('footer').css('opacity', '0.2');
   });
   $('#cancelButton').click(function () {
     $('#qr_container').slideUp();
     $('header').css('opacity', '1');
     $('.user_interface').css('opacity', '1');
+    $('.main-content').css('opacity', '1');
+    $('.left-sidebar').css('opacity', '1');
     $('.second_interface').css('opacity', '1');
     $('footer').css('opacity', '1');
   });
@@ -130,13 +133,16 @@ $(document).ready(() => {
     $('#share_container').slideDown();
     $('header').css('opacity', '0.2');
     $('.user_interface').css('opacity', '0.2');
-    $('.second_interface').css('opacity', '0.2');
+    $('.main-content').css('opacity', '0.2');
+    $('.left-sidebar').css('opacity', '0.2');
     $('footer').css('opacity', '0.2');
   });
   $('#cancel-Button').click(function () {
     $('#share_container').slideUp();
     $('header').css('opacity', '1');
     $('.user_interface').css('opacity', '1');
+    $('.main-content').css('opacity', '1');
+    $('.left-sidebar').css('opacity', '1');
     $('.second_interface').css('opacity', '1');
     $('footer').css('opacity', '1');
   });

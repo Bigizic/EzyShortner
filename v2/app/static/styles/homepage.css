@@ -527,6 +527,7 @@ footer a:hover {
 	border: none;
 	border-radius: 10px;
 	margin-right: 0.5rem;
+	cursor: pointer;
 }
 
 #instagram {
@@ -552,4 +553,14 @@ footer a:hover {
 #telegram {
 	background: url('/static/images/gifs/telegram.gif')!important;
 	background-size: 100% !important;
+}
+
+#cancel-Button {
+    display: inline-flex;
+    vertical-align: super;
+    background: none;
+    font-weight: 900;
+    font-size: medium;
+    border: none;
+    cursor: pointer;
 }
