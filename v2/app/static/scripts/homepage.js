@@ -227,12 +227,12 @@ $(document).ready(() => {
   /* end mobile history view */
   
   /* product hover + button */
-  $('.first_product, .second_product').hover(
+  $('.first_product, .second_product, .third_product').hover(
     function() {
-      $(this).find('a button').addClass('hover-effect');
+      $(this).find('a button').removeClass('remove-effect').addClass('hover-effect');
     },
     function() {
-      $(this).find('a button').removeClass('hover-effect');
+      $(this).find('a button').removeClass('hover-effect').addClass('remove-effect');
     }
   );
   /* end product hover + button*/
