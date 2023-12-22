@@ -87,6 +87,7 @@
 		    {% if status == 200 %}
 	            <input type="button" class="copy_" value="COPY">
 	            <input type="button" class="qr_code" value="QR">
+	            <input type="button" class="b_share" value="SHARE">
 	            {% endif %}
 	        </div>
                 </form>
@@ -97,6 +98,18 @@
 			<button id="downloadButton"><a href="../static/images/qr_images/{{qr_image}}" download="Ezyqr.png">Download &nbsp;<i class="bi bi-cloud-download-fill"></i></a>
 			</button>
 			<button id="cancelButton">Cancel</button>
+		</div>
+	</div>
+	<div id="share_container">
+		<div class="share_something">
+		<button id="facebook"></button>
+		<button id="instagram"></button>
+		<button id="snapchat"></button>
+		<button id="telegram"></button>
+		<button id="x"></button>
+		<button id="whatsapp"></button>
+
+		<button id="cancel-Button">X</button>
 		</div>
 	</div>
 	<section class="second_interface">

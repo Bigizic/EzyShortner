@@ -82,6 +82,7 @@
                 {% if status == 200 %}
                     <button class="copy_">COPY</button>
                     <button class="qr_code">QR</button>
+                    <button class="b_share">SHARE</button>
                     {% endif %}
                 </div>
     
@@ -94,6 +95,20 @@
                 <button id="cancelButton">Cancel</button>
             </div>
         </div>
+        
+        <div id="share_container">
+		<div class="share_something">
+		<button id="facebook"></button>
+		<button id="instagram"></button>
+		<button id="snapchat"></button>
+		<button id="telegram"></button>
+		<button id="x"></button>
+		<button id="whatsapp"></button>
+
+		<button id="cancel-Button">X</button>
+		</div>
+	</div>
+        
         <footer>
             <a target="_blank" href="{{ url_for('web_app.about') }}"> About</a> &bull;
             <a href="https://github.com/Bigizic/Ezy_urlShortner/blob/main/LICENSE" target="_blank">licence </a> &bull;
