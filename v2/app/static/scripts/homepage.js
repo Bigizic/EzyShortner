@@ -42,9 +42,17 @@ $(document).ready(() => {
   /* qr image animation */
   $('.qr_code').click(function () {
     $('#qr_container').slideDown();
+    $('header').css('opacity', '0.2');
+    $('.user_interface').css('opacity', '0.2');
+    $('.second_interface').css('opacity', '0.2');
+    $('footer').css('opacity', '0.2');
   });
   $('#cancelButton').click(function () {
     $('#qr_container').slideUp();
+    $('header').css('opacity', '1');
+    $('.user_interface').css('opacity', '1');
+    $('.second_interface').css('opacity', '1');
+    $('footer').css('opacity', '1');
   });
   /* end qr image animation */
 
@@ -236,4 +244,22 @@ $(document).ready(() => {
     }
   );
   /* end product hover + button*/
+  
+  
+  /*share animation*/
+  $('.b_share').click(function () {
+    $('#share_container').slideDown();
+    $('header').css('opacity', '0.2');
+    $('.user_interface').css('opacity', '0.2');
+    $('.second_interface').css('opacity', '0.2');
+    $('footer').css('opacity', '0.2');
+  });
+  $('#cancel-Button').click(function () {
+    $('#share_container').slideUp();
+    $('header').css('opacity', '1');
+    $('.user_interface').css('opacity', '1');
+    $('.second_interface').css('opacity', '1');
+    $('footer').css('opacity', '1');
+  });
+  /* End share animation*/
 });
