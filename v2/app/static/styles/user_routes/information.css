@@ -258,6 +258,7 @@ body {
     position: relative;
     font-size: medium;
     border: none;
+    color: black;
 }
 .user_names li button:hover {
     background: #8888;
