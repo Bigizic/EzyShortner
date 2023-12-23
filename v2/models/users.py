@@ -15,7 +15,7 @@ class User(EzyModel, Base):
     """ Decleration of user """
     __tablename__ = 'users'
     email = Column(String(128), nullable=False, unique=True)
-    password = Column(String(128), nullable=True)
+    password = Column(String(255), nullable=True)
     first_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=True)
     ezy_urls = relationship("Ezy", backref="user")
@@ -23,6 +23,8 @@ class User(EzyModel, Base):
     Two_factor = Column(String(20), default='disabled')  # 2 factor authy
     # for normal account creations or google account creation
     authentication_method = Column(String(20), default='Ezy')
+    # for google account id to confirm google user
+    google_id = Column(String(200), default="N/A")
 
     def __init__(self, *args, **kwargs):
         """initializes user"""
