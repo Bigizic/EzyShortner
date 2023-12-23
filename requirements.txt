@@ -23,3 +23,5 @@ SQLAlchemy==1.4.23
 mysqlclient==2.1.0
 qrcode==6.1
 bcrypt
+pyasn1 --upgrade
+google-auth
