@@ -288,7 +288,15 @@ $(document).ready(() => {
   	['#instagram',  'insta']];
   apps.forEach((element) => {
     $(element[0]).click(function () {
-      shareIntegration(textToShare, element[1]);
+      if (element[0] === '#facebook') {
+        $.ajaxSetup({ cache: true });
+        $.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
+          FB.ui({
+            method: 'send',
+            link: `${textToShare}`
+          });
+        });
+      } else { shareIntegration(textToShare, element[1]); }
     });
   });
   
@@ -299,6 +307,6 @@ $(document).ready(() => {
     if (app === 'tele') { window.location.href = `tg://msg?text=${encodeURIComponent(textToShare)}`; }
     if (app === 'snap') { const doSomething = 'Do something'; }
     if (app === 'insta') { window.location.href = `instagram://share?text=${encodeURIComponent(textToShare)}`; }
-}
+  }
   /* End share animation*/
 });
