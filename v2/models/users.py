@@ -15,7 +15,7 @@ class User(EzyModel, Base):
     """ Decleration of user """
     __tablename__ = 'users'
     email = Column(String(128), nullable=False, unique=True)
-    password = Column(String(128), nullable=False)
+    password = Column(String(128), nullable=True)
     first_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=True)
     ezy_urls = relationship("Ezy", backref="user")
