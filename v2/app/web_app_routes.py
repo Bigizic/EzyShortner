@@ -2,6 +2,8 @@
 """Web app using flask"""
 
 import bcrypt
+from google.oauth2 import id_token
+from google.auth.transport import requests as g_req
 from flask import Flask, request, render_template, make_response, session
 from flask import Blueprint, redirect, url_for, current_app
 from models.ezy import Ezy
@@ -21,6 +23,7 @@ import uuid
 import logging
 
 web_app_blueprint = Blueprint('web_app', __name__)
+CLIENT_ID = '518132922807-8vsde0i71v5nktavtssmt1j8vtugvu6o.apps.googleusercontent.com'
 
 
 def check_session():
@@ -53,6 +56,12 @@ def about():
     return render_template('about.html', cache_id=uuid.uuid4())
 
 
+@web_app_blueprint.route('/google-signup', methods=["GET", "POST"])
+def google_signup():
+    if check_session():
+        return redirect(url_for('web_app.dashboard',
+                        user_id=session.get('user_id')))
+
 @web_app_blueprint.route('/signup', methods=["GET", "POST"])
 def sign_up():
     """Renders sign up page"""
@@ -61,30 +70,62 @@ def sign_up():
                         user_id=session['user_id']))
 
     if request.method == 'POST':
-        email = request.form.get("email")
-        # protect against attacks
-        if len(email) > 128 or not email.find('@') or email is None:
-            return render_template('signup.html', info="email is invalid!",
-                                   cache_id=uuid.uuid4())
-        password = request.form.get("pass")
-        if len(password) > 128 or password is None:
-            ps = "Oops.. check the password"
-            return render_template('signup.html', info=ps,
-                                   cache_id=uuid.uuid4())
+        if request.form.get('credential'):
+            try:
+                token = request.form.get('credential')
+                idinfo = id_token.verify_oauth2_token(token,
+                                                      g_req.Request(),
+                                                      CLIENT_ID)
+                if idinfo:
+                    email = idinfo.get('email')
+                    first_name = idinfo.get('given_name')
+                    last_name = idinfo.get('family_name')
+                    verified = idinfo.get('email_verified')
+                    google_id = idinfo.get("sub")  # for google id
+                    account_creation = 'google'
+                    password = None
+            except ValueError:
+                return render_template('signup.html',
+                                       info="Invalid account!",
+                                       cache_id=uuid.uuid4())
+        if request.form.get("email"):   
+            email = request.form.get("email")
+            # protect against attacks
+            if len(email) > 128 or not email.find('@') or email is None:
+                return render_template('signup.html',
+                                       info="email is invalid!",
+                                       cache_id=uuid.uuid4())
+            password = request.form.get("pass")
+            if len(password) > 128 or password is None:
+                ps = "Oops.. check the password"
+                return render_template('signup.html', info=ps,
+                                       cache_id=uuid.uuid4())
 
-        first_name = request.form.get("first_name")
-        last_name = request.form.get("last_name")
+            first_name = request.form.get("first_name")
+            last_name = request.form.get("last_name")
 
-        if len(first_name) >= 127 or len(last_name) >= 127:
-            return render_template('signup.html', info="names too long",
-                                   cache_id=uuid.uuid4())
+            if len(first_name) >= 127 or len(last_name) >= 127:
+                return render_template('signup.html',
+                                       info="names too long",
+                                       cache_id=uuid.uuid4())
 
         new_user = User()
         new_user.email = email
-        new_user.password = password
+        if password is not None:
+            new_user.password = password
         new_user.first_name = first_name
         new_user.last_name = last_name
-        if new_user.exists(None, email):
+        if account_creation:
+            new_user.verified = verified
+            new_user.google_id = google_id
+            new_user.authentication_method = 'google'
+
+            if new_user.exists(None, None, None, google_id):
+                return render_template('signup.html',
+                                        info="user already exits!",
+                                        cache_id=uuid.uuid4())
+
+        if new_user.exists(None, email) and not account_creation:
             return render_template('signup.html', info="email already exits!",
                                    cache_id=uuid.uuid4())
         new_user.save()
@@ -107,24 +148,47 @@ def sign_in():
                         user_id=session['user_id']))
 
     if request.method == 'POST':
-        email = request.form.get("email")
-        # protect against attacks
-        if len(email) > 128 or not email.find('@') or email is None:
-            return render_template('signin.html', info="email is invalid!",
-                                   cache_id=uuid.uuid4())
-        password = request.form.get("pass")
-        if len(password) > 128 or password is None:
-            ps = "Oops.. check the password"
-            return render_template('signin.html', info=ps,
-                                   cache_id=uuid.uuid4())
+        if request.form.get('credential'):
+            try:
+                token = request.form.get('credential')
+                idinfo = id_token.verify_oauth2_token(token,
+                                                      g_req.Request(),
+                                                      CLIENT_ID)
+                if idinfo:
+                    email = idinfo.get('email')
+                    google_id = idinfo.get("sub")  # for google id
+                    password = None
+            except ValueError:
+                return render_template('signin.html',
+                                       info="Invalid account!",
+                                       cache_id=uuid.uuid4())
+        if request.form.get('email'):
+            email = request.form.get("email")
+            # protect against attacks
+            if len(email) > 128 or not email.find('@') or email is None:
+                return render_template('signin.html',
+                                       info="email is invalid!",
+                                       cache_id=uuid.uuid4())
+            google_id = None
+            password = request.form.get("pass")
+            if len(password) > 128 or password is None:
+                ps = "Oops.. check the password"
+                return render_template('signin.html', info=ps,
+                                       cache_id=uuid.uuid4())
 
         # check for existence of user via email return id and password
         user_data = DBStorage().existing(None, None, email)
         if not user_data:
             return render_template('signin.html', info="Oops.. No user Found",
                                    cache_id=uuid.uuid4())
-
         user_id, user_pass = user_data if user_data else None
+
+        if google_id is not None:
+            session['logged_in'] = True
+            session['email'] = email
+            session['user_id'] = user_id
+            session.permanet = True
+            return redirect(url_for("web_app.dashboard", user_id=user_id))
 
         if user_id and user_pass:
             # compares html password and database password
