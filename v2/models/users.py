@@ -5,7 +5,7 @@
 import bcrypt
 from models.Ezy_model import EzyModel, Base
 import sqlalchemy
-from sqlalchemy import Column, String, Boolean
+from sqlalchemy import Column, String, Boolean, Table
 from sqlalchemy.orm import relationship
 import uuid
 from flask import current_app
@@ -19,7 +19,10 @@ class User(EzyModel, Base):
     first_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=True)
     ezy_urls = relationship("Ezy", backref="user")
-    verified = Column(Boolean, default=False)
+    verified = Column(String(20), default='No')  # email verification
+    Two_factor = Column(String(20), default='disabled')  # 2 factor authy
+    # for normal account creations or google account creation
+    authentication_method = Column(String(20), default='Ezy')
 
     def __init__(self, *args, **kwargs):
         """initializes user"""
