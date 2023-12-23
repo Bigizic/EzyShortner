@@ -90,6 +90,17 @@ $(document).ready(() => {
       $('.next_button i').css('color', '#fff');
     });
   /* end */
+  
+  /* SIGN UP GOOGLE SIGNIN */
+  function onSignIn(googleUser) {
+  const profile = googleUser.getBasicProfile();
+  const names = profile.getName();
+  const email = profile.getEmail();
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail());
+}
+  /* END SIGNUP GOOGLE SIGN IN */
     
   typeText(0, 'Create an account in seconds!', 100);
 });
