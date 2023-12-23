@@ -261,5 +261,44 @@ $(document).ready(() => {
     $('.second_interface').css('opacity', '1');
     $('footer').css('opacity', '1');
   });
+  
+  /* Share copy little trick */
+  $(document).on('click', '#share_copy', function() {
+    const parent = $('#user_output').select();
+    document.execCommand('copy');
+    parent.blur();
+    
+    $('#warning').text('Copied!');
+    setTimeout(() => {
+      $('#warning').text('');
+    }, 1000);
+  });
+  /* end share copy littele trick */
+  
+  
+  /* SHARE INTERGRATION */
+  const textToShare = $('#user_output').val();
+  
+  const apps = [
+  	['#whatsapp', 'whatsapp'],
+  	['#facebook', 'fb'],
+  	['#x', 'x'],
+  	['#telegram', 'tele'],
+  	['#snapchat', 'snap'],
+  	['#instagram',  'insta']];
+  apps.forEach((element) => {
+    $(element[0]).click(function () {
+      shareIntegration(textToShare, element[1]);
+    });
+  });
+  
+  function shareIntegration(textToShare, app) {
+    if (app === 'whatsapp') { window.location.href = `whatsapp://send?text=${encodeURIComponent(textToShare)}`; }
+    if (app === 'fb') { window.location.href = `fb://share?url=https://ezyurl.xyz&quote=${encodeURIComponent(textToShare)}`; }
+    if (app === 'x') {  window.location.href = `xapp://share?message=${encodeURIComponent(textToShare)}`; }
+    if (app === 'tele') { window.location.href = `tg://msg?text=${encodeURIComponent(textToShare)}`; }
+    if (app === 'snap') { const doSomething = 'Do something'; }
+    if (app === 'insta') { window.location.href = `instagram://share?text=${encodeURIComponent(textToShare)}`; }
+}
   /* End share animation*/
 });

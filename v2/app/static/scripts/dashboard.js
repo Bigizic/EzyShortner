@@ -146,6 +146,19 @@ $(document).ready(() => {
     $('.second_interface').css('opacity', '1');
     $('footer').css('opacity', '1');
   });
+  
+  /* Share copy little trick */
+  $(document).on('click', '#share_copy', function() {
+    const parent = $('#user_output').select();
+    document.execCommand('copy');
+    parent.blur();
+    
+    $('#warning').text('Copied!');
+    setTimeout(() => {
+      $('#warning').text('');
+    }, 1000);
+  });
+  /* end share copy littele trick */
   /* End share animation*/
   
   
