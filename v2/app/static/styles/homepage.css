@@ -399,7 +399,6 @@ footer a:hover {
     text-align: center;
     color: #fff;
     font-size: 2.2rem;
-    font-family: 'Black Ops One' !important;
 }
 
 .products {
@@ -514,9 +513,10 @@ footer a:hover {
     cursor: pointer;
     font-size: large;
     font-weight: 550;
+    color: #fff;
 }
 
-#facebook, #instagram, #snapchat, #x, #whatsapp, #telegram {
+#facebook, #instagram, #snapchat, #x, #whatsapp, #telegram, #share_copy {
 	background: url('/static/images/gifs/facebook.gif');
 	background-repeat: repeat;
 	background-size: auto;
@@ -555,6 +555,11 @@ footer a:hover {
 	background-size: 100% !important;
 }
 
+#share_copy {
+	background: url('/static/images/gifs/copy.gif')!important;
+	background-size: 100% !important;
+}
+
 #cancel-Button {
     display: inline-flex;
     vertical-align: super;
@@ -563,4 +568,5 @@ footer a:hover {
     font-size: medium;
     border: none;
     cursor: pointer;
+    color: black;
 }

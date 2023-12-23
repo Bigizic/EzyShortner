@@ -397,7 +397,7 @@ footer a:hover {
 
 
 
-#facebook, #instagram, #snapchat, #x, #whatsapp, #telegram {
+#facebook, #instagram, #snapchat, #x, #whatsapp, #telegram, #share_copy {
 	background: url('/static/images/gifs/facebook.gif');
 	background-repeat: repeat;
 	background-size: auto;
@@ -436,6 +436,11 @@ footer a:hover {
 	background-size: 100% !important;
 }
 
+#share_copy {
+	background: url('/static/images/gifs/copy.gif')!important;
+	background-size: 100% !important;
+}
+
 #cancel-Button {
     display: inline-flex;
     vertical-align: super;
@@ -444,4 +449,5 @@ footer a:hover {
     font-size: medium;
     border: none;
     cursor: pointer;
+    color: black;
 }
