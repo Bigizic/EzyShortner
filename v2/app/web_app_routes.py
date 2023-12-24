@@ -95,6 +95,7 @@ def sign_up():
                 return render_template('signup.html',
                                        info="email is invalid!",
                                        cache_id=uuid.uuid4())
+            account_creation = None
             password = request.form.get("pass")
             if len(password) > 128 or password is None:
                 ps = "Oops.. check the password"
@@ -115,7 +116,7 @@ def sign_up():
             new_user.password = password
         new_user.first_name = first_name
         new_user.last_name = last_name
-        if account_creation:
+        if account_creation is not None:
             new_user.verified = verified
             new_user.google_id = google_id
             new_user.authentication_method = 'google'
