@@ -265,7 +265,7 @@ body {
     border: none;
 }
 
-.bi-pen-fill{
+.bi-pen-fill, #disabled_pass {
         position: absolute;
         right: 2rem;
 }
@@ -340,14 +340,14 @@ body {
 .toggle-password {
   position: absolute;
   top: 25%;
-  right: 38px;
+  right: 39px;
   transform: translateY(-70%);
   cursor: pointer;
 }
 .toggle-password-n {
   position: absolute;
   top: 46%;
-  right: 38px;
+  right: 39px;
   transform: translateY(-70%);
   cursor: pointer;
 }

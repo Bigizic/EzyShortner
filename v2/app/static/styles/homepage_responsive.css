@@ -63,6 +63,9 @@
         .cover-up-content {
                 display: none;
         }
+        .first_product, .second_product, .third_product {
+        	background: #8888;
+        }
 
 }
 
@@ -131,6 +134,9 @@
         }
         .cover-up-content {
                 display: none;
+        }
+        .first_product, .second_product, .third_product {
+        	background: #8888;
         }
 }
 
@@ -206,6 +212,9 @@
                 border: none;
                 margin-bottom: 1vh;
 		padding: 4px;
+        }
+        .first_product, .second_product, .third_product {
+        	background: #8888;
         }
         footer {
                 gap: 5vw;
