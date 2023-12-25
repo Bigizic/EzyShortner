@@ -98,7 +98,7 @@ $(document).ready(() => {
         if (newPassword === confirmNewPassword) {
             $('#n_status').hide();
         } else {
-            $('#n_status').show();
+            $('#n_status').show().css('display', 'block');
         }
     });
   });      
