@@ -18,22 +18,27 @@ def infopage(user_id, sec_info=None, first_info=None):
         names = info.first_name + ' ' + info.last_name
         email = info.email[:2].upper()
         full_email = info.email
+        a_m = info.authentication_method
+        g_id = info.google_id
         if sec_info:
             return render_template('user_routes/information.html',
                                    cache_id=uuid.uuid4(), names=names,
                                    email=email, user_id=user_id,
-                                   full_email=full_email, sec_info=sec_info)
+                                   full_email=full_email, sec_info=sec_info,
+                                   u_c_m='g' if a_m == 'google' else 'N/A')
         elif first_info:
             return render_template('user_routes/information.html',
                                    cache_id=uuid.uuid4(), names=names,
                                    email=email, user_id=user_id,
-                                   full_email=full_email, info=first_info)
+                                   full_email=full_email, info=first_info,
+                                   u_c_m='g' if a_m == 'google' else 'N/A')
         else:
             return render_template('user_routes/information.html',
                                    cache_id=uuid.uuid4(), names=names,
                                    email=email, user_id=user_id,
                                    full_email=full_email,
-                                   sec_info="Successfully Changed")
+                                   sec_info="Successfully Changed",
+                                   u_c_m='g' if a_m == 'google' else 'N/A')
 
     else:
         return render_template('signin.html', info="Oops.. No user Found",
@@ -50,6 +55,8 @@ def information(user_id, user_info=None):
         names = info.first_name + ' ' + info.last_name
         email = info.email[:2].upper()
         full_email = info.email
+        a_m = info.authentication_method
+        g_id = info.google_id
     else:
         return render_template('signin.html', info="Oops.. No user Found",
                                cache_id=uuid.uuid4())
@@ -103,4 +110,5 @@ def information(user_id, user_info=None):
 
     return render_template('user_routes/information.html',
                            cache_id=uuid.uuid4(), email=email, names=names,
-                           user_id=user_id, full_email=full_email)
+                           user_id=user_id, full_email=full_email,
+                           u_c_m='g' if a_m == 'google' else 'N/A')
