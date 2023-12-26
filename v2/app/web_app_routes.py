@@ -18,6 +18,7 @@ from app.web_app_functions.homepage import homepage
 from app.web_app_functions.historypage import historypage
 from app.web_app_functions.information import information
 from app.web_app_functions.editlink import editlink
+import pyotp
 import re
 import uuid
 import logging
@@ -55,12 +56,6 @@ def about():
     """Renders static/about page"""
     return render_template('about.html', cache_id=uuid.uuid4())
 
-
-@web_app_blueprint.route('/google-signup', methods=["GET", "POST"])
-def google_signup():
-    if check_session():
-        return redirect(url_for('web_app.dashboard',
-                        user_id=session.get('user_id')))
 
 @web_app_blueprint.route('/signup', methods=["GET", "POST"])
 def sign_up():
@@ -116,6 +111,9 @@ def sign_up():
             new_user.password = password
         new_user.first_name = first_name
         new_user.last_name = last_name
+
+        new_user.Two_factor = pyotp.random_base32()
+
         if account_creation is not None:
             new_user.verified = verified
             new_user.google_id = google_id
@@ -311,10 +309,37 @@ def user_profile(user_id):
                 'old_password': old_pass,
                 'new_password': new_pass
         }
-        return information(user_id, user_credentials)
+        otp_list = [request.form.get('digit-1'),
+                    request.form.get('digit-2'),
+                    request.form.get('digit-3'),
+                    request.form.get('digit-4'),
+                    request.form.get('digit-5'),
+                    request.form.get('digit-6')
+        ]
+        return information(user_id, user_credentials,
+                otp_list if None not in otp_list else None)
 
     if check_session():
         return information(user_id)
+    else:
+        session['info_message'] = "Sign in to continue"
+        return redirect(url_for('web_app.sign_in'))
+
+
+@web_app_blueprint.route('/profile/delete/<ezy_url_id>',
+                         methods=["POST"])
+def delete_profile(ezy_url_id):
+    """Deletes a user profile"""
+    if check_session():
+        user = User().exists(None, None, session.get('user_id'))
+        if user:
+            DBStorage().delete(None, None, ezy_url_id)
+            session['info_message'] = "Successfully deleted!!"
+            session.clear()
+            return redirect(url_for('web_app.sign_in'))
+        else:
+            session['info_message'] = "Sign in to continue"
+            return redirect(url_for('web_app.sign_in'))
     else:
         session['info_message'] = "Sign in to continue"
         return redirect(url_for('web_app.sign_in'))
