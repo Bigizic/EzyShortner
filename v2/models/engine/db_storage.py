@@ -82,7 +82,7 @@ class DBStorage:
         """Adds new object to the current database"""
         self.__session.add(session)
 
-    def delete(self, ins=None, ezy_id=None):
+    def delete(self, ins=None, ezy_id=None, user_id=None):
         """Deletes the current session record if it's not None"""
         try:
             if ins is not None:
@@ -90,6 +90,10 @@ class DBStorage:
                 self.__session.commit()
             elif ezy_id is not None:
                 self.__session.query(Ezy).filter_by(id=ezy_id).delete()
+                self.__session.commit()
+            elif user_id is not None:
+                self.__session.query(Ezy).filter_by(user_id=user_id).delete()
+                self.__session.query(User).filter_by(id=user_id).delete()
                 self.__session.commit()
             else:
                 return None
@@ -217,7 +221,7 @@ class DBStorage:
         return False
 
     def update_user(self, user_id, first_name=None, last_name=None,
-                    new_password=None):
+                    new_password=None, two_factor_status=None):
         """ Updates a user record """
         user = self.__session.query(User).filter(User.id == user_id).first()
 
@@ -230,6 +234,8 @@ class DBStorage:
         if new_password is not None:
             old_pass = user.password
             user.password = new_password
+        if two_factor_status is not None:
+            user.Two_factor_status = two_factor_status
 
         self.__session.commit()
         return True

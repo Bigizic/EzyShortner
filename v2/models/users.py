@@ -4,6 +4,7 @@
 
 import bcrypt
 from models.Ezy_model import EzyModel, Base
+import pyotp
 import sqlalchemy
 from sqlalchemy import Column, String, Boolean, Table
 from sqlalchemy.orm import relationship
@@ -15,14 +16,25 @@ class User(EzyModel, Base):
     """ Decleration of user """
     __tablename__ = 'users'
     email = Column(String(128), nullable=False, unique=True)
+
     password = Column(String(255), nullable=True)
+
     first_name = Column(String(128), nullable=True)
+
     last_name = Column(String(128), nullable=True)
+
     ezy_urls = relationship("Ezy", backref="user")
+
     verified = Column(String(20), default='No')  # email verification
-    Two_factor = Column(String(20), default='disabled')  # 2 factor authy
+
+    Two_factor = Column(String(50), default='disabled')  # 2 factor authy
+
+    # 2 factor status
+    Two_factor_status = Column(String(15), default="disabled")
+
     # for normal account creations or google account creation
     authentication_method = Column(String(20), default='Ezy')
+
     # for google account id to confirm google user
     google_id = Column(String(200), default="N/A")
 
