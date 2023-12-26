@@ -51,6 +51,17 @@
             <p>Don't have an account? <a style="color: #888888;" href="{{ url_for('web_app.sign_up') }}">Sign up</a></p>
             <a style="color: #888888;" href="{{ url_for('web_app.get_input') }}"> Not sure? </a>
         </section>
+        {% if user_authy == 200 %}
+        <section class="user_2fa">
+        <div class="user_2fa_div">
+        <form method="POST" action="/signin" id="authy_form">
+	        <p>Enter code from authenticator app</p>
+	        <input type="number" id="authy_code" name="authenticator_code" required="true">
+	        <button type="submit">Submit</button>
+	</form>
+        </div>
+        </section>
+        {% endif %}
         <footer>
             <a href="{{ url_for('web_app.about') }}"> About</a> &bull;
 	    <a href="" target="_blank"> Api </a> &bull;

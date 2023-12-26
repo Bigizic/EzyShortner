@@ -10,9 +10,11 @@
     <link type="text/css" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js?{{ cache_id }}"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
     <script type="text/javascript" src="/static/scripts/user_routes/information.js?{{ cache_id }}"></script>
+    
     <link rel="icon" href="/static/images/ezy_icon.jpg?{{ cache_id }}">
 </head>
 <body>
@@ -94,8 +96,13 @@
                         </i></button></li>
                         {% endif %}
                         
-                        <li><button><i style="color: #006400;" class="bi bi-shield-lock-fill"></i>&nbsp;&nbsp;&nbsp;<a style="color: initial; text-decoration: none; cursor: pointer;" href="">Setup 2FA</a></button></li>
+                        <li class="authy_html_setup"><button><i style="color: #006400;" class="bi bi-shield-lock-fill"></i>&nbsp;&nbsp;&nbsp;Setup 2FA <i id="authy_status" style="font-style: normal;">{{ user_authy_status }}</i>
+                        </a></button></li>
+                        
+                        <li class="delete_user" data-user-id="{{ user_id }}"><button><i style="color: initial;" class="bi bi-trash-fill"></i>&nbsp;&nbsp;&nbsp;Delete account</button></li>
+                        
                         <li><button><i class="bi bi-envelope-at-fill"></i>&nbsp;&nbsp;&nbsp;<a style="color: initial; text-decoration: none; cursor: pointer;" href="mailto:Olalekanisaac75@gmail.com">Contact Support</a></button></li>
+                        
                     </ul>
                 </div>
             </section>
@@ -131,6 +138,35 @@
             </div>
             </form>
         </div>
+        {% if user_authy_status == 'disabled' %}
+        <div style="display: none;" class="authy_form">
+            <form method="POST" class="authy_f" data-group-name="digits" data-autosubmit="false">
+            	<h3 style="text-align: center;">Protect your account with 2-Step Verification</h3>
+            	<p>Add additional layer of security when you sign in, 2-Step verification adds a quick, second setup to verify that it's you.</p>
+            	<p>Copy and paste this manual secret key in your authenticator app like <a target="_blank" style="color: yellowgreen; text-decoration: none;" href="https://ezyurl.xyz/VfM9m3j">Twilio Authy</a> for IOS or <a target="_blank" style="color: yellowgreen; text-decoration: none;" href="https://ezyurl.xyz/Jp4vtoV">Google Authenticator</a> for Andriod</p>
+            	
+            	<p> You can scan the qr code to enable </p>
+            	<div id="authy_qr_code_container">
+            	<div id="authy_qr_code"></div>
+            	</div>
+            	<p data-name="{{qr_authy}}" id="user_secret_key">{{ user_authy_key }} &nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" class="secret_key_copy">Click to copy</span></p>
+            	<p>Enter 6 digit code from authenticator app to enable 2-FA</p>
+            	<div class="authy_input">
+            	<input autofocus="true" type="text" id="digit-1" name="digit-1" data-next="digit-2"/>
+		<input type="text" id="digit-2" name="digit-2" data-next="digit-3" data-previous="digit-1" />
+		<input type="text" id="digit-3" name="digit-3" data-next="digit-4" data-previous="digit-2" />
+		<input type="text" id="digit-4" name="digit-4" data-next="digit-5" data-previous="digit-3" />
+		<input type="text" id="digit-5" name="digit-5" data-next="digit-6" data-previous="digit-4" />
+		<input type="text" id="digit-6" name="digit-6" data-next="digit-7" data-previous="digit-5" />
+		</div>
+            
+            	<div class="authy_submit_and_cancel">
+            		<input id="authy_save" type="submit" value="Save">
+            		<input id="authy_cancel" type="button" value="Cancel">
+            	</div>
+            </form>
+        </div>
+        {% endif %}
     </div>
 </body>
 </html>
