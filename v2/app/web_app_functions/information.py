@@ -9,9 +9,12 @@ from models.ezy import Ezy
 from models.users import User
 from models.engine.db_storage import DBStorage
 import uuid
+import pyotp
+
+EZY = 'https://ezyurl.xyz'
 
 
-def infopage(user_id, sec_info=None, first_info=None):
+def infopage(user_id, sec_info=None, first_info=None, otp_list=None):
     """Renders information.html"""
     info = DBStorage().fetch_user(user_id)
     if info:
@@ -20,32 +23,79 @@ def infopage(user_id, sec_info=None, first_info=None):
         full_email = info.email
         a_m = info.authentication_method
         g_id = info.google_id
+        user_authy_key = info.Two_factor
+        user_authy_status = info.Two_factor_status
+        uak = user_authy_key
+        su = pyotp.totp.TOTP(uak).provisioning_uri(name=info.first_name,
+                                                   issuer_name=EZY)
         if sec_info:
             return render_template('user_routes/information.html',
                                    cache_id=uuid.uuid4(), names=names,
                                    email=email, user_id=user_id,
                                    full_email=full_email, sec_info=sec_info,
-                                   u_c_m='g' if a_m == 'google' else 'N/A')
+                                   u_c_m='g' if a_m == 'google' else 'N/A',
+                                   user_authy_key=user_authy_key,
+                                   user_authy_status=user_authy_status,
+                                   qr_authy=su)
         elif first_info:
             return render_template('user_routes/information.html',
                                    cache_id=uuid.uuid4(), names=names,
                                    email=email, user_id=user_id,
                                    full_email=full_email, info=first_info,
-                                   u_c_m='g' if a_m == 'google' else 'N/A')
+                                   u_c_m='g' if a_m == 'google' else 'N/A',
+                                   user_authy_key=user_authy_key,
+                                   user_authy_status=user_authy_status,
+                                   qr_authy=su)
+        elif otp_list:
+            # verify user enterd otp
+            otps = ''
+            count = 0
+            for _ in range(6):
+                otps += otp_list[count]
+                count += 1
+
+            totp = pyotp.TOTP(user_authy_key)
+            totp.now()
+            verified = totp.verify(otps)
+            if verified:
+                DBStorage().update_user(user_id, None, None, None, 'enabled')
+                info = DBStorage().fetch_user(user_id)
+                return render_template('user_routes/information.html',
+                                   cache_id=uuid.uuid4(), names=names,
+                                   email=email, user_id=user_id,
+                                   full_email=full_email, sec_info='Enabled',
+                                   u_c_m='g' if a_m == 'google' else 'N/A',
+                                   user_authy_key=user_authy_key,
+                                   user_authy_status=info.Two_factor_status,
+                                   qr_authy=su)
+            else:
+                iop = 'check your entries'
+                return render_template('user_routes/information.html',
+                                   cache_id=uuid.uuid4(), names=names,
+                                   email=email, user_id=user_id,
+                                   full_email=full_email, info=iop,
+                                   u_c_m='g' if a_m == 'google' else 'N/A',
+                                   user_authy_key=user_authy_key,
+                                   user_authy_status=user_authy_status,
+                                   qr_authy=su)
+
         else:
             return render_template('user_routes/information.html',
                                    cache_id=uuid.uuid4(), names=names,
                                    email=email, user_id=user_id,
                                    full_email=full_email,
                                    sec_info="Successfully Changed",
-                                   u_c_m='g' if a_m == 'google' else 'N/A')
+                                   u_c_m='g' if a_m == 'google' else 'N/A',
+                                   user_authy_key=user_authy_key,
+                                   user_authy_status=user_authy_status,
+                                   qr_authy=su)
 
     else:
         return render_template('signin.html', info="Oops.. No user Found",
                                cache_id=uuid.uuid4())
 
 
-def information(user_id, user_info=None):
+def information(user_id, user_info=None, otp_list=None):
     """ If a user's request is post, allows editing user names and password
     otherwise render's user information page
     """
@@ -57,9 +107,14 @@ def information(user_id, user_info=None):
         full_email = info.email
         a_m = info.authentication_method
         g_id = info.google_id
+        user_authy_key = info.Two_factor
+        user_authy_status = info.Two_factor_status
     else:
         return render_template('signin.html', info="Oops.. No user Found",
                                cache_id=uuid.uuid4())
+
+    if otp_list is not None:
+        return infopage(user_id, None, None, otp_list)
 
     # checks in user_info dict for credentials that match updated info
     if user_info:
@@ -108,7 +163,13 @@ def information(user_id, user_info=None):
             else:
                 return infopage(user_id, None, "Invalid details")
 
+    uak = user_authy_key
+    su = pyotp.totp.TOTP(uak).provisioning_uri(name=info.first_name,
+                                               issuer_name=EZY)
     return render_template('user_routes/information.html',
                            cache_id=uuid.uuid4(), email=email, names=names,
                            user_id=user_id, full_email=full_email,
-                           u_c_m='g' if a_m == 'google' else 'N/A')
+                           u_c_m='g' if a_m == 'google' else 'N/A',
+                           user_authy_key=user_authy_key,
+                           user_authy_status=user_authy_status,
+                           qr_authy=su)
