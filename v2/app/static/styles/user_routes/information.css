@@ -431,6 +431,7 @@ body {
 
 
 
+
 /* RESPONSIVE */
 
 /*LARGE TABLETS/LAPTOPS */
@@ -622,6 +623,12 @@ body {
     .authy_form {
     	width: 80%;
     }
+    .authy_f {
+	input {
+		width: 20px;
+		height: 30px;
+	}
+    }
     
 }
 
@@ -716,6 +723,12 @@ body {
     }
     .authy_form {
     	width: 80%;
+    }
+    .authy_f {
+	input {
+		width: 20px;
+		height: 30px;
+	}
     }
 }
 
@@ -813,5 +826,11 @@ body {
     }
     .authy_form {
     	width: 80%;
+    }
+    .authy_f {
+	input {
+		width: 20px;
+		height: 30px;
+	}
     }
 }
