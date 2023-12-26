@@ -265,7 +265,7 @@ body {
     border: none;
 }
 
-.bi-pen-fill, #disabled_pass {
+.bi-pen-fill, #disabled_pass, #authy_status {
         position: absolute;
         right: 2rem;
 }
@@ -281,6 +281,29 @@ body {
 	display: flex;
 	
 }
+
+.authy_form {
+	background-color: #004700;
+	position: absolute;
+	top: 10%;
+	height: fit-content;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 40px;
+	border-radius: 8px;
+	display: flex;
+}
+
+.authy_submit_and_cancel {
+	margin-top: 2rem;
+	display: flex;
+	gap: 10rem;
+	display: flex;
+	justify-content: center;
+}
+
+
+
 .name_form label, .password_form label {
 	display: block;
 }
@@ -322,6 +345,22 @@ body {
 	cursor: pointer;
 }
 
+
+#authy_save, #authy_cancel {
+	width: fit-content;
+	border-radius: 4px;
+	height: 30px;
+	background-color: #006400;
+	color: white;
+	cursor: pointer;
+	border: revert;
+	line-height: revert;
+	font-size: revert;
+	font-family: revert;
+	font-weight: revert;
+	margin-top: 8%;
+}
+
 #o_pass, #n_pass {
 	margin-bottom: 1rem;
 }
@@ -356,6 +395,40 @@ body {
 	color: red;
 }
 
+.authy_input {
+	display: flex;
+	justify-content: center;
+}
+
+
+.authy_f {
+	input {
+		width: 30px;
+		height: 50px;
+		background-color: #8888;
+		border: none;
+		line-height: 50px;
+		text-align: center;
+		font-size: 24px;
+		font-family: 'Raleway', sans-serif;
+		font-weight: 200;
+		color: white;
+		margin: 0 10px;
+		outline: none;
+	}
+	.splitter {
+		padding: 0 5px;
+		color: white;
+		font-size: 24px;
+	}
+
+}
+#authy_qr_code_container {
+	display: flex;
+	justify-content: center;
+}
+
+
 
 
 /* RESPONSIVE */
@@ -382,10 +455,12 @@ body {
     .main-content h1 {
     margin: 50px 10px 0px 0px !important;
     }
-    .name_form, .password_form {
+    .name_form, .password_form{
 	transform: translateX(0%) !important;
     }
-
+    .authy_form {
+    	left: 55% !important;
+    }
 }
 
 
@@ -415,7 +490,9 @@ body {
     .name_form, .password_form {
 	transform: translateX(0%) !important;
     }
-
+    .authy_form {
+    	left: 55% !important;
+    }
 }
 
 
@@ -444,6 +521,9 @@ body {
     }
     .name_form, .password_form {
 	transform: translateX(0%) !important;
+    }
+    .authy_form {
+    	left: 55% !important;
     }
 }
 
