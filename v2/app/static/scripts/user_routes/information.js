@@ -4,6 +4,19 @@ const testEnv = 'api/ezy_v1/short?url=';
 
 $(document).ready(() => {
 
+
+  function opacityStart() {
+    $('.left-sidebar').css('opacity', '0.2');
+    $('.right-sidebar').css('opacity', '0.2');
+    $('footer').css('opacity', '0.2');
+  };
+  
+  function opacityEnd() {
+    $('.left-sidebar').css('opacity', '1');
+    $('.right-sidebar').css('opacity', '1');
+    $('footer').css('opacity', '1');
+  };
+  
   /* start loading view */
   $('.loader').show();
   setTimeout(function() {
@@ -15,10 +28,12 @@ $(document).ready(() => {
   
   /* mobile menu button */
   $('.menu-button').click(function () {
+    opacityStart();
     $('.cover-up').css('width', '80%');
   });
 
   $('.close-button').click(function () {
+    opacityEnd();
     $('.cover-up').css('width', '0');
   });
   /* end mobile menu button */
@@ -36,21 +51,38 @@ $(document).ready(() => {
   
   /* names edit */
   $('#edit_name').click(function () {
+    opacityStart();
     $('.name_form').slideDown();
   });
   $('#name_cancel').click(function () {
+    opacityEnd();
     $('.name_form').slideUp();
   });
   /* end names edit */
   
   /* password edit */
   $('#edit_pass').click(function () {
+    opacityStart();
     $('.password_form').slideDown();
   });
   $('#pass_cancel').click(function () {
+    opacityEnd();
     $('.password_form').slideUp();
   });
   /* end password edit */
+  
+  /* authy setup */
+  $('.authy_html_setup').click(function () {
+    if ($('#authy_status').text() == 'disabled') {
+      $('.authy_form').slideDown();
+      opacityStart();
+    }
+  });
+  $('#authy_cancel').click(function () {
+    $('.authy_form').slideUp();
+    opacityEnd();
+  });
+  /* end authy setup */
   
   /* status code success or email has been used */
   const statusElement = $('#status_code, #status_code_2');
@@ -131,6 +163,79 @@ $(document).ready(() => {
   }
   });
   /* END */
+  
+  /*DELETE USER FUNCTIONS */
+  
+  $('.delete_user').on('click', function(e) {
+    e.preventDefault();
+    const userId = $(this).data('user-id');
+    if (confirm(`Confirm to delete your account and it's records`)) {
+      $.ajax({
+        url: `/profile/delete/${userId}`,
+        method: 'POST',
+        success: function(response) {
+          window.location.replace(window.location.href);
+        },
+        error: function(xhr, status, error) {
+          console.error(error);
+        }
+      });
+    }
+  });
+  /*END DELETE USER */
+
+  $('.authy_f').find('input').each(function() {
+    $(this).attr('maxlength', 1);
+    $(this).on('keyup', function(e) {
+      var parent = $($(this).parent());
+
+      if(e.keyCode === 8 || e.keyCode === 37) {
+        var prev = parent.find('input#' + $(this).data('previous'));
+      
+        if(prev.length) {
+          $(prev).select();
+        }
+        } else if((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 96 && e.keyCode <= 105) || e.keyCode === 39) {
+          var next = parent.find('input#' + $(this).data('next'));
+      
+          if(next.length) {
+            $(next).select();
+          } else {
+            if(parent.data('autosubmit')) {
+              parent.submit();
+            }
+          }
+        }
+    });
+  });
+  
+  
+  /* secret key copy */  
+  const auS = $('#user_secret_key').data('name');
+
+  $(document).on('click', '.secret_key_copy', function() {
+    const tempInput = $('<textarea>');
+    $('body').append(tempInput);
+    tempInput.val(auS).select();
+    document.execCommand('copy');
+    tempInput.remove();
+    $(this).text('Copied!');
+    setTimeout(() => {
+      $(this).text('Click to copy');
+    }, 1000);
+  });
+  /* End secret key copy */
+  
+  /* qr code for user 2fa*/
+
+  $('#authy_qr_code').css({
+    'background-image': `url('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=${auS}')`,
+    'background-repeat': 'no-repeat',
+    'width': '100px',
+    'height': '100px',
+    'background-size': '100%',
+  });
+  /* end qr code for user 2fa*/
 
   
   addClassForMobile();

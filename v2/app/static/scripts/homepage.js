@@ -4,6 +4,22 @@ const testEnv = 'api/ezy_v1/short?url=';
 
 $(document).ready(() => {
 
+
+  function opacityStart() {
+    $('header').css('opacity', '0.2');
+    $('.user_interface').css('opacity', '0.2');
+    $('.second_interface').css('opacity', '0.2');
+    $('footer').css('opacity', '0.2');
+  };
+  
+  function opacityEnd() {
+    $('header').css('opacity', '1');
+    $('.user_interface').css('opacity', '1');
+    $('.second_interface').css('opacity', '1');
+    $('footer').css('opacity', '1');
+  };
+
+
   /* start loading view */
   $('.loader').show();
   setTimeout(function() {
@@ -41,18 +57,12 @@ $(document).ready(() => {
 
   /* qr image animation */
   $('.qr_code').click(function () {
+    opacityStart();
     $('#qr_container').slideDown();
-    $('header').css('opacity', '0.2');
-    $('.user_interface').css('opacity', '0.2');
-    $('.second_interface').css('opacity', '0.2');
-    $('footer').css('opacity', '0.2');
   });
   $('#cancelButton').click(function () {
+    opacityEnd();
     $('#qr_container').slideUp();
-    $('header').css('opacity', '1');
-    $('.user_interface').css('opacity', '1');
-    $('.second_interface').css('opacity', '1');
-    $('footer').css('opacity', '1');
   });
   /* end qr image animation */
 
@@ -65,19 +75,31 @@ $(document).ready(() => {
 
   /* history animation for desktops && larger screens*/
   $('.history').click(function () {
+    $('.user_interface').css('opacity', '0.2');
+    $('.second_interface').css('opacity', '0.2');
+    $('footer').css('opacity', '0.2');
     $('.history_list').css('width', '24%');
   });
   $('.h-close-button').click(function () {
+    $('.user_interface').css('opacity', '1');
+    $('.second_interface').css('opacity', '1');
+    $('footer').css('opacity', '1');
     $('.history_list').css('width', '0%');
   });
   /* end history animation */
 
   /* mobile menu button */
   $('.menu-button').click(function () {
+    $('.user_interface').css('opacity', '0.2');
+    $('.second_interface').css('opacity', '0.2');
+    $('footer').css('opacity', '0.2');
     $('.cover-up').css('width', '80%');
   });
 
   $('.close-button').click(function () {
+    $('.user_interface').css('opacity', '1');
+    $('.second_interface').css('opacity', '1');
+    $('footer').css('opacity', '1');
     $('.cover-up').css('width', '0');
   });
   /* end mobile menu button */
@@ -248,18 +270,12 @@ $(document).ready(() => {
   
   /*share animation*/
   $('.b_share').click(function () {
+    opacityStart();
     $('#share_container').slideDown();
-    $('header').css('opacity', '0.2');
-    $('.user_interface').css('opacity', '0.2');
-    $('.second_interface').css('opacity', '0.2');
-    $('footer').css('opacity', '0.2');
   });
   $('#cancel-Button').click(function () {
+    opacityEnd();
     $('#share_container').slideUp();
-    $('header').css('opacity', '1');
-    $('.user_interface').css('opacity', '1');
-    $('.second_interface').css('opacity', '1');
-    $('footer').css('opacity', '1');
   });
   
   /* Share copy little trick */

@@ -4,6 +4,25 @@ const testEnv = 'api/ezy_v1/short?url=';
 
 $(document).ready(() => {
 
+
+  function opacityStart() {
+    $('header').css('opacity', '0.2');
+    $('.user_interface').css('opacity', '0.2');
+    $('.main-content').css('opacity', '0.2');
+    $('.left-sidebar').css('opacity', '0.2');
+    $('footer').css('opacity', '0.2');
+  };
+  
+  function opacityEnd() {
+    $('header').css('opacity', '1');
+    $('.user_interface').css('opacity', '1');
+    $('.main-content').css('opacity', '1');
+    $('.left-sidebar').css('opacity', '1');
+    $('.second_interface').css('opacity', '1');
+    $('footer').css('opacity', '1');
+  };
+
+
   /* start loading view */
   $('.loader').show();
   setTimeout(function() {
@@ -27,10 +46,12 @@ $(document).ready(() => {
 
   /* mobile menu button */
   $('.menu-button').click(function () {
+    opacityStart();
     $('.cover-up').css('width', '80%');
   });
 
   $('.close-button').click(function () {
+    opacityEnd();
     $('.cover-up').css('width', '0');
   });
   /* end mobile menu button */
@@ -64,20 +85,11 @@ $(document).ready(() => {
   /* qr image animation */
   $('.qr_code').click(function () {
     $('#qr_container').slideDown();
-    $('header').css('opacity', '0.2');
-    $('.user_interface').css('opacity', '0.2');
-    $('.main-content').css('opacity', '0.2');
-    $('.left-sidebar').css('opacity', '0.2');
-    $('footer').css('opacity', '0.2');
+    opacityStart();
   });
   $('#cancelButton').click(function () {
     $('#qr_container').slideUp();
-    $('header').css('opacity', '1');
-    $('.user_interface').css('opacity', '1');
-    $('.main-content').css('opacity', '1');
-    $('.left-sidebar').css('opacity', '1');
-    $('.second_interface').css('opacity', '1');
-    $('footer').css('opacity', '1');
+    opacityEnd();
   });
   /* end qr image animation */
 
@@ -131,20 +143,11 @@ $(document).ready(() => {
   /*share animation*/
   $('.b_share').click(function () {
     $('#share_container').slideDown();
-    $('header').css('opacity', '0.2');
-    $('.user_interface').css('opacity', '0.2');
-    $('.main-content').css('opacity', '0.2');
-    $('.left-sidebar').css('opacity', '0.2');
-    $('footer').css('opacity', '0.2');
+    opacityStart();
   });
   $('#cancel-Button').click(function () {
     $('#share_container').slideUp();
-    $('header').css('opacity', '1');
-    $('.user_interface').css('opacity', '1');
-    $('.main-content').css('opacity', '1');
-    $('.left-sidebar').css('opacity', '1');
-    $('.second_interface').css('opacity', '1');
-    $('footer').css('opacity', '1');
+    opacityEnd();
   });
   
   /* Share copy little trick */
