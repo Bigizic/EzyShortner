@@ -292,6 +292,7 @@ body {
 	padding: 40px;
 	border-radius: 8px;
 	display: flex;
+	width: revert;
 }
 
 .authy_submit_and_cancel {
