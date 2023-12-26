@@ -291,8 +291,7 @@ body {
 	transform: translateX(-50%);
 	padding: 40px;
 	border-radius: 8px;
-	display: flex;
-	width: revert;
+	display: block;
 }
 
 .authy_submit_and_cancel {
