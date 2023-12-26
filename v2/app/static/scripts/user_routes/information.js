@@ -212,11 +212,12 @@ $(document).ready(() => {
   
   /* secret key copy */  
   const auS = $('#user_secret_key').data('name');
+  const fN = $('#user_secret_key').text().trim().split(' ')[0];
 
   $(document).on('click', '.secret_key_copy', function() {
     const tempInput = $('<textarea>');
     $('body').append(tempInput);
-    tempInput.val(auS).select();
+    tempInput.val(fN).select();
     document.execCommand('copy');
     tempInput.remove();
     $(this).text('Copied!');
