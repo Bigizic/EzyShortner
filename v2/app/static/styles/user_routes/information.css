@@ -619,6 +619,9 @@ body {
     .bin {
         margin-top: 10px;
     }
+    .authy_form {
+    	width: 80%;
+    }
     
 }
 
@@ -710,6 +713,9 @@ body {
     }
     #table {
         font-size: 14px;
+    }
+    .authy_form {
+    	width: 80%;
     }
 }
 
@@ -804,5 +810,8 @@ body {
     }
     .bin {
         margin-top: 10px;
+    }
+    .authy_form {
+    	width: 80%;
     }
 }
