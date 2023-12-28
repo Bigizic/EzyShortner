@@ -58,13 +58,10 @@ section h1 {
     font-size: 3rem;
 }
 
-.first_form {
+.first_form, .second_form, .third_form {
     transition: transform 0.5s ease;
 }
 
-.second_form {
-    transition: transform 0.5s ease;
-}
 
 label {
     display: block;
@@ -72,29 +69,44 @@ label {
 }
 
 #email_or_username, #pass, #first_name, #last_name {
-    width: 90%;
-    height: 2rem;
+    width: 80%;
+    height: 2.2rem;
     border-radius: 10px;
     background-color: #44494D;
     border: none;
     color: white;
     margin-bottom: 4%;
-    padding: 0% 5% 0% 5%;
+    padding: 0% 10% 0% 5%;
     font-size: medium;
 }
 
 #pass {
-    width: 80% !important;
-    padding: 0% 12% 0% 5% !important;
+    /*width: 84% !important;
+    padding: 0% 10% 0% 5% !important;*/
 }
 
 #email_or_username:focus, #pass:focus, #first_name:focus, #last_name:focus {
     border: 1px solid black !important;
     outline: none;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2)
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.enter_, .next_button {
+
+.enter_ {
+    background-color: #006400 !important;
+    height: 2rem;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    margin-bottom: 10%;
+    font-size: medium;
+    box-sizing: content-box;
+    cursor: pointer;
+    font-weight: 990;
+    padding: 0px 20px;
+}
+
+.next_button {
     background-color: #006400 !important;
     width: 80%;
     height: 2rem;
@@ -105,19 +117,24 @@ label {
     font-size: medium;
     box-sizing: content-box;
     cursor: pointer;
+    font-weight: 990;
 }
 .back_button {
-    background-color: #006400 !important;
-    width: max-content;
+    background: transparent !important;
+    height: 2rem;
+    border-radius: 10px;
     border: none;
     color: white;
-    font-size: medium;
     margin-bottom: 10%;
-    border-radius: 10px;
+    font-size: medium;
+    box-sizing: content-box;
+    cursor: pointer;
+    font-weight: 990;
+    padding: 0px 20px;
 }
 
-.enter_:hover, .next_button:hover, .back_button:hover {
-    background-color: #131418 !important;
+.enter_:hover, .next_button:hover, .back_button:hover, .nnext_button:hover {
+   cursor: pointer;
 }
 
 .enter_ {
@@ -160,9 +177,9 @@ label {
 
 .toggle-password {
   position: absolute;
-  top: 50%;
+  /*top: 50%;*/
   right: 8px;
-  transform: translateY(-30%);
+  transform: translateY(40%);
   cursor: pointer;
 }
 
@@ -176,6 +193,34 @@ label {
     right: 15px;
     transform: translateY(-52%);
     cursor: pointer;
+}
+
+.otp_input {
+	display: flex;
+	justify-content: center;
+}
+
+.otp_input {
+	input {
+		width: 30px;
+		height: 50px;
+		background-color: #8888;
+		border: none;
+		line-height: 50px;
+		text-align: center;
+		font-size: 24px;
+		font-family: 'Raleway', sans-serif;
+		font-weight: 200;
+		color: white;
+		margin: 0 10px;
+		outline: none;
+	}
+	.splitter {
+		padding: 0 5px;
+		color: white;
+		font-size: 24px;
+	}
+
 }
 
 footer {
@@ -206,6 +251,10 @@ footer a:hover {
 		margin: 0px;
 		background: rgb(19,20,24);
 	}
+	.otp_msg {
+		text-align: center;
+    		font-size: small !important;
+	}
 }
 
 
@@ -215,6 +264,10 @@ footer a:hover {
 		margin: 0px;
 		background: rgb(19,20,24) !important;
 	}
+	.otp_msg {
+		text-align: center;
+     		font-size: small !important;
+	}
 }
 
 
@@ -223,5 +276,9 @@ footer a:hover {
 	body {
 		margin: 0px;
 		background: rgb(19,20,24);
+	}
+	.otp_msg {
+		text-align: center;
+    		font-size: small !important;
 	}
 }
