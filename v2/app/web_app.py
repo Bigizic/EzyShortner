@@ -3,9 +3,6 @@
 
 from datetime import timedelta
 from flask import Flask, request, render_template, make_response, session
-from models.ezy import Ezy
-from models.users import User
-from models.engine.db_storage import DBStorage
 from os import environ
 from shortner.qr_img_gen import qr_gen
 import uuid
