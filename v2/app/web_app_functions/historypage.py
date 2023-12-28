@@ -8,7 +8,8 @@ Return: history template
 
 from flask import render_template, current_app
 from models.ezy import Ezy
-from models.users import User
+from models import storage_type as st
+from models.users import EzyUser, GoogleUser
 from models.engine.db_storage import DBStorage
 import re
 import uuid
@@ -17,18 +18,17 @@ import uuid
 def historypage(user_id, query=None):
     """Renders the history page returns crucial info"""
     if query:
-        long_result = DBStorage().search(user_id, query)
+        long_result = st.search(user_id, query)
 
         query = re.search(r'[^/]+$', query)
 
-        short_result = DBStorage().search(user_id, None, query[0])
+        short_result = st.search(user_id, None, query[0])
 
         result = long_result if long_result else short_result
 
-        user = User().exists(None, None, user_id)
-        info = DBStorage().fetch_user(user_id)
+        info = st.fetch_user(user_id)
         names = info.first_name + ' ' + info.last_name
-        email = info.email[:2].upper()
+        profile_pic = info.profile_pic
 
         if result:
             sear = []
@@ -46,22 +46,23 @@ def historypage(user_id, query=None):
             # search result successful
             return render_template('user_routes/history.html',
                                    cache_id=uuid.uuid4(),
-                                   email=email, names=names,
-                                   user_id=user_id,
+                                   names=names, user_id=user_id,
+                                   profile_pic=profile_pic,
                                    history_items=search_result)
         else:
             return render_template('user_routes/history.html',
                                    cache_id=uuid.uuid4(),
-                                   email=email, names=names,
-                                   user_id=user_id,
+                                   names=names, user_id=user_id,
+                                   profile_pic=profile_pic,
                                    info="NO RESULTS")
 
-    user = User().exists(None, None, user_id)
-    if user:
-        info = DBStorage().fetch_user(user_id)
+    g_user = GoogleUser().exists(None, None, user_id)
+    e_user = EzyUser().exists(None, None, user_id)
+    if g_user or e_user:
+        info = st.fetch_user(user_id)
         names = info.first_name + ' ' + info.last_name
-        email = info.email[:2].upper()
-        his = DBStorage().fetch_user_and_ezy(user_id)
+        profile_pic = info.profile_pic
+        his = st.fetch_user_and_ezy(user_id)
         if his:
             history = sorted(his, key=lambda x: x['created_at'],
                              reverse=True)
@@ -69,8 +70,8 @@ def historypage(user_id, query=None):
             history = ''
         return render_template('user_routes/history.html',
                                cache_id=uuid.uuid4(),
-                               email=email, names=names,
-                               user_id=user_id,
+                               names=names, user_id=user_id,
+                               profile_pic=profile_pic,
                                history_items=history)
     else:
         # direct a user if they've been blocked to sign in

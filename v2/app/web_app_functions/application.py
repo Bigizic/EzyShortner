@@ -8,7 +8,6 @@ Return: application features
 """
 
 from models.ezy import Ezy
-from models.users import User
 from models.engine.db_storage import DBStorage
 from os import environ
 from shortner.qr_img_gen import qr_gen
