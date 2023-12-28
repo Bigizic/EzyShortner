@@ -46,12 +46,10 @@ $(document).ready(() => {
 
   /* mobile menu button */
   $('.menu-button').click(function () {
-    opacityStart();
     $('.cover-up').css('width', '80%');
   });
 
   $('.close-button').click(function () {
-    opacityEnd();
     $('.cover-up').css('width', '0');
   });
   /* end mobile menu button */

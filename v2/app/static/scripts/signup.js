@@ -49,6 +49,11 @@ $(document).ready(() => {
       }
     }
   });
+  $('.nnext_button').click(function () {
+    $('#typing-animation').css('display', 'none');
+    $('.second_form').hide().css('transform', 'scale(1)');
+    $('.third_form').show().css('transform', 'scale(1.1)');
+  });
   /* next button end */
   
   /* back button functions */
@@ -81,15 +86,6 @@ $(document).ready(() => {
   });
   /* end */
   
-  /* next button hover */
-  $('.next_button').hover(
-    function () {
-      $('.next_button i').css('color', '#131418');
-    },
-    function () {
-      $('.next_button i').css('color', '#fff');
-    });
-  /* end */
-    
+
   typeText(0, 'Create an account in seconds!', 100);
 });

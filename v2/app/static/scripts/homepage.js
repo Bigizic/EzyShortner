@@ -90,16 +90,10 @@ $(document).ready(() => {
 
   /* mobile menu button */
   $('.menu-button').click(function () {
-    $('.user_interface').css('opacity', '0.2');
-    $('.second_interface').css('opacity', '0.2');
-    $('footer').css('opacity', '0.2');
     $('.cover-up').css('width', '80%');
   });
 
   $('.close-button').click(function () {
-    $('.user_interface').css('opacity', '1');
-    $('.second_interface').css('opacity', '1');
-    $('footer').css('opacity', '1');
     $('.cover-up').css('width', '0');
   });
   /* end mobile menu button */

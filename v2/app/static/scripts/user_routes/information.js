@@ -73,9 +73,16 @@ $(document).ready(() => {
   
   /* authy setup */
   $('.authy_html_setup').click(function () {
-    if ($('#authy_status').text() == 'disabled') {
-      $('.authy_form').slideDown();
-      opacityStart();
+    if ($('.authy_form').length) {
+      if ($('#authy_status').text() == 'disabled') {
+        $('.authy_form').slideDown();
+        opacityStart();
+      }
+    } else {
+      $('.authy_warning').slideDown().text('Please verify your email to set 2fa');
+      setTimeout(function () {
+        $('.authy_warning').slideUp();
+      }, 2000);
     }
   });
   $('#authy_cancel').click(function () {
@@ -83,6 +90,15 @@ $(document).ready(() => {
     opacityEnd();
   });
   /* end authy setup */
+  
+  /* password warning */
+  $('.guiop').click(function () {
+    $('.password_warning').slideDown().text('Passwords are disabled for google users');
+    setTimeout(function () {
+      $('.password_warning').slideUp();
+    }, 2000);
+  });
+  /* end password warning */
   
   /* status code success or email has been used */
   const statusElement = $('#status_code, #status_code_2');
@@ -113,6 +129,26 @@ $(document).ready(() => {
     }
   });
   /* end */
+
+  /* delete password toogle password icon */
+  const delPassInput = $('#d_pass');
+  const dEyeIcon = $('.d_toggle-password i');
+  
+  delPassInput.attr('minlength', 8);      
+  delPassInput.on('input', function () {          
+    dEyeIcon.addClass('bi-eye-slash-fill');
+  });      
+  
+  dEyeIcon.click(function () {
+    if (delPassInput.attr('type') === 'password') {
+      delPassInput.attr('type', 'text');
+      dEyeIcon.removeClass('bi-eye-slash-fill').addClass('bi-eye-fill');
+    } else {
+      delPassInput.attr('type', 'password');
+      dEyeIcon.removeClass('bi-eye-fill').addClass('bi-eye-slash-fill');
+    }
+  });
+  /* end password toggle for delete password */
   
   /* password toogle for new password */
   const passwordInpu = [$('#n_pass'), $('#nn_pass')];
@@ -133,7 +169,8 @@ $(document).ready(() => {
             $('#n_status').show().css('display', 'block');
         }
     });
-  });      
+  });
+
 
   eyeIco.forEach(function(icon) {
     icon.click(function () {
@@ -164,22 +201,33 @@ $(document).ready(() => {
   });
   /* END */
   
-  /*DELETE USER FUNCTIONS */
+  /*DELETE USER FUNCTIONS and delete password*/
   
   $('.delete_user').on('click', function(e) {
-    e.preventDefault();
-    const userId = $(this).data('user-id');
-    if (confirm(`Confirm to delete your account and it's records`)) {
-      $.ajax({
-        url: `/profile/delete/${userId}`,
-        method: 'POST',
-        success: function(response) {
-          window.location.replace(window.location.href);
-        },
-        error: function(xhr, status, error) {
-          console.error(error);
-        }
+    $('.delete_password_form').css('display', 'flex');
+    if ($('.delete_password_form').length) {
+      $('delete_password_form').slideDown();
+      opacityStart();
+      $('#del_pass_cancel').click(function () {
+        $('.delete_password_form').slideUp();
+        opacityEnd();
       });
+      
+    } else {
+      e.preventDefault();
+      const userId = $(this).data('user-id');
+      if (confirm(`Confirm to delete your account and it's records`)) {
+        $.ajax({
+          url: `/profile/delete/${userId}`,
+          method: 'POST',
+          success: function(response) {
+            window.location.replace(window.location.href);
+          },
+          error: function(xhr, status, error) {
+            console.error(error);
+          }
+        });
+      }
     }
   });
   /*END DELETE USER */
