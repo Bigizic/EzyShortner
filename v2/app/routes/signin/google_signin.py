@@ -13,7 +13,8 @@ import pyotp
 import uuid
 import logging
 
-CLIENT_ID = '518132922807-8vsde0i71v5nktavtssmt1j8vtugvu6o.apps.googleusercontent.com'
+CLIENT_ID = ('518132922807-8vsde0i71v5nktavtssmt1j8vtugvu6o
+             .apps.googleusercontent.com')
 
 
 def google_signin(req):
