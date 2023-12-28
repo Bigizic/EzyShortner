@@ -32,32 +32,32 @@
             <div class="user_interface">
                 <form method="POST" action="/signup" id="signup_form">
                     <div class="first_form">
-                    <label for="email_or_username">Email</label>
-                    <input required="true" name="email" id="email_or_username" type="email" type="text">
-                    <div class="password-container">
-                    <label for="pass">Password</label>
-                    <input required="true" name="pass" id="pass" type="password">
-                    <span class="toggle-password"><i class="bi-eye-slash-fill"></i></span>
-                    <label style="color: red; font-size: smaller;" class="password-warning" for="pass"></label>
-                    </div>
-                    <button class="next_button">Next</button>
+                    	<label for="email_or_username">Email</label>
+                    	<input required="true" name="email" id="email_or_username" type="email" type="text">
+                    	<div class="password-container">
+                    		<label for="pass">Password</label>
+                    		<input required="true" name="pass" id="pass" type="password">
+                    		<span class="toggle-password"><i class="bi-eye-slash-fill"></i></span>
+                    		<label style="color: red; font-size: smaller;" class="password-warning" for="pass"></label>
+                    	</div>
+                    	<button class="next_button">Next</button>
                     </div>
                     <div style="display: none;" class="second_form">
                        <label for="first_name"> First Name</label>
                        <input required="true" name="first_name" id="first_name" type="text">
                        <label for="last_name"> Last Name</label>
                        <input required="true" name="last_name" id="last_name" type="text"><br>
+                       <button type="button" class="back_button">Back</button>
                        <input type="submit" value="Sign Up" class="enter_">
-                       <button class="back_button">Back</button>
                     </div>
                 </form>
             </div>
             
             <div class="g_id_signin"
-            data-type="standard"
-            data-theme="outline"
-            data-text="signup_with"
-            data-shape="pill">
+            	 data-type="standard"
+            	 data-theme="outline"
+            	 data-text="signup_with"
+            	 data-shape="pill">
             </div>
             <p>Already have an account? <a style="color: #888888;" href="{{ url_for('web_app.sign_in') }}">Sign in here</a></p>
             <a style="color: #888888;" href="{{ url_for('web_app.get_input') }}"> Not sure? </a>

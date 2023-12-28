@@ -39,7 +39,13 @@
             </div>
             <div class="user-info">
                 <div class="user-details">
-                <p class="user-information">{{ email }}</p>
+                {% if profile_pic|length > 5 %}
+                <p style="background: url('{{profile_pic}}'); background-repeat: no-repeat; width: 40px; height: 40px; background-size: 100%; border-radius: 50%; margin: 0px 10px 0px 0px;" class="user-information-picture"></p>
+                {% endif %}
+                
+                {% if profile_pic|length < 5 %}
+                <p class="user-information">{{ profile_pic }}</p>
+                {% endif %}
                 <p class="user-name">{{ names }}</p>
                 </div>
                 <a href="{{ url_for('web_app.logout') }}" class="logout">Logout</a>
@@ -61,7 +67,13 @@
             </div>
             <div class="user-info">
                 <div class="user-details">
-                <p class="user-information">{{ email }}</p>
+                {% if profile_pic|length > 5 %}
+                <p style="background: url('{{profile_pic}}'); background-repeat: no-repeat; width: 40px; height: 40px; background-size: 100%; border-radius: 50%; margin: 0px 10px 0px 0px;" class="user-information-picture"></p>
+                {% endif %}
+                
+                {% if profile_pic|length < 5 %}
+                <p class="user-information">{{ profile_pic }}</p>
+                {% endif %}
                 <p class="user-name">{{ names }}</p>
                 </div>
                 <a href="{{ url_for('web_app.logout') }}" class="logout">Logout</a>

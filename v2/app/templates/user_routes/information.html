@@ -38,8 +38,14 @@
                 </div>
                 <div class="user-info">
                     <div class="user-details">
-                        <p class="user-information">{{ email }}</p>
-                        <p class="user-name">{{ names }}</p>
+                {% if info.profile_pic|length > 5 %}
+                <p style="background: url('{{info.profile_pic}}'); background-repeat: no-repeat; width: 40px; height: 40px; background-size: 100%; border-radius: 50%; margin: 0px 10px 0px 0px;" class="user-information-picture"></p>
+                {% endif %}
+                
+                {% if info.profile_pic|length < 5 %}
+                <p class="user-information">{{ info.profile_pic }}</p>
+                {% endif %}
+                        <p class="user-name">{{ info.first_name ~ ' ' ~ info.last_name }}</p>
                     </div>
                     <a href="{{ url_for('web_app.logout') }}" class="logout">Logout</a>
                 </div>
@@ -60,43 +66,57 @@
             </div>
             <div class="user-info">
                 <div class="user-details">
-                    <p class="user-information">{{ email }}</p>
-                    <p class="user-name">{{ names }}</p>
+                {% if info.profile_pic|length > 5 %}
+                <p style="background: url('{{info.profile_pic}}'); background-repeat: no-repeat; width: 40px; height: 40px; background-size: 100%; border-radius: 50%; margin: 0px 10px 0px 0px;" class="user-information-picture"></p>
+                {% endif %}
+                
+                {% if info.profile_pic|length < 5 %}
+                <p class="user-information">{{ info.profile_pic }}</p>
+                {% endif %}
+                    <p class="user-name">{{ info.first_name ~ ' ' ~ info.last_name }}</p>
                 </div>
                 <a href="{{ url_for('web_app.logout') }}" class="logout">Logout</a>
             </div>
         </section>
         <section class="right-sidebar">
-            {% if info %}
-            <p id="status_code">{{info}}</p>
+            {% if first_info %}
+            <p id="status_code">{{first_info}}</p>
             {% endif %}
             {% if sec_info %}
             <p id="status_code_2">{{sec_info}}</p>
             {% endif %}
+            <p style="display: none;" class="authy_warning"></p>
+            <p style="display: none;" class="password_warning"></p>
             <div class="main-content">
-                <h1>{{ email }}</h1>
-                <h2>{{ names }}</h2>
-                <h5>{{ full_email }}</h5>
+                {% if info.profile_pic|length > 5 %}
+                <h1 style="background: url('{{info.profile_pic}}'); background-repeat: no-repeat; cursor: pointer; display: inline-flex; align-items: center; justify-content: space-evenly; margin: 0px 10px 0px 0px; border-radius: 50%; width: 4rem; height: 4rem; font-family: 'Black Ops One'; background-size: 100%; border-radius: 50%;"></h1>
+                {% endif %}
+
+		{% if info.profile_pic|length < 5 %}
+		<h1>{{ info.profile_pic }}</h1>
+		{% endif %}
+                <h2>{{ info.first_name ~ ' ' ~ info.last_name }}</h2>
+                <h5>{{ info.email }}</h5>
             </div>
             <section class="user_interface">
                 <div class="user_names">
                     <ul>
-                        <li><button><i class="bi bi-person-fill"></i>&nbsp;&nbsp;&nbsp; {{ names }}<i id="edit_name" style="font-style: normal; cursor: pointer;" class="bi bi-pen-fill">Edit</i></button></li>
+                        <li><button><i class="bi bi-person-fill"></i>&nbsp;&nbsp;&nbsp; {{ info.first_name ~ ' ' ~ info.last_name }}<i id="edit_name" style="font-style: normal; cursor: pointer;" class="bi bi-pen-fill">Edit</i></button></li>
                         
-                        {% if u_c_m == 'N/A' %}
+                        {% if not info.google_id %}
                         <li><button><i class="bi bi-key-fill"></i>&nbsp;&nbsp;&nbsp;Password
                         <i id="edit_pass" style="font-style: normal; cursor: pointer;" class="bi bi-pen-fill">Edit
                         </i></button></li>
                         {% endif %}
                         
-                        {% if u_c_m == 'g' %}
-                        <li><button><i class="bi bi-key-fill"></i>&nbsp;&nbsp;&nbsp;Password
+                        {% if info.google_id %}
+                        <li class="guiop"><button><i class="bi bi-key-fill"></i>&nbsp;&nbsp;&nbsp;Password
                         <i id="disabled_pass" style="font-style: normal; color: red;">
-                        Disabled
+                        disabled
                         </i></button></li>
                         {% endif %}
                         
-                        <li class="authy_html_setup"><button><i style="color: #006400;" class="bi bi-shield-lock-fill"></i>&nbsp;&nbsp;&nbsp;Setup 2FA <i id="authy_status" style="font-style: normal;">{{ user_authy_status }}</i>
+                        <li class="authy_html_setup"><button><i style="color: #006400;" class="bi bi-shield-lock-fill"></i>&nbsp;&nbsp;&nbsp;Setup 2FA <i id="authy_status" style="font-style: normal;">{{ info.two_factor_status }}</i>
                         </a></button></li>
                         
                         <li class="delete_user" data-user-id="{{ user_id }}"><button><i style="color: initial;" class="bi bi-trash-fill"></i>&nbsp;&nbsp;&nbsp;Delete account</button></li>
@@ -138,18 +158,18 @@
             </div>
             </form>
         </div>
-        {% if user_authy_status == 'disabled' %}
+        {% if info.verified in [True, '1'] %}
         <div style="display: none;" class="authy_form">
             <form style="box-sizing: content-box;" method="POST" class="authy_f" data-group-name="digits" data-autosubmit="false">
             	<h3 style="text-align: center;">Protect your account with 2-Step Verification</h3>
             	<p>Add additional layer of security when you sign in, 2-Step verification adds a quick, second setup to verify that it's you.</p>
-            	<p>Copy and paste this manual secret key in your authenticator app like <a target="_blank" style="color: yellowgreen; text-decoration: none;" href="https://ezyurl.xyz/VfM9m3j">Twilio Authy</a> for IOS or <a target="_blank" style="color: yellowgreen; text-decoration: none;" href="https://ezyurl.xyz/Jp4vtoV">Google Authenticator</a> for Andriod</p>
+            	<p>Copy and paste this manual secret key in your authenticator app like <a target="_blank" style="color: yellowgreen; text-decoration: none;" href="https://www.twilio.com/en-us/trusted-activation/verify">Twilio Authy</a> for IOS or <a target="_blank" style="color: yellowgreen; text-decoration: none;" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en&gl=US&pli=1">Google Authenticator</a> for Andriod</p>
             	
             	<p> You can scan the qr code to enable </p>
             	<div id="authy_qr_code_container">
             	<div id="authy_qr_code"></div>
             	</div>
-            	<p data-name="{{qr_authy}}" id="user_secret_key">{{ user_authy_key }} &nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" class="secret_key_copy">Click to copy</span></p>
+            	<p data-name="{{qr_authy}}" id="user_secret_key">{{ info.two_factor }} &nbsp;&nbsp;&nbsp;<span style="cursor: pointer;" class="secret_key_copy">Click to copy</span></p>
             	<p>Enter 6 digit code from authenticator app to enable 2-FA</p>
             	<div class="authy_input">
             	<input autofocus="true" type="text" id="digit-1" name="digit-1" data-next="digit-2"/>
@@ -163,6 +183,22 @@
             	<div class="authy_submit_and_cancel">
             		<input id="authy_save" type="submit" value="Save">
             		<input id="authy_cancel" type="button" value="Cancel">
+            	</div>
+            </form>
+        </div>
+        {% endif %}
+        
+        {% if info.password %}
+        <div class="delete_password_form" style="display: none;">
+            <p style="position: absolute; top: 0px;">Enter your password to confirm account deletion</p>
+            <form style="margin-top: 4rem;" id="del_pass_form" method="POST">
+            	<label style="display: block;" for="o_pass">Current Password</label>
+           	<input type="password" name="del_old_password" id="d_pass">
+        	<span class="d_toggle-password"><i class=""></i></span>
+            
+            	<div class="del_submit_and_cancel_p">
+            		<input id="del_pass_save" type="submit" value="Save">
+            		<input id="del_pass_cancel"type="button" value="Cancel" action="cancel">
             	</div>
             </form>
         </div>
