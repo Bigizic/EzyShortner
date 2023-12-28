@@ -8,7 +8,7 @@ import models
 from os import environ
 from models.Ezy_model import EzyModel, Base
 from models.ezy import Ezy
-from models.users import User
+from models.users import GoogleUser, EzyUser
 import sqlalchemy
 from sqlalchemy import func
 from sqlalchemy import create_engine
@@ -24,7 +24,7 @@ class DBStorage:
         USER = environ.get("EZYUSER")
         PWD = environ.get("EZYPWD")
         HST = "0.0.0.0"
-        DB = "Ezy_url"
+        DB = "EZY"
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
                                       format(USER, PWD, HST, DB),
                                       pool_pre_ping=True)
@@ -93,7 +93,15 @@ class DBStorage:
                 self.__session.commit()
             elif user_id is not None:
                 self.__session.query(Ezy).filter_by(user_id=user_id).delete()
-                self.__session.query(User).filter_by(id=user_id).delete()
+
+                user_type = self.fetch_user(user_id)
+
+                if isinstance(user_type, GoogleUser):
+                    self.__session.query(GoogleUser).filter_by(
+                                         id=user_id).delete()
+                if isinstance(user_type, EzyUser):
+                    self.__session.query(EzyUser).filter_by(
+                                         id=user_id).delete()
                 self.__session.commit()
             else:
                 return None
@@ -119,7 +127,7 @@ class DBStorage:
         return result
 
     def existing(self, my_short_url, alias=None, user_email=None,
-                 user_id=None, google_id=None):
+                 user_id=None):
         """This function reloads data from the database and checks
         if the {short_url} column has any records of the shortened
         url
@@ -132,24 +140,24 @@ class DBStorage:
                 exists = self.__session.query(Ezy).filter_by(
                     short_url=alias).first()
                 return word if exists else False
-                
-            if google_id:
-                exists = self.__session.query(User).filter_by(
-                         google_id=google_id).first()
-                return True if exists else False
 
             if my_short_url:
                 exists = self.__session.query(Ezy).filter_by(
                          short_url=my_short_url).first()
                 return True if exists else False
             if user_email:
-                exists = self.__session.query(User).filter_by(
+                g_user = self.__session.query(GoogleUser).filter_by(
+                                              email=user_email).first()
+                e_user = self.__session.query(EzyUser).filter_by(
                          email=user_email).first()
+                exists = e_user if e_user else g_user
                 return [exists.id, exists.password] if exists else None
             if user_id:
-                exists = self.__session.query(User).filter_by(
-                         id=user_id).first()
-                return True if exists else False
+                g_exists = self.__session.query(GoogleUser).filter_by(
+                                                id=user_id).first()
+                e_exists = self.__session.query(EzyUser).filter_by(
+                                                id=user_id).first()
+                return True if g_exists or e_exists else False
 
         except Exception:
             self.__session.rollback()
@@ -190,23 +198,38 @@ class DBStorage:
             })
         return result if result else None
 
-    def fetch_user(self, id, email=None):
+    def fetch_user(self, id=None, email=None, google_id=None):
         """Fetches a user from the database by email or id
         """
         if id:
-            result = self.__session.query(User).filter(User.id == id).first()
+            ezy_result = self.__session.query(EzyUser).filter(
+                                              EzyUser.id == id).first()
+            google_result = self.__session.query(GoogleUser).filter(
+                                                 GoogleUser.id == id).first()
+
+            result = ezy_result if ezy_result else google_result
             return result if result else None
         if email:
-            result = self.__session.query(User).filter(
-                                          User.email == email).first()
+            result = self.__session.query(EzyUser).filter(
+                                          EzyUser.email == email).first()
             return result if result else None
+
+        if google_id:
+            current_app.logger.warning(google_id)
+            res = self.__session.query(
+                    GoogleUser).filter(
+                    GoogleUser.google_id == google_id).first()
+            return res if res else None
 
     def search(self, user_id=None, longl=None, short=None):
         """Query the database with the user's id to find a
         record of short link or long link associated with a user
         """
-        user = self.__session.query(User).filter(
-                                    User.id == user_id).first()
+        e_user = self.__session.query(EzyUser).filter(
+                                      EzyUser.id == user_id).first()
+        g_user = self.__session.query(GoogleUser).filter(
+                                      GoogleUser.id == user_id).first()
+        user = g_user if g_user else e_user
         if user:
             long_link = self.__session.query(Ezy).filter(
                                              Ezy.user_id == user_id,
@@ -223,7 +246,12 @@ class DBStorage:
     def update_user(self, user_id, first_name=None, last_name=None,
                     new_password=None, two_factor_status=None):
         """ Updates a user record """
-        user = self.__session.query(User).filter(User.id == user_id).first()
+        e_user = self.__session.query(EzyUser).filter(
+                                      EzyUser.id == user_id).first()
+        g_user = self.__session.query(GoogleUser).filter(
+                                      GoogleUser.id == user_id).first()
+
+        user = e_user if e_user else g_user
 
         if first_name is not None:
             user.first_name = first_name

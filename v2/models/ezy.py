@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """A class that sets the parameters needed and add other funtionality
-basically the entry point
+basically the entry point for the links
 """
 
 
@@ -25,10 +25,14 @@ BASEURL = "ezyurl.xyz/"
 class Ezy(EzyModel, Base):
     """default storage: MySql db"""
 
-    __tablename__ = "records"
+    __tablename__ = "link_records"
+
     original_url = Column(Text, nullable=False)
+
     short_url = Column(String(70), nullable=False)
-    user_id = Column(String(100), ForeignKey('users.id'))
+
+    user_id = Column(String(100), default="NULL")
+
     clicks = Column(BigInteger, nullable=True, default=0)
 
     def __init__(self, *args, **kwargs):

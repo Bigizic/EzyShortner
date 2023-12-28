@@ -74,7 +74,7 @@ class EzyModel(Base):
         """Remove the instanced Url from the database"""
         models.storage_type.delete(self)
 
-    def exists(self, alias=None, user_email=None, user_id=None, google_id=None):
+    def exists(self, alias=None, user_email=None, user_id=None):
         """Makes a call to the database existing() to check if the
         short_url exists in the database
         """
@@ -84,8 +84,6 @@ class EzyModel(Base):
             return models.storage_type.existing(None, None, None, user_id)
         if alias:
             return models.storage_type.existing(None, alias)
-        if google_id:
-            return models.storage_type.existing(None, None, None, None, google_id)
 
         if not alias and models.storage_type.existing(self.short_url) is True:
             self.short_url = generate_random_url()

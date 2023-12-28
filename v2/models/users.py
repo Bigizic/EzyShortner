@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-""" Creation of user class """
-
+"""
+Holds information for users that created account with email and password
+"""
 
 import bcrypt
 from models.Ezy_model import EzyModel, Base
@@ -12,31 +13,25 @@ import uuid
 from flask import current_app
 
 
-class User(EzyModel, Base):
+class EzyUser(EzyModel, Base):
     """ Decleration of user """
-    __tablename__ = 'users'
+    __tablename__ = 'ezy_users'
     email = Column(String(128), nullable=False, unique=True)
 
-    password = Column(String(255), nullable=True)
+    password = Column(String(255), nullable=False)
 
     first_name = Column(String(128), nullable=True)
 
     last_name = Column(String(128), nullable=True)
 
-    ezy_urls = relationship("Ezy", backref="user")
-
     verified = Column(String(20), default='No')  # email verification
 
-    Two_factor = Column(String(50), default='disabled')  # 2 factor authy
+    two_factor = Column(String(50), nullable=False)  # 2 factor authy
 
     # 2 factor status
-    Two_factor_status = Column(String(15), default="disabled")
+    two_factor_status = Column(String(15), default="disabled")
 
-    # for normal account creations or google account creation
-    authentication_method = Column(String(20), default='Ezy')
-
-    # for google account id to confirm google user
-    google_id = Column(String(200), default="N/A")
+    profile_pic = Column(String(5), default="N/A", nullable=False)
 
     def __init__(self, *args, **kwargs):
         """initializes user"""
@@ -51,3 +46,29 @@ class User(EzyModel, Base):
             super().__setattr__(attribute, hashed_password)
         else:
             super().__setattr__(attribute, value)
+
+
+class GoogleUser(EzyModel, Base):
+    """ Decleration of user """
+    __tablename__ = 'google_users'
+    google_id = Column(String(200), nullable=False, unique=True)
+
+    email = Column(String(128), nullable=False, unique=True)
+
+    first_name = Column(String(128), nullable=True)
+
+    last_name = Column(String(128), nullable=True)
+
+    verified = Column(String(20), default='No')  # email verification
+
+    # 2 factor authentication
+    two_factor = Column(String(50), nullable=False)
+
+    # 2 factor status
+    two_factor_status = Column(String(15), default="disabled")
+
+    profile_pic = Column(String(200), default="N/A", nullable=False)
+
+    def __init__(self, *args, **kwargs):
+        """initializes user"""
+        super().__init__(*args, **kwargs)
