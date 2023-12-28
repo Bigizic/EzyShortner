@@ -6,8 +6,9 @@ from google.oauth2 import id_token
 from google.auth.transport import requests as g_req
 from flask import Flask, request, render_template, make_response, session
 from flask import Blueprint, redirect, url_for, current_app
+from models import storage_type as st
 from models.ezy import Ezy
-from models.users import User
+from models.users import GoogleUser, EzyUser
 from models.engine.db_storage import DBStorage
 from os import environ
 from shortner.qr_img_gen import qr_gen
@@ -18,20 +19,27 @@ from app.web_app_functions.homepage import homepage
 from app.web_app_functions.historypage import historypage
 from app.web_app_functions.information import information
 from app.web_app_functions.editlink import editlink
+from app.routes.signup.google_signup import google_signup
+from app.routes.signup.ezy_signup import ezy_signup
+from app.routes.signin.ezy_signin import ezy_signin
+from app.routes.signin.google_signin import google_signin
 import pyotp
 import re
 import uuid
 import logging
+import random
+import string
 
 web_app_blueprint = Blueprint('web_app', __name__)
-CLIENT_ID = '518132922807-8vsde0i71v5nktavtssmt1j8vtugvu6o.apps.googleusercontent.com'
+CLIENT_ID = ('518132922807-8vsde0i71v5nktavtssmt1j8vtugvu6o
+             .apps.googleusercontent.com')
 
 
 def check_session():
     """Checks session data to see if a user's logged in
     """
     if ('logged_in' in session and session['logged_in'] and
-            session['user_id']):
+            session.get('user_id')):
         return True
     else:
         return False
@@ -65,74 +73,12 @@ def sign_up():
                         user_id=session['user_id']))
 
     if request.method == 'POST':
+        # google sign up
         if request.form.get('credential'):
-            try:
-                token = request.form.get('credential')
-                idinfo = id_token.verify_oauth2_token(token,
-                                                      g_req.Request(),
-                                                      CLIENT_ID)
-                if idinfo:
-                    email = idinfo.get('email')
-                    first_name = idinfo.get('given_name')
-                    last_name = idinfo.get('family_name')
-                    verified = idinfo.get('email_verified')
-                    google_id = idinfo.get("sub")  # for google id
-                    account_creation = 'google'
-                    password = None
-            except ValueError:
-                return render_template('signup.html',
-                                       info="Invalid account!",
-                                       cache_id=uuid.uuid4())
-        if request.form.get("email"):   
-            email = request.form.get("email")
-            # protect against attacks
-            if len(email) > 128 or not email.find('@') or email is None:
-                return render_template('signup.html',
-                                       info="email is invalid!",
-                                       cache_id=uuid.uuid4())
-            account_creation = None
-            password = request.form.get("pass")
-            if len(password) > 128 or password is None:
-                ps = "Oops.. check the password"
-                return render_template('signup.html', info=ps,
-                                       cache_id=uuid.uuid4())
-
-            first_name = request.form.get("first_name")
-            last_name = request.form.get("last_name")
-
-            if len(first_name) >= 127 or len(last_name) >= 127:
-                return render_template('signup.html',
-                                       info="names too long",
-                                       cache_id=uuid.uuid4())
-
-        new_user = User()
-        new_user.email = email
-        if password is not None:
-            new_user.password = password
-        new_user.first_name = first_name
-        new_user.last_name = last_name
-
-        new_user.Two_factor = pyotp.random_base32()
-
-        if account_creation is not None:
-            new_user.verified = verified
-            new_user.google_id = google_id
-            new_user.authentication_method = 'google'
-
-            if new_user.exists(None, None, None, google_id):
-                return render_template('signup.html',
-                                        info="user already exits!",
-                                        cache_id=uuid.uuid4())
-
-        if new_user.exists(None, email) and not account_creation:
-            return render_template('signup.html', info="email already exits!",
-                                   cache_id=uuid.uuid4())
-        new_user.save()
-        session['user_email'] = email
-        session['logged_in'] = True
-        session['user_id'] = new_user.id
-        session.permanent = True
-        return redirect(url_for("web_app.dashboard", user_id=new_user.id))
+            return google_signup(request)
+        # ezy sign up
+        if request.form.get("email"):
+            return ezy_signup(request)
 
     info_message = session.pop('info_message', None)
     return render_template('signup.html', info=info_message,
@@ -148,60 +94,10 @@ def sign_in():
 
     if request.method == 'POST':
         if request.form.get('credential'):
-            try:
-                token = request.form.get('credential')
-                idinfo = id_token.verify_oauth2_token(token,
-                                                      g_req.Request(),
-                                                      CLIENT_ID)
-                if idinfo:
-                    email = idinfo.get('email')
-                    google_id = idinfo.get("sub")  # for google id
-                    password = None
-            except ValueError:
-                return render_template('signin.html',
-                                       info="Invalid account!",
-                                       cache_id=uuid.uuid4())
+            return google_signin(request)
+
         if request.form.get('email'):
-            email = request.form.get("email")
-            # protect against attacks
-            if len(email) > 128 or not email.find('@') or email is None:
-                return render_template('signin.html',
-                                       info="email is invalid!",
-                                       cache_id=uuid.uuid4())
-            google_id = None
-            password = request.form.get("pass")
-            if len(password) > 128 or password is None:
-                ps = "Oops.. check the password"
-                return render_template('signin.html', info=ps,
-                                       cache_id=uuid.uuid4())
-
-        # check for existence of user via email return id and password
-        user_data = DBStorage().existing(None, None, email)
-        if not user_data:
-            return render_template('signin.html', info="Oops.. No user Found",
-                                   cache_id=uuid.uuid4())
-        user_id, user_pass = user_data if user_data else None
-
-        if google_id is not None:
-            session['logged_in'] = True
-            session['email'] = email
-            session['user_id'] = user_id
-            session.permanet = True
-            return redirect(url_for("web_app.dashboard", user_id=user_id))
-
-        if user_id and user_pass:
-            # compares html password and database password
-            passs = bcrypt.checkpw(password.encode(), user_pass.encode())
-            if passs:
-                session['logged_in'] = True
-                session['email'] = email
-                session['user_id'] = user_id
-                session.permanent = True
-                return redirect(url_for("web_app.dashboard", user_id=user_id))
-            else:
-                return render_template('signin.html',
-                                       info="Oops wrong information",
-                                       cache_id=uuid.uuid4())
+            return ezy_signin(request)
 
     info_message = session.pop('info_message', None)
     return render_template('signin.html', cache_id=uuid.uuid4(),
@@ -219,14 +115,15 @@ def dashboard(user_id):
         return dashpage(res[0], res[1], res[2], res[3], res[4])
 
     if check_session():
-        user = User().exists(None, None, user_id)
-        if user:
+        g_user = GoogleUser().exists(None, None, user_id)
+        e_user = EzyUser().exists(None, None, user_id)
+        if g_user or e_user:
             info = DBStorage().fetch_user(user_id)
             names = info.first_name + ' ' + info.last_name
-            email = info.email[:2].upper()
+            profile_pic = info.profile_pic
             return render_template('dashboard.html', cache_id=uuid.uuid4(),
-                                   names=names, email=email,
-                                   user_id=session['user_id'])
+                                   names=names, profile_pic=profile_pic,
+                                   user_id=session.get('user_id'))
         else:
             # direct a user if they've been blocked to sign in
             session['logged_in'] = False
@@ -280,9 +177,10 @@ def history_helper():
 def delete_history(ezy_url_id):
     """Deletes an instance of a url"""
     if check_session():
-        user = User().exists(None, None, session['user_id'])
-        if user:
-            DBStorage().delete(None, ezy_url_id)
+        g_user = GoogleUser().exists(None, None, session.get('user_id'))
+        e_user = EzyUser().exists(None, None, session.get('user_id'))
+        if g_user or e_user:
+            st.delete(None, ezy_url_id)
             return redirect(url_for('web_app.history',
                             user_id=session['user_id']))
         else:
@@ -303,6 +201,9 @@ def user_profile(user_id):
 
         old_pass = request.form.get("old_password")
         new_pass = request.form.get("new_password")
+
+        del_pass = request.form.get("del_old_password")
+
         user_credentials = {
                 'first_name': first_name,
                 'last_name': last_name,
@@ -314,10 +215,30 @@ def user_profile(user_id):
                     request.form.get('digit-3'),
                     request.form.get('digit-4'),
                     request.form.get('digit-5'),
-                    request.form.get('digit-6')
-        ]
+                    request.form.get('digit-6')]
+        # delete a user bassed on del_pass passed from client
+        if del_pass:
+            temp_user = st.fetch_user(user_id)
+            compare_old = bcrypt.checkpw(del_pass.encode(),
+                                         temp_user.password.encode())
+            uak = temp_user.two_factor
+            su = pyotp.totp.TOTP(uak).provisioning_uri(
+                                 name=temp_user.first_name,
+                                 issuer_name='https://ezyurl.xyz')
+        if compare_old:
+            st.delete(None, None, user_id)
+            session['info_message'] = "Successfully deleted!!"
+            session.clear()
+            return redirect(url_for('web_app.sign_in'))
+        else:
+            return render_template('user_routes/information.html',
+                                   cache_id=uuid.uuid4(), info=temp_user,
+                                   user_id=user_id,
+                                   first_info="Check your entries",
+                                   qr_authy=su)
+
         return information(user_id, user_credentials,
-                otp_list if None not in otp_list else None)
+                           otp_list if None not in otp_list else None)
 
     if check_session():
         return information(user_id)
@@ -331,9 +252,10 @@ def user_profile(user_id):
 def delete_profile(ezy_url_id):
     """Deletes a user profile"""
     if check_session():
-        user = User().exists(None, None, session.get('user_id'))
-        if user:
-            DBStorage().delete(None, None, ezy_url_id)
+        g_user = GoogleUser().exists(None, None, session.get('user_id'))
+        e_user = EzyUser().exists(None, None, session.get('user_id'))
+        if g_user or e_user:
+            st.delete(None, None, ezy_url_id)
             session['info_message'] = "Successfully deleted!!"
             session.clear()
             return redirect(url_for('web_app.sign_in'))
