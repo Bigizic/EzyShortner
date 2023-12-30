@@ -225,17 +225,17 @@ def user_profile(user_id):
             su = pyotp.totp.TOTP(uak).provisioning_uri(
                                  name=temp_user.first_name,
                                  issuer_name='https://ezyurl.xyz')
-        if compare_old:
-            st.delete(None, None, user_id)
-            session['info_message'] = "Successfully deleted!!"
-            session.clear()
-            return redirect(url_for('web_app.sign_in'))
-        else:
-            return render_template('user_routes/information.html',
-                                   cache_id=uuid.uuid4(), info=temp_user,
-                                   user_id=user_id,
-                                   first_info="Check your entries",
-                                   qr_authy=su)
+            if compare_old:
+                st.delete(None, None, user_id)
+                session.clear()
+                session['info_message'] = "Successfully deleted!!"
+                return redirect(url_for('web_app.sign_in'))
+            else:
+                return render_template('user_routes/information.html',
+                                       cache_id=uuid.uuid4(), info=temp_user,
+                                       user_id=user_id,
+                                       first_info="Check your entries",
+                                       qr_authy=su)
 
         return information(user_id, user_credentials,
                            otp_list if None not in otp_list else None)
@@ -256,8 +256,8 @@ def delete_profile(ezy_url_id):
         e_user = EzyUser().exists(None, None, session.get('user_id'))
         if g_user or e_user:
             st.delete(None, None, ezy_url_id)
-            session['info_message'] = "Successfully deleted!!"
             session.clear()
+            session['info_message'] = "Successfully deleted!!"
             return redirect(url_for('web_app.sign_in'))
         else:
             session['info_message'] = "Sign in to continue"
@@ -284,6 +284,47 @@ def edit_my_link(user_id):
     else:
         session['info_message'] = "Sign in to continue"
         return redirect(url_for('web_app.sign_in'))
+
+
+@web_app_blueprint.route('/verify_user', methods=["GET", "POST"])
+def verify_user():
+    """Verifies a user if they set up extra layer of security
+    """
+    if check_session():
+        return redirect(url_for('web_app.dashboard'))
+
+    if request.method == "POST":
+        otp_list = [request.form.get('digit-1'),
+                    request.form.get('digit-2'),
+                    request.form.get('digit-3'),
+                    request.form.get('digit-4'),
+                    request.form.get('digit-5'),
+                    request.form.get('digit-6')]
+
+        otps = ''
+        count = 0
+        for _ in range(6):
+            otps += otp_list[count]
+            count += 1
+
+        fetch_user = st.fetch_user(session.get("user_id"))
+        if fetch_user:
+            two_fa = fetch_user.two_factor
+            totp = pyotp.TOTP(two_fa)
+            totp.now()
+            verified = totp.verify(otps)
+            if verified:
+                session["logged_in"] = True
+                return redirect(url_for("web_app.dashboard",
+                                user_id=session.get("user_id")))
+            else:
+                return render_template('user_routes/verify_user.html',
+                                       cache_id=uuid.uuid4(),
+                                       info="Check your entries")
+    wor = "Enter otp from authenticator app to continue"
+    return render_template('user_routes/verify_user.html',
+                           cache_id=uuid.uuid4(),
+                           info=wor)
 
 
 @web_app_blueprint.route('/logout', methods=["GET"])
