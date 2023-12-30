@@ -47,13 +47,16 @@ def infopage(user_id, sec_info=None, first_info=None, otp_list=None):
                 st.update_user(user_id, None, None, None, 'enabled')
                 info = st.fetch_user(user_id)
                 return render_template('user_routes/information.html',
-                                   cache_id=uuid.uuid4(), user_id=user_id,
-                                   info=info, sec_info='Enabled', qr_authy=su)
+                                       cache_id=uuid.uuid4(),
+                                       user_id=user_id,
+                                       info=info, sec_info='Enabled!!',
+                                       qr_authy=su)
             else:
                 iop = 'check your entries'
                 return render_template('user_routes/information.html',
-                                   cache_id=uuid.uuid4(), user_id=user_id,
-                                   first_info=iop, info=info, qr_authy=su)
+                                       cache_id=uuid.uuid4(),
+                                       user_id=user_id, first_info=iop,
+                                       info=info, qr_authy=su)
 
         else:
             return render_template('user_routes/information.html',
