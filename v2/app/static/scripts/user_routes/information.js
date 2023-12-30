@@ -42,6 +42,7 @@ $(document).ready(() => {
   function addClassForMobile() {
     const leftItemLix = $('.left-items-lx');
     if ($(window).width() <= 991) {
+      $('.authy_f').find('input').attr('inputmode', 'numeric');
       leftItemLix.addClass('mobile-class');
     } else {
       leftItemLix.removeClass('mobile-class');
@@ -232,6 +233,7 @@ $(document).ready(() => {
   });
   /*END DELETE USER */
 
+  /* OTPS INPUT FIELD */
   $('.authy_f').find('input').each(function() {
     $(this).attr('maxlength', 1);
     $(this).on('keyup', function(e) {
@@ -256,6 +258,21 @@ $(document).ready(() => {
         }
     });
   });
+  /* OTPS PASTE FUNCTION */
+  $('.authy_f').find('input').on('paste', function(e) {
+    e.preventDefault();
+    const pasteData = e.originalEvent.clipboardData.getData('text');
+    const currentIndex = $(this).index();
+
+    for (var i = 0; i < pasteData.length; i++) {
+      const currentInput = $('.authy_f').find('input').eq(currentIndex + i);
+      if (currentInput.length) {
+        currentInput.val(pasteData[i]);
+      }
+    }
+  });
+  /* END OTPS PASTE FUNCTION*/
+  /* END OTPS INPUT FIELD */
   
   
   /* secret key copy */  
@@ -285,6 +302,32 @@ $(document).ready(() => {
     'background-size': '100%',
   });
   /* end qr code for user 2fa*/
+  
+  
+  /* verfiy user.html script */
+  if ($('.some_info').length) {
+    if ($('.some_info').text().trim() == 'Enter otp from authenticator app to continue') {
+      $('.some_info').css('color', 'lightgreen');
+    } else { $('.some_info').css('color', 'red'); }
+    $('.some_info').slideDown();
+    setTimeout(function () {
+      $('.some_info').slideUp();
+    }, 2000);
+  };
+  $('.verify_cancel').click(function () {
+    $.ajax({
+      url: '/signin',
+      method: 'GET',
+      success: function(response) {
+        $('.authy_form').slideUp();
+        window.location.href = '/signin';
+      },
+      error: function(xhr, status, error) {
+        console.error(error);
+      }
+    });
+  });
+  /* end verfiy user.html script */
 
   
   addClassForMobile();
