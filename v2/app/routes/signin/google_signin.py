@@ -42,8 +42,12 @@ def google_signin(req):
                                    cache_id=uuid.uuid4())
 
         # fetch user info since user exists via google id
-        session['logged_in'] = True
         session['email'] = email
         session['user_id'] = g_user.id
         session.permanet = True
+        if (g_user.verified in ["True", "1"] and
+                g_user.two_factor_status == 'enabled'):
+            return redirect(url_for("web_app.verify_user"))
+
+        session['logged_in'] = True
         return redirect(url_for("web_app.dashboard", user_id=g_user.id))
