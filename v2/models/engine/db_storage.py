@@ -215,7 +215,6 @@ class DBStorage:
             return result if result else None
 
         if google_id:
-            current_app.logger.warning(google_id)
             res = self.__session.query(
                     GoogleUser).filter(
                     GoogleUser.google_id == google_id).first()
@@ -263,7 +262,7 @@ class DBStorage:
             old_pass = user.password
             user.password = new_password
         if two_factor_status is not None:
-            user.Two_factor_status = two_factor_status
+            user.two_factor_status = two_factor_status
 
         self.__session.commit()
         return True
