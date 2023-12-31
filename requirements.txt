@@ -1,5 +1,6 @@
 # These commands should be executed outside of the Python virtual environment
 # Use them to install necessary system libraries for MySQL or MariaDB support
+# to run enter pip install -r requirements.txt
 
 # Install libmysqlclient-dev
 # You can use this for MySQL support
