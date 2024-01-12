@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+sudo certbot certonly --webroot --webroot-path /var/www/html/ --preferred-challenges http -d ezyurl.xyz -d www.ezyurl.xyz --email olalekanisaac75@gmail.com --agree-tos --no-eff-email --cert-name ezyurl.xyz
