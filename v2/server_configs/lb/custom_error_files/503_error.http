@@ -1,0 +1,34 @@
+HTTP/1.0 503 Service Unavailable
+Cache-Control: no-cache
+Connection: close
+Content-Type: text/html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Unavailable</title>
+    <style>
+        body {
+                background: rgb(19,20,24);
+                background: linear-gradient(180deg, rgba(19,20,24,1) 42%, rgba(0,100,0,1) 76%);
+                font-family: apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                color: #fff;
+        }
+        h1 {
+                text-align: center;
+        }
+        p {
+                text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Sorry, Ezy is scheduceld for maintenance</h1>
+    <p>Please try again later.</p>
+</body>
+</html>
