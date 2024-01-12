@@ -27,3 +27,4 @@ bcrypt
 pyasn1
 google-auth
 pyotp
+Pillow
