@@ -5,6 +5,7 @@ Holds information for users that created account with email and password
 
 import bcrypt
 from models.Ezy_model import EzyModel, Base
+from models.account_information import AccountInformation
 import pyotp
 import sqlalchemy
 from sqlalchemy import Column, String, Boolean, Table

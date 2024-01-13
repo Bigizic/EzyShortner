@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """Prepares the database connector and engine"""
 
-
 import bcrypt
+import datetime
 from flask import current_app
 import models
 from os import environ
+from models.account_information import AccountInformation as ACCI
 from models.Ezy_model import EzyModel, Base
 from models.ezy import Ezy
 from models.users import GoogleUser, EzyUser
@@ -13,6 +14,8 @@ import sqlalchemy
 from sqlalchemy import func
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+
+TIME = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
 
 
 class DBStorage:
@@ -276,6 +279,48 @@ class DBStorage:
             for obj in result:
                 setattr(obj, 'original_url', longL)
 
+            self.__session.commit()
+            return True
+
+        return False
+
+
+    def fetch_account_info(self, user_id):
+        """Return a user record from account_information table
+        otherwise None
+        """
+        record = self.__session.query(ACCI).filter(
+                                      ACCI.user_id == user_id).first()
+        return record if record else None
+
+    def update_account_info(self, user_id: str, login=None,
+                            logout=None) -> bool:
+        """update the account login and logout time from the database
+        """
+        record = self.__session.query(ACCI).filter(
+                                      ACCI.user_id == user_id).all()
+        if record:
+            if login:
+                for obj in record:
+                    value = obj.login_time
+                    value.append(datetime.datetime.utcnow()
+                                 .strftime('%Y-%m-%d %H:%M:%S'))
+                current_app.logger.warning(value)
+                setattr(obj, 'login_time', value)
+                self.__session.commit()
+            if logout:
+                for obj in record:
+                    logout_r = obj.logout_time
+                    current_app.logger.warning(logout_r)
+                    if logout_r is None:
+                        logout_t = {'logout': [datetime.datetime.utcnow()
+                                               .strftime('%Y-%m-%d %H:%M:%S')]}
+                        setattr(obj, 'logout_time', logout_t)
+                    else:
+                        logout_r['logout'].append(datetime.datetime.utcnow()
+                                                  .strftime('%Y-%m-%d %H:%M:%S'))
+                        current_app.logger.warning(logout_r)
+                        setattr(obj, 'logout_time', logout_r)
             self.__session.commit()
             return True
 
