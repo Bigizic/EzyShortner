@@ -157,7 +157,7 @@ class DBStorage:
                 return [exists.id, exists.password] if exists else None
             if user_id:
                 g_exists = self.__session.query(GoogleUser).filter_by(
-                                                id=user_id).first()
+                                                google_id=user_id).first()
                 e_exists = self.__session.query(EzyUser).filter_by(
                                                 id=user_id).first()
                 return True if g_exists or e_exists else False
