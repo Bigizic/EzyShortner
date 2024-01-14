@@ -1,16 +1,20 @@
 #!/usr/bin/python3
-"""Renders Google users sign in
+"""Renders Ezy users sign in
 """
 
 import bcrypt
+import datetime
 from flask import Flask, request, render_template, make_response, session
 from flask import Blueprint, redirect, url_for, current_app
 from models import storage_type as st
+from models.account_information import AccountInformation as ACCI
 from models.users import EzyUser
 from models.engine.db_storage import DBStorage
 import pyotp
 import uuid
 import logging
+
+TIME = '%Y-%m-%d %H:%M:%S'
 
 
 def ezy_signin(req):
@@ -44,6 +48,19 @@ def ezy_signin(req):
             passs = bcrypt.checkpw(password.encode(), user_pass.encode())
 
             if passs:
+                u_a = ACCI()
+
+                fetch_a_in = st.fetch_account_info(user_info.id)
+
+                if fetch_a_in and fetch_a_in.login_time:
+                    st.update_account_info(user_info.id, 'login')
+                else:
+                    if fetch_a_in is None:
+                        u_a.user_id = user_info.id
+                    u_a.login_time = datetime.datetime.utcnow().strftime(TIME)
+                    u_a.updated_at = datetime.datetime.utcnow().strftime(TIME)
+                    u_a.save()
+
                 session['logged_in'] = True
                 session['email'] = email
                 session['user_id'] = user_info.id

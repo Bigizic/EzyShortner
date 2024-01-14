@@ -2,11 +2,13 @@
 """Web app using flask"""
 
 import bcrypt
+import datetime
 from google.oauth2 import id_token
 from google.auth.transport import requests as g_req
 from flask import Flask, request, render_template, make_response, session
 from flask import Blueprint, redirect, url_for, current_app
 from models import storage_type as st
+from models.account_information import AccountInformation as ACCI
 from models.ezy import Ezy
 from models.users import GoogleUser, EzyUser
 from models.engine.db_storage import DBStorage
@@ -30,6 +32,7 @@ import logging
 import random
 import string
 
+TIME = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
 web_app_blueprint = Blueprint('web_app', __name__)
 CLIENT_ID = ('518132922807-8vsde0i71v5nktavtssmt1j8vtugvu6o'
              '.apps.googleusercontent.com')
@@ -330,6 +333,12 @@ def verify_user():
 @web_app_blueprint.route('/logout', methods=["GET"])
 def logout():
     """clear the session data"""
+    u_id = session.get('user_id')
+
+    fetch = st.fetch_account_info(u_id)
+    if fetch:
+        st.update_account_info(u_id, None, 'logout')
+
     session.clear()
     return redirect(url_for('web_app.get_input'))
 

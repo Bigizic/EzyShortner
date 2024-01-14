@@ -32,31 +32,11 @@ def ezy_signup(req):
 
         first_name = req.form.get("first_name")
         last_name = req.form.get("last_name")
-        """codes = [
-            request.form.get("digit-1"),
-            request.form.get("digit-2"),
-            request.form.get("digit-3"),
-            request.form.get("digit-4"),
-            request.form.get("digit-5"),
-            request.form.get("digit-6")
-        ]"""
 
         if len(first_name) >= 127 or len(last_name) >= 127:
             return render_template('signup.html',
                                    info="names too long",
                                    cache_id=uuid.uuid4())
-        # otp codes don't match
-        """otps = ''
-        count = 0
-        for _ in range(6):
-            otps += codes[count]
-            count += 1
-        current_app.logger.warning(code)
-        current_app.logger.warning(otps)
-        if code != otps:
-            return render_template('signup.html',
-                                   info="Invalid otp codes",
-                                   cache_id=uuid.uuid4())"""
         new_user = EzyUser()
 
         # checks if ezy user exits by email
