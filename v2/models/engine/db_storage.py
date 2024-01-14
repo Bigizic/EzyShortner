@@ -15,7 +15,7 @@ from sqlalchemy import func
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-TIME = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+TIME = '%Y-%m-%d %H:%M:%S'
 
 
 class DBStorage:
@@ -267,6 +267,8 @@ class DBStorage:
         if two_factor_status is not None:
             user.two_factor_status = two_factor_status
 
+        user.updated_at = datetime.datetime.utcnow().strftime(TIME)
+
         self.__session.commit()
         return True
 
@@ -278,12 +280,13 @@ class DBStorage:
         if result:
             for obj in result:
                 setattr(obj, 'original_url', longL)
+                setattr(obj, 'updated_at', (datetime.datetime.utcnow()
+                                            .strftime(TIME)))
 
             self.__session.commit()
             return True
 
         return False
-
 
     def fetch_account_info(self, user_id):
         """Return a user record from account_information table
@@ -298,30 +301,36 @@ class DBStorage:
         """update the account login and logout time from the database
         """
         record = self.__session.query(ACCI).filter(
-                                      ACCI.user_id == user_id).all()
-        if record:
-            if login:
-                for obj in record:
-                    value = obj.login_time
-                    value.append(datetime.datetime.utcnow()
-                                 .strftime('%Y-%m-%d %H:%M:%S'))
-                current_app.logger.warning(value)
-                setattr(obj, 'login_time', value)
-                self.__session.commit()
-            if logout:
-                for obj in record:
-                    logout_r = obj.logout_time
-                    current_app.logger.warning(logout_r)
-                    if logout_r is None:
-                        logout_t = {'logout': [datetime.datetime.utcnow()
-                                               .strftime('%Y-%m-%d %H:%M:%S')]}
-                        setattr(obj, 'logout_time', logout_t)
-                    else:
-                        logout_r['logout'].append(datetime.datetime.utcnow()
-                                                  .strftime('%Y-%m-%d %H:%M:%S'))
-                        current_app.logger.warning(logout_r)
-                        setattr(obj, 'logout_time', logout_r)
-            self.__session.commit()
-            return True
+                                      ACCI.user_id == user_id).first()
+        if login and record:
+            value = record.login_time
+            record.login_time = (
+                                 value +
+                                 ', ' +
+                                 datetime.datetime.utcnow().strftime(TIME))
+            temp = record.login_time
+            setattr(record, 'login_time', temp)
+            setattr(record, 'updated_at', (datetime.datetime.utcnow()
+                                           .strftime(TIME)))
 
-        return False
+        if logout and record:
+            logout_r = record.logout_time
+
+            if logout_r is None:
+                logout_t = datetime.datetime.utcnow().strftime(TIME)
+                setattr(record, 'logout_time', logout_t)
+                setattr(record, 'updated_at', (datetime.datetime.utcnow()
+                                               .strftime(TIME)))
+
+            else:
+                record.logout_time = (
+                                      logout_r +
+                                      ', ' +
+                                      datetime.datetime.utcnow().strftime(
+                                                                        TIME))
+                temp = record.logout_time
+                setattr(record, 'logout_time', temp)
+                setattr(record, 'updated_at', (datetime.datetime.utcnow()
+                                               .strftime(TIME)))
+        self.__session.commit()
+        return
