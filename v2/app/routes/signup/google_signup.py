@@ -2,16 +2,19 @@
 """Renders google signup
 """
 
+import datetime
 from google.oauth2 import id_token
 from google.auth.transport import requests as g_req
 from flask import Flask, request, render_template, make_response, session
 from flask import Blueprint, redirect, url_for, current_app
 from models.users import GoogleUser
+from models.account_information import AccountInformation as ACCI
 from models.engine.db_storage import DBStorage
 import pyotp
 import uuid
 import logging
 
+TIME = '%Y-%m-%d %H:%M:%S'
 CLIENT_ID = ('518132922807-8vsde0i71v5nktavtssmt1j8vtugvu6o'
              '.apps.googleusercontent.com')
 
@@ -60,4 +63,10 @@ def google_signup(req):
         session['logged_in'] = True
         session['user_id'] = new_user.id
         session.permanent = True
+
+        u_a = ACCI()
+        u_a.user_id = new_user.id
+        u_a.login_time = datetime.datetime.utcnow().strftime(TIME)
+        u_a.save()
+
         return redirect(url_for("web_app.dashboard", user_id=new_user.id))

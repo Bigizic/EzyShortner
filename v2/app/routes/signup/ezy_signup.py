@@ -3,13 +3,17 @@
 """
 
 import bcrypt
+import datetime
 from flask import Flask, request, render_template, make_response, session
 from flask import Blueprint, redirect, url_for, current_app
+from models.account_information import AccountInformation as ACCI
 from models.users import EzyUser
 from models.engine.db_storage import DBStorage
 import pyotp
 import uuid
 import logging
+
+TIME = '%Y-%m-%d %H:%M:%S'
 
 
 def ezy_signup(req):
@@ -57,4 +61,11 @@ def ezy_signup(req):
         session['logged_in'] = True
         session['user_id'] = new_user.id
         session.permanent = True
+
+        u_a = ACCI()
+        u_a.user_id = new_user.id
+        u_a.login_time = datetime.datetime.utcnow().strftime(TIME)
+        u_a.save()
+
+
         return redirect(url_for("web_app.dashboard", user_id=new_user.id))
