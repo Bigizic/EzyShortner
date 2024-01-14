@@ -133,6 +133,7 @@ section form label {
 	transform: translateX(-50%);
 	padding: 20px;
 	border-radius: 4px;
+	z-index: 1;
 }
 #share_container {
 	top: 50% !important;
@@ -268,7 +269,7 @@ footer a:hover {
     color: #006400;
 }
 
- .history_list {
+.history_list {
     width: 0%;
     height: 100vh;
     position: fixed;
