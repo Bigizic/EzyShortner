@@ -8,6 +8,16 @@ body {
     min-height: 100vh;*/
 }
 
+.admin_notification {
+  /*background: blueviolet;*/
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
 .menu-button {
     border: none !important;
 }
@@ -24,6 +34,7 @@ header h1 {
     transition: transform 0.5s ease;
     font-family: 'Black Ops One';
     font-size: 45px;
+    font-weight: 100;
 }
 header h1:hover {
     color: #006400;
@@ -50,12 +61,14 @@ section h1 {
     font-family: 'Black Ops One' !important;
     flex: 0 0 50%;
     margin-top: 5%;
+    font-weight: 100;
 }
 
 section h1 strong {
     color: #8888;
     font-size: 16px;
     display: block;
+    font-weight: 100;
 }
 .mobile_h1 {
     display: none;
@@ -110,6 +123,7 @@ section form label {
     color: #fff;
     font-size: 16px !important;
     font-family: 'Black Ops One';
+    font-weight: 100;
 }
 .home:hover, .about:hover, .blog:hover, .login:hover, .sign_up:hover {
     color: #006400;
