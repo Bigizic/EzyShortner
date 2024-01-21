@@ -176,6 +176,9 @@ body {
     cursor: pointer;
     font-family: 'Black Ops One';
     font-size: 2.5rem;
+    h1 {
+    	font-weight: 100;
+    }
 }
 .main-content:hover {
     color: #006400;
