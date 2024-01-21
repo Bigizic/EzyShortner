@@ -29,3 +29,5 @@ google-auth
 pyotp
 Pillow
 jsonschema
+Flask-Session
+flask_sqlalchemy
