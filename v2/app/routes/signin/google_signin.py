@@ -49,6 +49,8 @@ def google_signin(req):
         session['email'] = email
         session['user_id'] = g_user.id
         session.permanet = True
+
+        # 2fa
         if (g_user.verified in ["True", "1"] and
                 g_user.two_factor_status == 'enabled'):
             return redirect(url_for("web_app.verify_user"))

@@ -48,6 +48,9 @@ def ezy_signin(req):
             passs = bcrypt.checkpw(password.encode(), user_pass.encode())
 
             if passs:
+                if user_info.verified in ["True", "1"] \
+                        and user_info.two_factor_status == 'enabled':
+                    return redirect(url_for("web_app.verify_user"))
                 u_a = ACCI()
 
                 fetch_a_in = st.fetch_account_info(user_info.id)
