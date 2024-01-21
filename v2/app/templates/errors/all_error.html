@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>{{error_code}}</title>
+		<link type="text/css" rel="stylesheet" href="/static/styles/homepage_responsive.css">
+    <link type="text/css" rel="stylesheet" href="/static/styles/homepage.css">
+    <link rel="icon" href="/static/images/ezy_icon.jpg">
+	</head>
+	<body style="display: flex;
+		     flex-direction: column;
+		     min-height: 100vh;
+		     color: #fff">
+		{% block content %}
+		<h1>An unexpected error has occurred</h1>
+		<p>The administrator has been notified. Sorry for the inconvenience!</p>
+		<p><a href="javascript:history.back()">Back</a></p>
+		{% endblock %}
+
+	</body>
+</html>

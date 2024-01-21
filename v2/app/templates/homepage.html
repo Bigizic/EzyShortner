@@ -18,6 +18,12 @@
 
     <link rel="icon" href="../static/images/ezy_icon.jpg?{{ cache_id }}">
     <body>
+    	{% if admin_notification %}
+    	<div style="background: {{ admin_notification.background_color }};" class="admin_notification">
+    		<p style="color: #fff;font-size: larger;font-family: 'Black Ops One';font-weight: 100;">
+    		</p>
+    	</div>
+    	{% endif %}
         <header>
         <div class="loader-container">
             <div class="loader"></div>
