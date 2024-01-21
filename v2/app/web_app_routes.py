@@ -5,6 +5,7 @@ import bcrypt
 import datetime
 from google.oauth2 import id_token
 from google.auth.transport import requests as g_req
+from flask import g
 from flask import Flask, request, render_template, make_response, session
 from flask import Blueprint, redirect, url_for, current_app
 from models import storage_type as st
@@ -36,6 +37,7 @@ TIME = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
 web_app_blueprint = Blueprint('web_app', __name__)
 CLIENT_ID = ('518132922807-8vsde0i71v5nktavtssmt1j8vtugvu6o'
              '.apps.googleusercontent.com')
+CID = uuid.uuid4()
 
 
 def check_session():
@@ -59,13 +61,13 @@ def get_input():
         user_output = request.form.get("user_output")
         res = application(user_input, user_output)
         return homepage(res[0], res[1], res[2], res[3], res[4])
-    return render_template('homepage.html', cache_id=uuid.uuid4())
+    return render_template('homepage.html', cache_id=CID)
 
 
 @web_app_blueprint.route('/about')
 def about():
     """Renders static/about page"""
-    return render_template('about.html', cache_id=uuid.uuid4())
+    return render_template('about.html', cache_id=CID)
 
 
 @web_app_blueprint.route('/signup', methods=["GET", "POST"])
@@ -85,7 +87,7 @@ def sign_up():
 
     info_message = session.pop('info_message', None)
     return render_template('signup.html', info=info_message,
-                           cache_id=uuid.uuid4())
+                           cache_id=CID)
 
 
 @web_app_blueprint.route('/signin', methods=["GET", "POST"])
@@ -103,8 +105,7 @@ def sign_in():
             return ezy_signin(request)
 
     info_message = session.pop('info_message', None)
-    return render_template('signin.html', cache_id=uuid.uuid4(),
-                           info=info_message)
+    return render_template('signin.html', cache_id=CID, info=info_message)
 
 
 @web_app_blueprint.route('/dashboard/<user_id>', methods=["GET", "POST"],
@@ -124,7 +125,7 @@ def dashboard(user_id):
             info = DBStorage().fetch_user(user_id)
             names = info.first_name + ' ' + info.last_name
             profile_pic = info.profile_pic
-            return render_template('dashboard.html', cache_id=uuid.uuid4(),
+            return render_template('dashboard.html', cache_id=CID,
                                    names=names, profile_pic=profile_pic,
                                    user_id=session.get('user_id'))
         else:
@@ -235,7 +236,7 @@ def user_profile(user_id):
                 return redirect(url_for('web_app.sign_in'))
             else:
                 return render_template('user_routes/information.html',
-                                       cache_id=uuid.uuid4(), info=temp_user,
+                                       cache_id=CID, info=temp_user,
                                        user_id=user_id,
                                        first_info="Check your entries",
                                        qr_authy=su)
@@ -322,17 +323,23 @@ def verify_user():
                                 user_id=session.get("user_id")))
             else:
                 return render_template('user_routes/verify_user.html',
-                                       cache_id=uuid.uuid4(),
+                                       cache_id=CID,
                                        info="Check your entries")
-    wor = "Enter otp from authenticator app to continue"
-    return render_template('user_routes/verify_user.html',
-                           cache_id=uuid.uuid4(),
-                           info=wor)
+    if session.get('user_id'):
+        wor = "Enter otp from authenticator app to continue"
+        return render_template('user_routes/verify_user.html',
+                               cache_id=CID,
+                               info=wor)
+    session['info_message'] = "Sign in to continue"
+    return redirect(url_for("web_app.sign_in"))
 
 
 @web_app_blueprint.route('/logout', methods=["GET"])
 def logout():
     """clear the session data"""
+    if not session.get('user_id'):
+        session['info_message'] = "Sign in to continue"
+        return redirect(url_for("web_app.sign_in"))
     u_id = session.get('user_id')
 
     fetch = st.fetch_account_info(u_id)
@@ -357,5 +364,5 @@ def redirect_function(shortlink):
         response.status_code = 302
         return response
     else:
-        return render_template('not_found.html', cache_id=uuid.uuid4(),
+        return render_template('/errors/404.html', cache_id=CID,
                                code=404)
