@@ -26,6 +26,7 @@ from app.routes.signup.google_signup import google_signup
 from app.routes.signup.ezy_signup import ezy_signup
 from app.routes.signin.ezy_signin import ezy_signin
 from app.routes.signin.google_signin import google_signin
+from typing import Union
 import pyotp
 import re
 import uuid
@@ -40,7 +41,7 @@ CLIENT_ID = ('518132922807-8vsde0i71v5nktavtssmt1j8vtugvu6o'
 CID = uuid.uuid4()
 
 
-def check_session():
+def check_session() -> bool:
     """Checks session data to see if a user's logged in
     """
     if ('logged_in' in session and session['logged_in'] and
@@ -51,7 +52,7 @@ def check_session():
 
 
 @web_app_blueprint.route("/", methods=["GET", "POST"])
-def get_input():
+def get_input() -> Union[render_template, homepage]:
     if check_session():
         return redirect(url_for('web_app.dashboard',
                         user_id=session['user_id']))
@@ -65,13 +66,13 @@ def get_input():
 
 
 @web_app_blueprint.route('/about')
-def about():
+def about() -> render_template:
     """Renders static/about page"""
     return render_template('about.html', cache_id=CID)
 
 
 @web_app_blueprint.route('/signup', methods=["GET", "POST"])
-def sign_up():
+def sign_up() -> Union[render_template, redirect, google_signup, ezy_signup]:
     """Renders sign up page"""
     if check_session():
         return redirect(url_for('web_app.dashboard',
@@ -91,7 +92,7 @@ def sign_up():
 
 
 @web_app_blueprint.route('/signin', methods=["GET", "POST"])
-def sign_in():
+def sign_in() -> Union[render_template, redirect, google_signin, ezy_signin]:
     """Renders sign in page"""
     if check_session():
         return redirect(url_for('web_app.dashboard',
@@ -110,8 +111,12 @@ def sign_in():
 
 @web_app_blueprint.route('/dashboard/<user_id>', methods=["GET", "POST"],
                          strict_slashes=False)
-def dashboard(user_id):
-    """User's dashboard"""
+def dashboard(user_id: str) -> Union[dashpage, render_template, redirect]:
+    """User's dashboard
+
+    Parameters:
+        - @param (user_id): <str> user id from database
+    """
     if request.method == "POST":
         user_input = request.form.get("user_input")
         user_output = request.form.get("user_output")
@@ -140,8 +145,10 @@ def dashboard(user_id):
 
 
 @web_app_blueprint.route('/dashboard', methods=["GET", "POST"])
-def dashboard_helper():
-    """Incase a user enters a route like server_name/dashboard"""
+def dashboard_helper() -> redirect:
+    """Incase a user enters a route like server_name/dashboard
+    Redirects them to the original dashboard route
+    """
     if check_session():
         return redirect(url_for('web_app.dashboard',
                         user_id=session['user_id']))
@@ -151,8 +158,11 @@ def dashboard_helper():
 
 
 @web_app_blueprint.route('/history/<user_id>', methods=["GET", "POST"])
-def history(user_id):
-    """Renders history for a user"""
+def history(user_id: str) -> Union[historypage, redirect]:
+    """Renders history for a user
+    Parameters:
+        - @param (user_id): <str> User's id from database
+    """
     if request.method == "POST":
         query = request.form.get("query")
         return historypage(user_id, query)
@@ -166,8 +176,10 @@ def history(user_id):
 
 
 @web_app_blueprint.route('/history', methods=["GET", "POST"])
-def history_helper():
-    """Incase a user enters a route like server_name/history"""
+def history_helper() -> redirect:
+    """Incase a user enters a route like server_name/history
+    redirects user to the history route
+    """
     if check_session():
         return redirect(url_for('web_app.history',
                         user_id=session['user_id']))
@@ -178,8 +190,12 @@ def history_helper():
 
 @web_app_blueprint.route('/history/delete/<ezy_url_id>',
                          methods=["POST"])
-def delete_history(ezy_url_id):
-    """Deletes an instance of a url"""
+def delete_history(ezy_url_id: str) -> redirect:
+    """Deletes an instance of a url
+    Parameter:
+        - @param (ezy_url_id): <str> id of the created shortened link,
+            in __tablename__ >>>> link_records
+    """
     if check_session():
         g_user = GoogleUser().exists(None, None, session.get('user_id'))
         e_user = EzyUser().exists(None, None, session.get('user_id'))
@@ -197,8 +213,13 @@ def delete_history(ezy_url_id):
 
 @web_app_blueprint.route('/profile/<user_id>',
                          methods=["GET", "POST"])
-def user_profile(user_id):
-    """ Render user's profile information """
+def user_profile(user_id: str) -> Union[information, redirect,
+                                        render_template]:
+    """ Render user's profile information
+
+    Parameter:
+        - @param (user_id): <str> User id from database
+    """
     if request.method == "POST":
         first_name = request.form.get("first_name")
         last_name = request.form.get("last_name")
@@ -253,8 +274,11 @@ def user_profile(user_id):
 
 @web_app_blueprint.route('/profile/delete/<ezy_url_id>',
                          methods=["POST"])
-def delete_profile(ezy_url_id):
-    """Deletes a user profile"""
+def delete_profile(ezy_url_id: str) -> redirect:
+    """Deletes a user profile
+    Parameter:
+        - @param {ezy_url_id}: id of a shortened link from database
+    """
     if check_session():
         g_user = GoogleUser().exists(None, None, session.get('user_id'))
         e_user = EzyUser().exists(None, None, session.get('user_id'))
@@ -272,8 +296,11 @@ def delete_profile(ezy_url_id):
 
 
 @web_app_blueprint.route('/edit-my-links/<user_id>', methods=["GET", "POST"])
-def edit_my_link(user_id):
-    """Edits a user's long link"""
+def edit_my_link(user_id: str) -> Union[redirect, editlink]:
+    """Edits a user's long link
+    Parameter:
+        - @param {user_id}: user id of logged in user
+    """
     if request.method == "POST":
         long_link = request.form.get("long_link")
         short = request.form.get("short_link")
@@ -291,7 +318,7 @@ def edit_my_link(user_id):
 
 
 @web_app_blueprint.route('/verify_user', methods=["GET", "POST"])
-def verify_user():
+def verify_user() -> Union[redirect, render_template]:
     """Verifies a user if they set up extra layer of security
     """
     if check_session():
@@ -335,7 +362,7 @@ def verify_user():
 
 
 @web_app_blueprint.route('/logout', methods=["GET"])
-def logout():
+def logout() -> redirect:
     """clear the session data"""
     if not session.get('user_id'):
         session['info_message'] = "Sign in to continue"
@@ -351,7 +378,7 @@ def logout():
 
 
 @web_app_blueprint.route('/<shortlink>')
-def redirect_function(shortlink):
+def redirect_function(shortlink) -> Union[render_template, make_response]:
     """Perfroms redirection refain to redirection.txt"""
     url = Ezy().get_long(shortlink)
 

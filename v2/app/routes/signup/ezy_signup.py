@@ -67,5 +67,4 @@ def ezy_signup(req):
         u_a.login_time = datetime.datetime.utcnow().strftime(TIME)
         u_a.save()
 
-
         return redirect(url_for("web_app.dashboard", user_id=new_user.id))

@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """Function that renders user's information page
-@param (user_id): <str> from session['user_id'], in uuid.uuid4() format
 """
 
 import bcrypt
@@ -9,16 +8,32 @@ from models import storage_type as st
 from models.ezy import Ezy
 from models.users import EzyUser, GoogleUser
 from models.engine.db_storage import DBStorage
+from typing import List, Union
 import uuid
 import pyotp
 
 EZY = 'https://ezyurl.xyz'
 
 
-def infopage(user_id, sec_info=None, first_info=None, otp_list=None):
-    """Renders information.html"""
+def infopage(user_id: str, sec_info: str = None, first_info: str = None,
+             otp_list: List[int] = None) -> render_template:
+    """Renders information.html, a helper function that renders the html based
+        on certain warnings, credentials etc..
+
+    parameters:
+        - @param (user_id): <str> from session['user_id'], uuid.uuid4() format
+
+        - @param (sec_info): <str> Second info usually flashed in green
+            color on user page
+
+        - @param (first_info): <str> First info usually warning info and
+            in red color
+
+        - @param (otp_list): <list> a list of 6 numbers from user
+    """
     info = st.fetch_user(user_id)
     if info:
+        # sets and show user 2fa
         uak = info.two_factor
         su = pyotp.totp.TOTP(uak).provisioning_uri(name=info.first_name,
                                                    issuer_name=EZY)
@@ -44,8 +59,10 @@ def infopage(user_id, sec_info=None, first_info=None, otp_list=None):
             totp.now()
             verified = totp.verify(otps)
             if verified:
+                # user enetered otp is valid
+                # procced to update user "two_factor_status" record to enabled
                 st.update_user(user_id, None, None, None, 'enabled')
-                info = st.fetch_user(user_id)
+                info = st.fetch_user(user_id)  # fetch new user details
                 return render_template('user_routes/information.html',
                                        cache_id=uuid.uuid4(),
                                        user_id=user_id,
@@ -70,9 +87,16 @@ def infopage(user_id, sec_info=None, first_info=None, otp_list=None):
                                cache_id=uuid.uuid4())
 
 
-def information(user_id, user_info=None, otp_list=None):
-    """ If a user's request is post, allows editing user names and password
-    otherwise render's user information page
+def information(user_id: str, user_info: str = None,
+                otp_list: List[int] = None) -> Union[render_template,
+                                                     infopage]:
+    """ If a user's request is post, allows editing user names, password
+    and enabling 2fa otherwise render's user information page
+
+    Parameters:
+        - @param (user_id): <str> from session['user_id'], uuid.uuid4() format
+        - @param (user_infor): <str> Warning information for user
+        - @param (otp_list): <list> list of 6 digit numbers
     """
     g_user = GoogleUser().exists(None, None, user_id)
     e_user = EzyUser().exists(None, None, user_id)

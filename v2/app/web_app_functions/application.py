@@ -1,8 +1,5 @@
 #!/usr/bin/python3
 """Function that handles the application interaction
-@param (user_input): <str> accepts user input from request.method.get
-@param (user_output): <str> accepts user output from request.method.get
-@param (user_id): <str> a uuid.uuid4() id that serves as a user id
 
 Return: application features
 """
@@ -16,7 +13,16 @@ import re
 import uuid
 
 
-def application(user_input, user_output, user_id=None):
+def application(user_input: str, user_output: str, user_id: str = None) -> str:
+    """
+    @param (user_input): <str> accepts user input from request.method.get
+        i.e the long link
+
+    @param (user_output): <str> accepts user output from request.method.get
+        i.e the alias
+
+    @param (user_id): <str> a uuid.uuid4() id that serves as a user id
+    """
     if len(user_input) >= 32000:
         return '', '', 404, 'Link must not be greater than 32000', ''
 

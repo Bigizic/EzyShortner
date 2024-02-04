@@ -7,17 +7,26 @@ a long link to a short link
 Return: template
 """
 
-from flask import render_template, current_app
+from flask import render_template, current_app, redirect, url_for
 from models import storage_type as st
 from models.ezy import Ezy
 from models.users import EzyUser, GoogleUser
 from models.engine.db_storage import DBStorage
 import re
+from typing import Union, List
 import uuid
 
 
-def editpage(user_id, info=None, sec_info=None):
-    """ Implementation """
+def editpage(user_id: str, info: str = None,
+             sec_info: str = None) -> Union[render_template, redirect]:
+    """Parameters:
+        - @param (user_id): <str> uuid.uuid4() string from database
+        - @param (info): <str> information to display on user side
+        - @param (sec_info): <str> Second information to display on user side
+
+        Return:
+            - render_template or redirect if user is not found
+    """
     g_user = GoogleUser().exists(None, None, user_id)
     e_user = EzyUser().exists(None, None, user_id)
     if g_user or e_user:
@@ -41,8 +50,12 @@ def editpage(user_id, info=None, sec_info=None):
         return redirect(url_for('web_app.sign_in'))
 
 
-def editlink(user_id, links=None, query=None):
-    """ Implementation """
+def editlink(user_id: str, links: List[str] = None, query: str = None):
+    """Parameters:
+        - @param (user_id): <str> uuid.uuid4() string of user id
+        - @param (links): <list> List of lonk and short link to be edited
+        - @param {query}: <str> query to search for
+    """
     if links:
         edit_record = st.update_user_longL_record(user_id, links[0], links[1])
         if edit_record:

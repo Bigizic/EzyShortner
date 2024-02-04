@@ -5,10 +5,15 @@
 
 Return: if alias exist or not
 """
+from models.ezy import Ezy
 
 
-def func_alias(ezy_instance, user_output):
-    """Handles:
+def func_alias(ezy_instance: Ezy, user_output: str) -> str:
+    """
+    @param (ezy_instance): <Ezy> an instance of Ezy Module from app route
+    @param (user_output): <str> Basically user entered alias from html form
+
+    Handles:
     ALIAS EXIST ORIGINAL URL INVALID
                 |
     Return: (str) "alias exist original url invalid"

@@ -1,10 +1,84 @@
 <!DOCTYPE html>
 <html>
-	<meta charset="utf-8">
-	<link type="text/css" rel="stylesheet" href="../static/styles/404_page.css?{{cache_id}}">
-	<link rel="icon" href="../static/images/ezy_icon.jpg?{{ cache_id }}">
-	<title>EzyUrl</title>
-	<body>
-		<h1>404 PAGE for EZYURL</h1>
-	</body>
+    <meta charset="utf-8">
+	<link type="text/css" rel="stylesheet" href="/static/styles/homepage_responsive.css">
+    <link type="text/css" rel="stylesheet" href="/static/styles/homepage.css">
+    <link rel="icon" href="../static/images/ezy_icon.jpg">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link type="text/css" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js?{{ cache_id }}"></script>
+	<script type="text/javascript" src="../static/scripts/homepage.js"></script>
+    <title>404 Not Found</title>
+	<style>
+		button {
+			display: flex;
+  			align-self: center;
+  			padding: 8px 10px;
+  			border-radius: 10px;
+  			background: #fff;
+  			border: none;
+		}
+		button:hover {
+			background: black;
+  			color: #fff;
+		}
+	</style>
+	<body style="display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	color: #fff">
+	<header>
+            <h1>EZYURL</h1>
+            <div class="information">
+		        <a class="about" href="{{ url_for('web_app.about') }}"> About</a>
+                <a class="blog" href="">Blog</a>
+                <a class="login" href="{{ url_for('web_app.sign_in') }}">Login</a>
+		<a class="sign_up" href="{{ url_for('web_app.sign_up') }}">Sign up</a>
+		        <a class="history">History</a>
+                <div class="history_list">
+                    <div class="history_items">
+                        <span class="h-close-button">&times;</span><br><br>
+			<div class="view_history">
+			<ul class="long-url-history">
+			</ul>
+			</div>
+                    </div>
+                </div>
+            </div>
+        <button class="menu-button">&#9776;</button>
+        <div class="cover-up">
+            <div class="cover-up-content">
+                <span class="close-button">&times;</span>
+                <div class="menu-information">
+                    <ul>
+			            <li><a class="about" href="{{ url_for('web_app.about') }}"> About</a></li>
+                        <li><a class="blog" href="">Blog</a></li>
+                        <li><a class="home" href="">Home</a></li>
+                        <li><a class="history"> History</a></li>
+                        <div class="history_list">
+                            <div class="history_items">
+                                <span class="h-close-button">&times;</span><br><br>
+                                <div class="view_history">
+                                    <ul class="long-url-history">
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mobile_user">
+                            <a class="login" href="{{ url_for('web_app.sign_in') }}"><button>Login</button></a>
+                            <a class="sign_up" href="{{ url_for('web_app.sign_up') }}"><button>Sign up</button></a>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </header>
+            <h1 style="text-align: center; font-size: xxx-large; margin-top: 10%;">404 PAGE</h1>
+			<h3 style="text-align: center; font-size: medium">Sorry this page couldn't be routed to the original link</h3>
+			<a style="display: flex;
+			align-self: center;
+			text-decoration: none;" href="{{ url_for('web_app.get_input')}}"><button>Go Home</button></a>
+        </body>
 </html>
