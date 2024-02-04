@@ -334,3 +334,15 @@ class DBStorage:
                                                .strftime(TIME)))
         self.__session.commit()
         return
+
+    def check_admin(self, user_name: str):
+        """Checks if an admin exists
+        """
+        from admin.model.admin_model import Admin
+        result = self.__session.query(Admin).all()
+        usernames = [getattr(x, 'username') for x in result]
+        for _ in usernames:
+            exists = bcrypt.checkpw(user_name.encode(), _.encode())
+            if exists:
+                return True
+        return False
