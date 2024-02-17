@@ -346,3 +346,15 @@ class DBStorage:
             if exists:
                 return True
         return False
+
+    def get_admin(self, admin_username: str):
+        """Returns an admin object of admin details
+        """
+        from admin.model.admin_model import Admin
+        result = self.__session.query(Admin).all()
+
+        for xtra in result:
+            username = getattr(xtra, 'username')
+            if bcrypt.checkpw(admin_username.encode(), username.encode()):
+                return xtra
+        return None
